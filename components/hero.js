@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "next/link"
 import TopBar from "../components/topBar"
-import PodcastSection from "../components/podcastSection"
 
 const Hero = ({ page }) => {
   return (
@@ -22,9 +21,6 @@ const Hero = ({ page }) => {
 				{page.intro_text &&
 					<div className="intro-text">{page.intro_text}</div>
 				}
-				{page.slug == 'podcast' &&
-        	<PodcastSection page={page}/>
-      	}
 			</div>
 			<style jsx>{`
 				section{

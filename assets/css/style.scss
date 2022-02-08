@@ -1,21 +1,37 @@
-// @font-face {
-//   font-family: "Karelia-Outtakes";
-//   src: url('../Karelia-Outtakes.otf');
-// }
+@font-face {
+  font-family: "SuisseIntl";
+  src: url('../fonts/SuisseIntl-Medium-WebM.woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url('../fonts/SuisseIntl-Regular-WebM.woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url('../fonts/SuisseIntl-Light-WebM.woff2');
+  font-weight: 100;
+}
+
 
 body, html{
-  // font-family: "Karelia-Outtakes";
+  font-family: "SuisseIntl";
   margin: 0;
   padding: 0;
-  color: #fff;
+  color: #000;
   font-size: 30px;
   padding-bottom: 40px;
   overflow-x: hidden;
+  background-color: #E6E6E6;
+  font-weight: 300;
 }
 
-// body *{
-//   font-family: "Karelia-Outtakes";
-// }
+input:focus {
+  outline:none;
+}
 
 a {
   text-decoration: none;
@@ -57,3 +73,54 @@ h1{
   }
 }
 
+.menu{
+  position: fixed;
+  top: 0;
+  border-bottom: 2px solid #000;
+  width: 98vw;
+  left: 1vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  .breadcrumbs{
+
+  }
+  .hamburger{
+    cursor: pointer;
+  }
+}
+
+.menu-modal{
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  width: 300px;
+  background-color: #E6E6E6;
+  .close{
+    cursor: pointer;
+    margin: 14px 1vw;
+    right: 0;
+    position: fixed;
+    top: 0;
+  }
+  .menu-links{
+    font-size: 30px;
+    a{
+      display: block;
+      width: 100%;
+      color: #000;
+      text-transform: capitalize;
+      padding: 10px 14px;
+      font-weight: 100;
+    }
+    .home{
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .menu-link{
+      margin-left: 20px;
+    }
+  }
+}
