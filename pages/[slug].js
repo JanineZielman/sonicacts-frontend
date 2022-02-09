@@ -1,25 +1,20 @@
 import { fetchAPI } from "../lib/api"
 import Layout from "../components/layout"
-import Hero from "../components/hero"
 import BasicSection from "../components/basicSection"
 import Seo from "../components/seo"
 
-const Page = ({pages, page}) => {
-  console.log(page)
+const Page = ({pages, page, global}) => {
   return (
-    <>
-      {/* <Hero page={page}/> */}
-      <Layout pages={pages.data}>
-        {page.basic_section &&
-          <BasicSection page={page}/>
-        }
-      </Layout>
-    </>
+    <Layout pages={pages.data} page={page} global={global}>
+      {page.basic_section &&
+        <BasicSection page={page}/>
+      }
+    </Layout>
   )
 }
 
 export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/api/pages");
+  const pagesRes = await fetchAPI("/pages");
   return {
     paths: pagesRes.data.map((page) => ({
       params: {
@@ -31,21 +26,19 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const pagesRes = await fetchAPI( `/api/pages?slug=${params.slug}`,{
-    populate: "*",
-  }
+  const pagesRes = 
+    await fetchAPI( `/pages?slug=${params.slug}`
   );
 
 
   // const allPagesRes = await fetchAPI("/api/pages");
   const [allPagesRes, globalRes] = await Promise.all([
-    fetchAPI("/api/pages"),
-    // fetchAPI("/api/global", { populate: "*" }),
-    
+    fetchAPI("/pages", { populate: "*" }),
+    fetchAPI("/global", { populate: "*" }),
   ])
 
   return {
-    props: { page: pagesRes.data[0], pages: allPagesRes },
+    props: { page: pagesRes.data[0], pages: allPagesRes, global: globalRes.data },
     revalidate: 1,
   };
 }

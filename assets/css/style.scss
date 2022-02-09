@@ -38,7 +38,7 @@ a {
 }
 
 .container{
-  padding: 24px 48px;
+  padding: 14px 1vw;
 }
 
 h1{
@@ -64,30 +64,43 @@ h1{
   line-height: 1.75;
 }
 
+.small-logo{
+  height: auto;
+  width: 300px;
+}
+
 .columns{
   display: flex;
   padding-bottom: 24px;
-  div{
-    margin-right: 24px;
-    width: 50%;
+  width: 70vw;
+  .intro-text{
+    margin-left: 75px;
+    width: 800px;
+  }
+  .big-logo{
+    width: 600px;
+    height: 300px;
   }
 }
 
 .menu{
   position: fixed;
   top: 0;
-  border-bottom: 2px solid #000;
   width: 98vw;
   left: 1vw;
   display: flex;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 14px 0 4px 0;
+  border-bottom: 2px solid #000;
   .breadcrumbs{
+  }
+}
 
-  }
-  .hamburger{
-    cursor: pointer;
-  }
+.hamburger{
+  position: fixed;
+  right: 1vw;
+  top: 14px;
+  cursor: pointer;
 }
 
 .menu-modal{
