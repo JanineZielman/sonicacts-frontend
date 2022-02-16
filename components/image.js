@@ -2,7 +2,7 @@ import { getStrapiMedia } from "../lib/media"
 import NextImage from "next/image"
 
 const Image = ({ image, style }) => {
-  const { url, alternativeText, width, height } = image
+  const { alternativeText, width, height } = image
 
   const loader = () => {
     return getStrapiMedia(image)

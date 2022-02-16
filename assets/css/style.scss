@@ -41,8 +41,8 @@ a {
   padding: 14px 1vw;
 }
 
-h1{
-  font-size: 53px;
+h1, h2{
+  font-size: 48px;
   margin: 0;
 }
 
@@ -70,16 +70,37 @@ h1{
 }
 
 .columns{
-  display: flex;
-  padding-bottom: 24px;
-  width: 70vw;
-  .intro-text{
-    margin-left: 75px;
-    width: 800px;
+  width: 100%;
+  .wrapper-medium{
+    width: 1100px;
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 24px;
   }
-  .big-logo{
-    width: 600px;
-    height: 300px;
+  .wrapper-large{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    border-top: 2px solid #000;
+    padding-top: 24px;
+  }
+  .intro-text{
+    width: 430px;
+  }
+  .image{
+    width: 370px;
+    height: auto;
+    margin-right: 100px;
+  }
+}
+
+.home-menu{
+  width: calc(100% - 470px);
+  h2{
+    padding: 10px 0;
+    border-bottom: 2px solid #000;
+    width: 100%;
+    text-transform: capitalize;
   }
 }
 
