@@ -94,6 +94,10 @@ h1, h2{
   }
 }
 
+.wrapper{
+  width: 900px;
+}
+
 .home-menu{
   width: calc(100% - 470px);
   h2{
@@ -105,15 +109,31 @@ h1, h2{
 }
 
 .menu{
-  position: fixed;
-  top: 0;
-  width: 98vw;
-  left: 1vw;
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 0 4px 0;
-  border-bottom: 2px solid #000;
-  .breadcrumbs{
+  position: relative;
+  margin: -14px 0 0 0;
+  padding: 0;
+  .menu-wrapper{
+    top: 0;
+    width: 98vw;
+    left: 1vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0 4px 0;
+    border-bottom: 2px solid #000;
+    .breadcrumbs{
+      display: flex;
+      align-items: center;
+      .small-logo{
+        margin-right: 48px;
+      }
+      a{
+        display: block;
+        color: #000;
+        text-decoration: none;
+        text-transform: capitalize;
+        font-size: 36px;
+      }
+    }
   }
 }
 

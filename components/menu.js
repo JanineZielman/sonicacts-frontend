@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Link from "next/link"
 import Modal from 'react-bootstrap/Modal'
 
-const Menu = ({ pages }) => {
+const Menu = ({ menus }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -30,7 +30,7 @@ const Menu = ({ pages }) => {
           <Link href="/">
             <a className="home">Sonic <br/> Acts</a>
           </Link>
-          {pages.map((page, i) => {
+          {menus.map((page, i) => {
             return (
               <Link href={page.attributes.slug} key={'link'+i}>
                 <a className="menu-link">{page.attributes.slug}</a>

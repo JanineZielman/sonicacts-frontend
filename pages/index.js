@@ -5,10 +5,10 @@ import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
 import Link from "next/link"
 
-const Home = ({ homepage, pages, global }) => {
-  console.log(homepage)
+const Home = ({ homepage, menus, global }) => {
+  console.log(menus)
   return (
-    <Layout page={homepage} pages={pages}>
+    <Layout page={homepage} menus={menus}>
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image">
@@ -24,12 +24,9 @@ const Home = ({ homepage, pages, global }) => {
          
           </div>
           <div className="home-menu">
-            {pages.map((page, i) => {
+            {menus.map((page, i) => {
               return (
-                <h2>{page.attributes.slug}</h2>
-                // <Link href={page.attributes.slug} key={'link'+i}>
-                //   <a className="menu-link">{page.attributes.slug}</a>
-                // </Link>
+                <h2 key={'link'+i}>{page.attributes.slug}</h2>
               )
             })}
           </div>
@@ -41,17 +38,17 @@ const Home = ({ homepage, pages, global }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [homepageRes, globalRes, pagesRes] = await Promise.all([
+  const [homepageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/homepage", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
-    fetchAPI("/pages", { populate: "*" }),
+    fetchAPI("/menus", { populate: "*" }),
   ])
 
   return {
     props: {
       homepage: homepageRes.data,
       global: globalRes.data,
-      pages: pagesRes.data,
+      menus: menusRes.data,
     },
     revalidate: 1,
   }

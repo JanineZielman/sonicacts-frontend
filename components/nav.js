@@ -4,22 +4,27 @@ import Modal from 'react-bootstrap/Modal'
 import Image from "./image"
 import Menu from "./menu"
 
-const Nav = ({ pages, global }) => {
-  
+const Nav = ({ menus, global, page }) => {
+  console.log(page)
   return (
     <div className="menu">
-      <div className="breadcrumbs">
-        <div className="small-logo">
-          <Link href="/">
+      <div className="menu-wrapper">
+        <div className="breadcrumbs">
+          <div className="small-logo">
+            <Link href="/">
+              <a>
+                <Image image={global.attributes.logo.data.attributes}/>
+              </a>
+            </Link>
+          </div>
+          <Link href={'/' + page.attributes.slug}>
             <a>
-              <Image image={global.attributes.logo.data.attributes}/>
+              {page.attributes.slug}
             </a>
           </Link>
         </div>
+        <Menu menus={menus}/>
       </div>
-     
-     <Menu pages={pages}/>
-
     </div>
   )
 }
