@@ -1,14 +1,10 @@
 import { fetchAPI } from "../lib/api"
 import Layout from "../components/layout"
-import BasicSection from "../components/basicSection"
 import Seo from "../components/seo"
 
 const Page = ({menus, page, global}) => {
   return (
     <Layout menus={menus.data} page={page} global={global}>
-      {page.basic_section &&
-        <BasicSection page={page}/>
-      }
     </Layout>
   )
 }
