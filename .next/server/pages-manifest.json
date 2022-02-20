@@ -3,5 +3,7 @@
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
   "/news/[slug]": "pages/news/[slug].js",
-  "/": "pages/index.js"
+  "/": "pages/index.js",
+  "/agenda": "pages/agenda.js",
+  "/news": "pages/news.js"
 }

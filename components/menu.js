@@ -32,7 +32,7 @@ const Menu = ({ menus }) => {
           </Link>
           {menus.map((page, i) => {
             return (
-              <Link href={page.attributes.slug} key={'link'+i}>
+              <Link href={'/'+page.attributes.slug} key={'link'+i}>
                 <a className="menu-link">{page.attributes.slug}</a>
               </Link>
             )
