@@ -12,7 +12,7 @@ const News = ({ menus, global, page }) => {
 			{page.attributes.news_items.data.map((item, i) => {
             return (
               <>
-              <Link href={page.attributes.slug+'/'+item.attributes.slug}>
+              <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
 								<a>{item.attributes.title}</a>
 							</Link>
               </>

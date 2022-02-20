@@ -4,6 +4,12 @@
 		border-bottom: 2px solid #000;
 		padding: 10px 0;
 	}
+	.content{
+		display: flex;
+	}
+	.wrapper{
+		width: 1100px;
+	}
 	h1{
 		font-size: 36px;
 		font-weight: 300;
@@ -27,5 +33,15 @@
 	}
 	.text-block{
 		width: 1100px;
+	}
+	.sidebar{
+		margin-left: 24px;
+		font-size: 14px;
+		a{
+			display: block;
+			font-size: 30px;
+			color: #000;
+			text-decoration: none;
+		}
 	}
 }

@@ -1,9 +1,11 @@
 import React from "react"
+import Link from "next/link"
+import Collapsible from 'react-collapsible';
+
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
-import Link from "next/link"
 
 const Home = ({ homepage, menus, global }) => {
   console.log(menus)
@@ -26,7 +28,11 @@ const Home = ({ homepage, menus, global }) => {
           <div className="home-menu">
             {menus.map((page, i) => {
               return (
-                <h2 key={'link'+i}>{page.attributes.slug}</h2>
+                <div key={'home'+i} className="collapsible">
+                  <Collapsible trigger={page.attributes.slug}>
+                    {page.attributes.slug} highlights..
+                  </Collapsible>
+                </div>
               )
             })}
           </div>

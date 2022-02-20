@@ -100,11 +100,13 @@ h1, h2{
 
 .home-menu{
   width: calc(100% - 470px);
-  h2{
+  .collapsible{
     padding: 10px 0;
     border-bottom: 2px solid #000;
     width: 100%;
     text-transform: capitalize;
+    font-size: 48px;
+    cursor: pointer;
   }
 }
 
