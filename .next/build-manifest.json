@@ -24,16 +24,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/agenda": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/agenda.js"
-    ],
-    "/agenda/[slug]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/agenda/[slug].js"
-    ],
     "/discover": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -44,15 +34,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/discover/[slug].js"
     ],
-    "/news": [
+    "/discover/categories/[slug]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/news.js"
-    ],
-    "/news/[slug]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/news/[slug].js"
+      "static/chunks/pages/discover/categories/[slug].js"
     ]
   },
   "ampFirstPages": []

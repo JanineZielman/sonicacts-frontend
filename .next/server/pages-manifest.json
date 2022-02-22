@@ -2,10 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/news/[slug]": "pages/news/[slug].js",
-  "/agenda/[slug]": "pages/agenda/[slug].js",
-  "/news": "pages/news.js",
-  "/discover": "pages/discover.js",
-  "/agenda": "pages/agenda.js",
-  "/discover/[slug]": "pages/discover/[slug].js"
+  "/discover/categories/[slug]": "pages/discover/categories/[slug].js",
+  "/discover/[slug]": "pages/discover/[slug].js",
+  "/discover": "pages/discover.js"
 }
