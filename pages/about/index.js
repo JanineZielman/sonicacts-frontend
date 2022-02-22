@@ -1,15 +1,14 @@
 import React from "react"
-import Link from "next/link"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
-import Image from "../../components/image"
+import Article from "../../components/article"
 import { fetchAPI } from "../../lib/api"
 
 const News = ({ menus, global, page }) => {
   console.log(page)
   return (
     <Layout page={page} menus={menus} global={global}>
-      
+      <Article page={page}/>
     </Layout>
   )
 }
