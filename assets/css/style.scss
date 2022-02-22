@@ -13,6 +13,12 @@
 @font-face {
   font-family: "SuisseIntl";
   src: url('../fonts/SuisseIntl-Light-WebM.woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url('../fonts/ABCDiatypeMono-Regular-Trial.woff2');
   font-weight: 100;
 }
 
@@ -168,7 +174,7 @@ h1, h2{
       color: #000;
       text-transform: capitalize;
       padding: 10px 14px;
-      font-weight: 100;
+      font-weight: 200;
     }
     .home{
       font-weight: 500;

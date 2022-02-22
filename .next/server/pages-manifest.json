@@ -2,11 +2,10 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/discover/[slug]": "pages/discover/[slug].js",
-  "/about": "pages/about.js",
-  "/agenda": "pages/agenda.js",
-  "/": "pages/index.js",
+  "/news/[slug]": "pages/news/[slug].js",
+  "/agenda/[slug]": "pages/agenda/[slug].js",
   "/news": "pages/news.js",
-  "/community": "pages/community.js",
-  "/discover": "pages/discover.js"
+  "/discover": "pages/discover.js",
+  "/agenda": "pages/agenda.js",
+  "/discover/[slug]": "pages/discover/[slug].js"
 }
