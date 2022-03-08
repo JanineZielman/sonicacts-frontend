@@ -25,7 +25,9 @@ const Discover = ({ menus, global, page, items, categories }) => {
           {items.map((item, i) => {
             return (
               <div className="discover-item">
-              <Image image={item.attributes.cover_image.data.attributes}/>
+              <div className="image">
+                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+              </div>
               <div className="category">
                 <Link href={'/'+page.attributes.slug+'/categories/'+item.attributes.category.data.attributes.slug} key={'agenda'+i}>
                   <a>{item.attributes.category.data.attributes.slug}</a>

@@ -5,17 +5,27 @@ import Seo from "../../components/seo"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
 
+
 const News = ({ menus, global, page, items }) => {
   console.log(items)
   return (
     <Layout page={page} menus={menus} global={global}>
-			{items.map((item, i) => {
-        return (
-          <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
-            <a>{item.attributes.title}</a>
-          </Link>
-        )
-      })}
+      <div className="discover">
+        <div className="discover-container">
+          {items.map((item, i) => {
+            return (
+              <div className="discover-item">
+                <div className="image">
+                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                </div>
+                <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
+                  <a>{item.attributes.title}</a>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+      </div>
     </Layout>
   )
 }
