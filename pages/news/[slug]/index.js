@@ -4,7 +4,6 @@ import Seo from "../../../components/seo"
 import Article from "../../../components/article"
 
 const NewsItem = ({menus, page, global, relations}) => {
-  console.log(relations)
   page.attributes.slug = 'news'
   return (   
     <Layout menus={menus} page={page} global={global}>
@@ -26,13 +25,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const pageRes = 
-    await fetchAPI( `/news-items?&populate[content][populate]=*&?slug=${params.slug}`
+
+   const pageRes = 
+    await fetchAPI( `/news-items?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`
   );
 
   const pageRel = 
-    await fetchAPI( `/news-items?populate=*&?slug=${params.slug}`
+    await fetchAPI( `/news-items?filters[slug][$eq]=${params.slug}&?populate=*`
   );
+
 
   const [menusRes, globalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),
