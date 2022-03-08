@@ -17,13 +17,30 @@ const News = ({ menus, global, page, items }) => {
             children={page.attributes.introTextSmall} 
           />
         </div>
-        {items.map((item, i) => {
-          return (
-            <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-              <a>{item.attributes.name}</a>
-            </Link>
-          )
-        })}
+        <div className="filter">
+          <div><span>Sort By</span></div>
+        </div>
+        <div className="discover-container">
+          {items.map((item, i) => {
+            return (
+              <div className="discover-item community">
+                <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+                  <a>
+                    <div className="image">
+                      {item.attributes?.cover_image?.data &&
+                        <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                      }
+                    </div>
+                    <div className="info">
+                      {item.attributes.name} 
+                      <div>{item.attributes.job_description}</div> 
+                    </div>
+                  </a>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </Layout>
   )
