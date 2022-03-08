@@ -24,6 +24,26 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/agenda": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/agenda.js"
+    ],
+    "/agenda/[slug]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/agenda/[slug].js"
+    ],
+    "/community/[slug]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/community/[slug].js"
+    ],
+    "/news": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/news.js"
+    ],
     "/news/[slug]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

@@ -82,7 +82,7 @@ const Article = ({page, relations}) => {
 						
 
 						
-						{relations?.attributes.community_items &&
+						{relations?.attributes?.community_items?.data[0] &&
 							<div>
 								<span>Community</span>
 								{relations.attributes.community_items.data.map((item, i) => {

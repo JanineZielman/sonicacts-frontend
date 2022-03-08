@@ -27,11 +27,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const pageRes = 
-    await fetchAPI( `/discover-items?&populate[content][populate]=*&?slug=${params.slug}`
+    await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`
   );
 
   const pageRel = 
-    await fetchAPI( `/discover-items?populate=*&?slug=${params.slug}`
+    await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}&populate=*`
   );
 
   const [menusRes, globalRes] = await Promise.all([
