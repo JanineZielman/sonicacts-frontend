@@ -24,15 +24,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/agenda/[slug]": [
+    "/agenda": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/agenda/[slug].js"
-    ],
-    "/discover": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/discover.js"
+      "static/chunks/pages/agenda.js"
     ],
     "/news": [
       "static/chunks/webpack.js",
