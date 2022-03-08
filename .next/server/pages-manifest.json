@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/news/[slug]": "pages/news/[slug].js",
-  "/news": "pages/news.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/agenda": "pages/agenda.js"
+  "/agenda": "pages/agenda.js",
+  "/community": "pages/community.js",
+  "/discover": "pages/discover.js"
 }

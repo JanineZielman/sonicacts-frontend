@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import Image from "../../components/image"
@@ -9,13 +10,21 @@ const News = ({ menus, global, page, items }) => {
   console.log(items)
   return (
     <Layout page={page} menus={menus} global={global}>
-      {items.map((item, i) => {
-        return (
-          <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-            <a>{item.attributes.title}</a>
-          </Link>
-        )
-      })}
+      <div className="discover">
+        <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+        <div className="wrapper intro">
+          <ReactMarkdown 
+            children={page.attributes.introTextSmall} 
+          />
+        </div>
+        {items.map((item, i) => {
+          return (
+            <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+              <a>{item.attributes.title}</a>
+            </Link>
+          )
+        })}
+      </div>
     </Layout>
   )
 }

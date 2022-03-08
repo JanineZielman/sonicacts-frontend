@@ -1,4 +1,15 @@
 .discover {
+  margin-top: 14px;
+  .intro {
+    a {
+      text-decoration: underline;
+      font-size: 30px;
+    }
+  }
+  h1 {
+    font-weight: 300;
+    line-height: 55px;
+  }
   .filter {
     padding-bottom: 10px;
     border-bottom: 2px solid #000;

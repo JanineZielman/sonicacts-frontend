@@ -29,20 +29,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/agenda.js"
     ],
-    "/news": [
+    "/community": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/news.js"
+      "static/chunks/pages/community.js"
     ],
-    "/news/[slug]": [
+    "/discover": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/news/[slug].js"
-    ],
-    "/next/dist/pages/_error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/next/dist/pages/_error.js"
+      "static/chunks/pages/discover.js"
     ]
   },
   "ampFirstPages": []
