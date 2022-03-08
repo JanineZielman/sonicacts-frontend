@@ -24,20 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/agenda": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/agenda.js"
-    ],
     "/community": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/community.js"
     ],
-    "/discover": [
+    "/community/[slug]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/discover.js"
+      "static/chunks/pages/community/[slug].js"
     ]
   },
   "ampFirstPages": []

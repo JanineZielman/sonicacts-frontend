@@ -8,8 +8,7 @@ const CommunityItem = ({menus, page, global, relations}) => {
   page.attributes.slug = 'community'
   return (   
     <Layout menus={menus} page={page} global={global}>
-			hello
-      {/* <Article page={page} relations={relations}/> */}
+      <Article page={page} relations={relations}/>
     </Layout>
   )
 }

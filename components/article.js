@@ -16,6 +16,12 @@ const Article = ({page, relations}) => {
 						<h1>{page.attributes.title}</h1>
 					</div>
 				}
+				{page.attributes.name &&
+					<div className="title">
+						<h1>{page.attributes.name}</h1>
+						<div className="subtitle">{page.attributes.job_description}</div>
+					</div>
+				}
 				<div className="content">
 					<div className="wrapper">
 						{page.attributes.content.map((item, i) => {
