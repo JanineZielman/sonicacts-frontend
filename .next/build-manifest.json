@@ -24,15 +24,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/community": [
+    "/discover": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/community.js"
-    ],
-    "/news": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/news.js"
+      "static/chunks/pages/discover.js"
     ]
   },
   "ampFirstPages": []

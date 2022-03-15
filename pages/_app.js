@@ -21,6 +21,7 @@ const MyApp = ({ Component, pageProps }) => {
           rel="shortcut icon"
           href={getStrapiMedia(global.attributes.favicon)}
         /> */}
+        <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"/>
       </Head>
       <Component {...pageProps} />
       {/* <GlobalContext.Provider value={global.attributes}>

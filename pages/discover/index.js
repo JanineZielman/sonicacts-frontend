@@ -1,41 +1,73 @@
 import React from "react"
 import Link from "next/link"
+import {useRouter} from "next/router";
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
 
+
 const Discover = ({ menus, global, page, items, categories }) => {
-  console.log(items)
+  const router = useRouter();
+  const key = router.query.filter;
+
+  console.log('key', key)
+
+  const isotope = React.useRef()
+  const [filterKey, setFilterKey] = React.useState('*')
+
+  React.useEffect(() => {
+    isotope.current = new Isotope('.discover-container', {
+      itemSelector: '.discover-item',
+      layoutMode: 'fitRows',
+    })
+    return () => isotope.current.destroy()
+  }, [])
+
+  React.useEffect(() => {
+    filterKey === '*'
+      ? isotope.current.arrange({filter: `*`})
+      : isotope.current.arrange({filter: `.${filterKey}`})
+  }, [filterKey])
+
+  React.useEffect(() => {
+    if (key != undefined){
+      setFilterKey(key)
+    }
+  }, [key])
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
         <p className="wrapper">{page.attributes.intro}</p>
         <div className="filter">
           <div><span>Filter by category</span></div>
-          {categories.map((category, i) => {
-            return (
-              <Link href={'/'+page.attributes.slug+'/categories/'+category.attributes.slug} key={'agenda'+i}>
-                <a>{category.attributes.slug}</a>
-              </Link>
-            )
-          })}
+            {categories.map((category, i) => {
+              return (
+                <Link key={'category'+i} href={{ pathname: '/discover', query: { filter: category.attributes.slug } }}><a>{category.attributes.slug}</a></Link>
+              )
+            })}
         </div>
         <div className="discover-container">
           {items.map((item, i) => {
             return (
-              <div className="discover-item">
-              <div className="image">
-                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-              </div>
-              <div className="category">
-                <Link href={'/'+page.attributes.slug+'/categories/'+item.attributes.category.data.attributes.slug} key={'agenda'+i}>
-                  <a>{item.attributes.category.data.attributes.slug}</a>
-                </Link>
-              </div>
-              <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-                <a>{item.attributes.title}</a>
-              </Link>
+              <div className={`discover-item ${item.attributes.category.data.attributes.slug}`}>
+                <div className="item-wrapper">
+                  <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                    <a>
+                      <div className="image">
+                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                      </div>
+                      <div className="category">
+                        <Link href={'/'+page.attributes.slug+'/categories/'+item.attributes.category.data.attributes.slug} key={'agenda'+i}>
+                          <a>{item.attributes.category.data.attributes.slug}</a>
+                        </Link>
+                      </div>
+                
+                      {item.attributes.title}
+                    </a>
+                  </Link>
+                </div>
               </div>
             )
           })}
