@@ -11,8 +11,6 @@ const Discover = ({ menus, global, page, items, categories }) => {
   const router = useRouter();
   const key = router.query.filter;
 
-  console.log('key', key)
-
   const isotope = React.useRef()
   const [filterKey, setFilterKey] = React.useState('*')
 
@@ -51,18 +49,21 @@ const Discover = ({ menus, global, page, items, categories }) => {
         <div className="discover-container">
           {items.map((item, i) => {
             return (
-              <div className={`discover-item ${item.attributes.category.data.attributes.slug}`}>
+              <div className={`discover-item ${item.attributes.category.data?.attributes?.slug}`}>
                 <div className="item-wrapper">
                   <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
                     <a>
                       <div className="image">
                         <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                       </div>
-                      <div className="category">
-                        <Link href={'/'+page.attributes.slug+'/categories/'+item.attributes.category.data.attributes.slug} key={'agenda'+i}>
-                          <a>{item.attributes.category.data.attributes.slug}</a>
-                        </Link>
-                      </div>
+                      {item.attributes.category?.data && 
+                        <div className="category">
+                          <Link href={'/'+page.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                            <a>{item.attributes.category.data.attributes.slug}</a>
+                          </Link>
+                        </div>
+                      }
+                      
                 
                       {item.attributes.title}
                     </a>

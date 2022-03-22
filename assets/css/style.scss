@@ -65,7 +65,7 @@ html {
   transition: all 0.4s ease-in-out;
 }
 @keyframes noise-anim {
-  $steps: 5;
+  $steps: 1;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
       clip: rect(random(145) + px, 600px, random(145) + px, 0);
@@ -81,11 +81,11 @@ html {
   background: #e6e6e6;
   overflow: hidden;
   clip: rect(0, 450px, 0, 0);
-  animation: noise-anim 5s infinite ease-in-out alternate;
+  animation: noise-anim 4s infinite ease-in-out alternate;
 }
 
 @keyframes noise-anim-2 {
-  $steps: 5;
+  $steps: 1;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
       clip: rect(random(145) + px, 600px, random(145) + px, 0);
