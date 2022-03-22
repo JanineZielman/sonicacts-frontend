@@ -1,29 +1,35 @@
 @font-face {
   font-family: "SuisseIntl";
-  src: url('../fonts/SuisseIntl-Medium-WebM.woff2');
+  src: url("../fonts/SuisseIntl-Medium-WebM.woff2");
   font-weight: 500;
 }
 
 @font-face {
   font-family: "SuisseIntl";
-  src: url('../fonts/SuisseIntl-Regular-WebM.woff2');
+  src: url("../fonts/SuisseIntl-Regular-WebM.woff2");
   font-weight: 300;
 }
 
 @font-face {
   font-family: "SuisseIntl";
-  src: url('../fonts/SuisseIntl-Light-WebM.woff2');
+  src: url("../fonts/SuisseIntl-Light-WebM.woff2");
   font-weight: 200;
 }
 
 @font-face {
   font-family: "SuisseIntl";
-  src: url('../fonts/ABCDiatypeMono-Regular-Trial.woff2');
+  src: url("../fonts/ABCDiatypeMono-Regular-Trial.woff2");
   font-weight: 100;
 }
 
+@font-face {
+  font-family: "Sonic";
+  src: url("../fonts/SonicLogoV02-Medium.woff");
+  font-weight: 100;
+}
 
-body, html{
+body,
+html {
   font-family: "SuisseIntl";
   margin: 0;
   padding: 0;
@@ -31,23 +37,98 @@ body, html{
   font-size: 30px;
   padding-bottom: 40px;
   overflow-x: hidden;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.logo {
+  position: relative;
+  h1 {
+    font-family: "Sonic";
+    font-size: 125px;
+    line-height: 0.9;
+    font-weight: 300;
+  }
+}
+
+.glitch {
+  color: #000;
+  font-family: "Sonic";
+  font-size: 125px;
+  font-weight: 300;
+  position: relative;
+  width: auto;
+  margin: -15px auto;
+  display: inline-block;
+  transition: all 0.4s ease-in-out;
+}
+@keyframes noise-anim {
+  $steps: 5;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(145) + px, 600px, random(145) + px, 0);
+    }
+  }
+}
+.glitch:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 4.5px;
+  top: 0px;
+  color: black;
+  background: #e6e6e6;
+  overflow: hidden;
+  clip: rect(0, 450px, 0, 0);
+  animation: noise-anim 5s infinite ease-in-out alternate;
+}
+
+@keyframes noise-anim-2 {
+  $steps: 5;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(145) + px, 600px, random(145) + px, 0);
+    }
+  }
+}
+.glitch:before {
+  content: attr(data-text);
+  position: absolute;
+  left: -4.5px;
+  top: 0px;
+  color: black;
+  background: #e6e6e6;
+  overflow: hidden;
+  clip: rect(0, 450px, 0, 0);
+  animation: noise-anim-2 5s infinite ease-in-out alternate;
+  animation-delay: var(--delay);
+}
+
+.filter-text {
+  font-family: "Sonic";
+  font-size: 125px;
+  line-height: 0.9;
+  overflow: hidden;
+  position: relative;
+  float: left;
   font-weight: 300;
 }
 
 input:focus {
-  outline:none;
+  outline: none;
 }
 
 a {
   text-decoration: none;
 }
 
-.container{
+.container {
   padding: 14px 1vw;
 }
 
-h1, h2{
+h1,
+h2 {
   font-size: 48px;
   margin: 0;
 }
@@ -70,43 +151,43 @@ h1, h2{
   line-height: 1.75;
 }
 
-.small-logo{
+.small-logo {
   height: auto;
   width: 300px;
 }
 
-.columns{
+.columns {
   width: 100%;
-  .wrapper-medium{
+  .wrapper-medium {
     width: 1100px;
     display: flex;
     align-items: flex-start;
     padding-bottom: 24px;
   }
-  .wrapper-large{
+  .wrapper-large {
     width: 100%;
     display: flex;
     align-items: flex-start;
     border-top: 2px solid #000;
     padding-top: 24px;
   }
-  .intro-text{
+  .intro-text {
     width: 430px;
   }
-  .image{
+  .image {
     width: 370px;
     height: auto;
     margin-right: 100px;
   }
 }
 
-.wrapper{
+.wrapper {
   width: 900px;
 }
 
-.home-menu{
+.home-menu {
   width: calc(100% - 470px);
-  .collapsible{
+  .collapsible {
     padding: 10px 0;
     border-bottom: 2px solid #000;
     width: 100%;
@@ -116,11 +197,11 @@ h1, h2{
   }
 }
 
-.menu{
+.menu {
   position: relative;
   margin: -14px 0 0 0;
   padding: 0;
-  .menu-wrapper{
+  .menu-wrapper {
     top: 0;
     width: 98vw;
     left: 1vw;
@@ -128,13 +209,13 @@ h1, h2{
     justify-content: space-between;
     padding: 14px 0 4px 0;
     border-bottom: 2px solid #000;
-    .breadcrumbs{
+    .breadcrumbs {
       display: flex;
       align-items: center;
-      .small-logo{
+      .small-logo {
         margin-right: 48px;
       }
-      a{
+      a {
         display: block;
         color: #000;
         text-decoration: none;
@@ -145,30 +226,30 @@ h1, h2{
   }
 }
 
-.hamburger{
+.hamburger {
   position: fixed;
   right: 1vw;
   top: 14px;
   cursor: pointer;
 }
 
-.menu-modal{
+.menu-modal {
   position: absolute;
   height: 100vh;
   top: 0;
   right: 0;
   width: 300px;
-  background-color: #E6E6E6;
-  .close{
+  background-color: #e6e6e6;
+  .close {
     cursor: pointer;
     margin: 14px 1vw;
     right: 0;
     position: fixed;
     top: 0;
   }
-  .menu-links{
+  .menu-links {
     font-size: 30px;
-    a{
+    a {
       display: block;
       width: 100%;
       color: #000;
@@ -176,12 +257,12 @@ h1, h2{
       padding: 10px 14px;
       font-weight: 200;
     }
-    .home{
+    .home {
       font-weight: 500;
       line-height: 1;
       margin-bottom: 14px;
     }
-    .menu-link{
+    .menu-link {
       margin-left: 20px;
     }
   }
