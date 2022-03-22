@@ -19,6 +19,7 @@ const Image = ({ image, layout, objectFit  }) => {
       src={getStrapiMedia(image)}
       alt={alternativeText || ""}
       className="img"
+      unoptimized={true}
     />
   )
 }

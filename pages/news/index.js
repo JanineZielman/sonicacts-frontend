@@ -31,13 +31,18 @@ const News = ({ menus, global, page, items }) => {
           {items.slice(1).map((item, i) => {
             return (
               <div className="discover-item">
-                <div className="image">
-                  <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                <div className="item-wrapper">
+                  <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
+                    <a>
+                      <div className="image">
+                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                      </div>
+                      <div className="date">{Moment(item.attributes.publishedAt).format('D MMM y')}</div>
+                    
+                      {item.attributes.title}
+                    </a>
+                  </Link>
                 </div>
-                <div className="date">{Moment(item.attributes.publishedAt).format('D MMM y')}</div>
-                <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
-                  <a>{item.attributes.title}</a>
-                </Link>
               </div>
             )
           })}

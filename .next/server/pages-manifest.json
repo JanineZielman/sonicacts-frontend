@@ -2,9 +2,7 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/discover": "pages/discover.js",
-  "/about": "pages/about.js",
-  "/community": "pages/community.js",
   "/news": "pages/news.js",
-  "/": "pages/index.js"
+  "/news/[slug]": "pages/news/[slug].js",
+  "/discover": "pages/discover.js"
 }
