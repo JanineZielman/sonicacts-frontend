@@ -47,8 +47,6 @@ html {
   position: relative;
   h1 {
     font-family: "Sonic";
-    font-size: 125px;
-    line-height: 0.9;
     font-weight: 300;
   }
 }
@@ -56,7 +54,7 @@ html {
 .glitch {
   color: #000;
   font-family: "Sonic";
-  font-size: 125px;
+  font-size: 145px;
   font-weight: 300;
   position: relative;
   width: auto;
@@ -80,7 +78,7 @@ html {
   color: black;
   background: #e6e6e6;
   overflow: hidden;
-  clip: rect(0, 450px, 0, 0);
+  clip: rect(0, 300px, 0, 0);
   animation: noise-anim 4s infinite ease-in-out alternate;
 }
 
@@ -100,7 +98,7 @@ html {
   color: black;
   background: #e6e6e6;
   overflow: hidden;
-  clip: rect(0, 450px, 0, 0);
+  clip: rect(0, 300px, 0, 0);
   animation: noise-anim-2 5s infinite ease-in-out alternate;
   animation-delay: var(--delay);
 }

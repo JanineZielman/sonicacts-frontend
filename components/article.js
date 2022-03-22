@@ -10,7 +10,7 @@ const Article = ({page, relations}) => {
 			<>
 				{page.attributes.title &&
 					<div className="title">
-						{relations?.attributes.category &&
+						{relations?.attributes?.category?.data &&
 							<div className="category">{relations.attributes.category.data.attributes.title}</div>
 						}
 						<h1>{page.attributes.title}</h1>
