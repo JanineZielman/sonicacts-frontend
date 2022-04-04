@@ -8,34 +8,17 @@ import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
 
 
-const Home = ({ homepage, menus, global }) => {
-  // console.log(menus)
-
-    const [counter, setCounter] = useState(360);
-    useEffect(() => {
-      counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-    }, [counter]);
-
+const Home = ({ homepage, menus, global, items }) => {
     
+  console.log(items) 
   
   return (
     <Layout page={homepage} menus={menus}>
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image logo">
-            <div class="glitch" data-text="Sonic Acts" style={{'--random': (Math.floor(Math.random() * 10) * 1) }}>Sonic</div> 
-            <div class="glitch" data-text="Acts" style={{'--random': (Math.floor(Math.random() * 10) * 1) }}>Acts</div> 
-            {/* <h1>
-              {('Sonic Acts').split("").map(function(char, index){
-                return (
-                  <>
-                  <div aria-hidden="true" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 1) + 's' }} key={index} data-text={char}>{char}</div>
-                  </>
-                );
-              })}
-            </h1> */}
-            
-            {/* <Image image={homepage.attributes.logo.data.attributes}/> */}
+            <div class="glitch" data-text="Sonic Acts">Sonic</div> 
+            <div class="glitch" data-text="Acts">Acts</div> 
           </div>
           <div className="intro-text">
             <h1>{homepage.attributes.IntroText}</h1>
@@ -51,7 +34,14 @@ const Home = ({ homepage, menus, global }) => {
               return (
                 <div key={'home'+i} className="collapsible">
                   <Collapsible trigger={page.attributes.slug}>
-                    {page.attributes.slug} highlights..
+                    {items[i].slice(0, 3).map((item, i) => {
+                      return(
+                        <div>
+                          <Image image={item.attributes.cover_image.data.attributes}/>
+                          <h2>{item.attributes.title}</h2>
+                        </div>
+                      )
+                    })}
                   </Collapsible>
                 </div>
               )
@@ -65,10 +55,11 @@ const Home = ({ homepage, menus, global }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [homepageRes, globalRes, menusRes] = await Promise.all([
+  const [homepageRes, globalRes, menusRes, newsRes] = await Promise.all([
     fetchAPI("/homepage", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
+    fetchAPI("/news-items", { populate: "*" }),
   ])
 
   return {
@@ -76,6 +67,15 @@ export async function getStaticProps() {
       homepage: homepageRes.data,
       global: globalRes.data,
       menus: menusRes.data,
+      items: {
+        0: newsRes.data,
+        1: newsRes.data,
+        2: newsRes.data,
+        3: newsRes.data,
+        4: newsRes.data,
+        5: newsRes.data,
+      }
+      
     },
     revalidate: 1,
   }

@@ -58,12 +58,12 @@ html {
   font-weight: 300;
   position: relative;
   width: auto;
-  margin: -15px auto;
+  margin: -18px auto;
   display: inline-block;
   transition: all 0.4s ease-in-out;
 }
 @keyframes noise-anim {
-  $steps: 1;
+  $steps: 20;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
       clip: rect(random(145) + px, 600px, random(145) + px, 0);
@@ -73,17 +73,18 @@ html {
 .glitch:after {
   content: attr(data-text);
   position: absolute;
-  left: 4.5px;
+  left: 5px;
   top: 0px;
   color: black;
   background: #e6e6e6;
+  // background: transparent;
   overflow: hidden;
   clip: rect(0, 300px, 0, 0);
-  animation: noise-anim 4s infinite ease-in-out alternate;
+  animation: noise-anim 20s infinite ease-in-out alternate;
 }
 
 @keyframes noise-anim-2 {
-  $steps: 1;
+  $steps: 20;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
       clip: rect(random(145) + px, 600px, random(145) + px, 0);
@@ -93,13 +94,14 @@ html {
 .glitch:before {
   content: attr(data-text);
   position: absolute;
-  left: -4.5px;
+  left: -5px;
   top: 0px;
   color: black;
   background: #e6e6e6;
+  // background: transparent;
   overflow: hidden;
   clip: rect(0, 300px, 0, 0);
-  animation: noise-anim-2 5s infinite ease-in-out alternate;
+  animation: noise-anim-2 20s infinite ease-in-out alternate;
   animation-delay: var(--delay);
 }
 
