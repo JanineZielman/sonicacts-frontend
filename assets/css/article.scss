@@ -57,6 +57,17 @@
   .image {
     width: 100%;
     margin-top: 14px;
+    &.small {
+      max-width: 30%;
+      padding-left: 150px;
+    }
+    &.medium {
+      max-width: 60%;
+      padding-left: 150px;
+    }
+    &.large {
+      width: 100%;
+    }
   }
   .text-block {
     width: 1100px;

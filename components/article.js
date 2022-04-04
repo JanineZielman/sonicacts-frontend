@@ -42,7 +42,7 @@ const Article = ({page, relations}) => {
 											</div>
 										</div>
 										:
-										<div className="image">
+										<div className={'image ' + item.size}>
 											<Image image={item.image.data.attributes}/>
 										</div>
 									}
