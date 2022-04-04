@@ -4,7 +4,7 @@ import Moment from 'moment';
 import Image from "./image"
 
 const Article = ({page, relations}) => {
-	console.log(page)
+	console.log(relations)
   return (   
 		<section className="article">
 			<>
@@ -24,6 +24,7 @@ const Article = ({page, relations}) => {
 				}
 				<div className="content">
 					<div className="wrapper">
+						<>
 						{page.attributes.content.map((item, i) => {
 							return (
 								<>
@@ -65,6 +66,14 @@ const Article = ({page, relations}) => {
 								</>
 							)
 						})}
+						{relations.attributes.footnotes &&
+							<div className="footnotes" id="footnotes">
+								<ReactMarkdown 
+									children={relations.attributes.footnotes.footnotes} 
+								/>
+							</div>
+						}
+						</>
 					</div>
 					<div className="sidebar">
 						{page.attributes.slug == 'news' &&
