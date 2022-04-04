@@ -17,7 +17,12 @@ const News = ({ menus, global, page, items }) => {
             <Image image={items[0].attributes.cover_image?.data?.attributes}/>
           </div>
           <div className="text">
-            <div className="date">{Moment(items[0].attributes.publishedAt).format('D MMM y')}</div>
+            <div className="date">
+							{page.attributes.date ?
+                <>{Moment(items[0].attributes.date).format('D MMM y')}</>
+							: <>{Moment(items[0].attributes.publishedAt).format('D MMM y')}</>
+							}
+						</div>
             <Link href={page.attributes.slug+'/'+items[0].attributes.slug}>
               <a>{items[0].attributes.title}</a>
             </Link>

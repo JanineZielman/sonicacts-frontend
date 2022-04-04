@@ -28,25 +28,25 @@ const Article = ({page, relations}) => {
 						{page.attributes.content.map((item, i) => {
 							return (
 								<>
-								{item.image &&
+								{item.image?.data &&
 								<>
-								{item.image_caption ?
-									<div className="columns" key={'column'+i}>
-										<div className="caption">
-											<ReactMarkdown 
-												children={item.image_caption} 
-											/>
+									{item.image_caption ?
+										<div className="columns" key={'column'+i}>
+											<div className="caption">
+												<ReactMarkdown 
+													children={item.image_caption} 
+												/>
+											</div>
+											<div className="image">
+												<Image image={item.image.data.attributes}/>
+											</div>
 										</div>
+										:
 										<div className="image">
 											<Image image={item.image.data.attributes}/>
 										</div>
-									</div>
-									:
-									<div className="image">
-										<Image image={item.image.data.attributes}/>
-									</div>
 									}
-									</>
+								</>
 								}
 								{item.sidenote && 
 									<div className={'sidenote ' + item.size}>
@@ -66,7 +66,7 @@ const Article = ({page, relations}) => {
 								</>
 							)
 						})}
-						{relations.attributes.footnotes &&
+						{relations?.attributes?.footnotes &&
 							<div className="footnotes" id="footnotes">
 								<ReactMarkdown 
 									children={relations.attributes.footnotes.footnotes} 
@@ -77,7 +77,12 @@ const Article = ({page, relations}) => {
 					</div>
 					<div className="sidebar">
 						{page.attributes.slug == 'news' &&
-							<span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
+							<>
+							{page.attributes.date ?
+								<span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
+							: <span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
+							}
+							</>
 						}
 					
 						{page.attributes.slug == 'agenda' &&
@@ -100,7 +105,7 @@ const Article = ({page, relations}) => {
 						{relations?.attributes?.community_items?.data[0] &&
 							<div>
 								<span>Community</span>
-								{relations.attributes.community_items.data.map((item, i) => {
+								{relations?.attributes?.community_items.data.map((item, i) => {
 									return (
 										<Link href={'/community/'+item.attributes.slug}>
 											<a>
