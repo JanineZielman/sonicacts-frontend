@@ -63,6 +63,12 @@ const Article = ({page, relations}) => {
 										/>
 									</div>
 								}
+								{item.url &&
+									<div className="iframe-wrapper"  key={'url'+i}>
+										<iframe className="iframe" src={item.url} frameBorder="0"/>
+										
+									</div>
+								}
 								</>
 							)
 						})}

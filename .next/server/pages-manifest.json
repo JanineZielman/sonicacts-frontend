@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/community/[slug]": "pages/community/[slug].js",
-  "/agenda/[slug]": "pages/agenda/[slug].js"
+  "/discover/[slug]": "pages/discover/[slug].js",
+  "/discover": "pages/discover.js"
 }
