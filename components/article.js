@@ -88,7 +88,17 @@ const Article = ({page, relations}) => {
 						{page.attributes.slug == 'agenda' &&
 							<>
 									<span>When</span>
-									<div>{Moment(page.attributes.date).format('D MMM y')}</div>
+									{relations?.attributes?.dates?.map((item, i) => {
+										return(
+											<div key={'dates'+i}>
+												{Moment(item.from).format('D MMM')} -&nbsp;
+												{Moment(item.till).format('D MMM y')}
+											</div>
+										)
+									})}
+									{page.attributes.date &&
+										<div>{Moment(page.attributes.date).format('D MMM y')}</div>
+									}
 									<div>{page.attributes.time}</div>
 								
 									<span>Location</span>
