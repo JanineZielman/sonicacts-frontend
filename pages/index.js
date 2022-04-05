@@ -22,6 +22,16 @@ const Home = ({ homepage, menus, global, items, about }) => {
     centerPadding: '150px',
   };
 
+   const settings2 = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '200px',
+  };
+
   return (
     <Layout page={homepage} menus={menus}>
       <div className="columns">
@@ -70,15 +80,16 @@ const Home = ({ homepage, menus, global, items, about }) => {
                               </div>
                             }
                             <div>
+                              <span> {item.attributes.date}</span>
+                              {item.attributes.title &&
+                              <h2>{item.attributes.title}</h2>
+                              }
+                              {item.attributes.name &&
+                              <h2>{item.attributes.name}</h2>
+                              }
                               <Link href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
                                 <a>
-                                  <span> {item.attributes.date}</span>
-                                  {item.attributes.title &&
-                                  <h2>{item.attributes.title}</h2>
-                                  }
-                                  {item.attributes.name &&
-                                  <h2>{item.attributes.name}</h2>
-                                  }
+                                  Read more
                                 </a>
                               </Link>
                             </div>
@@ -102,12 +113,9 @@ const Home = ({ homepage, menus, global, items, about }) => {
                 </a>
               </Link>
             </div>
-            <div className="collapsible">
+            <div className="collapsible contact">
               <Collapsible trigger={'contact'}>
-                 <Slider {...settings}>
-                    <div className="contact-item">
-                      <h5>{about.attributes.contact_adres}</h5>
-                    </div>
+                 <Slider {...settings2}>
                     <div className="contact-item">
                       <p>{about.attributes.contact_info}</p>
                     </div>
@@ -115,6 +123,9 @@ const Home = ({ homepage, menus, global, items, about }) => {
                       <ReactMarkdown 
                         children={about.attributes.contact_links} 
                       />
+                    </div>
+                    <div className="contact-item adres">
+                      <h5>{about.attributes.contact_adres}</h5>
                     </div>
                  </Slider>
               </Collapsible>

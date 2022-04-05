@@ -30,7 +30,7 @@
 
 @font-face {
   font-family: "Sonic Logo";
-  src: url("../fonts/Sonic-Acts-Logo-V02.woff");
+  src: url("../fonts/Sonic-Acts-Logo-V03.woff2");
   font-weight: 100;
 }
 
@@ -63,6 +63,19 @@ html {
   }
 }
 
+.logo-small {
+  position: relative;
+  margin-right: 48px;
+  span {
+    font-family: "Sonic Logo";
+    font-weight: 300;
+    font-size: 64px;
+  }
+  .glitch{
+    font-size: 64px;
+  }
+}
+
 .glitch {
   color: #000;
   font-family: "Sonic Logo";
@@ -89,7 +102,7 @@ html {
 .glitch:after {
   content: attr(data-text);
   position: absolute;
-  font-feature-settings: "ss01" on;
+  font-feature-settings: "ss02" on;
   left: 0px;
   top: 0px;
   // color: #e6e6e6;
@@ -97,7 +110,7 @@ html {
   background: #e6e6e6;
   overflow: hidden;
   clip: rect(0, 300px, 0, 0);
-  animation: noise-anim 40s infinite ease-in-out alternate;
+  animation: noise-anim 30s infinite ease-in-out alternate;
   animation-delay: var(--delay);
 }
 
@@ -120,7 +133,7 @@ html {
   background: #e6e6e6;
   overflow: hidden;
   clip: rect(0, 300px, 0, 0);
-  animation: noise-anim-2 40s infinite ease-in-out alternate;
+  animation: noise-anim-2 30s infinite ease-in-out alternate;
   animation-delay: var(--delay);
 }
 
@@ -373,37 +386,45 @@ h2 {
       }
       div{
         width: 50%;
-        max-height: 400px;
         div{
           width: 100%;
           height: 100%;
         }
       }
     }
-    .contact-item{
+    .contact-item {
       margin-top: 24px;
-      h5{
-        font-weight: 500;
-         margin: 0;
+      width: 400px;
+      &.adres {
+        width: 400px;
+        max-width: 400px;
       }
-      p{
+    
+      h5 {
+        font-weight: 500;
+        margin: 0;
+      }
+    
+      p {
         font-size: 24px;
         margin: 0;
         padding: 0 24px;
         margin-bottom: 20px;
         line-height: 1.2;
       }
-      &.small p{
+    
+      &.small p {
         a {
           font-size: 30px;
           font-weight: 300;
           display: block;
         }
+    
         font-size: 14px;
         font-weight: 100;
         text-transform: lowercase;
       }
-    } 
+    }
   }
 }
 

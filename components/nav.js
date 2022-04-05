@@ -10,12 +10,17 @@ const Nav = ({ menus, global, page }) => {
     <div className="menu">
       <div className="menu-wrapper">
         <div className="breadcrumbs">
-          <div className="small-logo">
-            <Link href="/">
-              <a>
-                <Image image={global.attributes.logo.data.attributes}/>
-              </a>
-            </Link>
+          <div className="logo-small">
+            <span  data-text="S" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
+            <span  data-text="o" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
+            <span  data-text="n" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
+            <span  data-text="i" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
+            <span  data-text="c" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+              &nbsp;
+            <span  data-text="A" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
+            <span  data-text="c" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+            <span  data-text="t" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
+            <span  data-text="s" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
           </div>
           <Link href={'/' + page.attributes.slug}>
             <a>
