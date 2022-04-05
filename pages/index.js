@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Collapsible from 'react-collapsible';
 import Slider from "react-slick";
+import ReactMarkdown from "react-markdown";
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -9,14 +10,16 @@ import { fetchAPI } from "../lib/api"
 
 
 const Home = ({ homepage, menus, global, items, about }) => {
-  console.log(homepage) 
+  console.log(items) 
   
   const settings = {
-    dots: true,
-    infinite: false,
+    dots: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '150px',
   };
 
   return (
@@ -24,8 +27,18 @@ const Home = ({ homepage, menus, global, items, about }) => {
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image logo">
-            <div className="glitch" data-text="Sonic Acts">Sonic</div> 
-            <div className="glitch" data-text="Acts">Acts</div> 
+            {/* <div className="glitch" data-text="Sonic Acts">Sonic</div> 
+            <div className="glitch" data-text="Acts">Acts</div>  */}
+            <span  data-text="S" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
+            <span  data-text="o" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
+            <span  data-text="n" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
+            <span  data-text="i" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
+            <span  data-text="c" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+            <br/>
+            <span  data-text="A" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
+            <span  data-text="c" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+            <span  data-text="t" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
+            <span  data-text="s" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
           </div>
           <div className="intro-text">
             <h1>{homepage.attributes.IntroText}</h1>
@@ -57,19 +70,24 @@ const Home = ({ homepage, menus, global, items, about }) => {
                               </div>
                             }
                             <div>
-                              {item.attributes.title &&
-                               <h2>{item.attributes.title}</h2>
-                              }
-                              {item.attributes.name &&
-                               <h2>{item.attributes.name}</h2>
-                              }
+                              <Link href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
+                                <a>
+                                  <span> {item.attributes.date}</span>
+                                  {item.attributes.title &&
+                                  <h2>{item.attributes.title}</h2>
+                                  }
+                                  {item.attributes.name &&
+                                  <h2>{item.attributes.name}</h2>
+                                  }
+                                </a>
+                              </Link>
                             </div>
-                          </div>
+                          </div>       
                         )
                       })}
                       <div className="slider-item">
                         <div>
-                          <h2>More</h2>
+                          <p>→ More {page.attributes.slug}</p>
                         </div>
                       </div>
                     </Slider>
@@ -87,7 +105,17 @@ const Home = ({ homepage, menus, global, items, about }) => {
             <div className="collapsible">
               <Collapsible trigger={'contact'}>
                  <Slider {...settings}>
-
+                    <div className="contact-item">
+                      <h5>{about.attributes.contact_adres}</h5>
+                    </div>
+                    <div className="contact-item">
+                      <p>{about.attributes.contact_info}</p>
+                    </div>
+                    <div className="contact-item small">
+                      <ReactMarkdown 
+                        children={about.attributes.contact_links} 
+                      />
+                    </div>
                  </Slider>
               </Collapsible>
             </div>

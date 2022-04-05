@@ -24,9 +24,11 @@
     "react-collapsible": "^2.8.4",
     "react-dom": "17.0.0",
     "react-markdown": "^7.1.2",
+    "react-modal": "^3.14.4",
     "react-moment": "^1.1.1",
     "react-slick": "^0.28.1",
     "react-text-fun": "^1.0.0",
+    "react-transition-group": "^4.4.2",
     "sass": "^1.45.0",
     "strapi-plugin-populate-deep": "^0.1.2"
   },

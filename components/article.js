@@ -90,6 +90,16 @@ const Article = ({page, relations}) => {
 							}
 							</>
 						}
+
+						{page.attributes.slug == 'about' &&
+							<div class="contact">
+								<h2>{page.attributes.contact_adres}</h2>
+								<p>{page.attributes.contact_info}</p>
+								<ReactMarkdown 
+									children={page.attributes.contact_links} 
+								/>
+							</div>
+						}
 					
 						{page.attributes.slug == 'agenda' &&
 							<>
