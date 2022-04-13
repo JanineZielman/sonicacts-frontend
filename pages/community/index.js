@@ -6,8 +6,9 @@ import Seo from "../../components/seo"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
 
-const News = ({ menus, global, page, items }) => {
-  console.log(items)
+const News = ({ menus, global, page, items, all }) => {
+  console.log('items', items)
+  console.log('all', all)
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
@@ -59,9 +60,10 @@ export async function getStaticProps() {
   );
 
   const number = totalItems.meta.pagination.total;
+  const page = totalItems.meta.pagination.pageCount;
 
   const itemRes = 
-    await fetchAPI( `/community-items?pagination[limit]=${number}&populate=*`
+    await fetchAPI( `/community-items?pagination[limit]=${number}&sort[0]=name&populate=*`
   );
 
   return {

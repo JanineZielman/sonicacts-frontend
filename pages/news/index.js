@@ -72,7 +72,7 @@ export async function getStaticProps() {
   const number = totalItems.meta.pagination.total;
 
   const itemRes = 
-    await fetchAPI( `/news-items?pagination[limit]=${number}&populate=*`
+    await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date&populate=*`
   );
 
   return {

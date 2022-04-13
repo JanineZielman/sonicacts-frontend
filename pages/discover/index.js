@@ -8,6 +8,7 @@ import { fetchAPI } from "../../lib/api"
 
 
 const Discover = ({ menus, global, page, items, categories }) => {
+  console.log('items', items)
   const router = useRouter();
   const key = router.query.filter;
 
@@ -18,6 +19,9 @@ const Discover = ({ menus, global, page, items, categories }) => {
     isotope.current = new Isotope('.discover-container', {
       itemSelector: '.discover-item',
       layoutMode: 'fitRows',
+      getSortData: {
+        filedate: '[data-ticks]',
+      }
     })
     return () => isotope.current.destroy()
   }, [])
@@ -82,7 +86,6 @@ export async function getStaticProps() {
   // Run API calls in parallel
   const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
-    // fetchAPI("/discover-items", { populate: "*" }),
     fetchAPI("/categories", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
@@ -95,7 +98,7 @@ export async function getStaticProps() {
   const number = totalItems.meta.pagination.total;
 
   const itemRes = 
-    await fetchAPI( `/discover-items?pagination[limit]=${number}&populate=*`
+    await fetchAPI( `/discover-items?pagination[limit]=${number}&sort[0]=date&populate=*`
   );
 
   return {
