@@ -80,13 +80,23 @@ const Discover = ({ menus, global, page, items, categories }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [pageRes, itemRes, categoryRes, globalRes, menusRes] = await Promise.all([
+  const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
-    fetchAPI("/discover-items", { populate: "*" }),
+    // fetchAPI("/discover-items", { populate: "*" }),
     fetchAPI("/categories", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
+
+  const totalItems = 
+    await fetchAPI( `/discover-items`
+  );
+
+  const number = totalItems.meta.pagination.total;
+
+  const itemRes = 
+    await fetchAPI( `/discover-items?pagination[limit]=${number}&populate=*`
+  );
 
   return {
     props: {

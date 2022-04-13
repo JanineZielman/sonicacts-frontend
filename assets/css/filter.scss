@@ -64,13 +64,19 @@
     display: flex;
     margin-top: 14px;
     flex-wrap: wrap;
-    width: 100vw;
-    margin-left: -1vw;
+    width: 100%;
     .discover-item {
       width: 33.33%;
       margin-bottom: 48px;
-      .item-wrapper {
-        padding: 0 1vw;
+      &:nth-child(3n+1){
+        .item-wrapper {
+          padding-right: 1vw;
+        }
+      }
+      &:nth-child(3n+2) {
+        .item-wrapper {
+          padding-right: 1vw;
+        }
       }
       &.community {
         margin: 14px 0;
@@ -86,6 +92,7 @@
             width: 80px;
             overflow: hidden;
             border-radius: 50%;
+            background-color: grey;
           }
           .info {
             padding: 0 14px;

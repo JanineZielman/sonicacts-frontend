@@ -48,12 +48,21 @@ const News = ({ menus, global, page, items }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [pageRes, itemRes, globalRes, menusRes] = await Promise.all([
+  const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/community", { populate: "*" }),
-    fetchAPI("/community-items", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
+
+  const totalItems = 
+    await fetchAPI( `/community-items`
+  );
+
+  const number = totalItems.meta.pagination.total;
+
+  const itemRes = 
+    await fetchAPI( `/community-items?pagination[limit]=${number}&populate=*`
+  );
 
   return {
     props: {
