@@ -92,7 +92,7 @@ const Article = ({page, relations}) => {
 						}
 
 						{page.attributes.slug == 'about' &&
-							<div class="contact">
+							<div className="contact">
 								<h2>{page.attributes.contact_adres}</h2>
 								<p>{page.attributes.contact_info}</p>
 								<ReactMarkdown 

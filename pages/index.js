@@ -2,6 +2,7 @@ import Link from "next/link"
 import Collapsible from 'react-collapsible';
 import Slider from "react-slick";
 import ReactMarkdown from "react-markdown";
+import Moment from 'moment';
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -32,6 +33,17 @@ const Home = ({ homepage, menus, global, items, about }) => {
     centerPadding: '200px',
   };
 
+  const settings3 = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: false,
+    variableWidth: true,
+    centerPadding: '200px'
+  };
+
   return (
     <Layout page={homepage} menus={menus}>
       <div className="columns">
@@ -39,16 +51,16 @@ const Home = ({ homepage, menus, global, items, about }) => {
           <div className="image logo">
             {/* <div className="glitch" data-text="Sonic Acts">Sonic</div> 
             <div className="glitch" data-text="Acts">Acts</div>  */}
-            <span  data-text="S" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
-            <span  data-text="o" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
-            <span  data-text="n" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
-            <span  data-text="i" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
-            <span  data-text="c" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+            <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
+            <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
+            <span  data-text="n" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
+            <span  data-text="i" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
+            <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
             <br/>
-            <span  data-text="A" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
-            <span  data-text="c" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-            <span  data-text="t" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
-            <span  data-text="s" class="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
+            <span  data-text="A" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
+            <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+            <span  data-text="t" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
+            <span  data-text="s" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
           </div>
           <div className="intro-text">
             <h1>{homepage.attributes.IntroText}</h1>
@@ -66,30 +78,42 @@ const Home = ({ homepage, menus, global, items, about }) => {
             </Link>
           </div>
           <div className="home-menu">
-            {menus.slice(0, 4).map((page, i) => {
+            {menus.slice(0, 3).map((page, i) => {
               return (
-                <div key={'home'+i} className="collapsible">
-                  <Collapsible trigger={page.attributes.slug}>
+                <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
+                  <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
                     <Slider {...settings}>
                       {items[i].slice(0, 3).map((item, i) => {
                         return(
                           <div className="slider-item">
                             {item.attributes.cover_image?.data &&
-                              <div>
+                              <div className="image">
                                 <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
                               </div>
                             }
-                            <div>
-                              <span> {item.attributes.date}</span>
-                              {item.attributes.title &&
-                              <h2>{item.attributes.title}</h2>
-                              }
+                            <div className="text">
+                              <div>
+                                {item.attributes.category?.data &&
+                                  <div className="category">{item.attributes.category.data.attributes.title}</div>
+                                }
+                                {item.attributes.date &&
+                                  <span>
+                                    {Moment(item.attributes.date).format('D MMM y')}
+                                  </span>
+                                }
+                                {item.attributes.title &&
+                                  <h2>{item.attributes.title}</h2>
+                                }
+                              </div>
                               {item.attributes.name &&
                               <h2>{item.attributes.name}</h2>
                               }
+                              {item.attributes.job_description &&
+                                <span> {item.attributes.job_description}</span>
+                              }
                               <Link href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
                                 <a>
-                                  Read more
+                                  → Read more
                                 </a>
                               </Link>
                             </div>
@@ -98,7 +122,59 @@ const Home = ({ homepage, menus, global, items, about }) => {
                       })}
                       <div className="slider-item">
                         <div>
-                          <p>→ More {page.attributes.slug}</p>
+                          <p>→ {page.attributes.slug}</p>
+                        </div>
+                      </div>
+                    </Slider>
+                  </Collapsible>
+                </div>
+              )
+            })}
+            {menus.slice(3,4).map((page, i) => {
+              return (
+                <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
+                  <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
+                    <Slider {...settings3}>
+                      {items[3].slice(0, 6).map((item, i) => {
+                        return(
+                          <div className="slider-item">
+                            {item.attributes.cover_image?.data &&
+                              <div className="image">
+                                <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                              </div>
+                            }
+                            <div className="text">
+                              <div>
+                                {item.attributes.category?.data &&
+                                  <div className="category">{item.attributes.category.data.attributes.title}</div>
+                                }
+                                {item.attributes.date &&
+                                  <span>
+                                    {Moment(item.attributes.date).format('D MMM y')}
+                                  </span>
+                                }
+                                {item.attributes.title &&
+                                  <h2>{item.attributes.title}</h2>
+                                }
+                              </div>
+                              {item.attributes.name &&
+                              <h2>{item.attributes.name}</h2>
+                              }
+                              {item.attributes.job_description &&
+                                <span> {item.attributes.job_description}</span>
+                              }
+                              <Link href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
+                                <a>
+                                  → Read more
+                                </a>
+                              </Link>
+                            </div>
+                          </div>       
+                        )
+                      })}
+                      <div className="slider-item">
+                        <div>
+                          <p>→ {page.attributes.slug}</p>
                         </div>
                       </div>
                     </Slider>
