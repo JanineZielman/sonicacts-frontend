@@ -1,89 +1,113 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import {useRouter} from "next/router";
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const Discover = ({ menus, global, page, items, categories }) => {
+const Discover = ({ menus, global, page, items, categories, numberOfPosts }) => {
   console.log('items', items)
+
   const router = useRouter();
   const key = router.query.filter;
 
-  const isotope = React.useRef()
-  const [filterKey, setFilterKey] = React.useState('*')
+  const [posts, setPosts] = useState(items);
+  const [hasMore, setHasMore] = useState(true);
 
-  React.useEffect(() => {
-    isotope.current = new Isotope('.discover-container', {
-      itemSelector: '.discover-item',
-      layoutMode: 'fitRows',
-      getSortData: {
-        filedate: '[data-ticks]',
-      }
-    })
-    return () => isotope.current.destroy()
-  }, [])
+  const getMorePosts = async () => {
+    const res = await fetchAPI(
+      `/discover-items?pagination[start]=${posts.length}&populate=*`
+    );
+    const newPosts = await res.data;
+    setPosts((posts) => [...posts, ...newPosts]);
+  };
 
-  React.useEffect(() => {
-    filterKey === '*'
-      ? isotope.current.arrange({filter: `*`})
-      : isotope.current.arrange({filter: `.${filterKey}`})
-  }, [filterKey])
+  useEffect(() => {
+    setHasMore(numberOfPosts > posts.length ? true : false);
+  }, [posts]);
 
-  React.useEffect(() => {
-    if (key != undefined){
-      setFilterKey(key)
-    }
-  }, [key])
+  // const router = useRouter();
+  // const key = router.query.filter;
+
+  // const isotope = React.useRef()
+  // const [filterKey, setFilterKey] = React.useState('*')
+
+  // React.useEffect(() => {
+  //   isotope.current = new Isotope('.discover-container', {
+  //     itemSelector: '.discover-item',
+  //     layoutMode: 'fitRows',
+  //   })
+  //   return () => isotope.current.destroy()
+  // }, [])
+
+  // React.useEffect(() => {
+  //   filterKey === '*'
+  //     ? isotope.current.arrange({filter: `*`})
+  //     : isotope.current.arrange({filter: `.${filterKey}`})
+  // }, [filterKey])
+
+  // React.useEffect(() => {
+  //   if (key != undefined){
+  //     setFilterKey(key)
+  //   }
+  // }, [key])
 
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        <p className="wrapper">{page.attributes.intro}</p>
+        <p className="wrapper">{page?.attributes.intro}</p>
         <div className="filter">
           <div><span>Filter by category</span></div>
-            {categories.map((category, i) => {
+            {categories?.map((category, i) => {
               return (
-                <Link key={'category'+i} href={{ pathname: '/discover', query: { filter: category.attributes.slug } }}><a>{category.attributes.slug}</a></Link>
+                <Link key={'category'+i} href={{ pathname: '/discover', query: { filter: category?.attributes.slug } }}><a>{category?.attributes.slug}</a></Link>
               )
             })}
         </div>
         <div className="discover-container">
-          {items.map((item, i) => {
-            return (
-              <div className={`discover-item ${item.attributes.category.data?.attributes?.slug}`}>
-                <div className="item-wrapper">
-                  <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                    <a>
-                      <div className="image">
-                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                      </div>
-                      {item.attributes.category?.data && 
-                        <div className="category">
-                          <Link href={'/'+page.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                            <a>{item.attributes.category.data.attributes.slug}</a>
-                          </Link>
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={getMorePosts}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+          >
+            {posts.map((item, i) => {
+              return (
+                <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
+                  <div className="item-wrapper">
+                    <Link href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                      <a>
+                        <div className="image">
+                          <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                         </div>
-                      }
-                      
-                
-                      {item.attributes.title}
-                    </a>
-                  </Link>
+                        {item.attributes.category?.data && 
+                          <div className="category">
+                            <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                              <a>{item.attributes.category?.data.attributes.slug}</a>
+                            </Link>
+                          </div>
+                        }
+                        {item.attributes.title}
+                      </a>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          
+            </InfiniteScroll>
+            
         </div>
       </div>
     </Layout>
   )
 }
 
-export async function getStaticProps() {
-  // Run API calls in parallel
+export async function getServerSideProps() {
+
   const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
     fetchAPI("/categories", { populate: "*" }),
@@ -91,26 +115,24 @@ export async function getStaticProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const totalItems = 
+  const items = await fetchAPI(`/discover-items?&populate=*`);
+
+	const totalItems = 
     await fetchAPI( `/discover-items`
   );
 
-  const number = totalItems.meta.pagination.total;
-
-  const itemRes = 
-    await fetchAPI( `/discover-items?pagination[limit]=${number}&sort[0]=date&populate=*`
-  );
+  const numberOfPosts = totalItems.meta.pagination.total;
 
   return {
     props: {
+      items: items.data,
+      numberOfPosts: +numberOfPosts,
       page: pageRes.data,
-      items: itemRes.data,
       categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
     },
-    revalidate: 1,
-  }
+  };
 }
 
 export default Discover

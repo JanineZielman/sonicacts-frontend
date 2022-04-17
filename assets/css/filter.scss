@@ -65,6 +65,11 @@
     margin-top: 14px;
     flex-wrap: wrap;
     width: 100%;
+    .infinite-scroll-component{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
     .discover-item {
       width: 33.33%;
       margin-bottom: 48px;

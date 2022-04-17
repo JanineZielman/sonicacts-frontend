@@ -13,20 +13,8 @@ const NewsItem = ({menus, page, global, relations}) => {
   )
 }
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/news-items");
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({ params }) {
-   const pageRes = 
+export async function getServerSideProps({params}) {
+  const pageRes = 
     await fetchAPI( `/news-items?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`
   );
 
@@ -41,8 +29,12 @@ export async function getStaticProps({ params }) {
   ])
 
   return {
-    props: { menus: menusRes.data, page: pageRes.data[0], global: globalRes.data, relations: pageRel.data[0] },
-    revalidate: 1,
+    props: { 
+      menus: menusRes.data, 
+      page: pageRes.data[0], 
+      global: globalRes.data, 
+      relations: pageRel.data[0] 
+    },
   };
 }
 

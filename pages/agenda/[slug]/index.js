@@ -13,19 +13,7 @@ const AgendaItem = ({menus, page, global, relations}) => {
   )
 }
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/agenda-items");
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({params}) {
   const pageRes = 
     await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`
   );
@@ -40,10 +28,13 @@ export async function getStaticProps({ params }) {
   ])
 
   return {
-    props: { menus: menusRes.data, page: pageRes.data[0], global: globalRes.data, relations: pageRel.data[0] },
-    revalidate: 1,
+    props: { 
+      menus: menusRes.data, 
+      page: pageRes.data[0], 
+      global: globalRes.data, 
+      relations: pageRel.data[0] 
+    }
   };
 }
-
 
 export default AgendaItem

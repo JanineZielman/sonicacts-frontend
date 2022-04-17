@@ -53,6 +53,7 @@ const News = ({ menus, global, page, items }) => {
           })}
         </div>
       </div>
+      
     </Layout>
   )
 }
@@ -72,7 +73,7 @@ export async function getStaticProps() {
   const number = totalItems.meta.pagination.total;
 
   const itemRes = 
-    await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date:asc&populate=*`
+    await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date&populate=*`
   );
 
   return {
