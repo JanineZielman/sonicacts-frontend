@@ -73,22 +73,6 @@
       font-weight: 100;
     }
   }
-  .agenda-container .agenda-item a{
-    flex-direction: column;
-    overflow: hidden;
-    .image{
-      height: 60vw;
-    }
-    .image, .info{
-      width: 100%;
-    }
-    .info-wrapper{
-      padding: 10px 0;
-      h3{
-        font-size: 36px;
-      }
-    }
-  }
   .discover-container {
     display: flex;
     margin-top: 14px;
