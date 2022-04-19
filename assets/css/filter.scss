@@ -13,14 +13,26 @@
   .filter {
     padding-bottom: 10px;
     border-bottom: 2px solid #000;
+    div{
+      padding: 0;
+      margin: 0;
+    }
     a {
-      margin-right: 24px;
+      margin-right: 10px;
       color: #000;
       text-decoration: none;
       text-transform: capitalize;
       display: inline-block;
       line-height: 1;
       cursor: pointer;
+      font-size: 21px;
+      font-weight: 500;
+      background-color: rgb(242, 242, 242);
+      padding: 5px 15px;
+      border-radius: 20px;
+      &.active{
+        background-color: white;
+      }
     }
     span {
       font-size: 14px;
@@ -49,6 +61,7 @@
   a {
     color: #000;
     font-size: 48px;
+    font-weight: 500;
     line-height: 1;
   }
   .category {

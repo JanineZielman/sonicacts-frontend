@@ -1,14 +1,29 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-const News = ({ menus, global, page, items, all }) => {
-  console.log('items', items)
-  console.log('all', all)
+const Community = ({ menus, global, page, items, numberOfPosts }) => {
+  
+  const [posts, setPosts] = useState(items);
+  const [hasMore, setHasMore] = useState(true);
+
+  const getMorePosts = async () => {
+    const res = await fetchAPI(
+      `/community-items?sort[0]=name&pagination[start]=${posts.length}&populate=*`
+    );
+    const newPosts = await res.data;
+    setPosts((posts) => [...posts, ...newPosts]);
+  };
+
+  useEffect(() => {
+    setHasMore(numberOfPosts > posts.length ? true : false);
+  }, [posts]);
+  
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
@@ -22,25 +37,32 @@ const News = ({ menus, global, page, items, all }) => {
           <div><span>Sort By</span></div>
         </div>
         <div className="discover-container">
-          {items.map((item, i) => {
-            return (
-              <div className="discover-item community">
-                <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-                  <a>
-                    <div className="image">
-                      {item.attributes?.cover_image?.data &&
-                        <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                      }
-                    </div>
-                    <div className="info">
-                      {item.attributes.name} 
-                      <div>{item.attributes.job_description}</div> 
-                    </div>
-                  </a>
-                </Link>
-              </div>
-            )
-          })}
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={getMorePosts}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+          >
+            {posts.map((item, i) => {
+              return (
+                <div className="discover-item community">
+                  <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+                    <a>
+                      <div className="image">
+                        {item.attributes?.cover_image?.data &&
+                          <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                        }
+                      </div>
+                      <div className="info">
+                        {item.attributes.name} 
+                        <div>{item.attributes.job_description}</div> 
+                      </div>
+                    </a>
+                  </Link>
+                </div>
+              )
+            })}
+          </InfiniteScroll>
         </div>
       </div>
     </Layout>
@@ -55,21 +77,23 @@ export async function getStaticProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const totalItems = 
-    await fetchAPI( `/community-items`
+  // const itemRes = 
+  //   await fetchAPI( `/community-items?pagination[limit]=${number}&sort[0]=name&populate=*`
+  // );
+
+  const items = await fetchAPI(`/community-items?sort[0]=name&populate=*`);
+
+	const totalItems = 
+    await fetchAPI( `/community-items?sort[0]=name`
   );
 
-  const number = totalItems.meta.pagination.total;
-  const page = totalItems.meta.pagination.pageCount;
-
-  const itemRes = 
-    await fetchAPI( `/community-items?pagination[limit]=${number}&sort[0]=name&populate=*`
-  );
+  const numberOfPosts = totalItems.meta.pagination.total;
 
   return {
     props: {
       page: pageRes.data,
-      items: itemRes.data,
+      items: items.data,
+      numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
     },
@@ -77,4 +101,4 @@ export async function getStaticProps() {
   }
 }
 
-export default News
+export default Community

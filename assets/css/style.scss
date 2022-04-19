@@ -219,6 +219,10 @@ h2 {
   }
   .highlight{
     padding-right: 48px;
+    div{
+      border-radius: 50%;
+      margin: 20px!important;
+    }
     a {
       color: #000;
     }

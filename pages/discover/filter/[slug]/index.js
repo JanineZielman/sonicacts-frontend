@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from "react"
 import Link from "next/link"
-import Layout from "../../components/layout"
-import Seo from "../../components/seo"
-import Image from "../../components/image"
-import { fetchAPI } from "../../lib/api"
+import Layout from "../../../../components/layout"
+import Seo from "../../../../components/seo"
+import Image from "../../../../components/image"
+import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
+const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPosts, filter}) => {
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/discover-items?pagination[start]=${posts.length}&populate=*`
+      `/discover-items?filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -30,11 +30,16 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
         <p className="wrapper">{page?.attributes.intro}</p>
         <div className="filter">
           <div><span>Filter by category</span></div>
-            {categories?.map((category, i) => {
-              return (
-                <a key={'category'+i} href={`/discover/filter/${category?.attributes.slug}`}>{category?.attributes.slug}</a>
-              )
-            })}
+						<a key={'category-all'} href={`/discover`}>All</a>
+						{categories?.map((category, i) => {
+							return (
+								<a key={'category'+i} href={`/discover/filter/${category?.attributes.slug}`}
+									className={category?.attributes.slug == filter && 'active'}
+								>
+									{category?.attributes.slug}
+								</a>
+							)
+						})}
         </div>
         <div className="discover-container">
           <InfiniteScroll
@@ -73,7 +78,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({params}) {
   const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
     fetchAPI("/categories", { populate: "*" }),
@@ -81,10 +86,10 @@ export async function getServerSideProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/discover-items?&populate=*`);
+  const items = await fetchAPI(`/discover-items?filters[category][slug][$eq]=${params.slug}&populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/discover-items`
+    await fetchAPI( `/discover-items?filters[category][slug][$eq]=${params.slug}`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;
@@ -97,8 +102,9 @@ export async function getServerSideProps() {
       categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
+			filter: params.slug
     },
   };
 }
 
-export default Discover
+export default DiscoverFiltered

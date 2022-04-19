@@ -1,14 +1,29 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import Moment from 'moment';
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
+import InfiniteScroll from 'react-infinite-scroll-component';
 
+const News = ({ menus, global, page, items, numberOfPosts }) => {
 
-const News = ({ menus, global, page, items }) => {
-  console.log(items)
+  const [posts, setPosts] = useState(items);
+  const [hasMore, setHasMore] = useState(true);
+
+  const getMorePosts = async () => {
+    const res = await fetchAPI(
+      `/news-items?sort[0]=date&pagination[start]=${posts.length}&populate=*`
+    );
+    const newPosts = await res.data;
+    setPosts((posts) => [...posts, ...newPosts]);
+  };
+
+  useEffect(() => {
+    setHasMore(numberOfPosts > posts.length ? true : false);
+  }, [posts]);
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
@@ -33,24 +48,36 @@ const News = ({ menus, global, page, items }) => {
           
         </div>
         <div className="discover-container">
-          {items.slice(1).map((item, i) => {
-            return (
-              <div className="discover-item">
-                <div className="item-wrapper">
-                  <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
-                    <a>
-                      <div className="image">
-                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                      </div>
-                      <div className="date">{Moment(item.attributes.publishedAt).format('D MMM y')}</div>
-                    
-                      {item.attributes.title}
-                    </a>
-                  </Link>
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={getMorePosts}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+          >
+            {posts.slice(1).map((item, i) => {
+              return (
+                <div className="discover-item">
+                  <div className="item-wrapper">
+                    <Link href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
+                      <a>
+                        <div className="image">
+                          <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                        </div>
+                        <div className="date">
+                          {item.attributes.date 
+                            ? Moment(item.attributes.date).format('D MMM y')
+                            : Moment(item.attributes.publishedAt).format('D MMM y')
+                          }
+                        </div>
+                      
+                        {item.attributes.title}
+                      </a>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </InfiniteScroll>
         </div>
       </div>
       
@@ -66,20 +93,23 @@ export async function getStaticProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const totalItems = 
-    await fetchAPI( `/news-items`
+  // const itemRes = 
+  //   await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date&populate=*`
+  // );
+
+  const items = await fetchAPI(`/news-items?sort[0]=date&populate=*`);
+
+	const totalItems = 
+    await fetchAPI( `/news-items?sort[0]=date`
   );
 
-  const number = totalItems.meta.pagination.total;
-
-  const itemRes = 
-    await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date&populate=*`
-  );
+  const numberOfPosts = totalItems.meta.pagination.total;
 
   return {
     props: {
       page: pageRes.data,
-      items: itemRes.data,
+      items: items.data,
+      numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
     },
