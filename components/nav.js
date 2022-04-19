@@ -5,7 +5,6 @@ import Image from "./image"
 import Menu from "./menu"
 
 const Nav = ({ menus, global, page }) => {
-  console.log(page)
   return (
     <div className="menu">
       <div className="menu-wrapper">
@@ -28,9 +27,9 @@ const Nav = ({ menus, global, page }) => {
               </a>
             </Link>
           </div>
-          <Link href={'/' + page.attributes.slug}>
+          <Link href={'/' + page?.attributes?.slug}>
             <a>
-              {page.attributes.slug}
+              {page.attributes?.slug}
             </a>
           </Link>
         </div>

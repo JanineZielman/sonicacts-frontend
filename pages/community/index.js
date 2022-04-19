@@ -34,7 +34,7 @@ const Community = ({ menus, global, page, items, numberOfPosts }) => {
           />
         </div>
         <div className="filter">
-          <div><span>Sort By</span></div>
+          <div><span>Search</span></div>
         </div>
         <div className="discover-container">
           <InfiniteScroll

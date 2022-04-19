@@ -4,7 +4,6 @@ import Seo from "../../../components/seo"
 import Article from "../../../components/article"
 
 const CommunityItem = ({menus, page, global, relations}) => {
-  console.log(relations)
   page.attributes.slug = 'community'
   return (   
     <Layout menus={menus} page={page} global={global}>

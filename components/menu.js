@@ -2,6 +2,7 @@ import React,  { useState } from "react"
 import { CSSTransition } from 'react-transition-group';
 import Link from "next/link"
 import Modal from 'react-modal';
+import Search from '../components/search'
 
 const Menu = ({ menus }) => {
   const [show, setShow] = useState(false);
@@ -17,7 +18,9 @@ const Menu = ({ menus }) => {
   
   return (
     <>
-
+      <div className="menu-search">
+        <Search/>
+      </div>
       <div className="hamburger" onClick={handleShow}>
         <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="49" y1="1" x2="1" y2="1" stroke="black" strokeWidth="2" strokeLinecap="square"/>

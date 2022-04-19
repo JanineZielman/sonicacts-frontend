@@ -4,7 +4,6 @@ import Moment from 'moment';
 import Image from "./image"
 
 const Article = ({page, relations}) => {
-	console.log(relations)
   return (   
 		<section className="article">
 			<>

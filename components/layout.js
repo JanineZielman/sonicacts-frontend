@@ -4,7 +4,7 @@ import Menu from "./menu"
 const Layout = ({ children, seo, menus, page, global}) => {
   return(
     <section className="container">
-      {page.attributes.slug != 'homepage'  ? 
+      {page?.attributes?.slug != 'homepage'  ? 
         <Nav menus={menus} global={global} page={page}/>
       : <Menu menus={menus}/>
       }

@@ -61,6 +61,15 @@ html {
     font-family: "Sonic Logo";
     font-weight: 300;
   }
+  .s1{
+    position: absolute;
+    z-index: 9;
+  }
+  .s2{
+    position: absolute;
+    top: 120px;
+    z-index: 0;
+  }
 }
 
 .logo-small {
@@ -73,6 +82,10 @@ html {
   }
   .glitch{
     font-size: 64px;
+    font-feature-settings: "ss02" on;
+    &:before, &:after{
+      font-feature-settings: "ss03" on;
+    }
   }
 }
 

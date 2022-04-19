@@ -5,7 +5,6 @@ import Article from "../../components/article"
 import { fetchAPI } from "../../lib/api"
 
 const News = ({ menus, global, page }) => {
-  console.log(page)
   return (
     <Layout page={page} menus={menus} global={global}>
       <Article page={page}/>

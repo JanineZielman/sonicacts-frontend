@@ -31,7 +31,6 @@ const Agenda = ({ menus, global, page, items }) => {
             difference[i] = next[i] - current[i];
             const differencePrev = [];
             differencePrev[i] = current[i] - previous[i];
-            console.log('difference', difference[i])
             const number = [];
             for (let j = 0; j < difference[i] - 1; j++) { 
               number[j] += 1
