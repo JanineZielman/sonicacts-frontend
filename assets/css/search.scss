@@ -19,7 +19,7 @@
 	margin-top: 14px;
 	.search-item{
 		width: 33%;
-		margin-bottom: 48px;
+		margin-bottom: 24px;
 		&:nth-child(3n+1) {
 			.item-wrapper {
 				padding-right: 1vw;
@@ -38,7 +38,7 @@
 		}
 		.content-wrapper{
 			padding: 0 20px;
-			width: 75%;
+			width: calc(100% - 120px);
 			.category, .date, .tag{
 				font-size: 14px;
 				font-weight: 100;
@@ -46,10 +46,11 @@
 		}
 	}
 	.image{
-		width: 25%;
-		height: auto;
+		width: 80px;
+		height: 80px;
 		position: relative;
 		overflow: hidden;
+		border-radius: 50%;
 	}
 }
 

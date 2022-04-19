@@ -98,8 +98,8 @@ const Agenda = ({ menus, global, page, items }) => {
   )
 }
 
-export async function getStaticProps() {
-  var currentDate = new Date(Date.now()).toISOString().split('T')[0].replaceAll('/', '-')
+export async function getServerSideProps() {
+  const currentDate = new Date(Date.now()).toISOString().split('T')[0].replaceAll('/', '-')
   
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
