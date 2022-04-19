@@ -1,0 +1,51 @@
+.agenda-container{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	.agenda-item{
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+		margin: 24px 0;
+		a{
+			display: flex;
+		}
+		.info{
+			width: 50%;
+			.info-wrapper{
+				padding: 0 20px;
+				span{
+					font-weight: 200;
+				}
+				h3{
+					font-size: 48px;
+					font-weight: 500;
+					margin: 0;
+				}
+			}
+		}
+		.image{
+			width: 50%;
+			height: 30vw;
+			position: relative;
+			overflow: hidden;
+		}
+	}
+	.timeline-item {
+		text-align: center;
+		width: 100%;
+		font-size: 48px;
+		font-weight: 200;
+		padding: 24px 0;
+		&.missing{
+			padding: 24px 0 0 0;
+		}
+		.line{
+			width: 2px;
+			height: 50px;
+			background-color: black;
+			display: block;
+			margin: auto;
+		}
+	}
+}
