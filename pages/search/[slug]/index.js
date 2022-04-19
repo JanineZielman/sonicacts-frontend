@@ -9,11 +9,23 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 const Search = ({ menus, global, items, search, numberOfPosts}) => {
-  console.log('number', numberOfPosts)
-  const page = search
+  
+  const page = search 
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
+
+  useEffect(() => {
+    setPosts((posts) => (
+      {
+        discover:[...items.discover],
+        news:[...items.news],
+        agenda:[...items.agenda]
+      }
+    ))
+  }, [search]);
+
+  const postNumber = posts.discover.length + posts.news.length + posts.agenda.length
 
   const getMorePosts = async () => {
     const qs = require('qs');
@@ -49,16 +61,27 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
     }, {
       encodeValuesOnly: true,
     });
-    const res = await fetchAPI(
-      `/discover-items?pagination[start]=${posts.length}&populate=*`
-    );
-    
-    const newPosts = await res.data;
-    setPosts((posts) => [...posts, ...newPosts]);
+
+    const discoverItems = await fetchAPI(`/discover-items?${query}&pagination[start]=${posts.discover.length}&populate=*`);
+    const newsItems = await fetchAPI(`/news-items?${query}&pagination[start]=${posts.news.length}&populate=*`);
+    const agendaItems = await fetchAPI(`/agenda-items?${query}&pagination[start]=${posts.agenda.length}&populate=*`);
+
+    const newDiscover = await discoverItems.data;
+    const newNews = await newsItems.data;
+    const newAgenda = await agendaItems.data;
+
+    setPosts((posts) => (
+      {
+        discover:[...posts.discover, ...newDiscover],
+        news:[...posts.news, ...newNews],
+        agenda:[...posts.agenda, ...newAgenda]
+      }
+    ))
   };
+  
 
   useEffect(() => {
-    setHasMore(numberOfPosts > posts.length ? true : false);
+    setHasMore(numberOfPosts > postNumber ? true : false);
   }, [posts]);
 
 
@@ -68,15 +91,21 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
         <span>you've searched for:</span>
         <h2>{search}</h2>
       </div>
+      <InfiniteScroll
+        dataLength={parseInt(posts.discover?.length) + parseInt(posts.news?.length) + parseInt(posts.agenda?.length)}
+        next={getMorePosts}
+        hasMore={hasMore}
+        loader={<h4>Loading...</h4>}
+      >
       <div className="search">
         <div className="search-container">
-            {Object.keys(items).map((name, index) => {
-              const categories = Object.keys(items);
+            {Object.keys(posts).map((name, index) => {
+              const categories = Object.keys(posts);
               return (
                 <>
-                  {items[name].map((item, i) => {
+                  {posts[name].map((item, i) => {
                     return(
-                      <div className={`search-item ${item.attributes.category?.data?.attributes?.slug}`}>
+                      <div className={`search-item ${item.attributes?.category?.data?.attributes?.slug}`}>
                         <div className="item-wrapper">
                           <Link href={'/'+categories[index]+'/'+item.attributes.slug} key={'search'+i}>
                             <a>
@@ -86,7 +115,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                               <div className="content-wrapper">
                                 {item.attributes.category?.data && 
                                   <div className="category">
-                                    <Link href={'/'+categories[index]+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'search'+i}>
+                                    <Link href={'/'+categories[index]+'/filter/'+item.attributes?.category?.data?.attributes.slug} key={'search'+i}>
                                       <a>{item.attributes.category?.data.attributes.slug}</a>
                                     </Link>
                                   </div>
@@ -119,6 +148,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
             })}
         </div>
       </div>
+      </InfiniteScroll>
     </Layout>
   )
 }

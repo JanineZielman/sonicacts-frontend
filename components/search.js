@@ -1,16 +1,19 @@
-import React from "react"
+import React, {useState} from "react"
 import { useRouter } from 'next/router'
 
 const Search = () => {
 	const router = useRouter();
-	console.log(router.query.slug)
+  const [input, setInput] = useState();
   let inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
-		router.push('/search/'+ lowerCase);
+    if (e.key === 'Enter') {
+      router.push('/search/'+ lowerCase);
+      setInput(lowerCase)
+    }
   };
   return (
     <div className="search-bar">
-      <input type="text" placeholder="Search" onChange={inputHandler} value={router.query.slug}/>
+      <input type="text" placeholder="Search" onChange={inputHandler} onKeyUp={inputHandler}/>
     </div>
   )
 }
