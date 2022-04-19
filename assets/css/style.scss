@@ -63,7 +63,7 @@ html {
   }
   .s1{
     position: absolute;
-    z-index: 9;
+    // z-index: 1;
   }
   .s2{
     position: absolute;
@@ -421,9 +421,9 @@ h2 {
     position: relative;
     &:before {
       content: ' ';
-      width: 200px;
+      width: 300px;
       height: 100%;
-      background: url('../noise.png');
+      background: url('../noise-bg.png');
       background-size: contain;
       position: absolute;
       z-index: 99;
@@ -434,9 +434,9 @@ h2 {
     }
     &:after {
       content: ' ';
-      width: 200px;
+      width: 300px;
       height: 100%;
-      background: url('../noise.png');
+      background: url('../noise-bg.png');
       background-size: contain;
       position: absolute;
       top: 0;
