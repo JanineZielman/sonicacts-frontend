@@ -99,7 +99,7 @@ const Agenda = ({ menus, global, page, items }) => {
 }
 
 export async function getStaticProps() {
-  const currentDate = new Date(Date.now()).toISOString().split('T')[0].replaceAll('/', '-')
+  // const currentDate = new Date(Date.now()).toISOString().split('T')[0].replaceAll('/', '-')
   
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
@@ -109,7 +109,7 @@ export async function getStaticProps() {
   ])
 
   const itemRes = 
-    await fetchAPI( `/agenda-items?filters[date][$gte]=${currentDate}&pagination&sort[0]=date&populate=*`
+    await fetchAPI( `/agenda-items?filters[date][$gte]=2022-04-20&pagination&sort[0]=date&populate=*`
   );
 
   return {
