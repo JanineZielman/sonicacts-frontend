@@ -104,7 +104,8 @@ export async function getStaticProps() {
   function getCurrentDate() {
     return new Date();
   }
-  const currentDate = getCurrentDate();
+  const date = getCurrentDate();
+  const currentDate = date.toISOString().split('T')[0].replaceAll('/', '-')
 
   
   // Run API calls in parallel
@@ -115,7 +116,7 @@ export async function getStaticProps() {
   ])
 
   const itemRes = 
-    await fetchAPI( `/agenda-items?filters[date][$gte]=2022-04-20&pagination&sort[0]=date&populate=*`
+    await fetchAPI( `/agenda-items?filters[date][$gte]=${currentDate}&pagination&sort[0]=date&populate=*`
   );
 
   return {
