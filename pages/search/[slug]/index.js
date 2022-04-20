@@ -105,7 +105,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                 <>
                   {posts[name].map((item, i) => {
                     return(
-                      <div className={`search-item ${item.attributes?.category?.data?.attributes?.slug}`}>
+                      <div key={`results${i}`} className={`search-item ${item.attributes?.category?.data?.attributes?.slug}`}>
                         <div className="item-wrapper">
                           <Link href={'/'+categories[index]+'/'+item.attributes.slug} key={'search'+i}>
                             <a>

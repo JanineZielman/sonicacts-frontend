@@ -27,7 +27,7 @@ const Article = ({page, relations}) => {
 						<>
 						{page.attributes.content.map((item, i) => {
 							return (
-								<>
+								<div key={`content${i}`}>
 								{item.image?.data &&
 								<>
 									{item.image_caption ?
@@ -69,7 +69,7 @@ const Article = ({page, relations}) => {
 										
 									</div>
 								}
-								</>
+								</div>
 							)
 						})}
 						{relations?.attributes?.footnotes &&
@@ -154,7 +154,7 @@ const Article = ({page, relations}) => {
 								<span>Community</span>
 								{relations?.attributes?.community_items.data.map((item, i) => {
 									return (
-										<Link href={'/community/'+item.attributes.slug}>
+										<Link href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
 											<a>
 											{item.attributes.name}
 											</a>

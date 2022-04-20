@@ -33,7 +33,7 @@ const Menu = ({ menus }) => {
         timeout={300}
         classNames="dialog"
       >
-        <Modal  isOpen={show} onHide={handleClose} className={'menu-modal'}  closeTimeoutMS={500} style={modalStyles}>
+        <Modal  isOpen={show} onHide={handleClose} className={'menu-modal'} ariaHideApp={false} closeTimeoutMS={500} style={modalStyles}>
           <div onClick={handleClose} className="close">
             <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
