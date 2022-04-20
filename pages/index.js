@@ -95,7 +95,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
                             <div className="text">
                               <div>
                                 {item.attributes.category?.data &&
-                                  <div className="category">{item.attributes.category.data.attributes.title}</div>
+                                  <span className="category">{item.attributes.category.data.attributes.title}</span>
                                 }
                                 {item.attributes.date &&
                                   <span>
@@ -122,9 +122,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
                         )
                       })}
                       <div className="slider-item">
-                        <div>
-                          <p>→ {page.attributes.slug}</p>
-                        </div>
+                        <p className="show-more">
+                          <Link href={'/' + page.attributes.slug}>
+                            <a>→ {page.attributes.slug}</a>
+                          </Link>
+                        </p>
                       </div>
                     </Slider>
                   </Collapsible>
@@ -174,9 +176,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
                         )
                       })}
                       <div className="slider-item">
-                        <div>
-                          <p>→ {page.attributes.slug}</p>
-                        </div>
+                         <p className="show-more">
+                          <Link href={'/' + page.attributes.slug}>
+                            <a>→ {page.attributes.slug}</a>
+                          </Link>
+                        </p>
                       </div>
                     </Slider>
                   </Collapsible>

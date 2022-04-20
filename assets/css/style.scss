@@ -282,6 +282,22 @@ h2 {
     a{
       color: #000;
     }
+    .category {
+      font-size: 14px;
+      font-weight: 300!important;
+    }
+    .slider-item{
+      .show-more{
+        width: 100%;
+        text-align: center;
+        margin-top: 75px;
+        a{
+          padding-right: 100px;
+          font-size: 30px !important;
+          font-weight: bold;
+        }
+      }
+    }
     &.news{
       .slider-item{
         .text{
