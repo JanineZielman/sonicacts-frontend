@@ -9,7 +9,7 @@ import { fetchAPI } from "../../lib/api"
 
 const Agenda = ({ menus, global, page, items }) => {
   var  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
+  console.log(items)
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
@@ -65,9 +65,27 @@ const Agenda = ({ menus, global, page, items }) => {
                           </div>
                         }
                         {item.attributes.date &&
-                          <span>
+                          <span className="date" key={`date-${i}`}>
                             {Moment(item.attributes.date).format('D MMM y')}
                           </span>
+                        }
+                        {item.attributes.dates &&
+                          item.attributes.dates.map((date, i) => {
+                            return(
+                              <span className="date" key={`dates-${i}`}>
+                                {date.single_date &&
+                                  <>
+                                  , {Moment(date.single_date).format('D MMM y')}
+                                  </>
+                                }
+                                {date.end_date &&
+                                  <>
+                                  &nbsp;- {Moment(date.end_date).format('D MMM y')}
+                                  </>
+                                }
+                              </span>
+                            )
+                          })
                         }
                         <h3>{item.attributes.title}</h3>
                         {item.attributes.tags?.data && 
@@ -119,8 +137,24 @@ export async function getStaticProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
+  const qs = require('qs');
+  const query = qs.stringify({
+    populate: '*', 
+    filters: {
+      $or: [
+        {
+          date: {
+            $gte: currentDate,
+          },
+        },
+      ],
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
+
   const itemRes = 
-    await fetchAPI( `/agenda-items?filters[date][$gte]=${currentDate}&pagination&sort[0]=date&populate=*`
+    await fetchAPI( `/agenda-items?${query}&pagination&sort[0]=date`
   );
 
   return {

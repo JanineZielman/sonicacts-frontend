@@ -4,6 +4,7 @@ import Moment from 'moment';
 import Image from "./image"
 
 const Article = ({page, relations}) => {
+	console.log(relations)
   return (   
 		<section className="article">
 			<>
@@ -84,7 +85,7 @@ const Article = ({page, relations}) => {
 						{page.attributes.slug == 'news' &&
 							<>
 							{page.attributes.date ?
-								<span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
+								<span>Posted on {Moment(page.attributes.date).format('D MMM y')}</span>
 							: <span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
 							}
 							</>
@@ -103,17 +104,38 @@ const Article = ({page, relations}) => {
 						{page.attributes.slug == 'agenda' &&
 							<>
 									<span>When</span>
-									{relations?.attributes?.dates?.map((item, i) => {
-										return(
-											<div key={'dates'+i}>
-												{Moment(item.from).format('D MMM')} -&nbsp;
-												{Moment(item.till).format('D MMM y')}
-											</div>
-										)
-									})}
-									{page.attributes.date &&
-										<div>{Moment(page.attributes.date).format('D MMM y')}</div>
+									{relations?.attributes?.date && relations?.attributes?.dates == 0 &&
+										Moment(relations?.attributes?.date).format('D MMM y')
 									}
+									{relations?.attributes?.dates &&
+										relations?.attributes?.dates.map((date, i) => {
+											return(
+												<div className="date" key={`dates-${i}`}>
+													{date.single_date &&
+														<>
+														{relations?.attributes?.date && 
+															<div>
+															- {Moment(relations?.attributes?.date).format('D MMM y')}
+															</div>
+														}
+														<div>
+														- {Moment(date.single_date).format('D MMM y')}
+														</div>
+														</>
+													}
+													{date.end_date &&
+														<>
+														{relations?.attributes?.date &&
+															Moment(relations?.attributes?.date).format('D MMM')
+														}
+														&nbsp;- {Moment(date.end_date).format('D MMM y')}
+														</>
+													}
+												</div>
+											)
+										})
+									}
+									<span>Time</span>
 									<div>{page.attributes.time}</div>
 								
 									<span>Location</span>
