@@ -9,7 +9,7 @@ import { fetchAPI } from "../../lib/api"
 
 const Agenda = ({ menus, global, page, items }) => {
   var  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  console.log(items)
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">

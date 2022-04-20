@@ -270,6 +270,30 @@ h2 {
   width: 900px;
 }
 
+.collapsible.about {
+  padding: 10px 0;
+  width: 100%;
+  text-transform: capitalize;
+  font-size: 48px;
+  cursor: pointer;
+  .Collapsible{
+    span{
+      display: block;
+      border-bottom: 2px solid #000;
+      padding: 14px 0 ;
+    }
+  }
+  .Collapsible__contentInner{
+    padding: 14px 0;
+  }
+  .text-block.small p {
+    padding: 0;
+  }
+  p{
+    margin: 0;
+  }
+}
+
 .home-menu {
   width: calc(100% - 470px);
   .collapsible {

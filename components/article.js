@@ -1,10 +1,11 @@
 import ReactMarkdown from "react-markdown";
 import Link from "next/link"
 import Moment from 'moment';
+import Collapsible from 'react-collapsible';
 import Image from "./image"
 
 const Article = ({page, relations}) => {
-	console.log(relations)
+	console.log(page)
   return (   
 		<section className="article">
 			<>
@@ -26,56 +27,57 @@ const Article = ({page, relations}) => {
 					<div className="wrapper">
 						<>
 						{page.attributes.content.map((item, i) => {
+							console.log(item)
 							return (
 								<div key={`content${i}`}>
-								{item.image?.data &&
-								<>
-									{item.image_caption ?
-										<div className="columns" key={'column'+i}>
-											<div className="caption">
-												<ReactMarkdown 
-													children={item.image_caption} 
-												/>
-											</div>
-											<div className="image">
-												<Image image={item.image.data.attributes}/>
-											</div>
-										</div>
-										:
-										<div className={'image ' + item.size}>
-											<Image image={item.image.data.attributes}/>
+									{item.image?.data &&
+										<>
+											{item.image_caption ?
+												<div className="columns" key={'column'+i}>
+													<div className="caption">
+														<ReactMarkdown 
+															children={item.image_caption} 
+														/>
+													</div>
+													<div className="image">
+														<Image image={item.image.data.attributes}/>
+													</div>
+												</div>
+												:
+												<div className={'image ' + item.size}>
+													<Image image={item.image.data.attributes}/>
+												</div>
+											}
+										</>
+									}
+									{item.sidenote && 
+										<div className={'sidenote ' + item.size}>
+											<ReactMarkdown 
+												children={item.sidenote} 
+											/>
 										</div>
 									}
-								</>
-								}
-								{item.sidenote && 
-									<div className={'sidenote ' + item.size}>
-										<ReactMarkdown 
-											children={item.sidenote} 
-										/>
-									</div>
-								}
-								{item.text_block &&
-									<div className={'text-block ' + item.size} key={'text'+i}>
-									
-										<ReactMarkdown 
-											children={item.text_block} 
-										/>
-									</div>
-								}
-								{item.url &&
-									<div className="iframe-wrapper"  key={'url'+i}>
-										<iframe className="iframe" src={item.url} frameBorder="0"/>
+									{item.text_block &&
+										<div className={'text-block ' + item.size} key={'text'+i}>
 										
-									</div>
-								}
+											<ReactMarkdown 
+												children={item.text_block} 
+											/>
+										</div>
+									}
+									{item.url &&
+										<div className="iframe-wrapper"  key={'url'+i}>
+											<iframe className="iframe" src={item.url} frameBorder="0"/>
+											
+										</div>
+									}
 								</div>
 							)
 						})}
 						{relations?.attributes?.footnotes &&
 							<div className="footnotes" id="footnotes">
 								<ReactMarkdown 
-									children={relations.attributes.footnotes.footnotes} 
+									children={relations?.attributes?.footnotes?.footnotes} 
 								/>
 							</div>
 						}
@@ -176,6 +178,21 @@ const Article = ({page, relations}) => {
 					</div>
 				</div>
 			</>
+			{page.attributes.content.map((item, i) => {
+				return(
+					item.__component == 'basic.collapsible' &&
+					<div className="collapsible about">
+						<Collapsible trigger={item.title}>
+							<div className={'text-block ' + item.text.size} key={'textcol'+i}>
+								<ReactMarkdown 
+									children={item.text.text_block} 
+								/>
+							</div>
+						</Collapsible>
+					</div>
+					
+				)
+			})}
 		</section>
   )
 }

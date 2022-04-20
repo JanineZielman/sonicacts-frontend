@@ -4,7 +4,7 @@ import Seo from "../../components/seo"
 import Article from "../../components/article"
 import { fetchAPI } from "../../lib/api"
 
-const News = ({ menus, global, page }) => {
+const About = ({ menus, global, page }) => {
   return (
     <Layout page={page} menus={menus} global={global}>
       <Article page={page}/>
@@ -15,7 +15,7 @@ const News = ({ menus, global, page }) => {
 export async function getStaticProps() {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/about", { populate: "*" }),
+    fetchAPI("/about?populate[content][populate]=*"),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
@@ -30,4 +30,4 @@ export async function getStaticProps() {
   }
 }
 
-export default News
+export default About
