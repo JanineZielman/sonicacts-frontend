@@ -101,9 +101,6 @@ const Agenda = ({ menus, global, page, items }) => {
 export async function getStaticProps() {
   const currentDate = new Date(Date.now()).toISOString().split('T')[0].replace('///g', '-')
 
-
-
-  
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/agenda-overview", { populate: "*" }),
