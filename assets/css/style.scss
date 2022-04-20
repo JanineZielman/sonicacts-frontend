@@ -234,18 +234,22 @@ h2 {
     padding-right: 48px;
     div{
       border-radius: 50%;
-      margin: 20px!important;
+      width: 360px;
+      height: 360px;
+      margin: 0px 20px 20px 10px!important;
     }
     a {
       color: #000;
     }
     span{
       font-size: 14px;
+      padding-left: 24px;
     }
     h3{
       margin: 0;
       line-height: 1;
       font-weight: 500;
+      padding-left: 24px;
     }
   }
   .intro-text {
@@ -421,10 +425,10 @@ h2 {
     position: relative;
     &:before {
       content: ' ';
-      width: 300px;
+      width: 400px;
       height: 100%;
       background: url('../noise-bg.png');
-      background-size: contain;
+      background-size: cover;
       position: absolute;
       z-index: 99;
       top: 0;
@@ -434,10 +438,10 @@ h2 {
     }
     &:after {
       content: ' ';
-      width: 300px;
+      width: 400px;
       height: 100%;
       background: url('../noise-bg.png');
-      background-size: contain;
+      background-size: cover;
       position: absolute;
       top: 0;
       right: 0;
