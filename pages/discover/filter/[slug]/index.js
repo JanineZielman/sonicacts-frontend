@@ -65,6 +65,17 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                           </div>
                         }
                         {item.attributes.title}
+                        {item.attributes.tags?.data && 
+                          <div className="tags">
+                              {item.attributes.tags.data.map((tag, i) => {
+                                return(
+                                <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                  <a>{tag.attributes.slug}</a>
+                                </Link>
+                                )
+                            })}
+                          </div>
+                        }
                       </a>
                     </Link>
                   </div>

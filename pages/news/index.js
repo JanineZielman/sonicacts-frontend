@@ -41,6 +41,17 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
             <Link href={page.attributes.slug+'/'+items[0].attributes.slug}>
               <a>{items[0].attributes.title}</a>
             </Link>
+             {items[0].attributes.tags?.data && 
+                <div className="tags">
+                  {items[0].attributes.tags.data.map((tag, i) => {
+                    return(
+                    <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                      <a>{tag.attributes.slug}</a>
+                    </Link>
+                    )
+                  })}
+                </div>
+              }
           </div>
         </div>
         <div className="filter">
@@ -71,6 +82,17 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
                         </div>
                       
                         {item.attributes.title}
+                        {item.attributes.tags?.data && 
+                          <div className="tags">
+                            {item.attributes.tags.data.map((tag, i) => {
+                              return(
+                              <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                <a>{tag.attributes.slug}</a>
+                              </Link>
+                              )
+                            })}
+                          </div>
+                        }
                       </a>
                     </Link>
                   </div>
@@ -92,10 +114,6 @@ export async function getStaticProps() {
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
-
-  // const itemRes = 
-  //   await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date&populate=*`
-  // );
 
   const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&populate=*`);
 

@@ -46,9 +46,16 @@ const Menu = ({ menus }) => {
             </Link>
             {menus.map((page, i) => {
               return (
+                page.attributes.slug != 'shop' ?
+
                 <Link href={'/'+page.attributes.slug} key={'link'+i}>
                   <a className="menu-link">{page.attributes.slug}</a>
                 </Link>
+                :
+                <Link href={'https://sonicacts.com/sashop/'} key={'link'+i}>
+                  <a className="menu-link" target={'_blank'}>{page.attributes.slug}</a>
+                </Link>
+          
               )
             })}
           </div>

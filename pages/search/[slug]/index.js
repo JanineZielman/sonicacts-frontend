@@ -50,7 +50,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
             },
           },
           {
-            tag: {
+            tags: {
               slug: {
                 $containsi: search,
               },
@@ -129,11 +129,15 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                                   </div>
                                 }
                                 {item.attributes.title}
-                                {item.attributes.tag?.data && 
-                                  <div className="tag">
-                                    <Link href={'/search/'+item.attributes.tag?.data?.attributes.slug} key={'search'+i}>
-                                      <a>{item.attributes.tag?.data.attributes.slug}</a>
-                                    </Link>
+                                {item.attributes.tags?.data && 
+                                  <div className="tags">
+                                     {item.attributes.tags.data.map((tag, i) => {
+                                       return(
+                                        <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                          <a>{tag.attributes.slug}</a>
+                                        </Link>
+                                       )
+                                    })}
                                   </div>
                                 }
                               </div>
@@ -181,7 +185,7 @@ export async function getServerSideProps({params}) {
           },
         },
         {
-          tag: {
+          tags: {
             slug: {
               $containsi: params.slug,
             },

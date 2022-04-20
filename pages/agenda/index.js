@@ -57,11 +57,6 @@ const Agenda = ({ menus, global, page, items }) => {
                     </div>
                     <div className="info">
                       <div className="info-wrapper">
-                        {item.attributes.date &&
-                          <span>
-                            {Moment(item.attributes.date).format('D MMM y')}
-                          </span>
-                        }
                         {item.attributes.category?.data && 
                           <div className="category">
                             <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
@@ -69,7 +64,23 @@ const Agenda = ({ menus, global, page, items }) => {
                             </Link>
                           </div>
                         }
+                        {item.attributes.date &&
+                          <span>
+                            {Moment(item.attributes.date).format('D MMM y')}
+                          </span>
+                        }
                         <h3>{item.attributes.title}</h3>
+                        {item.attributes.tags?.data && 
+                          <div className="tags">
+                            {item.attributes.tags.data.map((tag, i) => {
+                              return(
+                              <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                <a>{tag.attributes.slug}</a>
+                              </Link>
+                              )
+                            })}
+                          </div>
+                        }
                       </div>
                     </div>
                   </a>

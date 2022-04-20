@@ -9,8 +9,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
 
-  console.log(items)
-
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
@@ -65,6 +63,17 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                         <div className="title">
                           {item.attributes.title}
                         </div>
+                        {item.attributes.tags?.data && 
+                          <div className="tags">
+                              {item.attributes.tags.data.map((tag, i) => {
+                                return(
+                                <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                  <a>{tag.attributes.slug}</a>
+                                </Link>
+                                )
+                            })}
+                          </div>
+                        }
                       </a>
                     </Link>
                   </div>

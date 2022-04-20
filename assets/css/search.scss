@@ -12,6 +12,15 @@
 	}
 }
 
+.tags {
+	font-size: 14px;
+	a{
+		font-size: 14px;
+		font-weight: 100;
+		line-height: 1;
+	}
+}
+
 .search-container{
 	position: relative;
 	display: flex;
@@ -39,9 +48,17 @@
 		.content-wrapper{
 			padding: 0 20px;
 			width: calc(100% - 120px);
-			.category, .date, .tag{
+			.category, .date, .tags{
 				font-size: 14px;
 				font-weight: 100;
+			}
+			.tags{
+				a{
+					display: inline-block;
+					&:not(:first-child):before{
+						content: ', ';
+					}
+				}
 			}
 		}
 	}
