@@ -64,9 +64,9 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
                           <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                         </div>
                         <div className="date">
-                          {item.attributes.date 
-                            ? Moment(item.attributes.date).format('D MMM y')
-                            : Moment(item.attributes.publishedAt).format('D MMM y')
+                          {item.attributes.date &&
+                            Moment(item.attributes.date).format('D MMM y')
+                            // : Moment(item.attributes.publishedAt).format('D MMM y')
                           }
                         </div>
                       
@@ -97,7 +97,7 @@ export async function getStaticProps() {
   //   await fetchAPI( `/news-items?pagination[limit]=${number}&sort[0]=date&populate=*`
   // );
 
-  const items = await fetchAPI(`/news-items?sort[0]=date&populate=*`);
+  const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&populate=*`);
 
 	const totalItems = 
     await fetchAPI( `/news-items?sort[0]=date`

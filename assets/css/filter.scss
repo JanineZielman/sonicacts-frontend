@@ -96,6 +96,13 @@
           padding-right: 1vw;
         }
       }
+      .title{
+        line-height: 1.1;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
       &.community {
         margin: 14px 0;
         a {

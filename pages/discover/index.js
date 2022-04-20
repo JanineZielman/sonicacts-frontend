@@ -9,12 +9,14 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
 
+  console.log(items)
+
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/discover-items?pagination[start]=${posts.length}&populate=*`
+      `/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -55,12 +57,14 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                         </div>
                         {item.attributes.category?.data && 
                           <div className="category">
-                            <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                            <Link href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
                               <a>{item.attributes.category?.data.attributes.slug}</a>
                             </Link>
                           </div>
                         }
-                        {item.attributes.title}
+                        <div className="title">
+                          {item.attributes.title}
+                        </div>
                       </a>
                     </Link>
                   </div>
@@ -82,7 +86,7 @@ export async function getServerSideProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/discover-items?&populate=*`);
+  const items = await fetchAPI(`/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
 
 	const totalItems = 
     await fetchAPI( `/discover-items`

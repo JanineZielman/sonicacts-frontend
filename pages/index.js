@@ -215,15 +215,25 @@ const Home = ({ homepage, menus, global, items, about }) => {
 }
 
 export async function getStaticProps() {
+
+  const totalCom = await fetchAPI( `/discover-items`);
+  const numberCom = totalCom.meta.pagination.total / 6;
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  const firstID = getRandomInt(numberCom);
+
+  
   // Run API calls in parallel
   const [homepageRes, globalRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
     fetchAPI("/homepage", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI("/news-items", { populate: "*" }),
-    fetchAPI("/agenda-items", { populate: "*" }),
-    fetchAPI("/discover-items", { populate: "*" }),
-    fetchAPI("/community-items", { populate: "*" }),
+    fetchAPI("/news-items?sort[0]=date%3Adesc&populate=*"),
+    fetchAPI("/agenda-items?sort[0]=date&populate=*"),
+    fetchAPI("/discover-items?sort[0]=publishedAt%3Adesc&populate=*"),
+    fetchAPI(`/community-items?pagination[pageSize]=6&pagination[page]=${firstID}&populate=*`),
     fetchAPI("/about", { populate: "*" }),
   ])
 
