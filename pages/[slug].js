@@ -4,8 +4,9 @@ import Seo from "../components/seo"
 
 const Page = ({menus, page, global}) => {
   return (
-    <Layout menus={menus.data} page={page} global={global}>
-    </Layout>
+    <></>
+    // <Layout menus={menus.data} page={page} global={global}>
+    // </Layout>
   )
 }
 
