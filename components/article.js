@@ -3,6 +3,7 @@ import Link from "next/link"
 import Moment from 'moment';
 import Collapsible from 'react-collapsible';
 import Image from "./image"
+import image from "next/image";
 
 const Article = ({page, relations}) => {
 	console.log(page)
@@ -24,12 +25,12 @@ const Article = ({page, relations}) => {
 					</div>
 				}
 				<div className="content">
-					<div className="wrapper">
+					<div className={`wrapper ${page.attributes.slug}`}>
 						<>
 						{page.attributes.content.map((item, i) => {
 							console.log(item)
 							return (
-								<div key={`content${i}`}>
+								<div key={`content${i}`} className={`${page.attributes.slug}-block`}>
 									{item.image?.data &&
 										<>
 											{item.image_caption ?
@@ -39,12 +40,12 @@ const Article = ({page, relations}) => {
 															children={item.image_caption} 
 														/>
 													</div>
-													<div className="image">
+													<div className={`image ${page.attributes.slug}`}>
 														<Image image={item.image.data.attributes}/>
 													</div>
 												</div>
 												:
-												<div className={'image ' + item.size}>
+												<div className={`image ${item.size} ${page.attributes.slug}`}>
 													<Image image={item.image.data.attributes}/>
 												</div>
 											}
@@ -147,9 +148,6 @@ const Article = ({page, relations}) => {
 									<div>{page.attributes.price}</div>
 							</>
 						}
-					
-						
-
 						
 						{relations?.attributes?.community_items?.data[0] &&
 							<div>

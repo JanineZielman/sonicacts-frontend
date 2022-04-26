@@ -8,16 +8,12 @@ import { fetchAPI } from "../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const Search = ({ menus, global, items, search, numberOfPosts, agendaAmount}) => {
-  console.log(numberOfPosts)
-  console.log('agenda', agendaAmount)
-  console.log('items', items)
+const Search = ({ menus, global, items, search, numberOfPosts}) => {
   const page = search 
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
-  
 
   useEffect(() => {
     setPosts((posts) => (
@@ -213,7 +209,6 @@ export async function getServerSideProps({params}) {
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
-      agendaAmount: agenda,
     },
   };
 }
