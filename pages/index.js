@@ -238,7 +238,7 @@ export async function getStaticProps() {
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/news-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/agenda-items?filters[date][$gte]=${currentDate}&sort[0]=date&populate=*`),
-    fetchAPI("/discover-items?sort[0]=publishedAt%3Adesc&populate=*"),
+    fetchAPI("/discover-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/community-items?pagination[pageSize]=6&pagination[page]=${firstID}&populate=*`),
     fetchAPI("/about", { populate: "*" }),
   ])

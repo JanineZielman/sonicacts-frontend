@@ -95,7 +95,7 @@ export async function getServerSideProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
+  const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
 
 	const totalItems = 
     await fetchAPI( `/discover-items`

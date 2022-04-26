@@ -52,14 +52,6 @@
 				font-size: 14px;
 				font-weight: 100;
 			}
-			.tags{
-				a{
-					display: inline-block;
-					&:not(:first-child):before{
-						content: ', ';
-					}
-				}
-			}
 		}
 	}
 	.image{

@@ -8,12 +8,16 @@ import { fetchAPI } from "../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-const Search = ({ menus, global, items, search, numberOfPosts}) => {
-  
+const Search = ({ menus, global, items, search, numberOfPosts, agendaAmount}) => {
+  console.log(numberOfPosts)
+  console.log('agenda', agendaAmount)
+  console.log('items', items)
   const page = search 
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
+
+  
 
   useEffect(() => {
     setPosts((posts) => (
@@ -26,6 +30,9 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
   }, [search]);
 
   const postNumber = posts.discover.length + posts.news.length + posts.agenda.length
+
+  console.log('posts amount', postNumber)
+  console.log('more', hasMore)
 
   const getMorePosts = async () => {
     const qs = require('qs');
@@ -44,13 +51,6 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
           },
           {
             category: {
-              slug: {
-                $containsi: search,
-              },
-            },
-          },
-          {
-            tags: {
               slug: {
                 $containsi: search,
               },
@@ -92,7 +92,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
         <h2>{search}</h2>
       </div>
       <InfiniteScroll
-        dataLength={parseInt(posts.discover?.length) + parseInt(posts.news?.length) + parseInt(posts.agenda?.length)}
+        dataLength={postNumber}
         next={getMorePosts}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
@@ -184,13 +184,6 @@ export async function getServerSideProps({params}) {
             },
           },
         },
-        {
-          tags: {
-            slug: {
-              $containsi: params.slug,
-            },
-          },
-        }
       ],
     },
   }, {
@@ -220,6 +213,7 @@ export async function getServerSideProps({params}) {
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
+      agendaAmount: agenda,
     },
   };
 }
