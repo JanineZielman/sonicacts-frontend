@@ -43,7 +43,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
   };
 
   return (
-    <Layout page={homepage} menus={menus}>
+    <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image logo">
