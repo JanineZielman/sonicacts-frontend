@@ -4,7 +4,7 @@
 const nextConfig = {
   images: {
     loader: "default",
-    domains: ["localhost", "91.184.31.135:1337"],
+    domains: ["localhost", "cms.sonicacts.com"],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
