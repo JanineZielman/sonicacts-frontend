@@ -416,6 +416,7 @@ h2 {
   right: 1vw;
   top: 14px;
   cursor: pointer;
+  z-index: 1;
 }
 
 .menu-modal {
@@ -572,6 +573,7 @@ h2 {
 .ReactModal__Overlay--after-open {
   opacity: 1;
   transform: translateX(0px);
+  z-index: 999;
 }
 
 .ReactModal__Overlay--before-close {
