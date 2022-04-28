@@ -38,6 +38,15 @@
       font-size: 14px;
       font-weight: 100;
     }
+    .sort{
+      cursor: pointer;
+      &.true:before{
+        content: 'Old → New';
+      }
+      &.false:before {
+        content: 'New → Old';
+      }
+    }
   }
   .highlight {
     margin-top: 14px;

@@ -8,13 +8,29 @@ import { fetchAPI } from "../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const News = ({ menus, global, page, items, numberOfPosts }) => {
-
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
+  const [check, setCheck] = useState(false);
+
+  const ascPosts = async () => {
+    setCheck(prevCheck => !prevCheck);
+    var res = '';
+    if (check == true){
+      res = await fetchAPI(
+        `/news-items?sort[0]=date%3Adesc&populate=*`
+      );
+    } else{
+       res = await fetchAPI(
+        `/news-items?sort[0]=date%3Aasc&populate=*`
+      );
+    }
+    const newPosts = await res.data;
+    setPosts(newPosts);
+  };
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/news-items?sort[0]=date&pagination[start]=${posts.length}&populate=*`
+      `/news-items?sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -56,7 +72,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
         </div>
         <div className="filter">
           <div><span>Sort By</span></div>
-          
+          <div onClick={ascPosts} className={`sort ${check}`}></div>
         </div>
         <div className="discover-container">
           <InfiniteScroll
@@ -118,7 +134,7 @@ export async function getStaticProps() {
   const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/news-items?sort[0]=date`
+    await fetchAPI( `/news-items?sort[0]=date%3Adesc`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;
