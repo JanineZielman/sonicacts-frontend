@@ -12,9 +12,10 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
+
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
+      `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -23,6 +24,8 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
+  
+  console.log(posts)
 
   return (
     <Layout page={page} menus={menus} global={global}>
@@ -98,7 +101,7 @@ export async function getServerSideProps() {
   const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/discover-items`
+    await fetchAPI( `/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;
