@@ -27,9 +27,6 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
 
   const postNumber = posts.discover.length + posts.news.length + posts.agenda.length
 
-  console.log('posts amount', postNumber)
-  console.log('more', hasMore)
-
   const getMorePosts = async () => {
     const qs = require('qs');
     const query = qs.stringify({

@@ -1,13 +1,13 @@
 import React, {useState} from "react"
 import { useRouter } from 'next/router'
 
-const Search = () => {
+const Search = ({params}) => {
 	const router = useRouter();
   const [input, setInput] = useState();
   let inputHandler = (e) => {
     var lowerCase = e.target.value.toLowerCase();
     if (e.key === 'Enter') {
-      router.push('/search/'+ lowerCase);
+      router.push(params + '/search/'+ lowerCase);
       setInput(lowerCase)
     }
   };

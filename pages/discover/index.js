@@ -8,10 +8,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
-
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
-
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
@@ -24,8 +22,6 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
-  
-  console.log(posts)
 
   return (
     <Layout page={page} menus={menus} global={global}>

@@ -14,23 +14,21 @@ import { getStrapiMedia } from "../lib/media"
 export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
-  // const { global } = pageProps
-
-
+  const { global } = pageProps
   return (
     <>
       <Head>
-        {/* <link
+        <link
           rel="shortcut icon"
-          href={getStrapiMedia(global.attributes.favicon)}
-        /> */}
+          href={getStrapiMedia(global.attributes.favicon?.data?.attributes)}
+        />
         <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
       </Head>
-      <Component {...pageProps} />
-      {/* <GlobalContext.Provider value={global.attributes}>
+      {/* <Component {...pageProps} /> */}
+      <GlobalContext.Provider value={global.attributes}>
         <Component {...pageProps} />
-      </GlobalContext.Provider> */}
+      </GlobalContext.Provider>
     </>
   )
 }
@@ -49,8 +47,8 @@ MyApp.getInitialProps = async (ctx) => {
     },
   })
   // Pass the data to our page via props
-  // return { ...appProps, pageProps: { global: globalRes.data } }
-  return { ...appProps }
+  return { ...appProps, pageProps: { global: globalRes.data } }
+  // return { ...appProps }
 }
 
 export default MyApp

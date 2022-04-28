@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import ReactMarkdown from "react-markdown";
-import Layout from "../../components/layout"
-import Seo from "../../components/seo"
-import Image from "../../components/image"
-import { fetchAPI } from "../../lib/api"
+import Layout from "../../../components/layout"
+import Seo from "../../../components/seo"
+import Image from "../../../components/image"
+import { fetchAPI } from "../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Search from "../../components/search"
+import Search from "../../../components/search"
 
 const Community = ({ menus, global, page, items, numberOfPosts }) => {
   

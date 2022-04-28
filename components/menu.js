@@ -19,7 +19,7 @@ const Menu = ({ menus }) => {
   return (
     <>
       <div className="menu-search">
-        <Search/>
+        <Search params={''}/>
       </div>
       <div className="hamburger" onClick={handleShow}>
         <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg">

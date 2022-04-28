@@ -77,7 +77,10 @@
     display: flex;
     margin-top: 14px;
     flex-wrap: wrap;
-    width: 100%;
+    width: 98vw;
+    .infinite-scroll-component__outerdiv{
+      width: 100%;
+    }
     .infinite-scroll-component{
       width: 100%;
       display: flex;
@@ -85,6 +88,7 @@
     }
     .discover-item {
       width: 33.33%;
+      position: relative;
       margin-bottom: 48px;
       &:nth-child(3n+1){
         .item-wrapper {

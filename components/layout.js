@@ -3,7 +3,6 @@ import Menu from "./menu"
 import Link from "next/link"
 
 const Layout = ({ children, seo, menus, page, global}) => {
-  console.log(global)
   return(
     <>
     <section className="container">

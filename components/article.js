@@ -6,7 +6,7 @@ import Image from "./image"
 import image from "next/image";
 
 const Article = ({page, relations}) => {
-	console.log(page)
+
   return (   
 		<section className="article">
 			<>
@@ -28,7 +28,6 @@ const Article = ({page, relations}) => {
 					<div className={`wrapper ${page.attributes.slug}`}>
 						<>
 						{page.attributes.content.map((item, i) => {
-							console.log(item)
 							return (
 								<div key={`content${i}`} className={`${page.attributes.slug}-block`}>
 									{item.image?.data &&

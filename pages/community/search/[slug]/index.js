@@ -1,32 +1,62 @@
 import React, {useEffect, useState} from "react"
 import Link from "next/link"
-import ReactMarkdown from "react-markdown";
-import Layout from "../../components/layout"
-import Seo from "../../components/seo"
-import Image from "../../components/image"
-import { fetchAPI } from "../../lib/api"
+import Layout from "../../../../components/layout"
+import Seo from "../../../../components/seo"
+import Image from "../../../../components/image"
+import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Search from "../../components/search"
+import ReactMarkdown from "react-markdown";
+import Search from "../../../../components/search"
 
-const Community = ({ menus, global, page, items, numberOfPosts }) => {
-  
+
+const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts}) => {
+
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
+
+  useEffect(() => {
+    setPosts(items);
+  }, [search]);
+
   const getMorePosts = async () => {
-    const res = await fetchAPI(
-      `/community-items?sort[0]=name&pagination[start]=${posts.length}&populate=*`
+    const qs = require('qs');
+    const query = qs.stringify({
+      filters: {
+        $or: [
+          {
+            slug: {
+              $containsi: search,
+            },
+          },
+          {
+            name: {
+              $containsi: search,
+            },
+          }
+        ],
+      },
+    }, {
+      encodeValuesOnly: true,
+    });
+
+		const res = await fetchAPI(
+      `/community-items?${query}&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
-    setPosts((posts) => [...posts, ...newPosts]);
+
+		setPosts((posts) => [...posts, ...newPosts]);
+    
   };
+  
 
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
-  
+
+
   return (
-    <Layout page={page} menus={menus} global={global}>
+		<Layout page={page} menus={menus} global={global}>
       <div className="discover">
         <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
         <div className="wrapper intro">
@@ -35,7 +65,7 @@ const Community = ({ menus, global, page, items, numberOfPosts }) => {
           />
         </div>
         <div className="filter">
-           <Search params={'/community'}/>
+          <Search params={'/community'}/>
         </div>
         <div className="discover-container">
           <InfiniteScroll
@@ -70,36 +100,48 @@ const Community = ({ menus, global, page, items, numberOfPosts }) => {
   )
 }
 
-export async function getStaticProps() {
-  // Run API calls in parallel
+export async function getServerSideProps({params}) {
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/community", { populate: "*" }),
+		fetchAPI("/community", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  // const itemRes = 
-  //   await fetchAPI( `/community-items?pagination[limit]=${number}&sort[0]=name&populate=*`
-  // );
+  const qs = require('qs');
+  const query = qs.stringify({
+    filters: {
+      $or: [
+        {
+          slug: {
+            $containsi: params.slug,
+          },
+        },
+        {
+          name: {
+            $containsi: params.slug,
+          },
+        }
+      ],
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
+  
+  const community = await fetchAPI(`/community-items?${query}&populate=*`);
 
-  const items = await fetchAPI(`/community-items?sort[0]=name&populate=*`);
 
-	const totalItems = 
-    await fetchAPI( `/community-items?sort[0]=name`
-  );
-
-  const numberOfPosts = totalItems.meta.pagination.total;
+  const numberOfPosts = community.meta.pagination.total;  
 
   return {
     props: {
-      page: pageRes.data,
-      items: items.data,
+			page: pageRes.data,
+      search: params.slug,
+      items: community.data,
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
     },
-    revalidate: 1,
-  }
+  };
 }
 
-export default Community
+export default CommunitySearch
