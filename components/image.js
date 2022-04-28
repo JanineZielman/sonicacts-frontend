@@ -1,27 +1,45 @@
 import { getStrapiMedia } from "../lib/media"
 import NextImage from "next/image"
 
-const Image = ({ image, layout, objectFit  }) => {
+const Image = ({ image, layout, objectFit, sizes  }) => {
 
   const { alternativeText, width, height } = image
 
 
-  const loader = () => {
-    return getStrapiMedia(image)
+  // const loader = () => {
+  //   return getStrapiMedia(image)
+  // }
+
+  const loader = ({ width, quality }) => {
+    return `${getStrapiMedia(image)}?w=${width}&q=${quality || 75}`
   }
 
   return (
-    <NextImage
-      loader={loader}
-      layout={layout}
-      width={width || ""} 
-      height={height || ""}
-      objectFit={objectFit}
-      src={getStrapiMedia(image)}
-      alt={alternativeText || ""}
-      className="img"
-      unoptimized={true}
-    />
+    <>
+    {layout == 'fill' ?
+      <NextImage
+        loader={loader}
+        layout={layout}
+        objectFit={objectFit}
+        src={getStrapiMedia(image)}
+        alt={alternativeText || ""}
+        sizes={sizes}
+        className="img"
+      />
+    :
+     <NextImage
+        loader={loader}
+        layout={layout}
+        width={width || ""} 
+        height={height || ""}
+        objectFit={objectFit}
+        src={getStrapiMedia(image)}
+        alt={alternativeText || ""}
+        sizes={sizes}
+        className="img"
+      />
+    }
+    </>
   )
 }
 
