@@ -13,33 +13,41 @@ import { fetchAPI } from "../lib/api"
 const Home = ({ homepage, menus, global, items, about}) => {
   const settings = {
     dots: false,
+    arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    // slidesToShow: 1,
     slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: '150px',
+    variableWidth: true,
+    adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 4000
   };
 
    const settings2 = {
     dots: false,
+    arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    // slidesToShow: 1,
     slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: '200px',
+    variableWidth: true,
+    // adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 4000
   };
 
   const settings3 = {
     dots: false,
+    arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    // slidesToShow: 2,
     slidesToScroll: 1,
-    centerMode: false,
     variableWidth: true,
-    centerPadding: '200px'
+    // adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 4000
   };
 
   return (
@@ -137,7 +145,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <Slider {...settings3}>
+                    <Slider {...settings2}>
                       {items[3].slice(0, 6).map((item, i) => {
                         return(
                           <div className="slider-item">
@@ -196,11 +204,8 @@ const Home = ({ homepage, menus, global, items, about}) => {
             </div>
             <div className="collapsible contact">
               <Collapsible trigger={'contact'}>
-                 <Slider {...settings2}>
-                    <div className="contact-item">
-                      <p>{about.attributes.contact_info}</p>
-                    </div>
-                    <div className="contact-item small">
+                 <Slider {...settings3}>
+                   <div className="contact-item small">
                       <ReactMarkdown 
                         children={about.attributes.contact_links} 
                       />
@@ -208,6 +213,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
                     <div className="contact-item adres">
                       <h5>{about.attributes.contact_adres}</h5>
                     </div>
+                    <div className="contact-item">
+                      <p>{about.attributes.contact_info}</p>
+                    </div>
+                    
+                   
                  </Slider>
               </Collapsible>
             </div>

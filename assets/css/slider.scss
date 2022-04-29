@@ -1,0 +1,120 @@
+.slick-slider {
+	position: relative;
+	padding: 14px 0;
+	.slick-track {
+		display: flex !important;
+	}
+	.slick-list {
+		position: relative;
+		transition: all 0.4s ease-in-out !important;
+		&:before {
+			content: ' ';
+			width: 15vw;
+			height: 100%;
+			background: url('../noise-bg.png');
+			background-size: cover;
+			position: absolute;
+			z-index: 99;
+			top: 0;
+			left: 0;
+			-webkit-transform: scaleX(-1);
+			transform: scaleX(-1);
+		}
+		&:after {
+			content: ' ';
+			width: 15vw;
+			height: 100%;
+			background: url('../noise-bg.png');
+			background-size: cover;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+	}
+	.slick-slide {
+		position: relative;
+		margin-right: 24px;
+		.slider-item {
+			position: relative;
+			max-width: calc(100vw - 600px)!important;
+			display: flex!important;
+			h2 {
+				width: 100%;
+				line-height: 1.1;
+			}
+			p {
+				font-size: 30px;
+			}
+			.image{
+				width: 50%;
+				margin-right: 14px;
+			}
+			.text {
+				width: 50%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				div:nth-child(1){
+					display: flex;
+					align-items: flex-start;
+					flex-direction: column;
+				}
+				a{
+					font-size: 30px;
+				}
+			}
+		}
+		.contact-item {
+			width: 400px;
+			&.adres {
+				width: 400px;
+				max-width: 400px;
+			}
+
+			h5 {
+				font-weight: 500;
+				margin: 0;
+			}
+
+			p {
+				font-size: 24px;
+				margin: 0;
+				padding: 0 24px;
+				margin-bottom: 20px;
+				line-height: 1.2;
+			}
+
+			&.small p {
+				a {
+					font-size: 30px;
+					font-weight: 300;
+					display: block;
+				}
+
+				font-size: 14px;
+				font-weight: 100;
+				text-transform: lowercase;
+			}
+		}
+	}
+	.show-more {
+		width: calc(100vw - 550px);
+		height: 250px;
+		text-align: center;
+		display: flex;	
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		a {
+			font-size: 30px !important;
+			font-weight: bold;
+		}
+	}
+}
+
+.contact .slick-slider {
+	.slick-slide{
+		max-width: 500px;
+		
+	}
+}
