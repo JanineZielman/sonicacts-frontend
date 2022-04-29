@@ -66,9 +66,8 @@ const Article = ({page, relations}) => {
 										</div>
 									}
 									{item.url &&
-										<div className="iframe-wrapper"  key={'url'+i}>
-											<iframe className="iframe" src={item.url} frameBorder="0"/>
-											
+										<div className={`iframe-wrapper ${item.sound}`}  key={'url'+i}>
+											<iframe className="iframe" src={item.url.match(/\bhttps?:\/\/\S+/gi)} frameBorder="0"/>
 										</div>
 									}
 								</div>
