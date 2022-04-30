@@ -27,7 +27,7 @@ const Article = ({page, relations}) => {
 				<div className="content">
 					<div className={`wrapper ${page.attributes.slug}`}>
 						<>
-						{page.attributes.content.map((item, i) => {
+						{page.attributes.content?.map((item, i) => {
 							return (
 								<div key={`content${i}`} className={`${page.attributes.slug}-block`}>
 									{item.image?.data &&
@@ -174,7 +174,7 @@ const Article = ({page, relations}) => {
 					</div>
 				</div>
 			</>
-			{page.attributes.content.map((item, i) => {
+			{page.attributes.content?.map((item, i) => {
 				return(
 					item.__component == 'basic.collapsible' &&
 					<div className="collapsible about">

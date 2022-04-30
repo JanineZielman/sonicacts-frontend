@@ -54,6 +54,21 @@
 			max-width: calc(100vw - 500px) !important;
 		}
 	}
+	.article .wrapper{
+		width: 100%;
+	}
+	.article .content {
+		flex-direction: column;
+	}
+	.article .text-block{
+		width: 100%;
+	}
+	.collapsible.about{
+		font-size: 36px;
+	}
+	.collapsible.about .Collapsible span{
+		padding: 10px;
+	}
 }
 
 @media only screen and (max-width: 900px) {

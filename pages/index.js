@@ -13,7 +13,7 @@ import { fetchAPI } from "../lib/api"
 const Home = ({ homepage, menus, global, items, about}) => {
   const settings = {
     dots: false,
-    arrows: false,
+    arrows: true,
     infinite: true,
     speed: 500,
     // slidesToShow: 1,
@@ -26,7 +26,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
 
    const settings2 = {
     dots: false,
-    arrows: false,
+    arrows: true,
     infinite: true,
     speed: 500,
     // slidesToShow: 1,
@@ -39,7 +39,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
 
   const settings3 = {
     dots: false,
-    arrows: false,
+    arrows: true,
     infinite: true,
     speed: 500,
     // slidesToShow: 2,
