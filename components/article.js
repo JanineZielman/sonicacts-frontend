@@ -140,14 +140,34 @@ const Article = ({page, relations}) => {
 											)
 										})
 									}
-									<span>Time</span>
-									<div>{page.attributes.time}</div>
-								
-									<span>Location</span>
-									<div>{page.attributes.location}</div>
-
-									<span>Tickets</span>
-									<div>{page.attributes.price}</div>
+									{page.attributes.time &&
+										<>
+										<span>Time</span>
+										<div>{page.attributes.time}</div>
+										</>
+									}
+									{page.attributes.location &&
+										<>
+										<span>Location</span>
+										<div>{page.attributes.location}</div>
+										</>
+									}
+									{page.attributes.price &&
+										<>
+										<span>Tickets</span>
+										<div>{page.attributes.price}</div>
+										</>
+									}
+									{page.attributes.available_at &&
+										<>
+										<span>Available at</span>
+										<div className="available-links">
+											<ReactMarkdown 
+												children={page.attributes.available_at}
+											/>
+										</div>
+										</>
+									}
 							</>
 						}
 						
