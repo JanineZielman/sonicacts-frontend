@@ -150,7 +150,29 @@
         height: 20vw;
         position: relative;
         margin-bottom: 7px;
+        mask-image: url('../noise4.png');
+        mask-size: cover;
+        mask-repeat: no-repeat;
+        mask-position: top;
+        transition: all 0.4s ease;
+        &:hover{
+          mask-image: url('../white.png');
+
+        }
       }
     }
   }
 }
+
+// .agenda-item .image{
+//   mask-image: url('../noise4.png');
+//   mask-size: cover;
+//   mask-repeat: no-repeat;
+//   mask-position: top;
+//   transition: all 0.4s ease;
+  
+//   &:hover {
+//     mask-image: url('../white.png');
+  
+//   }
+// }
