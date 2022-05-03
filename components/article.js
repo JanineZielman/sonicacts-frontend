@@ -6,7 +6,7 @@ import Image from "./image"
 import image from "next/image";
 
 const Article = ({page, relations}) => {
-
+	console.log(relations)
   return (   
 		<section className="article">
 			<>
@@ -186,12 +186,33 @@ const Article = ({page, relations}) => {
 							</div>
 						}
 
-						{page.attributes.links &&
+						{page.attributes.links || relations?.attributes?.discover_items &&
 							<div className="links">
-								<span>Links</span>
-								<ReactMarkdown 
-									children={page.attributes.links} 
-								/>
+								{page.attributes.links &&
+									<>
+									<span>Links</span>
+									<ReactMarkdown 
+										children={page.attributes.links} 
+									/>
+									</>
+								}
+								{relations.attributes.discover_items.data[0] &&
+									<>
+									<span>Related</span>
+									{relations?.attributes?.discover_items?.data.map((item, i ) => {
+
+										return(
+											<p>
+												<Link href={'/discover/'+item.attributes.slug} key={`dis-link${i}`}>
+													<a>
+													→ {item.attributes.title}
+													</a>
+												</Link>
+											</p>
+										)
+									})}
+									</>
+								}
 							</div>
 						}
 						
