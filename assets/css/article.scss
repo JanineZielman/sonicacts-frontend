@@ -135,6 +135,10 @@
   }
   .footnotes{
     font-size: 21px;
+    a{
+      font-size: inherit;
+      text-decoration: underline;
+    }
   }
   .sidebar {
     margin-left: 24px;

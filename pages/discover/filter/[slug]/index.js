@@ -14,7 +14,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/discover-items?filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
+      `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -97,11 +97,11 @@ export async function getServerSideProps({params}) {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
+  const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
   
 
 	const totalItems = 
-    await fetchAPI( `/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}`
+    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;

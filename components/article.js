@@ -28,6 +28,10 @@ const Article = ({page, relations}) => {
 					<div className={`wrapper ${page.attributes.slug}`}>
 						<>
 						{page.attributes.content?.map((item, i) => {
+							{item.url &&
+								console.log(item.url.match(/\bhttps?:\/\/\S+/gi)[0]);
+							}
+							
 							return (
 								<div key={`content${i}`} className={`${page.attributes.slug}-block`}>
 									{item.image?.data &&
@@ -67,7 +71,7 @@ const Article = ({page, relations}) => {
 									}
 									{item.url &&
 										<div className={`iframe-wrapper ${item.sound}`}  key={'url'+i}>
-											<iframe className="iframe" src={item.url.match(/\bhttps?:\/\/\S+/gi)} frameBorder="0"/>
+											<iframe className="iframe" src={item.url.match(/\bhttps?:\/\/\S+/gi)[0]} frameBorder="0"/>
 										</div>
 									}
 								</div>
