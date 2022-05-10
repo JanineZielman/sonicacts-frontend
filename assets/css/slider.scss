@@ -71,7 +71,7 @@
 			}
 			.image{
 				width: 50%;
-				height: 350px;
+				height: 22vw;
 				margin-right: 14px;
 				div{
 					width: 100%;
@@ -127,12 +127,12 @@
 		}
 	}
 	.show-more {
-		width: calc(100vw - 550px);
-		height: 300px;
+		width: 40vw;
+		height: 18.5vw;
 		text-align: center;
 		display: flex;	
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 		text-align: center;
 		a {
 			font-size: 30px !important;

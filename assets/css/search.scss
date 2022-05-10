@@ -76,11 +76,30 @@
 	}
 }
 
-.menu-search .search-bar{
+.top-search .search-bar{
 	width: 300px;
 	margin-right: 100px;
 	margin-left: auto;
 	margin-top: -10px;
 	margin-bottom: 15px;
 	z-index: 8;
+}
+
+.menu-links{
+	margin-bottom: 24px;
+}
+
+.menu-search .search-bar {
+	margin-left: calc(100% - 300px);
+}
+
+.menu-modal .note{
+	margin-left: calc(100% - 300px);
+}
+
+.note{
+	font-size: 14px;
+	font-weight: 100;
+	position: absolute;
+	margin-top: -8px;
 }

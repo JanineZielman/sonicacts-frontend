@@ -64,7 +64,9 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                             </Link>
                           </div>
                         }
-                        {item.attributes.title}
+                        <div className="title">
+                          {item.attributes.title}
+                        </div>
                         {item.attributes.tags?.data && 
                           <div className="tags">
                               {item.attributes.tags.data.map((tag, i) => {

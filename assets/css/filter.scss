@@ -27,11 +27,12 @@
       cursor: pointer;
       font-size: 21px;
       font-weight: 500;
-      background-color: rgb(242, 242, 242);
+      background-color: white;
       padding: 5px 15px;
       border-radius: 20px;
       &.active{
-        background-color: white;
+        background-color: black;
+        color: white;
       }
     }
     span {
@@ -150,7 +151,7 @@
         height: 20vw;
         position: relative;
         margin-bottom: 7px;
-        mask-image: url('../noise4.png');
+        mask-image: url('../test.png');
         mask-size: cover;
         mask-repeat: no-repeat;
         mask-position: top;

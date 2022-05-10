@@ -43,33 +43,39 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        <div className="highlight">
-          <div className="image">
-            <Image image={items[0].attributes.cover_image?.data?.attributes}/>
-          </div>
-          <div className="text">
-            <div className="date">
-							{page.attributes.date ?
-                <>{Moment(items[0].attributes.date).format('D MMM y')}</>
-							: <>{Moment(items[0].attributes.publishedAt).format('D MMM y')}</>
-							}
-						</div>
-            <Link href={page.attributes.slug+'/'+items[0].attributes.slug}>
-              <a>{items[0].attributes.title}</a>
-            </Link>
-             {items[0].attributes.tags?.data && 
-                <div className="tags">
-                  {items[0].attributes.tags.data.map((tag, i) => {
-                    return(
-                    <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                      <a>{tag.attributes.slug}</a>
-                    </Link>
-                    )
-                  })}
+        <Link href={page.attributes.slug+'/'+items[0].attributes.slug}>
+          <a>
+            <div className="highlight">
+              <div className="image">
+                <Image image={items[0].attributes.cover_image?.data?.attributes}/>
+              </div>
+              <div className="text">
+                <div className="date">
+                  {page.attributes.date ?
+                    <>{Moment(items[0].attributes.date).format('D MMM y')}</>
+                  : <>{Moment(items[0].attributes.publishedAt).format('D MMM y')}</>
+                  }
                 </div>
-              }
-          </div>
-        </div>
+                
+                <div className="title">
+                  {items[0].attributes.title}
+                </div>
+                
+                {items[0].attributes.tags?.data && 
+                  <div className="tags">
+                    {items[0].attributes.tags.data.map((tag, i) => {
+                      return(
+                      <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                        <a>{tag.attributes.slug}</a>
+                      </Link>
+                      )
+                    })}
+                  </div>
+                }
+              </div>
+            </div>
+          </a>
+        </Link>
         <div className="filter">
           <div><span>Sort By</span></div>
           <div onClick={ascPosts} className={`sort ${check}`}></div>
@@ -96,8 +102,9 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
                             // : Moment(item.attributes.publishedAt).format('D MMM y')
                           }
                         </div>
-                      
-                        {item.attributes.title}
+                        <div className="title">
+                          {item.attributes.title}
+                        </div>
                         {item.attributes.tags?.data && 
                           <div className="tags">
                             {item.attributes.tags.data.map((tag, i) => {

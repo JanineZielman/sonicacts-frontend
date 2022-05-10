@@ -18,9 +18,6 @@ const Menu = ({ menus }) => {
   
   return (
     <>
-      <div className="menu-search">
-        <Search params={''}/>
-      </div>
       <div className="hamburger" onClick={handleShow}>
         <svg width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="49" y1="1" x2="1" y2="1" stroke="black" strokeWidth="2" strokeLinecap="square"/>
@@ -58,6 +55,9 @@ const Menu = ({ menus }) => {
           
               )
             })}
+          </div>
+           <div className="menu-search">
+            <Search params={''}/>
           </div>
         </Modal>
       </CSSTransition>

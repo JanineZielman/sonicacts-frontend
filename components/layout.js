@@ -1,6 +1,7 @@
 import Nav from "./nav"
 import Menu from "./menu"
 import Link from "next/link"
+import Search from "./search"
 
 const Layout = ({ children, seo, menus, page, global}) => {
   return(
@@ -8,15 +9,16 @@ const Layout = ({ children, seo, menus, page, global}) => {
     <section className="container">
       {page?.attributes?.slug != 'homepage'  ? 
         <Nav menus={menus} global={global} page={page}/>
-      : <Menu menus={menus}/>
+      : 
+        <>
+          <Menu menus={menus}/>
+          <div className="top-search">
+            <Search params={''}/>
+          </div>
+        </>
       }
      
       {children}
-      <style jsx>{`
-        section{
-
-        }
-      `}</style>
     </section>
     <footer className="footer">
         {global.attributes.footer_links.map((link, i) => {

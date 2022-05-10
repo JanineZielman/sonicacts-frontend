@@ -135,9 +135,12 @@
   }
   .footnotes{
     font-size: 21px;
+    font-weight: 100;
     a{
       font-size: inherit;
       text-decoration: underline;
+      font-weight: 100;
+      font-size: 21px;
     }
   }
   .sidebar {
@@ -181,7 +184,13 @@
       color: #000;
       text-decoration: none;
       line-height: 1.2;
-      font-weight: 300;
+      font-weight: 500;
+      transition: fontWeight 0.1s;
+      
+      &:hover {
+        font-weight: 200;
+        letter-spacing: 1.1px;
+      }
     }
     .links {
       max-width: 300px;
