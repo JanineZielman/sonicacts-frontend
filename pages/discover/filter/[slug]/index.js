@@ -5,7 +5,7 @@ import Seo from "../../../../components/seo"
 import Image from "../../../../components/image"
 import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import LazyLoad from 'react-lazyload';
 
 const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPosts, filter}) => {
 
@@ -51,36 +51,38 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
             {posts.map((item, i) => {
               return (
                 <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
-                  <div className="item-wrapper">
-                    <Link href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                      <a>
-                        <div className="image">
-                          <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                        </div>
-                        {item.attributes.category?.data && 
-                          <div className="category">
-                            <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              <a>{item.attributes.category?.data.attributes.slug}</a>
-                            </Link>
+                  <LazyLoad height={600}>
+                    <div className="item-wrapper">
+                      <Link href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                        <a>
+                          <div className="image">
+                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                           </div>
-                        }
-                        <div className="title">
-                          {item.attributes.title}
-                        </div>
-                        {item.attributes.tags?.data && 
-                          <div className="tags">
-                              {item.attributes.tags.data.map((tag, i) => {
-                                return(
-                                <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  <a>{tag.attributes.slug}</a>
-                                </Link>
-                                )
-                            })}
+                          {item.attributes.category?.data && 
+                            <div className="category">
+                              <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                                <a>{item.attributes.category?.data.attributes.slug}</a>
+                              </Link>
+                            </div>
+                          }
+                          <div className="title">
+                            {item.attributes.title}
                           </div>
-                        }
-                      </a>
-                    </Link>
-                  </div>
+                          {item.attributes.tags?.data && 
+                            <div className="tags">
+                                {item.attributes.tags.data.map((tag, i) => {
+                                  return(
+                                  <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    <a>{tag.attributes.slug}</a>
+                                  </Link>
+                                  )
+                              })}
+                            </div>
+                          }
+                        </a>
+                      </Link>
+                    </div>
+                  </LazyLoad>
                 </div>
               )
             })}

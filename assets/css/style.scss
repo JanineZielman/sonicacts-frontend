@@ -232,11 +232,13 @@ h2 {
     width: 100%;
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     border-top: 2px solid #000;
     padding-top: 24px;
   }
   .highlight{
     padding-right: 48px;
+    width: 360px;
     div{
       border-radius: 50%;
       width: 360px;
@@ -441,7 +443,7 @@ h2 {
   width: 100vw;
   max-width: 1400px;
   background-color: #e6e6e6;
-  background: url('../noise-bg.png');
+  background: url('../noise-bg5.png');
   background-position: right;
   background-size: cover;
   background-repeat: no-repeat;

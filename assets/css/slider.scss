@@ -127,16 +127,27 @@
 		}
 	}
 	.show-more {
-		width: 40vw;
-		height: 18.5vw;
+		width: 20vw;
+		height: 18vw;
+		margin-left: 12vw;
 		text-align: center;
 		display: flex;	
 		justify-content: center;
-		align-items: flex-start;
-		text-align: center;
+		align-items: center;
+		text-align: left;
 		a {
-			font-size: 30px !important;
+			width: 340px;
+			height: 340px;
+			padding: 20px 20px;
+			background-color: black;
+			color: white;
+			border-radius: 50%;
+			font-size: 48px !important;
 			font-weight: bold;
+			// text-transform: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 }

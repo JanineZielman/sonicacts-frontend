@@ -8,6 +8,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
+import LazyLoad from 'react-lazyload';
 
 
 const Home = ({ homepage, menus, global, items, about}) => {
@@ -92,53 +93,54 @@ const Home = ({ homepage, menus, global, items, about}) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <Slider {...settings}>
-                      {items[i].slice(0, 3).map((item, i) => {
-                        return(
-                          <div className="slider-item">
-                            {item.attributes.cover_image?.data &&
-                              <div className="image">
-                                <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
-                              </div>
-                            }
-                            <div className="text">
-                              <div>
-                                {item.attributes.category?.data &&
-                                  <span className="category">{item.attributes.category.data.attributes.title}</span>
-                                }
-                                {item.attributes.date &&
-                                  <span>
-                                    {Moment(item.attributes.date).format('D MMM y')}
-                                  </span>
-                                }
-                                {item.attributes.title &&
-                                  <h2>{item.attributes.title}</h2>
-                                }
-                              </div>
-                              {item.attributes.name &&
-                              <h2>{item.attributes.name}</h2>
+                    <LazyLoad height={600}>
+                      <Slider {...settings}>
+                        {items[i].slice(0, 3).map((item, i) => {
+                          return(
+                            <div className="slider-item">
+                              {item.attributes.cover_image?.data &&
+                                <div className="image">
+                                  <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                                </div>
                               }
-                              {item.attributes.job_description &&
-                                <span> {item.attributes.job_description}</span>
-                              }
-                              <Link href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
-                                <a>
+                              <div className="text">
+                                <div>
+                                  {item.attributes.category?.data &&
+                                    <span className="category">{item.attributes.category.data.attributes.title}</span>
+                                  }
+                                  {item.attributes.date &&
+                                    <span>
+                                      {Moment(item.attributes.date).format('D MMM y')}
+                                    </span>
+                                  }
+                                  {item.attributes.title &&
+                                    <h2>{item.attributes.title}</h2>
+                                  }
+                                </div>
+                                {item.attributes.name &&
+                                <h2>{item.attributes.name}</h2>
+                                }
+                                {item.attributes.job_description &&
+                                  <span> {item.attributes.job_description}</span>
+                                }
+                                <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
                                   → Read more
                                 </a>
-                              </Link>
-                            </div>
-                          </div>       
-                        )
-                      })}
-                      <div className="slider-item">
-                        <p className="show-more">
-                          <Link href={'/' + page.attributes.slug}>
-                            <a>→ {page.attributes.slug}</a>
-                          </Link>
-                        </p>
-                      </div>
-                    </Slider>
+                              </div>
+                            </div>       
+                          )
+                        })}
+                        <div className="slider-item">
+                          <p className="show-more">
+                            <a href={'/' + page.attributes.slug}>
+                              → {page.attributes.slug}
+                            </a>
+                          </p>
+                        </div>
+                      </Slider>
+                    </LazyLoad>
                   </Collapsible>
+                  
                 </div>
               )
             })}
@@ -146,80 +148,78 @@ const Home = ({ homepage, menus, global, items, about}) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <Slider {...settings2}>
-                      {items[3].slice(0, 6).map((item, i) => {
-                        return(
-                          <div className="slider-item">
-                            {item.attributes.cover_image?.data &&
-                              <div className="image">
-                                <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
-                              </div>
-                            }
-                            <div className="text">
-                              <div>
-                                {item.attributes.category?.data &&
-                                  <div className="category">{item.attributes.category.data.attributes.title}</div>
-                                }
-                                {item.attributes.date &&
-                                  <span>
-                                    {Moment(item.attributes.date).format('D MMM y')}
-                                  </span>
-                                }
-                                {item.attributes.title &&
-                                  <h2>{item.attributes.title}</h2>
-                                }
-                              </div>
-                              {item.attributes.name &&
-                              <h2>{item.attributes.name}</h2>
+                    <LazyLoad height={600}>
+                      <Slider {...settings2}>
+                        {items[3].slice(0, 6).map((item, i) => {
+                          return(
+                            <div className="slider-item">
+                              {item.attributes.cover_image?.data &&
+                                <div className="image">
+                                  <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                                </div>
                               }
-                              {item.attributes.job_description &&
-                                <span> {item.attributes.job_description}</span>
-                              }
-                              <Link href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
-                                <a>
+                              <div className="text">
+                                <div>
+                                  {item.attributes.category?.data &&
+                                    <div className="category">{item.attributes.category.data.attributes.title}</div>
+                                  }
+                                  {item.attributes.date &&
+                                    <span>
+                                      {Moment(item.attributes.date).format('D MMM y')}
+                                    </span>
+                                  }
+                                  {item.attributes.title &&
+                                    <h2>{item.attributes.title}</h2>
+                                  }
+                                </div>
+                                {item.attributes.name &&
+                                <h2>{item.attributes.name}</h2>
+                                }
+                                {item.attributes.job_description &&
+                                  <span> {item.attributes.job_description}</span>
+                                }
+                                <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
                                   → Read more
                                 </a>
-                              </Link>
-                            </div>
-                          </div>       
-                        )
-                      })}
-                      <div className="slider-item">
-                         <p className="show-more">
-                          <Link href={'/' + page.attributes.slug}>
-                            <a>→ {page.attributes.slug}</a>
-                          </Link>
-                        </p>
-                      </div>
-                    </Slider>
+                              </div>
+                            </div>       
+                          )
+                        })}
+                        <div className="slider-item">
+                          <p className="show-more">
+                            <a href={'/' + page.attributes.slug}>→ {page.attributes.slug}</a>
+                          </p>
+                        </div>
+                      </Slider>
+                    </LazyLoad>
                   </Collapsible>
                 </div>
               )
             })}
             <div className="collapsible">
-              <Link href="https://sonicacts.com/sashop/">
-                <a target="_blank">
-                  Shop
-                </a>
-              </Link>
+              <a href="https://sonicacts.com/sashop/" target="_blank">
+                Shop
+              </a>
             </div>
             <div className="collapsible contact">
               <Collapsible trigger={'contact'}>
-                 <Slider {...settings3}>
-                   <div className="contact-item small">
-                      <ReactMarkdown 
-                        children={about.attributes.contact_links} 
-                      />
-                    </div>
-                    <div className="contact-item adres">
-                      <h5>{about.attributes.contact_adres}</h5>
-                    </div>
-                    <div className="contact-item">
-                      <p>{about.attributes.contact_info}</p>
-                    </div>
+                <LazyLoad height={600}>
+                  <Slider {...settings3}>
+                    <div className="contact-item small">
+                        <ReactMarkdown 
+                          children={about.attributes.contact_links} 
+                        />
+                      </div>
+                      <div className="contact-item adres">
+                        <h5>{about.attributes.contact_adres}</h5>
+                      </div>
+                      <div className="contact-item">
+                        <p>{about.attributes.contact_info}</p>
+                      </div>
+                      
                     
-                   
-                 </Slider>
+                  </Slider>
+                </LazyLoad>
               </Collapsible>
             </div>
           </div>

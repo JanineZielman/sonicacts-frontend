@@ -6,6 +6,7 @@ import Seo from "../../components/seo"
 import Image from "../../components/image"
 import Moment from 'moment';
 import { fetchAPI } from "../../lib/api"
+import LazyLoad from 'react-lazyload';
 
 const Agenda = ({ menus, global, page, items }) => {
   var  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -50,59 +51,61 @@ const Agenda = ({ menus, global, page, items }) => {
 
               }
               <div className="agenda-item">
-                <Link href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-                  <a>
-                    <div className="image">
-                      <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover' sizes="50vw"/>
-                    </div>
-                    <div className="info">
-                      <div className="info-wrapper">
-                        {item.attributes.category?.data && 
-                          <div className="category">
-                            <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              <a>{item.attributes.category?.data.attributes.slug}</a>
-                            </Link>
-                          </div>
-                        }
-                        {item.attributes.date &&
-                          <span className="date" key={`date-${i}`}>
-                            {Moment(item.attributes.date).format('D MMM y')}
-                          </span>
-                        }
-                        {item.attributes.dates &&
-                          item.attributes.dates.map((date, i) => {
-                            return(
-                              <span className="date" key={`dates-${i}`}>
-                                {date.single_date &&
-                                  <>
-                                  , {Moment(date.single_date).format('D MMM y')}
-                                  </>
-                                }
-                                {date.end_date &&
-                                  <>
-                                  &nbsp;- {Moment(date.end_date).format('D MMM y')}
-                                  </>
-                                }
-                              </span>
-                            )
-                          })
-                        }
-                        <h3>{item.attributes.title}</h3>
-                        {item.attributes.tags?.data && 
-                          <div className="tags">
-                            {item.attributes.tags.data.map((tag, i) => {
-                              return(
-                              <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                <a>{tag.attributes.slug}</a>
-                              </Link>
-                              )
-                            })}
-                          </div>
-                        }
+                <LazyLoad height={600}>
+                  <Link href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+                    <a>
+                      <div className="image">
+                        <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover' sizes="50vw"/>
                       </div>
-                    </div>
-                  </a>
-                </Link>
+                      <div className="info">
+                        <div className="info-wrapper">
+                          {item.attributes.category?.data && 
+                            <div className="category">
+                              <Link href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                                <a>{item.attributes.category?.data.attributes.slug}</a>
+                              </Link>
+                            </div>
+                          }
+                          {item.attributes.date &&
+                            <span className="date" key={`date-${i}`}>
+                              {Moment(item.attributes.date).format('D MMM y')}
+                            </span>
+                          }
+                          {item.attributes.dates &&
+                            item.attributes.dates.map((date, i) => {
+                              return(
+                                <span className="date" key={`dates-${i}`}>
+                                  {date.single_date &&
+                                    <>
+                                    , {Moment(date.single_date).format('D MMM y')}
+                                    </>
+                                  }
+                                  {date.end_date &&
+                                    <>
+                                    &nbsp;- {Moment(date.end_date).format('D MMM y')}
+                                    </>
+                                  }
+                                </span>
+                              )
+                            })
+                          }
+                          <h3>{item.attributes.title}</h3>
+                          {item.attributes.tags?.data && 
+                            <div className="tags">
+                              {item.attributes.tags.data.map((tag, i) => {
+                                return(
+                                <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                  <a>{tag.attributes.slug}</a>
+                                </Link>
+                                )
+                              })}
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                </LazyLoad>
               </div>
               
               {items[i].attributes.date && difference[i] > 1 &&

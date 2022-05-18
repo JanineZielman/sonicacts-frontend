@@ -7,7 +7,7 @@ import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ReactMarkdown from "react-markdown";
 import Search from "../../../../components/search"
-
+import LazyLoad from 'react-lazyload';
 
 const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts}) => {
 
@@ -77,19 +77,21 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts}) =
             {posts.map((item, i) => {
               return (
                 <div className="discover-item community">
-                  <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-                    <a>
-                      <div className="image">
-                        {item.attributes?.cover_image?.data &&
-                          <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                        }
-                      </div>
-                      <div className="info">
-                        {item.attributes.name} 
-                        <div>{item.attributes.job_description}</div> 
-                      </div>
-                    </a>
-                  </Link>
+                  <LazyLoad height={100}>
+                    <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+                      <a>
+                        <div className="image">
+                          {item.attributes?.cover_image?.data &&
+                            <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                          }
+                        </div>
+                        <div className="info">
+                          {item.attributes.name} 
+                          <div>{item.attributes.job_description}</div> 
+                        </div>
+                      </a>
+                    </Link>
+                  </LazyLoad>
                 </div>
               )
             })}
