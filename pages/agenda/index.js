@@ -21,6 +21,11 @@ const Agenda = ({ menus, global, page, items }) => {
           />
         </div>
         <div className="agenda-container">
+          {items[0] &&
+            <div className="seperator">
+              <h2>Upcoming</h2>
+            </div>
+          }
           {items.map((item, i) => {
             const current = [];
             current[i] = Moment(items[i].attributes.date).format('M');
@@ -151,6 +156,9 @@ export async function getStaticProps() {
           },
         },
       ],
+      kind: {
+        $ne: 'opencall',
+      },
     },
   }, {
     encodeValuesOnly: true,
