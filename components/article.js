@@ -152,6 +152,12 @@ const Article = ({page, relations}) => {
 										<div>{page.attributes.location}</div>
 										</>
 									}
+									{page.attributes.deadline &&
+										<>
+										<span>Deadline</span>
+										<div>{Moment(page.attributes.deadline).format('D MMM y')}</div>
+										</>
+									}
 									{page.attributes.price &&
 										<>
 										<span>Tickets</span>

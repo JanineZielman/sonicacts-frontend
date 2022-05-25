@@ -237,8 +237,20 @@
 	.columns .wrapper-large, .article .columns {
 		width: 100%;
 		flex-direction: column;
+		justify-content: center;
 	}
 
+	.columns .highlight{
+		display: flex;
+		width: 100%;
+		justify-content: center;
+		div{
+			margin: 0!important;
+		}
+		a{
+			width: 360px;
+		}
+	}
 
 	.home-menu .collapsible {
 		font-size: 36px;
