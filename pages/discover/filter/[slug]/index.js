@@ -96,7 +96,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
 export async function getServerSideProps({params}) {
   const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
-    fetchAPI("/categories", { populate: "*" }),
+    fetchAPI("/categories?sort[0]=order&populate=*"),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])

@@ -65,6 +65,9 @@
     left: 1100px;
     margin-left: 48px;
     width: 500px;
+    a{
+      font-size: inherit;
+    }
     &.small {
       font-size: 14px;
       max-width: 300px;

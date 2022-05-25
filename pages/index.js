@@ -21,7 +21,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
     slidesToScroll: 1,
     variableWidth: true,
     adaptiveHeight: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 4000
   };
 
@@ -34,7 +34,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
     slidesToScroll: 1,
     variableWidth: true,
     // adaptiveHeight: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 4000
   };
 
@@ -44,10 +44,10 @@ const Home = ({ homepage, menus, global, items, about}) => {
     infinite: true,
     speed: 500,
     // slidesToShow: 2,
+    // adaptiveHeight: true,
     slidesToScroll: 1,
     variableWidth: true,
-    // adaptiveHeight: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 4000
   };
 
@@ -93,11 +93,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <LazyLoad height={600}>
+                    <LazyLoad height={300}>
                       <Slider {...settings}>
                         {items[i].slice(0, 3).map((item, i) => {
                           return(
-                            <div className="slider-item">
+                            <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
                               {item.attributes.cover_image?.data &&
                                 <div className="image">
                                   <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
@@ -123,11 +123,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
                                 {item.attributes.job_description &&
                                   <span> {item.attributes.job_description}</span>
                                 }
-                                <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
+                                {/* <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
                                   → Read more
-                                </a>
+                                </a> */}
                               </div>
-                            </div>       
+                            </a>       
                           )
                         })}
                         <div className="slider-item">
@@ -148,11 +148,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <LazyLoad height={600}>
+                    <LazyLoad height={300}>
                       <Slider {...settings2}>
                         {items[3].slice(0, 6).map((item, i) => {
                           return(
-                            <div className="slider-item">
+                            <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item community-slider-item">
                               {item.attributes.cover_image?.data &&
                                 <div className="image">
                                   <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
@@ -178,11 +178,11 @@ const Home = ({ homepage, menus, global, items, about}) => {
                                 {item.attributes.job_description &&
                                   <span> {item.attributes.job_description}</span>
                                 }
-                                <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
+                                {/* <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
                                   → Read more
-                                </a>
+                                </a> */}
                               </div>
-                            </div>       
+                            </a>       
                           )
                         })}
                         <div className="slider-item">
@@ -203,7 +203,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
             </div>
             <div className="collapsible contact">
               <Collapsible trigger={'contact'}>
-                <LazyLoad height={600}>
+                <LazyLoad height={300}>
                   <Slider {...settings3}>
                     <div className="contact-item small">
                         <ReactMarkdown 
