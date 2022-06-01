@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/portal", "destination": "https://portal.sonicacts.com" },
-    { "source": "/portal/:path*", "destination": "https://portal.sonicacts.com/:path*" }
+    { "source": "/portal", "destination": "https://portal.sonicacts.com" }
   ]
 }
