@@ -1,6 +1,6 @@
 {
-  "rewrites": [
-    { "source": "/portal", "destination": "https://portal.sonicacts.com/portal" },
-		{ "source": "/portal/:path*", "destination": "https://portal.sonicacts.com/portal/:path*" }
+  "redirects": [
+    { "source": "/portal", "destination": "https://portal.sonicacts.com/portal", "permanent": true },
+		{ "source": "/portal/:path*", "destination": "https://portal.sonicacts.com/portal/:path*", "permanent": true }
   ]
 }
