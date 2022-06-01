@@ -229,9 +229,9 @@ const Article = ({page, relations}) => {
 					item.__component == 'basic.collapsible' &&
 					<div className="collapsible about">
 						<Collapsible trigger={item.title}>
-							<div className={'text-block ' + item.text.size} key={'textcol'+i}>
+							<div className={'text-block ' + item.text?.size} key={'textcol'+i}>
 								<ReactMarkdown 
-									children={item.text.text_block} 
+									children={item.text?.text_block} 
 								/>
 							</div>
 						</Collapsible>
