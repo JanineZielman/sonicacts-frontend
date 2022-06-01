@@ -6,7 +6,7 @@ import Article from "../../../components/article"
 const DiscoverItem = ({menus, page, global, relations}) => {
   page.attributes.slug = 'discover'
   return (   
-    <Layout menus={menus} page={page} global={global}>
+    <Layout menus={menus} page={page} global={global} relations={relations}>
       <Article page={page} relations={relations}/>
     </Layout>
   )

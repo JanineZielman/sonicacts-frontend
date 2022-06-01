@@ -6,7 +6,6 @@ import Image from "./image"
 import image from "next/image";
 
 const Article = ({page, relations}) => {
-	console.log(relations)
   return (   
 		<section className="article">
 			<>
