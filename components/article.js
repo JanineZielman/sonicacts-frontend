@@ -1,12 +1,19 @@
 import ReactMarkdown from "react-markdown";
-
+import React, {useEffect} from "react"
 import Moment from 'moment';
 import Collapsible from 'react-collapsible';
 import Image from "./image"
-import image from "next/image";
 
 const Article = ({page, relations}) => {
-	console.log(page)
+	useEffect(() => {
+    var text = document.getElementsByClassName('text-block');
+		for (let i = 0; i < text.length; i++) { 
+			var links = text[i].getElementsByTagName('a');
+			for (let j = 0; j < links.length; j++) { 
+				links[j].setAttribute('target', '_blank');
+			}
+		}
+  }, []);
   return (   
 		<section className="article">
 			<>
