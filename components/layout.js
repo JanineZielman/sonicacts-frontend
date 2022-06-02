@@ -4,8 +4,7 @@ import Link from "next/link"
 import Search from "./search"
 import Head from 'next/head'
 
-const Layout = ({ children, seo, menus, page, global, relations}) => {
-  console.log(relations)
+const Layout = ({ children, menus, page, global, relations}) => {
   const slug = page.attributes.slug;
   const slugName = slug.charAt(0).toUpperCase() + slug.slice(1);
   return(

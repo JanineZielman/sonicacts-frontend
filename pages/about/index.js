@@ -1,6 +1,5 @@
 import React from "react"
 import Layout from "../../components/layout"
-import Seo from "../../components/seo"
 import Article from "../../components/article"
 import { fetchAPI } from "../../lib/api"
 

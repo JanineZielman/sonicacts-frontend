@@ -76,13 +76,23 @@
 	}
 }
 
-.top-search .search-bar{
-	width: 300px;
-	margin-right: 100px;
-	margin-left: auto;
-	margin-top: -10px;
-	margin-bottom: 15px;
-	z-index: 8;
+.top-search{
+	display: flex;
+	justify-content: flex-end;
+	.note{
+		margin-top: 13px;
+		width: 300px;
+		margin-right: 100px;
+		margin-left: auto;
+	}
+	.search-bar{
+		width: 300px;
+		margin-right: 100px;
+		margin-left: auto;
+		margin-top: -20px;
+		margin-bottom: 15px;
+		z-index: 8;
+	}
 }
 
 .menu-links{

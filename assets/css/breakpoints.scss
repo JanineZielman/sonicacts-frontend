@@ -8,8 +8,17 @@
 	.wrapper, .columns .wrapper-medium, .columns .wrapper-large{
 		width: 100%;
 	}
-	.top-search .search-bar{
-		margin-left: 0;
+	.top-search {
+		justify-content: flex-start;
+		.note{
+			margin-top: 0px;
+			margin-left: 0;
+			margin-right: auto;
+		}
+		.search-bar{
+			margin-top: -25px;
+			margin-left: 0;
+		}
 	}
 	.community .slick-slider .slick-slide{
 		.slider-item {

@@ -1,6 +1,5 @@
 import { fetchAPI } from "../../../lib/api"
 import Layout from "../../../components/layout"
-import Seo from "../../../components/seo"
 import Article from "../../../components/article"
 
 const NewsItem = ({menus, page, global, relations}) => {

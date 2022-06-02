@@ -1,10 +1,8 @@
 import { fetchAPI } from "../lib/api"
 import Layout from "../components/layout"
-import Seo from "../components/seo"
 import Article from "../components/article"
 
 const Page = ({menus, page, global}) => {
-  console.log(page)
   return (
     <Layout menus={menus} page={page} global={global}>
       <Article page={page}/>
