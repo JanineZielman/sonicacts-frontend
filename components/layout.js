@@ -11,7 +11,9 @@ const Layout = ({ children, menus, page, global, relations}) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(false)
+    setTimeout(function() {
+       setLoading(false)
+    }, 100);
   }, []);
   
   return(
