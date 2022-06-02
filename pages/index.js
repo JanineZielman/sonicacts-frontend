@@ -104,7 +104,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
                                   {item.attributes.category?.data &&
                                     <span className="category">{item.attributes.category.data.attributes.title}</span>
                                   }
-                                  {item.attributes.date &&
+                                  {item.attributes.date && page.attributes.slug != 'discover' &&
                                     <span>
                                       {Moment(item.attributes.date).format('D MMM y')}
                                     </span>
