@@ -10,12 +10,19 @@ import "../assets/css/breakpoints.scss"
 import { createContext } from "react"
 import { fetchAPI } from "../lib/api"
 import { getStrapiMedia } from "../lib/media"
+import React, {useEffect, useState} from "react"
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
   const { global } = pageProps
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false)
+  }, []);
+  
   return (
     <>
       <Head>
@@ -23,12 +30,19 @@ const MyApp = ({ Component, pageProps }) => {
           rel="shortcut icon"
           href={getStrapiMedia(global.attributes.favicon?.data?.attributes)}
         />
-        <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
+        <link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
       </Head>
-      {/* <Component {...pageProps} /> */}
       <GlobalContext.Provider value={global.attributes}>
-        <Component {...pageProps} />
+        {loading ?
+          <div className="loader"></div>
+          :
+          <>
+            <div className={`loader ${loading}`}></div>
+            <Component {...pageProps} />
+          </>
+        }
+        
       </GlobalContext.Provider>
     </>
   )
@@ -39,14 +53,7 @@ MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(ctx)
   // // Fetch global site settings from Strapi
-  const globalRes = await fetchAPI("/global", {
-    populate: {
-      logo: "*",
-      seo: {
-        populate: "*",
-      },
-    },
-  })
+  const globalRes = await fetchAPI("/global", { populate: "*"})
   // Pass the data to our page via props
   return { ...appProps, pageProps: { global: globalRes.data } }
   // return { ...appProps }

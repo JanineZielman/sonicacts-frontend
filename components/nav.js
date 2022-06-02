@@ -1,7 +1,4 @@
 import React, { useState } from "react"
-import Link from "next/link"
-import Modal from 'react-bootstrap/Modal'
-import Image from "./image"
 import Menu from "./menu"
 
 const Nav = ({ menus, global, page }) => {
@@ -10,28 +7,24 @@ const Nav = ({ menus, global, page }) => {
       <div className="menu-wrapper">
         <div className="breadcrumbs">
           <div className="logo-wrapper">
-            <Link href="/">
-              <a>
-                <div className="logo-small">
-                  <span  data-text="S" className="glitch s" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
-                  <span  data-text="o" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
-                  <span  data-text="n" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
-                  <span  data-text="i" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
-                  <span  data-text="c" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-                    &nbsp;
-                  <span  data-text="A" className="glitch a" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
-                  <span  data-text="c" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-                  <span  data-text="t" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
-                  <span  data-text="s" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
-                </div>
-              </a>
-            </Link>
-          </div>
-          <Link href={'/' + page?.attributes?.slug}>
-            <a>
-              {page.attributes?.slug}
+            <a href="/">
+              <div className="logo-small">
+                <span  data-text="S" className="glitch s" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
+                <span  data-text="o" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
+                <span  data-text="n" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
+                <span  data-text="i" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
+                <span  data-text="c" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+                  &nbsp;
+                <span  data-text="A" className="glitch a" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
+                <span  data-text="c" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+                <span  data-text="t" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
+                <span  data-text="s" className="glitch hide-for-mobile" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
+              </div>
             </a>
-          </Link>
+          </div>
+          <a href={'/' + page?.attributes?.slug}>
+            {page.attributes?.slug}
+          </a>
         </div>
         <Menu menus={menus}/>
       </div>

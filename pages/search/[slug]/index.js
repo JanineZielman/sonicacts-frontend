@@ -99,42 +99,40 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                     return(
                       <div key={`results${i}`} className={`search-item ${item.attributes?.category?.data?.attributes?.slug}`}>
                         <div className="item-wrapper">
-                          <Link href={'/'+categories[index]+'/'+item.attributes.slug} key={'search'+i}>
-                            <a>
-                              <div className="image">
-                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                              </div>
-                              <div className="content-wrapper">
-                                {item.attributes.category?.data && 
-                                  <div className="category">
-                                    <Link href={'/'+categories[index]+'/filter/'+item.attributes?.category?.data?.attributes.slug} key={'search'+i}>
-                                      <a>{item.attributes.category?.data.attributes.slug}</a>
-                                    </Link>
-                                  </div>
-                                }
-                                {item.attributes.date && 
-                                  <div className="date">
-                                    {item.attributes.date 
-                                      ? Moment(item.attributes.date).format('D MMM y')
-                                      : Moment(item.attributes.publishedAt).format('D MMM y')
-                                    }
-                                  </div>
-                                }
-                                {item.attributes.title}
-                                {item.attributes.tags?.data && 
-                                  <div className="tags">
-                                     {item.attributes.tags.data.map((tag, i) => {
-                                       return(
-                                        <Link href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                          <a>{tag.attributes.slug}</a>
-                                        </Link>
-                                       )
-                                    })}
-                                  </div>
-                                }
-                              </div>
-                            </a>
-                          </Link>
+                          <a href={'/'+categories[index]+'/'+item.attributes.slug} key={'search'+i}>
+                            <div className="image">
+                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                            </div>
+                            <div className="content-wrapper">
+                              {item.attributes.category?.data && 
+                                <div className="category">
+                                  <a href={'/'+categories[index]+'/filter/'+item.attributes?.category?.data?.attributes.slug} key={'search'+i}>
+                                    {item.attributes.category?.data.attributes.slug}
+                                  </a>
+                                </div>
+                              }
+                              {item.attributes.date && 
+                                <div className="date">
+                                  {item.attributes.date 
+                                    ? Moment(item.attributes.date).format('D MMM y')
+                                    : Moment(item.attributes.publishedAt).format('D MMM y')
+                                  }
+                                </div>
+                              }
+                              {item.attributes.title}
+                              {item.attributes.tags?.data && 
+                                <div className="tags">
+                                    {item.attributes.tags.data.map((tag, i) => {
+                                      return(
+                                      <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                        {tag.attributes.slug}
+                                      </a>
+                                      )
+                                  })}
+                                </div>
+                              }
+                            </div>
+                          </a>
                         </div>
                       </div>
                     )

@@ -181,11 +181,9 @@ const Article = ({page, relations}) => {
 								<span>Community</span>
 								{relations?.attributes?.community_items.data.map((item, i) => {
 									return (
-										<Link href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
-											<a>
+										<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
 											{item.attributes.name}
-											</a>
-										</Link>
+										</a>
 									)
 								})}
 							</div>
@@ -208,11 +206,9 @@ const Article = ({page, relations}) => {
 
 										return(
 											<p>
-												<Link href={'/discover/'+item.attributes.slug} key={`dis-link${i}`}>
-													<a>
+												<a href={'/discover/'+item.attributes.slug} key={`dis-link${i}`}>
 													→ {item.attributes.title}
-													</a>
-												</Link>
+												</a>
 											</p>
 										)
 									})}

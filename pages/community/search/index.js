@@ -48,19 +48,17 @@ const Community = ({ menus, global, page, items, numberOfPosts }) => {
               return (
                 <div className="discover-item community">
                   <LazyLoad height={100}>
-                    <Link href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
-                      <a>
-                        <div className="image">
-                          {item.attributes?.cover_image?.data &&
-                            <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                          }
-                        </div>
-                        <div className="info">
-                          {item.attributes.name} 
-                          <div>{item.attributes.job_description}</div> 
-                        </div>
-                      </a>
-                    </Link>
+                    <a href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+                      <div className="image">
+                        {item.attributes?.cover_image?.data &&
+                          <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                        }
+                      </div>
+                      <div className="info">
+                        {item.attributes.name} 
+                        <div>{item.attributes.job_description}</div> 
+                      </div>
+                    </a>
                   </LazyLoad>
                 </div>
               )

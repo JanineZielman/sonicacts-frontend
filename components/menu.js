@@ -1,6 +1,5 @@
 import React,  { useState } from "react"
 import { CSSTransition } from 'react-transition-group';
-import Link from "next/link"
 import Modal from 'react-modal';
 import Search from '../components/search'
 
@@ -38,20 +37,20 @@ const Menu = ({ menus }) => {
             </svg>
           </div>
           <div className="menu-links" onClick={handleClose}>
-            <Link href="/">
-              <a className="home">Sonic <br/> Acts</a>
-            </Link>
+            <a href="/" className="home">
+              Sonic <br/> Acts
+            </a>
             {menus.map((page, i) => {
               return (
                 page.attributes.slug != 'shop' ?
 
-                <Link href={'/'+page.attributes.slug} key={'link'+i}>
-                  <a className="menu-link">{page.attributes.slug}</a>
-                </Link>
+                <a href={'/'+page.attributes.slug} key={'link'+i} className="menu-link">
+                  {page.attributes.slug}
+                </a>
                 :
-                <Link href={'https://sonicacts.com/sashop/'} key={'link'+i}>
-                  <a className="menu-link" target={'_blank'}>{page.attributes.slug}</a>
-                </Link>
+                <a href={'https://sonicacts.com/sashop/'} key={'link'+i} className="menu-link" target={'_blank'}>
+                  {page.attributes.slug}
+                </a>
           
               )
             })}
