@@ -36,14 +36,15 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
       </Head>
       <GlobalContext.Provider value={global.attributes}>
-        {loading ?
+        {/* {loading ?
           <div className="loader"></div>
           :
           <>
             <div className={`loader ${loading}`}></div>
             <Component {...pageProps} />
           </>
-        }
+        } */}
+        <Component {...pageProps} />
         
       </GlobalContext.Provider>
     </>
