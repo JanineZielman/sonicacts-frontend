@@ -4,6 +4,7 @@ import Seo from "../components/seo"
 import Article from "../components/article"
 
 const Page = ({menus, page, global}) => {
+  console.log(page)
   return (
     <Layout menus={menus} page={page} global={global}>
       <Article page={page}/>
@@ -25,7 +26,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const pagesRes = 
-    await fetchAPI( `/pages?slug=${params.slug}`
+    await fetchAPI( `/pages?filters[slug][$eq]=${params.slug}&populate=*`
   );
 
 
