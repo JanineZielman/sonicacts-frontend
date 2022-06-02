@@ -5,8 +5,8 @@ import Head from 'next/head'
 import React, {useEffect, useState} from "react"
 
 const Layout = ({ children, menus, page, global, relations}) => {
-  const slug = page.attributes.slug;
-  const slugName = slug.charAt(0).toUpperCase() + slug.slice(1);
+  const slug = page.attributes?.slug;
+  const slugName = slug?.charAt(0).toUpperCase() + slug?.slice(1);
 
   const [loading, setLoading] = useState(true);
 
@@ -20,10 +20,10 @@ const Layout = ({ children, menus, page, global, relations}) => {
     <>
     <Head>
       <title>{global.attributes.title} | {slugName}</title>
-      <meta name="description" content={page.attributes.introTextBig ? page.attributes.introTextBig : page.attributes.title ? page.attributes.title : page.attributes.name ? page.attributes.name : global.attributes.description} />
+      <meta name="description" content={page.attributes?.introTextBig ? page.attributes?.introTextBig : page.attributes?.title ? page.attributes?.title : page.attributes?.name ? page.attributes?.name : global.attributes?.description} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={`${global.attributes.title} | ${slugName}`} />
-      <meta property="og:description" content={page.attributes.introTextBig ? page.attributes.introTextBig : page.attributes.title ? page.attributes.title : page.attributes.name ? page.attributes.name : global.attributes.description} />
+      <meta property="og:description" content={page.attributes?.introTextBig ? page.attributes?.introTextBig : page.attributes?.title ? page.attributes?.title : page.attributes?.name ? page.attributes?.name : global.attributes?.description} />
       <meta name="image" content={relations?.attributes.cover_image.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
       <meta property="og:image" content={relations?.attributes.cover_image.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
     </Head>
