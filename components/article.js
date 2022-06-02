@@ -10,7 +10,11 @@ const Article = ({page, relations}) => {
 		for (let i = 0; i < text.length; i++) { 
 			var links = text[i].getElementsByTagName('a');
 			for (let j = 0; j < links.length; j++) { 
-				links[j].setAttribute('target', '_blank');
+				if (links[j].href.includes('#footnotes') != true) {
+					links[j].setAttribute('target', '_blank');
+				} else {
+					links[j].classList.add('footnote')
+				}
 			}
 		}
   }, []);
