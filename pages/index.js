@@ -77,7 +77,9 @@ const Home = ({ homepage, menus, global, items, about}) => {
         <div className="wrapper-large">
           <div className="highlight">
             <a href={homepage.attributes.highlight_url} target="_blank">
-              <Image image={homepage.attributes.highlight_image.data.attributes}/>
+              {homepage.attributes.highlight_image.data &&
+                <Image image={homepage.attributes.highlight_image.data?.attributes}/>
+              }
               <span>{homepage.attributes.highlight_subtitle}</span>
               <h3>{homepage.attributes.highlight_text}</h3>
             </a>

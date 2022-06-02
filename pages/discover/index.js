@@ -50,7 +50,9 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                     <div className="item-wrapper">
                       <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
                         <div className="image">
-                          <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                          {item.attributes.cover_image?.data &&
+                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                          }
                         </div>
                         {item.attributes.category?.data && 
                           <div className="category">
