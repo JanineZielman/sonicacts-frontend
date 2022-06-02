@@ -42,7 +42,9 @@ const Opencalls = ({ page, opencalls }) => {
 						<LazyLoad height={600}>
 							<a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
 								<div className="image">
-									<Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover' sizes="50vw"/>
+									{item.attributes.cover_image.data &&
+										<Image image={item.attributes.cover_image.data?.attributes} layout='fill' objectFit='cover' sizes="50vw"/>
+									}
 								</div>
 								<div className="info">
 									<div className="info-wrapper">

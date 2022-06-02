@@ -58,21 +58,23 @@ export async function getStaticProps() {
           date: {
             $gte: currentDate,
           },
-        },
+        }
       ],
       kind: {
         $ne: 'opencall',
       },
     },
+    sort: ['date:asc'],
   }, {
     encodeValuesOnly: true,
   });
 
   const itemRes = 
-    await fetchAPI( `/agenda-items?${query}&pagination&sort[0]=date`
+    await fetchAPI( `/agenda-items?${query}`
   );
 
-  const query2 = qs.stringify({
+
+  const queryoc = qs.stringify({
     populate: '*', 
     filters: {
       $or: [
@@ -86,12 +88,13 @@ export async function getStaticProps() {
         $eq: 'opencall',
       },
     },
+  sort: ['deadline:asc'],
   }, {
     encodeValuesOnly: true,
   });
 
   const opencallRes = 
-    await fetchAPI( `/agenda-items?${query2}&pagination&sort[0]=deadline`
+    await fetchAPI( `/agenda-items?${queryoc}`
   );
 
   return {
