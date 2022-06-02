@@ -3,6 +3,7 @@ import React, {useEffect} from "react"
 import Moment from 'moment';
 import Collapsible from 'react-collapsible';
 import Image from "./image"
+import LazyLoad from 'react-lazyload';
 
 const Article = ({page, relations}) => {
 	useEffect(() => {
@@ -38,15 +39,11 @@ const Article = ({page, relations}) => {
 				<div className="content">
 					<div className={`wrapper ${page.attributes.slug}`}>
 						<>
-						{page.attributes.content?.map((item, i) => {
-							{item.url &&
-								console.log(item.url.match(/\bhttps?:\/\/\S+/gi)[0]);
-							}
-							
+						{page.attributes.content?.map((item, i) => {							
 							return (
 								<div key={`content${i}`} className={`${page.attributes.slug}-block`}>
 									{item.image?.data &&
-										<>
+										<LazyLoad height={600}>
 											{item.image_caption ?
 												<div className="columns" key={'column'+i}>
 													<div className="caption">
@@ -55,15 +52,15 @@ const Article = ({page, relations}) => {
 														/>
 													</div>
 													<div className={`image ${page.attributes.slug}`}>
-														<Image image={item.image.data.attributes}/>
+														<Image image={item.image.data.attributes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8VQ8AAnkBewKPWHQAAAAASUVORK5CYII="/>
 													</div>
 												</div>
 												:
 												<div className={`image ${item.size} ${page.attributes.slug}`}>
-													<Image image={item.image.data.attributes}/>
+													<Image image={item.image.data.attributes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8VQ8AAnkBewKPWHQAAAAASUVORK5CYII="/>
 												</div>
 											}
-										</>
+										</LazyLoad>
 									}
 									{item.sidenote && 
 										<div className={'sidenote ' + item.size}>
