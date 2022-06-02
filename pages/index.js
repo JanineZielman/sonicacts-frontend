@@ -1,4 +1,3 @@
-import Link from "next/link"
 import Collapsible from 'react-collapsible';
 import Slider from "react-slick";
 import ReactMarkdown from "react-markdown";
@@ -56,8 +55,6 @@ const Home = ({ homepage, menus, global, items, about}) => {
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image logo">
-            {/* <div className="glitch" data-text="Sonic Acts">Sonic</div> 
-            <div className="glitch" data-text="Acts">Acts</div>  */}
             <div className="s1">
               <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
               <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
@@ -90,7 +87,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <LazyLoad height={300}>
+                    <LazyLoad height={600}>
                       <Slider {...settings}>
                         {items[i].slice(0, 3).map((item, i) => {
                           return(
@@ -120,9 +117,6 @@ const Home = ({ homepage, menus, global, items, about}) => {
                                 {item.attributes.job_description &&
                                   <span> {item.attributes.job_description}</span>
                                 }
-                                {/* <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
-                                  → Read more
-                                </a> */}
                               </div>
                             </a>       
                           )

@@ -6,6 +6,7 @@ import Image from "./image"
 import image from "next/image";
 
 const Article = ({page, relations}) => {
+	console.log(page)
   return (   
 		<section className="article">
 			<>
@@ -107,7 +108,9 @@ const Article = ({page, relations}) => {
 					
 						{page.attributes.slug == 'agenda' &&
 							<>
-									<span>When</span>
+									{relations?.attributes?.date &&
+										<span>When</span>
+									}
 									{relations?.attributes?.date && relations?.attributes?.dates == 0 &&
 										Moment(relations?.attributes?.date).format('D MMM y')
 									}
@@ -151,12 +154,6 @@ const Article = ({page, relations}) => {
 										<div>{page.attributes.location}</div>
 										</>
 									}
-									{page.attributes.deadline &&
-										<>
-										<span>Deadline</span>
-										<div>{Moment(page.attributes.deadline).format('D MMM y')}</div>
-										</>
-									}
 									{page.attributes.price &&
 										<>
 										<span>Tickets</span>
@@ -165,12 +162,18 @@ const Article = ({page, relations}) => {
 									}
 									{page.attributes.available_at &&
 										<>
-										<span>Available at</span>
+										<span>{page.attributes.kind == 'opencall' ? 'Apply at' : 'Available at'}</span>
 										<div className="available-links">
 											<ReactMarkdown 
 												children={page.attributes.available_at}
 											/>
 										</div>
+										</>
+									}
+									{page.attributes.deadline &&
+										<>
+										<span>Deadline</span>
+										<div>{Moment(page.attributes.deadline).format('D MMM y')}</div>
 										</>
 									}
 							</>
