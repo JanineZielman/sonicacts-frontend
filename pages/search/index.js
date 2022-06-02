@@ -11,7 +11,7 @@ const Search = ({ menus, global}) => {
   )
 }
 
-export async function getServerSideProps({params}) {
+export async function getStaticProps() {
   const [globalRes, menusRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),

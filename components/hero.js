@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "next/link"
+
 import TopBar from "../components/topBar"
 
 const Hero = ({ page }) => {
