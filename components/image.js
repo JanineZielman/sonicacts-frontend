@@ -6,12 +6,8 @@ const Image = ({ image, layout, objectFit, sizes  }) => {
   const { alternativeText, width, height } = image
 
 
-  // const loader = () => {
-  //   return getStrapiMedia(image)
-  // }
-
   const loader = ({ width, quality }) => {
-    return `${getStrapiMedia(image)}?w=${width}&q=${quality || 75}`
+    return `${getStrapiMedia(image)}?w=${'1080'}&q=${quality || 75}`
   }
 
   return (
