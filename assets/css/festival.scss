@@ -1,0 +1,129 @@
+@font-face {
+	font-family: "Crystal";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V07VF.woff2");
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "Crystal2";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V08VF.woff2");
+	font-weight: 100;
+}
+
+@font-face {
+	font-family: "Crystal3";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V09VF.woff2");
+	font-weight: 100;
+}
+
+.festival{
+	background-color: rgb(208, 240, 208);
+	.menu .menu-wrapper{
+		background-color: rgb(208, 240, 208);
+	}
+	.glitch:after, .glitch:before{
+		background-color: rgb(208, 240, 208);
+	}
+	.festival-hero-wrapper{
+		position: relative;
+		height: 100vh;
+	}
+	.festival-hero{
+		position: absolute;
+		top: 0;
+		z-index: 999;
+		height: 98vh;
+		width: 98vw;
+		left: 1vw;
+		.slick-slider{
+			padding: 0;
+			.slick-slide{
+				width: 100%;
+				height: 98vh;
+				margin-right: 0;
+			}
+			.slick-list{
+				&:before{
+					width: 20vw;
+					// background: url('../noise-fes.png');
+					background: none;
+					background-size: cover;
+				}
+				&:after {
+					width: 20vw;
+					// background: url('../noise-fes.png');
+					background: none;
+					background-size: cover;
+				}
+			}
+		}
+		.wrapper{
+			top: 0;
+			width: 100%;
+			position: absolute;
+			height: 98vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.title{
+			position: relative;
+			div{
+				position: absolute;
+				top: 48vh;
+				transform: translateY(-50%);
+				left: 0;
+				font-size: 24vw;
+				line-height: 0.7;
+				z-index: -1;
+				width: 98vw;
+				text-align:center;
+				span{
+					display: inline-block;
+				}
+				&.layer1{
+					font-family: Crystal3;
+					color: rgb(255,221,235);
+				}
+				&.layer2 {
+					font-family: Crystal2;
+					color: rgb(0,82,83);
+				}
+				&.layer3 {
+					font-family: Crystal;
+					color: white;
+				}
+			}
+		}
+		.info{
+			margin-top: 100px;
+			font-weight: 800;
+			font-size: 8vw;
+			line-height: 1;
+			h1{
+				font-size: 8vw;
+			}
+			.date{
+			}
+			.location {
+			}
+		}
+	}
+	.article{
+		display: flex;
+		flex-wrap: wrap;
+		.image.small, .image.medium{
+			padding-left: 0;
+		}
+	}
+	.text-block{
+		max-width: 100%;
+	}
+	.text-block.small{
+		width: 600px;
+		p{
+			padding-left: 0;
+			padding-right: 100px;
+		}
+	}
+}
