@@ -386,6 +386,9 @@
 			}
 		}
 	}
+	.article .text-block.big p{
+		font-size: 48px;
+	}
 }
 
 
@@ -400,5 +403,30 @@
 				}
 			}
 		}
+	}
+	.container {
+		padding: 14px 3vw;
+	}
+	.article .text-block p{
+		padding-right: 0;
+	}
+	.article .text-block.small p{
+		padding-left: 5px;
+	}
+	.article .image.medium{
+		max-width: 100%;
+		padding-left: 0;
+	}
+	.discover .discover-container{
+		width: 94vw;
+		.infinite-scroll-component__outerdiv{
+			width: 94vw;
+		}
+	}
+	.article .text-block.big p{
+		font-size: 24px;
+	}
+	.collapsible.about{
+		font-size: 30px;
 	}
 }
