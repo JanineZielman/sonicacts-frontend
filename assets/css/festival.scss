@@ -1,25 +1,95 @@
+@keyframes textAnimation {
+	0% {
+		font-variation-settings: 'wght' 100;
+		-moz-font-variation-settings: 'wght' 100;
+	}
+
+	50% {
+		font-variation-settings: 'wght' 90;
+		-moz-font-variation-settings: 'wght' 90;
+	}
+
+	100% {
+		font-variation-settings: 'wght' 100;
+		-moz-font-variation-settings: 'wght' 100;
+	}
+}
+
 @font-face {
 	font-family: "Crystal";
 	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V07VF.woff2");
-	font-weight: 100;
+	font-weight: 50 100;
+	font-display: swap;
 }
+
 
 @font-face {
 	font-family: "Crystal2";
 	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V08VF.woff2");
-	font-weight: 100;
+	font-weight: 50 100;
+	font-display: swap;
 }
 
 @font-face {
 	font-family: "Crystal3";
 	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V09VF.woff2");
-	font-weight: 100;
+	font-weight: 50 100;
+	font-display: swap;
 }
+
+@font-face {
+	font-family: "Crystal4";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V10VF.woff2");
+	font-weight: 50 100;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Crystal5";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V11VF.woff2");
+	font-weight: 50 100;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Crystal6";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V12VF.woff2");
+	font-weight: 50 100;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Grime";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-grime-open-01VF.woff2");
+	font-weight: 50 100;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Grime2";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-grime-open-02VF.woff2");
+	font-weight: 50 100;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Grime3";
+	src: url("../fonts/SONIC-CRYSTAL/Sonic-grime-open-03VF.woff2");
+	font-weight: 50 100;
+	font-display: swap;
+}
+
+
 
 .festival{
 	background-color: rgb(208, 240, 208);
 	.menu .menu-wrapper{
 		background-color: rgb(208, 240, 208);
+		border-bottom: 0;
+		padding: 0;
+		.breadcrumbs{
+			display: none;
+		}
 	}
 	.glitch:after, .glitch:before{
 		background-color: rgb(208, 240, 208);
@@ -31,95 +101,154 @@
 	.festival-hero{
 		position: absolute;
 		top: 0;
-		z-index: 999;
-		height: 98vh;
-		width: 98vw;
-		left: 1vw;
+		z-index: 8;
+		height: 100vh;
+		width: 100vw;
+		left: 0;
 		.slick-slider{
 			padding: 0;
 			.slick-slide{
-				width: 100%;
-				height: 98vh;
+				width: 100vw;
+				height: 100vh;
 				margin-right: 0;
 			}
 			.slick-list{
 				&:before{
-					width: 20vw;
-					// background: url('../noise-fes.png');
+					width: 10vw;
 					background: none;
 					background-size: cover;
 				}
 				&:after {
-					width: 20vw;
-					// background: url('../noise-fes.png');
+					width: 10vw;
 					background: none;
 					background-size: cover;
 				}
+			}
+		}
+		.bg{
+			top: 0;
+			position: absolute;
+			width: 100vw;
+			height: 100vh;
+			z-index: -1;
+			img{
+				width: 100vw;
+				height: 100vh;
+				object-fit: cover;
 			}
 		}
 		.wrapper{
 			top: 0;
 			width: 100%;
 			position: absolute;
-			height: 98vh;
+			height: 100vh;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-between;
 		}
 		.title{
 			position: relative;
 			div{
 				position: absolute;
-				top: 48vh;
-				transform: translateY(-50%);
-				left: 0;
-				font-size: 24vw;
+				top: 0;
+				// transform: translateY(-50%);
+				left: 0vw;
+				font-size: 50vw;
 				line-height: 0.7;
-				z-index: -1;
-				width: 98vw;
+				z-index: -2;
+				width: 100vw;
 				text-align:center;
+				height: calc(100vh - 8vw);
+				overflow: hidden;
 				span{
+					opacity: 0.8;
 					display: inline-block;
-					transition: all 1s ease-in-out;
+					// animation: textAnimation 3s infinite ease-in-out both;
+					// animation-delay: var(--delay);
 				}
 				&.layer1{
-					font-family: Crystal3;
 					color: rgb(255,221,235);
+					&.layer1_0 {
+						font-family: Crystal3;
+					}
 					&.layer1_1 {
-						color: rgb(70, 0, 61);
+						// color: rgb(70, 0, 61);
+						color: rgb(255, 221, 235);
+						font-family: Crystal6;
 					}
 					&.layer1_2{
 						color: rgb(255, 153, 0);
+						font-family: Grime3;
 					}
 				}
 				&.layer2 {
-					font-family: Crystal2;
+					span{
+						animation: textAnimation 3s infinite ease-in-out both;
+						// animation-delay: var(--delay);
+						&:nth-child(3n){
+							animation-delay: 2s;
+						}
+						&:nth-child(3n+1) {
+							animation-delay: 5s;
+						}
+						&:nth-child(5n) {
+							animation-delay: 3s;
+						}
+					}
 					color: rgb(0,82,83);
+					&.layer2_0 {
+						font-family: Crystal2;
+					}
+					&.layer2_1 {
+						font-family: Crystal5;
+						color:rgb(255, 153, 0);
+					}
+					&.layer2_2 {
+						font-family: Grime2;
+					}
 				}
 				&.layer3 {
-					font-family: Crystal;
 					color: white;
+					&.layer3_0 {
+						font-family: Crystal;
+					}
+					&.layer3_1 {
+						font-family: Crystal4;
+					}
+					&.layer3_2 {
+						font-family: Grime;
+					}
 				}
 			}
 		}
-		&:hover .title div span{
-			animation: textAnimation 3s infinite;
-			animation-delay: var(--delay);
-			animation-timing-function: ease-in-out;
-			animation-direction: alternate;
-			font-variation-settings: 'wght' 100;
-		}
 		.info{
-			margin-top: 100px;
-			font-weight: 800;
-			font-size: 8vw;
+			padding: 24px;
+			font-weight: 500;
+			font-size: 10vw;
 			line-height: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 100vh;
 			h1{
-				font-size: 8vw;
+				font-size: 10vw;
+				font-weight: 900;
+				text-transform: uppercase;
+			}
+			.locations-wrapper{
+				font-size: 6vw;
 			}
 			.date{
+					font-size: 6vw;
 			}
-			.location {
+			.locations {
+				border-top: 6px solid black;
+				background-color: rgb(208, 240, 208);
+				padding-top: 24px;
+				display: flex;
+				font-size: 2vw;
+				.location{
+					margin-right: 3vw;
+				}
 			}
 		}
 	}
@@ -155,18 +284,5 @@
 			padding-left: 0;
 			padding-right: 100px;
 		}
-	}
-}
-
-
-@keyframes textAnimation {
-	0% {
-		font-variation-settings: 'wght' 100;
-		-moz-font-variation-settings: 'wght' 100;
-	}
-
-	100% {
-		font-variation-settings: 'wght' 90;
-		-moz-font-variation-settings: 'wght' 90;
 	}
 }
