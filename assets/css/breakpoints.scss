@@ -26,6 +26,13 @@
 					font-size: 100vw;
 				}
 			}
+			.bg {
+				img{
+					width: 100vh;
+					height: 100vh;
+					transform: rotate(90deg);
+				}
+			}
 			.info{
 				padding: 12px;
 				h1{
@@ -43,6 +50,7 @@
 					justify-content: space-between;
 					font-size: 15px;
 					padding-top: 4px;
+					border-top-width: 4px;
 					.location{
 						margin: 10px 0;
 						width: 40%;
