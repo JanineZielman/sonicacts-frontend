@@ -15,7 +15,8 @@ const Hero = ({relations }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     // autoplay: true,
-    autoplaySpeed: 4000
+    autoplaySpeed: 4000,
+		lazyLoad: true,
   };
 	console.log(relations)
   return (
@@ -28,17 +29,17 @@ const Hero = ({relations }) => {
 							<div>
 								<div className="wrapper">
 									<div className="title">
-										<div className="layer1">
+										<div className={`layer1 layer1_${i}`}>
 											{(item.title).split("").map(function(char, index){
 												return <span aria-hidden="true" key={index} style={{'--delay': (Math.floor(Math.random() * 10) * 0.5) + 's', '--random': (Math.floor(Math.random() * 50) + 50)}}>{char}</span>;
 											})}
 										</div>
-										<div className="layer2">
+										<div className={`layer2 layer2_${i}`}>
 											{(item.title).split("").map(function(char, index){
 												return <span aria-hidden="true" key={index} style={{'--delay': (Math.floor(Math.random() * 10) * 0.5) + 's', '--random': (Math.floor(Math.random() * 50) + 50)}}>{char}</span>;
 											})}
 										</div>
-										<div className="layer3">
+										<div className={`layer3 layer3_${i}`}>
 											{(item.title).split("").map(function(char, index){
 												return <span aria-hidden="true" key={index} style={{'--delay': (Math.floor(Math.random() * 10) * 0.5) + 's', '--random': (Math.floor(Math.random() * 50) + 50)}}>{char}</span>;
 											})}

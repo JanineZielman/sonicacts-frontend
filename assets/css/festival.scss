@@ -80,10 +80,17 @@
 				text-align:center;
 				span{
 					display: inline-block;
+					transition: all 1s ease-in-out;
 				}
 				&.layer1{
 					font-family: Crystal3;
 					color: rgb(255,221,235);
+					&.layer1_1 {
+						color: rgb(70, 0, 61);
+					}
+					&.layer1_2{
+						color: rgb(255, 153, 0);
+					}
 				}
 				&.layer2 {
 					font-family: Crystal2;
@@ -94,6 +101,13 @@
 					color: white;
 				}
 			}
+		}
+		&:hover .title div span{
+			animation: textAnimation 3s infinite;
+			animation-delay: var(--delay);
+			animation-timing-function: ease-in-out;
+			animation-direction: alternate;
+			font-variation-settings: 'wght' 100;
 		}
 		.info{
 			margin-top: 100px;
@@ -118,6 +132,22 @@
 	}
 	.text-block{
 		max-width: 100%;
+		a{
+			transition: all 0.5s ease-in-out;
+			font-family: Crystal;
+			font-variation-settings: 'wght' 50;
+			-moz-font-variation-settings: 'wght' 50;
+			text-decoration: none;
+			&:hover{
+				font-variation-settings: 'wght' 100;
+				-moz-font-variation-settings: 'wght' 100;
+			}
+		}
+	}
+	.Collapsible{
+		.text-block {
+			max-width: 1100px;
+		}
 	}
 	.text-block.small{
 		width: 600px;
@@ -125,5 +155,18 @@
 			padding-left: 0;
 			padding-right: 100px;
 		}
+	}
+}
+
+
+@keyframes textAnimation {
+	0% {
+		font-variation-settings: 'wght' 100;
+		-moz-font-variation-settings: 'wght' 100;
+	}
+
+	100% {
+		font-variation-settings: 'wght' 90;
+		-moz-font-variation-settings: 'wght' 90;
 	}
 }
