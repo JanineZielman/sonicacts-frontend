@@ -11,33 +11,38 @@ const Hero = ({relations }) => {
     slidesToScroll: 1,
     // autoplay: true,
 		autoplaySpeed: 6000,
-		// lazyLoad: true,
+		lazyLoad: true,
   };
+
+	const text = "Son ic Acts Festi- val 20 22"
   return (
 		<>
 			<div className="festival-hero-wrapper"></div>
 			<div className="festival-hero">
 				<Slider {...settings}>
 					{relations.attributes.festival?.map((item, i) => {
-						console.log(item.title.split(' ')[0])
 						return(
 							<div>
 								<div className="wrapper">
-									<div className="title">
+									<div className={`title title_${i}`}>
 										<div className={`layer1 layer1_${i}`}>
-											{(item.title.split(' ')[1]).split("").map(function(char, index){
-												return <span aria-hidden="true" key={index} style={{'--delay': (Math.floor(Math.random() * 10) * 0.5) + 's', '--random': (Math.floor(Math.random() * 50) + 50)}}>{char}</span>;
-											})}
+											<span>Son</span><span>ic</span><span>Acts</span>
+											<span>Festi-</span><span>val</span><span>20</span><span>22</span>
+											{/* {(text).split("").map(function(char, index){
+												return <span aria-hidden="true" key={index}>{char}</span>;
+											})} */}
 										</div>
 										<div className={`layer2 layer2_${i}`}>
-											{(item.title.split(' ')[1]).split("").map(function(char, index){
-												return <span aria-hidden="true" key={index} style={{'--delay': (Math.floor(Math.random() * 10) * 0.5) + 's', '--random': (Math.floor(Math.random() * 50) + 50)}}>{char}</span>;
+											{(text).split("").map(function(char, index){
+												return <span aria-hidden="true" key={index}>{char}</span>;
 											})}
 										</div>
 										<div className={`layer3 layer3_${i}`}>
-											{(item.title.split(' ')[1]).split("").map(function(char, index){
-												return <span aria-hidden="true" key={index} style={{'--delay': (Math.floor(Math.random() * 10) * 0.5) + 's', '--random': (Math.floor(Math.random() * 50) + 50)}}>{char}</span>;
-											})}
+											<span>Son</span><span>ic</span><span>Acts</span>
+											<span>Festi-</span><span>val</span><span>20</span><span>22</span>
+											{/* {(text).split("").map(function(char, index){
+												return <span aria-hidden="true" key={index}>{char}</span>;
+											})} */}
 										</div>
 									</div>
 									<div className='bg'>
