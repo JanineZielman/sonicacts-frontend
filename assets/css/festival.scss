@@ -10,6 +10,11 @@
 	}
 }
 
+.animation{
+	// background-color: red;
+	animation: textAnimation 3s infinite ease-in-out alternate;
+}
+
 @font-face {
 	font-family: "Crystal";
 	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V07VF.woff2");
@@ -146,22 +151,21 @@
 		.title{
 			position: relative;
 			&.title_1 div {
-				margin-top: -20vw;
-				height: calc(100vh - 8vw + 20vw);
+				margin-top: -30vh;
+				height: calc(100vh - 8vw + 30vh);
 			}
 			&.title_2 div {
-				margin-top: -40vw;
-				height: calc(100vh - 8vw + 40vw);
+				margin-top: -65vh;
+				height: calc(100vh - 8vw + 65vh);
 			}
 			div{
 				position: absolute;
 				top: 0;
-				// transform: translateY(-50%);
-				left: 0vw;
-				font-size: 35vw;
+				left: 10vw;
+				font-size: 40vh;
 				line-height: 0.7;
 				z-index: -2;
-				width: 100vw;
+				width: 80vw;
 				text-align:center;
 				height: calc(100vh - 8vw);
 				overflow: hidden;
@@ -171,8 +175,6 @@
 					&:nth-child(1){
 						margin-left: 35%;
 					}
-					// animation: textAnimation 3s infinite ease-in-out both;
-					// animation-delay: var(--delay);
 				}
 				&.layer1{
 					color: rgb(255,221,235);
@@ -190,20 +192,6 @@
 					}
 				}
 				&.layer2 {
-					span{
-						&:nth-child(3n){
-							animation: textAnimation 3s infinite ease-in-out alternate;
-							animation-delay: 0s;
-						}
-						&:nth-child(3n+1) {
-							animation: textAnimation 3s infinite ease-in-out alternate;
-							animation-delay: 5s;
-						}
-						&:nth-child(5n) {
-							animation: textAnimation 3s infinite ease-in-out alternate;
-							animation-delay: 2s;
-						}
-					}
 					color: rgb(0,82,83);
 					&.layer2_0 {
 						font-family: Crystal2;
