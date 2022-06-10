@@ -56,7 +56,7 @@ const Hero = ({relations }) => {
 											</div>
 										</div>
 										<div className="locations-wrapper">
-											<div>Locations</div>
+											<div className='title-text'>Locations</div>
 											<div className='locations'>
 												{item.locations?.map((item, i) => {
 													console.log(item.location)
