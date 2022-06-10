@@ -1,5 +1,6 @@
 import Moment from 'moment';
 import Slider from "react-slick";
+import React, {useEffect} from 'react';
 
 const Hero = ({relations }) => {
 	const settings = {
@@ -11,10 +12,23 @@ const Hero = ({relations }) => {
     slidesToScroll: 1,
     // autoplay: true,
 		autoplaySpeed: 6000,
-		lazyLoad: true,
+		// lazyLoad: true,
   };
 
-	const text = "Son ic Acts Festi- val 20 22"
+	useEffect(() => {
+		let letters = document.getElementsByClassName('letter');
+		// let random1 = Math.floor(Math.random() * letters.length);
+		let random1 = Math.floor(Math.random() * 50) + 20;
+
+		for (let i = 0; i < letters.length; i = i + random1) {
+			letters[i].classList.add('animation');
+		}
+    // setTimeout(function() {
+    //    setLoading(false)
+    // }, 100);
+  }, []);
+
+	const text = "SonicActsFestival2022_SonicActsFestival2022"
   return (
 		<>
 			<div className="festival-hero-wrapper"></div>
@@ -26,23 +40,19 @@ const Hero = ({relations }) => {
 								<div className="wrapper">
 									<div className={`title title_${i}`}>
 										<div className={`layer1 layer1_${i}`}>
-											<span>Son</span><span>ic</span><span>Acts</span>
-											<span>Festi-</span><span>val</span><span>20</span><span>22</span>
-											{/* {(text).split("").map(function(char, index){
-												return <span aria-hidden="true" key={index}>{char}</span>;
-											})} */}
+											{(text).split("").map(function(char, index){
+												return <span className={`letter`} aria-hidden="true" key={index}>{char}</span>;
+											})}
 										</div>
 										<div className={`layer2 layer2_${i}`}>
 											{(text).split("").map(function(char, index){
-												return <span aria-hidden="true" key={index}>{char}</span>;
+												return <span className={`letter`} aria-hidden="true" key={index}>{char}</span>;
 											})}
 										</div>
 										<div className={`layer3 layer3_${i}`}>
-											<span>Son</span><span>ic</span><span>Acts</span>
-											<span>Festi-</span><span>val</span><span>20</span><span>22</span>
-											{/* {(text).split("").map(function(char, index){
-												return <span aria-hidden="true" key={index}>{char}</span>;
-											})} */}
+											{(text).split("").map(function(char, index){
+												return <span className={`letter`} aria-hidden="true" key={index}>{char}</span>;
+											})}
 										</div>
 									</div>
 									<div className='bg'>
@@ -59,7 +69,6 @@ const Hero = ({relations }) => {
 											<div className='title-text'>Locations</div>
 											<div className='locations'>
 												{item.locations?.map((item, i) => {
-													console.log(item.location)
 													return(
 														<div className="location">
 															{item.location.split('\n').map(str => <div>{str}</div>)}
