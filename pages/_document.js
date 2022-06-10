@@ -10,6 +10,7 @@ class MyDocument extends Document {
             async
             src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"
           />   
+          <script async src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"/>
         </Head>
         <body>
           <Main />

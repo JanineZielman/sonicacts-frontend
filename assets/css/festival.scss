@@ -10,9 +10,35 @@
 	}
 }
 
-.animation{
-	// background-color: red;
-	animation: textAnimation 3s infinite ease-in-out alternate;
+
+.letter{
+	&:nth-child(3n){
+		animation-delay: 2s;
+	}
+	&:nth-child(5n) {
+		animation-delay: 5s;
+	}
+	animation: textAnimation 5s infinite ease-in-out alternate;
+}
+
+.type img{
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	object-fit: cover;
+	z-index: -1;
+}
+
+iframe{
+	transition: opacity 0.4s ease-in-out;
+}
+
+.false iframe {
+	opacity: 0;
+}
+
+.false iframe{
+	opacity: 1;
 }
 
 @font-face {
@@ -86,6 +112,13 @@
 
 .festival{
 	background-color: #7A868E;
+	iframe{
+		width: 100vw;
+		height: 100vh;
+		border: none;
+		position: absolute;
+		z-index: -1;
+	}
 	.menu .menu-wrapper{
 		background-color: #7A868E;
 		border-bottom: 0;
@@ -108,6 +141,7 @@
 		height: 100vh;
 		width: 100vw;
 		left: 0;
+		background-color: #7A868E;
 		.slick-slider{
 			padding: 0;
 			.slick-slide{
@@ -152,69 +186,75 @@
 			position: relative;
 			&.title_1 div {
 				margin-top: -30vh;
-				height: calc(100vh - 8vw + 30vh);
+				height: calc(100vh + 30vh);
 			}
 			&.title_2 div {
-				margin-top: -65vh;
-				height: calc(100vh - 8vw + 65vh);
+				margin-top: -50vh;
+				height: calc(100vh + 50vh);
 			}
 			div{
 				position: absolute;
 				top: 0;
-				left: 10vw;
+				left: 0;
 				font-size: 40vh;
 				line-height: 0.7;
 				z-index: -2;
-				width: 80vw;
-				text-align:center;
-				height: calc(100vh - 8vw);
+				width: 100vw;
+				text-align:left;
+				height: 100vh;
 				overflow: hidden;
 				span{
-					opacity: 0.8;
+					// opacity: 0.8;
 					display: inline-block;
-					&:nth-child(1){
-						margin-left: 35%;
-					}
+					// &:nth-child(1){
+					// 	margin-left: 35%;
+					// }
 				}
 				&.layer1{
 					color: rgb(255,221,235);
 					&.layer1_0 {
-						font-family: Crystal3;
+						font-family: Crystal3, sans-serif;
+						font-weight: 100;
 					}
 					&.layer1_1 {
 						color: rgb(70, 0, 61);
 						// color: rgb(255, 221, 235);
-						font-family: Crystal6;
+						font-family: Crystal6, sans-serif;
+						font-weight: 100;
 					}
 					&.layer1_2{
 						color: rgb(255, 203, 5);
-						font-family: Grime3;
+						font-family: Grime3, sans-serif;
+						font-weight: 100;
 					}
 				}
 				&.layer2 {
 					color: rgb(0,82,83);
 					&.layer2_0 {
-						font-family: Crystal2;
+						font-family: Crystal2, sans-serif;
 					}
 					&.layer2_1 {
-						font-family: Crystal5;
+						font-family: Crystal5, sans-serif;
 						color: rgb(255, 221, 235);
 						// color:rgb(255,203,5);
 					}
 					&.layer2_2 {
-						font-family: Grime2;
+						font-family: Grime2, sans-serif;
 					}
 				}
 				&.layer3 {
 					color: white;
 					&.layer3_0 {
-						font-family: Crystal;
+						font-family: Crystal, sans-serif;
+						font-weight: 100;
 					}
 					&.layer3_1 {
-						font-family: Crystal4;
+						font-family: Crystal4, sans-serif;
+						font-weight: 100;
 					}
 					&.layer3_2 {
-						font-family: Grime;
+						font-family: Grime, sans-serif;
+						font-weight: 100;
 					}
 				}
 			}
@@ -270,7 +310,7 @@
 		max-width: 100%;
 		a{
 			transition: all 0.5s ease-in-out;
-			font-family: Crystal;
+			font-family: Crystal3;
 			font-variation-settings: 'wght' 50;
 			-moz-font-variation-settings: 'wght' 50;
 			text-decoration: none;
