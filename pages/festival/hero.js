@@ -11,7 +11,7 @@ const Hero = ({relations }) => {
     slidesToScroll: 1,
     // autoplay: true,
 		autoplaySpeed: 6000,
-		lazyLoad: false,
+		lazyLoad: true,
   };
 
 	const text = "Son ic Acts Festi- val 20 22"
