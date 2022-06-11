@@ -4,6 +4,9 @@ const Type2 = () => {
 	return(
 		<section className="festival type">
 			<div className="festival-hero">
+				<div className='bg'>
+					<img src="/fes-noise.svg" />
+				</div>
 				<div className={`title title_2`}>
 					<div className={`layer1 layer1_2`}>
 						{(text).split("").map(function(char, index){
