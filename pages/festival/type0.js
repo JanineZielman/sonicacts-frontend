@@ -2,7 +2,7 @@ const Type = () => {
 	const text = "Sonic Acts Festival 2022 _ Sonic Acts Festival 2022"
 	return(
 		<section className="festival">
-			<div className="festival-hero">
+			<div className="festival-hero festival-hero-type">
 				<div className='bg'>
 					<img src="/fes-noise.svg" />
 				</div>
