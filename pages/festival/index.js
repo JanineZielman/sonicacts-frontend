@@ -5,11 +5,34 @@ import Landing from "./landing"
 import Hero from "./hero"
 
 const Festival = ({ menus, global, page, relations }) => {
+	const text = "Sonic Acts Festival 2022 _ Sonic Acts Festival 2022"
   return (
 		<section className="festival">
 			<Layout page={page} menus={menus} global={global}>
-				<Hero relations={relations}/>
-				<Landing page={page}/>
+        <div className="festival-hero-bg">
+					<div className={`title`}>
+						<div className={`layer1`}>
+							{(text).split("").map(function(char, index){
+							return <span className={``} aria-hidden="true" key={index}>{char}</span>;
+							})}
+						</div>
+						<div className={`layer2`}>
+							{(text).split("").map(function(char, index){
+							return <span className={`letter`} aria-hidden="true" key={index}>{char}</span>;
+							})}
+						</div>
+						<div className={`layer3`}>
+							{(text).split("").map(function(char, index){
+							return <span className={``} aria-hidden="true" key={index}>{char}</span>;
+							})}
+						</div>
+					</div>
+				</div>
+        <div className="content-wrapper">
+          <Hero relations={relations}/>
+          <br/>
+          <Landing page={page}/>
+        </div>
 			</Layout>
 		</section>
   )

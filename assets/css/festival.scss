@@ -29,18 +29,6 @@
 	z-index: -1;
 }
 
-iframe{
-	transition: opacity 0.4s ease-in-out;
-}
-
-.false iframe {
-	opacity: 0;
-}
-
-.false iframe{
-	opacity: 1;
-}
-
 @font-face {
 	font-family: "Crystal";
 	src: url("../fonts/SONIC-CRYSTAL/Sonic-Crystal-V07VF.woff2");
@@ -110,15 +98,100 @@ iframe{
 	background: url(../noise-fes.png);
 }
 
+.festival-hero.festival-hero-type {
+	width: 100vw;
+	height: 100vh;
+	.title{
+		height: 100vh;
+		position: absolute;
+		z-index: 0;
+	}
+	.bg{
+		z-index: 999!important;
+	}
+}
+
+.festival-hero-bg {
+	width: 100vw;
+	height: 3000px;
+	position: relative;
+	.title {
+		// height: 1200px;
+		position: absolute;
+		z-index: 0;
+	}
+	div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 40vh;
+		line-height: 0.7;
+		width: 80vw;
+		padding: 50px 10vw;
+		// text-align: left;
+		// height: 100vh;
+		// overflow: hidden;
+
+		span {
+			display: inline-block;
+		}
+		&.layer1 {
+			color: rgb(255, 203, 5);
+			font-family: Crystal2, sans-serif;
+			:nth-child(6n){
+				color: #cfe7cc;
+			}
+			:nth-child(6n+1) {
+				color: rgb(255, 221, 235);
+			}
+			:nth-child(6n+2) {
+				color: #2e0e29;
+			}
+			:nth-child(6n+3) {
+				color: #974b8e;
+			}
+			:nth-child(6n+4) {
+				color: rgb(0, 82, 83);
+			}
+						
+		}
+	
+		&.layer2 {
+			color: rgb(0, 82, 83);
+			font-family: Crystal5, sans-serif;
+			:nth-child(6n) {
+				color: #974b8e;
+			}
+			:nth-child(6n+1) {
+				color: rgb(255, 203, 5);
+			}
+			:nth-child(6n+2) {
+				color: #cfe7cc;
+			}
+			:nth-child(6n+3) {
+				color: rgb(255, 221, 235);
+			}
+			:nth-child(6n+4) {
+				color: #2e0e29;
+			}
+
+		}
+	
+		&.layer3 {
+			color: white;
+			font-family: Grime, sans-serif;
+		}
+	}
+}
+
+.content-wrapper{
+	position: absolute;
+	z-index: 1;
+	top: 80px;
+}
+
 .festival{
 	background-color: #7A868E;
-	iframe{
-		width: 100vw;
-		height: 100vh;
-		border: none;
-		position: absolute;
-		z-index: -1;
-	}
 	.menu .menu-wrapper{
 		background-color: transparent;
 		border-bottom: 0;
@@ -141,40 +214,19 @@ iframe{
 		background-color: #7A868E;
 	}
 	.festival-hero-wrapper{
-		position: relative;
-		height: 100vh;
+		// position: relative;
+		// width: 100%;
+		// height: 1600px;
 	}
 	.festival-hero{
-		position: absolute;
-		top: 0;
-		z-index: 8;
-		height: 100vh;
-		width: 100vw;
-		left: 0;
-		background-color: #7A868E;
-		.slick-slider{
-			padding: 0;
-			.slick-slide{
-				width: 100vw;
-				height: 100vh;
-				margin-right: 0;
-			}
-			.slick-list{
-				&:before{
-					width: 10vw;
-					background: none;
-					background-size: cover;
-				}
-				&:after {
-					width: 10vw;
-					background: none;
-					background-size: cover;
-				}
-			}
-		}
+		// background-color: #7A868E;
+		// top: 80px;
+		// z-index: 0;
+		// position: absolute;
+		background-color: transparent;
 		.bg{
 			top: 0;
-			position: absolute;
+			position: fixed;
 			width: 100vw;
 			height: 100vh;
 			z-index: -1;
@@ -185,12 +237,8 @@ iframe{
 			}
 		}
 		.wrapper{
-			top: 0;
 			width: 100%;
-			position: absolute;
-			height: 100vh;
-			display: flex;
-			flex-direction: column;
+			border-top: 4px solid black;
 		}
 		.title{
 			position: relative;
@@ -199,8 +247,8 @@ iframe{
 				height: calc(100vh + 30vh);
 			}
 			&.title_2 div {
-				margin-top: -50vh;
-				height: calc(100vh + 50vh);
+				margin-top: -45vh;
+				height: calc(100vh + 45vh);
 			}
 			div{
 				position: absolute;
@@ -221,49 +269,50 @@ iframe{
 					// }
 				}
 				&.layer1{
-					color: rgb(255,221,235);
+					color: rgb(255, 203, 5);
 					&.layer1_0 {
-						font-family: Crystal3, sans-serif;
+						font-family: Grime3, sans-serif;
 						font-weight: 100;
 					}
 					&.layer1_1 {
-						color: rgb(70, 0, 61);
+						color: rgb(0, 82, 83);;
 						// color: rgb(255, 221, 235);
-						font-family: Crystal6, sans-serif;
+						font-family: Crystal3, sans-serif;
 						font-weight: 100;
 					}
 					&.layer1_2{
-						color: rgb(255, 203, 5);
-						font-family: Grime3, sans-serif;
+						color: rgb(255, 221, 235);
+						font-family: Crystal6, sans-serif;
 						font-weight: 100;
 					}
 				}
 				&.layer2 {
 					color: rgb(0,82,83);
 					&.layer2_0 {
-						font-family: Crystal2, sans-serif;
+						font-family: Grime2, sans-serif;
 					}
 					&.layer2_1 {
-						font-family: Crystal5, sans-serif;
-						color: rgb(255, 221, 235);
+						font-family: Crystal2, sans-serif;
+						color: #cfe7cc;
 						// color:rgb(255,203,5);
 					}
 					&.layer2_2 {
-						font-family: Grime2, sans-serif;
+						font-family: Crystal5, sans-serif;
+						color: #2e0e29;
 					}
 				}
 				&.layer3 {
 					color: white;
 					&.layer3_0 {
-						font-family: Crystal, sans-serif;
+						font-family: Grime, sans-serif;
 						font-weight: 100;
 					}
 					&.layer3_1 {
-						font-family: Crystal4, sans-serif;
+						font-family: Crystal, sans-serif;
 						font-weight: 100;
 					}
 					&.layer3_2 {
-						font-family: Grime, sans-serif;
+						font-family: Crystal4, sans-serif;
 						font-weight: 100;
 					}
 				}
@@ -273,37 +322,27 @@ iframe{
 			font-weight: 500;
 			font-size: 10vw;
 			line-height: 1;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			height: 100vh;
 			h1{
-				font-size: 10vw;
+				font-size: 8vw;
 				font-weight: 900;
 				text-transform: uppercase;
-				padding: 0 24px;
-				margin-top: 80px;
-			}
-			.locations-wrapper{
-				// font-size: 6vw;
-				font-size: 2vw;
-				line-height: 1.5;
-				.title-text{
-					padding: 0 24px;
-				}
+				padding: 24px 0px 12px 0px;
 			}
 			.date{
-					// font-size: 6vw;
-					font-size: 2vw;
-					padding: 0 24px;
+					font-size: 4vw;
+					padding: 0;
+					padding-left: 2vw;
+					line-height: 1.2;
 			}
 			.locations {
-				border-top: 2px solid black;
-				background-color: #7A868E;
+				margin-top: 24px;
+				border-top: 4px solid black;
+				// background-color: #7A868E;
 				display: flex;
-				font-size: 2vw;
+				font-size: 2.5vw;
 				line-height: 1.1;
-				padding: 24px 24px;
+				padding: 0px 24px;
+				padding: 2vw;
 				.location{
 					margin-right: 3vw;
 				}
