@@ -1,0 +1,103 @@
+@media only screen and (max-width: 1100px) {
+	.festival {
+		.content-wrapper {
+			top: 650px;
+		}
+
+		.text-block.small {
+			width: 100%;
+
+			p {
+				padding-right: 0;
+			}
+		}
+
+		.article .image.small {
+			max-width: 100%;
+		}
+
+		.Collapsible {
+			.text-block {
+				max-width: 100%;
+			}
+		}
+
+		.festival-hero-bg {
+			.title{
+				top: 600px;
+			}
+			div{
+				font-size: 20vh;
+			}
+		}
+
+		.festival-hero {
+
+
+			.info {
+				padding: 0;
+
+				h1 {
+					margin-top: 10px;
+					font-size: 16vw;
+					padding: 0px 12px;
+				}
+
+				.date {
+					font-size: 36px;
+					padding: 0px 12px;
+				}
+
+				.locations-wrapper {
+					font-size: 36px;
+					.title-text {
+						padding-left: 12px;
+					}
+				}
+
+				.locations {
+					flex-wrap: wrap;
+					font-size: 24px;
+					.location {
+						margin: 10px 0;
+						width: 45%;
+					}
+				}
+			}
+		}
+		.intro-text {
+			width: 100%;
+			position: absolute;
+			z-index: 99;
+			flex-direction: column-reverse;
+			div {
+				&:first-child {
+					width: 100%;
+				}
+
+				&:last-child {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.festival {
+		.menu{
+			.menu-wrapper {
+				.breadcrumbs {
+					margin-top: 0px;
+				}
+			}
+		}
+		.festival-hero{
+			.bg{
+					background-image: url('../noise-fes2.png');
+					background-position: top left;
+					background-size: cover;
+			}
+		}
+	}
+}

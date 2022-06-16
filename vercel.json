@@ -3,6 +3,12 @@
     { "source": "/portal", "destination": "https://portal.sonicacts.com/portal", "permanent": true },
 		{ "source": "/portal/:path*", "destination": "https://portal.sonicacts.com/portal/:path*", "permanent": true },
 		{ "source": "/sashop", "destination": "https://shop.sonicacts.com/", "permanent": true },
-		{ "source": "/sashop/:path*", "destination": "https://shop.sonicacts.com/:path*", "permanent": true }
+		{ "source": "/sashop/:path*", "destination": "https://shop.sonicacts.com/:path*", "permanent": true },
+		{ "source": "/darkecology", "destination": "https://portal.sonicacts.com/darkecology", "permanent": true },
+		{ "source": "/darkecology/:path*", "destination": "https://portal.sonicacts.com/darkecology/:path*", "permanent": true },
+		{ "source": "/2017", "destination": "https://portal.sonicacts.com/2017", "permanent": true },
+		{ "source": "/2017/:path*", "destination": "https://portal.sonicacts.com/2017/:path*", "permanent": true },
+		{ "source": "/2018", "destination": "https://portal.sonicacts.com/2018", "permanent": true },
+		{ "source": "/2018/:path*", "destination": "https://portal.sonicacts.com/2018/:path*", "permanent": true }
   ]
 }

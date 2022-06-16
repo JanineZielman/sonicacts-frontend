@@ -94,8 +94,8 @@
 }
 
 
-.festival.menu-modal {
-	background: url(../noise-fes.png);
+.biennial-2022.menu-modal {
+	background-image: url(../noise-fes.png);
 }
 
 .festival-hero.festival-hero-type {
@@ -113,11 +113,11 @@
 
 .festival-hero-bg {
 	width: 100vw;
-	height: 120vw;
+	height: 250vh;
 	position: relative;
 	overflow: hidden;
 	.title {
-		height: 100vw;
+		height: 250vh;
 		position: absolute;
 		z-index: 0;
 		top: 350px;
@@ -190,11 +190,6 @@
 	}
 }
 
-.content-wrapper{
-	position: absolute;
-	z-index: 1;
-	top: 450px;
-}
 
 .festival{
 	background-color: rgb(180,200,200);
@@ -204,16 +199,18 @@
 	left: 0;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	.content-wrapper {
+		position: absolute;
+		z-index: 1;
+		top: 450px;
+		width: 98vw;
+		left: 1vw;
+	}
 	.menu .menu-wrapper{
 		background-color: transparent;
 		border-bottom: 0;
 		position: absolute;
-		// padding: 0;
 		.breadcrumbs{
-			// display: none;
-			// a {
-			// 	display: none;
-			// }
 			.logo-wrapper a{
 				display: block;
 			}
@@ -226,10 +223,6 @@
 		background-color: rgb(180, 200, 200);
 	}
 	.festival-hero{
-		// background-color: #7A868E;
-		// top: 80px;
-		// z-index: 0;
-		// position: absolute;
 		background-color: transparent;
 		.bg{
 			top: 0px;
@@ -239,12 +232,6 @@
 			z-index: -1;
 			background-image: url('../fes-noise.svg');
 			background-position: top left;
-			// img{
-			// 	width: 100vw;
-			// 	height: 100vh;
-			// 	object-fit: cover;
-			// 	object-position: top left;
-			// }
 		}
 		.wrapper{
 			width: 100%;
