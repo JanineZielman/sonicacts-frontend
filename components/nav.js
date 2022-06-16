@@ -23,7 +23,7 @@ const Nav = ({ menus, global, page }) => {
             </a>
           </div>
           <a href={'/' + page?.attributes?.slug}>
-            {page.attributes?.slug}
+            {page.attributes?.slug.replace('-', ' ')}
           </a>
         </div>
         <Menu menus={menus} page={page}/>

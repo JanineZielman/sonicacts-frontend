@@ -113,10 +113,11 @@
 
 .festival-hero-bg {
 	width: 100vw;
-	height: 3000px;
+	height: 100vw;
 	position: relative;
+	overflow: hidden;
 	.title {
-		// height: 1200px;
+		height: 100vw;
 		position: absolute;
 		z-index: 0;
 	}
@@ -192,6 +193,12 @@
 
 .festival{
 	background-color: #7A868E;
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	left: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	.menu .menu-wrapper{
 		background-color: transparent;
 		border-bottom: 0;
@@ -199,9 +206,9 @@
 		// padding: 0;
 		.breadcrumbs{
 			// display: none;
-			a {
-				display: none;
-			}
+			// a {
+			// 	display: none;
+			// }
 			.logo-wrapper a{
 				display: block;
 			}
@@ -352,6 +359,7 @@
 	.article{
 		display: flex;
 		flex-wrap: wrap;
+		background-color: #7A868E;
 		.image.small, .image.medium{
 			padding-left: 0;
 		}
@@ -381,5 +389,8 @@
 			padding-left: 0;
 			padding-right: 100px;
 		}
+	}
+	.footer{
+		display: none;
 	}
 }

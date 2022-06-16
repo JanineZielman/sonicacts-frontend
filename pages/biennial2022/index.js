@@ -5,7 +5,8 @@ import Landing from "./landing"
 import Hero from "./hero"
 
 const Festival = ({ menus, global, page, relations }) => {
-	const text = "Sonic Acts Festival 2022 _ Sonic Acts Festival 2022"
+	const text = "Sonic Acts Biennial 2022 _ Sonic Acts Biennial 2022"
+
   return (
 		<section className="festival">
 			<Layout page={page} menus={menus} global={global}>
