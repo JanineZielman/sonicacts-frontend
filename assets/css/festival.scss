@@ -18,7 +18,7 @@
 	&:nth-child(5n) {
 		animation-delay: 5s;
 	}
-	animation: textAnimation 5s infinite ease-in-out alternate;
+	animation: textAnimation 10s infinite ease-in-out alternate;
 }
 
 .type img{
@@ -28,6 +28,7 @@
 	object-fit: cover;
 	z-index: -1;
 }
+
 
 @font-face {
 	font-family: "Crystal";
@@ -401,5 +402,28 @@
 				width: 70%;
 			}
 		}
+	}
+	.type .letter {
+		animation: textAnimation2 10s 2 ease-in-out;
+		div{
+			font-size: 40vw;
+		}
+	}
+}
+
+@keyframes textAnimation2 {
+	0% {
+		font-variation-settings: 'wght' 100;
+		-moz-font-variation-settings: 'wght' 100;
+	}
+
+	50% {
+		font-variation-settings: 'wght' 60;
+		-moz-font-variation-settings: 'wght' 60;
+	}
+
+	100% {
+		font-variation-settings: 'wght' 100;
+		-moz-font-variation-settings: 'wght' 100;
 	}
 }
