@@ -88,6 +88,15 @@ html {
       font-feature-settings: "ss03" on;
     }
   }
+  .glitch:before {
+    animation: noise-anim-small 30s infinite ease-in-out alternate;
+    animation-delay: var(--delay);
+  }
+
+  .glitch:after {
+    animation: noise-anim-small-2 30s infinite ease-in-out alternate;
+    animation-delay: var(--delay);
+  }
 }
 
 .glitch {
@@ -99,17 +108,27 @@ html {
   width: auto;
   margin: -18px auto;
   display: inline-block;
-  // transition-delay: var(--delay);
-  // transition: all var(--delay) ease-in-out;
+  transition-delay: var(--delay);
+  transition: all var(--delay) ease-in-out;
   span{
     display: inline-block;
   }
 }
 @keyframes noise-anim {
-  $steps: 20;
+  $steps: 15;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(120) + px, 600px, random(120) + px, 0);
+      clip: rect(random(135) + px, 700px, random(135) + px, 0);
+    }
+  }
+}
+
+@keyframes noise-anim-small {
+  $steps: 15;
+
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(100) + px, 100px, random(100) + px, 0);
     }
   }
 }
@@ -129,10 +148,20 @@ html {
 }
 
 @keyframes noise-anim-2 {
-  $steps: 20;
+  $steps: 15;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(120) + px, 600px, random(120) + px, 0);
+      clip: rect(random(135) + px, 600px, random(135) + px, 0);
+    }
+  }
+}
+
+@keyframes noise-anim-small-2 {
+  $steps: 15;
+
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(100) + px, 100px, random(100) + px, 0);
     }
   }
 }
@@ -457,8 +486,9 @@ h2 {
   width: 100vw;
   max-width: 1400px;
   background-color: #e6e6e6;
-  background: url('../noise-bg5.png');
-  background-position: right;
+  background: url(../noise-fes.png);
+  // background: url('../noise-bg5.png');
+  background-position: top right;
   background-size: cover;
   background-repeat: no-repeat;
   .close {
