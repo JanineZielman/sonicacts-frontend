@@ -407,8 +407,12 @@
 		animation: textAnimation2 10s 2 ease-in-out;
 	}
 	.type{
+		.title{
+			top: 0!important;
+			font-size: 35vw !important;
+		}
 		div {
-			font-size: 35vw;
+			top: 0 !important;
 		}
 	}
 }
