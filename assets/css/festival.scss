@@ -405,8 +405,10 @@
 	}
 	.type .letter {
 		animation: textAnimation2 10s 2 ease-in-out;
-		div{
-			font-size: 40vw;
+	}
+	.type{
+		div {
+			font-size: 35vw;
 		}
 	}
 }
