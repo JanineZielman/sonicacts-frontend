@@ -3,13 +3,19 @@ import Layout from "../../components/layout"
 import { fetchAPI } from "../../lib/api"
 import Landing from "./landing"
 import Hero from "./hero"
+import ReactMarkdown from "react-markdown";
 
 const Festival = ({ menus, global, page, relations }) => {
 	const text = "Sonic Acts Biennial 2022 _ Sonic Acts Biennial 2022"
 
   return (
+		<>
 		<section className="festival">
 			<Layout page={page} menus={menus} global={global}>
+				<div className="intro-text">
+					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
+					<div><p>{page.attributes.IntroText}</p></div>
+				</div>
         <div className="festival-hero-bg">
 					<div className={`title`}>
 						<div className={`layer1`}>
@@ -36,6 +42,7 @@ const Festival = ({ menus, global, page, relations }) => {
         </div>
 			</Layout>
 		</section>
+				</>
   )
 }
 
