@@ -96,7 +96,8 @@
 
 
 .biennial-2022.menu-modal {
-	background-image: url(../noise-fes.png);
+	background-image: url('../noise-bg5.png');
+	// background-image: url(../noise-fes.png);
 }
 
 .festival-hero.festival-hero-type {
@@ -121,7 +122,7 @@
 		height: 250vh;
 		position: absolute;
 		z-index: 0;
-		top: 350px;
+		top: 450px;
 	}
 	div {
 		position: absolute;
@@ -203,7 +204,7 @@
 	.content-wrapper {
 		position: absolute;
 		z-index: 1;
-		top: 450px;
+		top: 500px;
 		width: 98vw;
 		left: 1vw;
 	}
@@ -211,7 +212,15 @@
 		background-color: transparent;
 		border-bottom: 0;
 		position: absolute;
+		.logo-small .glitch{
+			font-size: 4vw;
+		}
 		.breadcrumbs{
+			position: absolute;
+			top: calc(250px + 4vw);
+			a{
+				font-size: 4vw;
+			}
 			.logo-wrapper a{
 				display: block;
 			}
@@ -249,7 +258,7 @@
 				height: calc(100vh + 30vh);
 			}
 			&.title_2 div {
-				margin-top: -45vh;
+				margin-top: -15vh;
 				height: calc(100vh + 45vh);
 			}
 			div{
@@ -300,7 +309,7 @@
 					}
 					&.layer2_2 {
 						font-family: Crystal5, sans-serif;
-						color: #4b0542;
+						color: #974b8e;
 					}
 				}
 				&.layer3 {
@@ -405,6 +414,7 @@
 		left: 2vw;
 		display: flex;
 		align-items: flex-start;
+		top: 0;
 		div{
 			a{
 				color: black;
