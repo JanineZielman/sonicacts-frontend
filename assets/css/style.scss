@@ -108,8 +108,8 @@ html {
   width: auto;
   margin: -18px auto;
   display: inline-block;
-  transition-delay: var(--delay);
-  transition: all var(--delay) ease-in-out;
+  // transition-delay: var(--delay);
+  // transition: all var(--delay) ease-in-out;
   span{
     display: inline-block;
   }
