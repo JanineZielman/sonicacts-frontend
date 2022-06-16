@@ -148,7 +148,7 @@
 				color: rgb(255, 221, 235);
 			}
 			:nth-child(6n+2) {
-				color: #2e0e29;
+				color: #4b0542;
 			}
 			:nth-child(6n+3) {
 				color: #974b8e;
@@ -175,7 +175,7 @@
 				color: rgb(255, 221, 235);
 			}
 			:nth-child(6n+4) {
-				color: #2e0e29;
+				color: #4b0542;
 			}
 
 		}
@@ -300,7 +300,7 @@
 					}
 					&.layer2_2 {
 						font-family: Crystal5, sans-serif;
-						color: #2e0e29;
+						color: #4b0542;
 					}
 				}
 				&.layer3 {
@@ -325,7 +325,8 @@
 			line-height: 1;
 			h1{
 				font-size: 8vw;
-				font-weight: 900;
+				font-weight: 500;
+				line-height: 1;
 				text-transform: uppercase;
 				padding: 24px 0px 12px 0px;
 			}
@@ -333,11 +334,11 @@
 					font-size: 4vw;
 					padding: 0;
 					padding-left: 2vw;
-					line-height: 1.2;
+					line-height: 1.1;
 					text-transform: uppercase;
 			}
 			.locations {
-				margin-top: 0px;
+				margin-top: 20px;
 				text-transform: uppercase;
 				border-top: 3px solid black;
 				// background-color: rgb(180,200,200);
