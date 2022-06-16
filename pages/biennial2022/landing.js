@@ -12,7 +12,7 @@ const Landing = ({page }) => {
 			return(
 				<>
 					{item.image?.data &&
-						<LazyLoad height={600}>
+					<div>
 							{item.image_caption ?
 								<div className="columns" key={'column'+i}>
 									<div className="caption">
@@ -29,7 +29,7 @@ const Landing = ({page }) => {
 									<Image image={item.image.data.attributes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8VQ8AAnkBewKPWHQAAAAASUVORK5CYII="/>
 								</div>
 							}
-						</LazyLoad>
+						</div>
 					}
 					{item.sidenote && 
 						<div className={'sidenote ' + item.size}>
@@ -48,7 +48,7 @@ const Landing = ({page }) => {
 					}
 					{item.__component == 'basic.collapsible' &&
 						<div className="collapsible about">
-							<Collapsible trigger={item.title}>
+							<Collapsible trigger={item.title} open={item.open == true && item.open}>
 								<div className={'text-block ' + item.text?.size} key={'textcol'+i}>
 									<ReactMarkdown 
 										children={item.text?.text_block} 

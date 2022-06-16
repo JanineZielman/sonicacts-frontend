@@ -1,11 +1,11 @@
 const Type = () => {
-	const text = "Sonic Acts Festival 2022 _ Sonic Acts Festival 2022"
+	const text = "Sonic Acts Biennial 2022 _ Sonic Acts Biennial 2022"
 	return(
 		<section className="festival">
 			<div className="festival-hero festival-hero-type">
-				<div className='bg'>
+				{/* <div className='bg'>
 					<img src="/fes-noise.svg" />
-				</div>
+				</div> */}
 				<div className={`title title_0`}>
 					<div className={`layer1 layer1_0`}>
 						{(text).split("").map(function(char, index){

@@ -1,17 +1,13 @@
 import Moment from 'moment';
 
 const Hero = ({relations }) => {
-	const text = "Sonic Acts Festival 2022 _ Sonic Acts Festival 2022"
-
   return (
 		<>
 			<div className="festival-hero">
 				{relations.attributes.festival?.map((item, i) => {
 					return(
 						<div className={`wrapper type`} >
-							<div className='bg'>
-								<img src="/fes-noise.svg" />
-							</div>
+							<div className='bg'></div>
 							<div className="info">
 								<div>
 									<h1>{item.title}</h1>
