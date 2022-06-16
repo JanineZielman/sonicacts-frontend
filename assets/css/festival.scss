@@ -204,7 +204,7 @@
 	.content-wrapper {
 		position: absolute;
 		z-index: 1;
-		top: 500px;
+		top: calc(400px + 4vw);
 		width: 98vw;
 		left: 1vw;
 	}
@@ -217,7 +217,7 @@
 		}
 		.breadcrumbs{
 			position: absolute;
-			top: calc(250px + 4vw);
+			top: 375px;
 			a{
 				font-size: 4vw;
 			}

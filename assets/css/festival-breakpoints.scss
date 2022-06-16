@@ -22,6 +22,21 @@
 			}
 		}
 
+		.menu {
+			.menu-wrapper {
+				.breadcrumbs {
+					margin-top: 0px;
+					top: 550px;
+					a{
+						font-size: 64px;
+					}
+					.logo-small .glitch {
+						font-size: 64px;
+					}
+				}
+			}
+		}
+
 		.festival-hero-bg {
 			.title{
 				top: 600px;
@@ -58,10 +73,6 @@
 				.locations {
 					flex-wrap: wrap;
 					font-size: 24px;
-					.location {
-						margin: 10px 0;
-						width: 45%;
-					}
 				}
 			}
 		}
@@ -89,8 +100,22 @@
 			.menu-wrapper {
 				.breadcrumbs {
 					margin-top: 0px;
+					top: 0;
+					a {
+						font-size: 36px;
+					}
+				
+					.logo-small .glitch {
+						font-size: 36px;
+					}
 				}
 			}
+		}
+		.intro-text {
+			top: 60px;
+		}
+		.content-wrapper{
+			top: 600px;
 		}
 		.festival-hero{
 			.bg{
