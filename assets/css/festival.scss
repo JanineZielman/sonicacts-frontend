@@ -126,9 +126,9 @@
 	}
 	div {
 		position: absolute;
-		top: 0;
+		top: -200px;
 		left: 0;
-		font-size: 40vh;
+		font-size: 50vh;
 		line-height: 0.7;
 		width: 80vw;
 		padding: 50px 10vw;
@@ -146,22 +146,22 @@
 				color: #cfe7cc;
 			}
 			:nth-child(6n+1) {
-				color: rgb(255, 221, 235);
+				color: rgb(255, 190, 255);
 			}
 			:nth-child(6n+2) {
-				color: #4b0542;
+				color: rgb(255,255,0);
 			}
 			:nth-child(6n+3) {
-				color: #974b8e;
+				color: rgb(0, 0, 255);
 			}
 			:nth-child(6n+4) {
-				color: rgb(0, 82, 83);
+				color: #974b8e;
 			}
 						
 		}
 	
 		&.layer2 {
-			color: rgb(0, 82, 83);
+			color: rgb(0, 0, 255);
 			font-family: Crystal5, sans-serif;
 			:nth-child(6n) {
 				color: #974b8e;
@@ -173,10 +173,10 @@
 				color: #cfe7cc;
 			}
 			:nth-child(6n+3) {
-				color: rgb(255, 221, 235);
+				color: rgb(255, 190, 255);
 			}
 			:nth-child(6n+4) {
-				color: #4b0542;
+				color: rgb(255, 255, 0);
 			}
 
 		}
@@ -246,7 +246,8 @@
 		.wrapper{
 			width: 100%;
 			border-top: 6px solid black;
-			margin-top: 48px;
+			margin-top: 24px;
+			padding-top: 10px;
 			&:first-child{
 				margin-top: 0px;
 			}
@@ -292,13 +293,13 @@
 						font-weight: 100;
 					}
 					&.layer1_2{
-						color: rgb(255, 221, 235);
+						color: rgb(255, 190, 255);
 						font-family: Crystal6, sans-serif;
 						font-weight: 100;
 					}
 				}
 				&.layer2 {
-					color: rgb(0,82,83);
+					color: rgb(0,0,255);
 					&.layer2_0 {
 						font-family: Grime2, sans-serif;
 					}
@@ -337,7 +338,8 @@
 				font-weight: 500;
 				line-height: 1;
 				text-transform: uppercase;
-				padding: 24px 0px 12px 0px;
+				// padding: 24px 0px 12px 0px;
+				padding: 14px 2vw 0 2vw;
 			}
 			.date{
 					font-size: 4vw;
@@ -347,14 +349,13 @@
 					text-transform: uppercase;
 			}
 			.locations {
-				margin-top: 20px;
 				text-transform: uppercase;
-				border-top: 3px solid black;
+				// border-top: 3px solid black;
 				// background-color: rgb(180,200,200);
 				display: flex;
 				font-size: 2.5vw;
 				line-height: 1.1;
-				padding: 14px 2vw;
+				padding: 7px 2vw 0 2vw;
 				.location{
 					margin-right: 20px;
 					&:after{
@@ -371,6 +372,7 @@
 		}
 	}
 	.article{
+		border-top: 6px solid black;
 		display: flex;
 		flex-wrap: wrap;
 		background-color: rgb(180, 200, 200);
