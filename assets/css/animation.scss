@@ -1,5 +1,8 @@
 .big-animation{
 	background-color: black;
+	&.smaller{
+		background-color: transparent;
+	}
 	@keyframes noise-anim {
 		$steps: 10;
 
@@ -18,6 +21,7 @@
 			}
 		}
 	}
+	
 	.glitch{
 		color: white;
 		font-size: 24vw;
@@ -26,6 +30,7 @@
 		background-color: black;
 		color: white;
 	}
+
 	.logo{
 		position: relative;
 		margin-top: 5vw;
@@ -35,8 +40,27 @@
 		z-index: 9;
 	}
 	.logo .s2{
-		top: 20vw;
+		top: 22vw;
 		z-index: 0;
+	}
+
+	&.smaller {
+		.glitch {
+			color: black;
+			font-size: 135px;
+		}
+		.glitch:before,
+		.glitch:after {
+			// background-color: #e6e6e6;
+			color: black;
+		}
+		.logo {
+			margin-bottom: 30vw;
+			margin-left: 0;
+			.s2 {
+				top: 120px;
+			}
+		}
 	}
 	
 }

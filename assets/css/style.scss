@@ -57,18 +57,21 @@ html {
 }
 
 .logo {
-  position: relative;
+  // position: relative!important;
+  // min-height: 300px;
+  margin-top: -20px;
   h1 {
     font-family: "Sonic Logo";
     font-weight: 300;
+    font-size: 135px;
   }
   .s1{
     position: absolute;
-    // z-index: 1;
+    // z-index: 9;
   }
   .s2{
     position: absolute;
-    top: 120px;
+    top: 140px;
     z-index: 0;
   }
 }
@@ -103,22 +106,26 @@ html {
   color: #000;
   font-family: "Sonic Logo";
   font-size: 135px;
+  line-height: 0.8;
   font-feature-settings: "ss01" on;
-  position: relative;
+  position: relative!important;
   width: auto;
-  margin: -18px auto;
+  margin: auto auto;
+  margin-bottom: 10vh;
   display: inline-block;
+  height: 110px;
+  // border: 1px solid red;
   // transition-delay: var(--delay);
   // transition: all var(--delay) ease-in-out;
-  span{
-    display: inline-block;
-  }
+  // span{
+  //   display: inline-block;
+  // }
 }
 @keyframes noise-anim {
   $steps: 15;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(135) + px, 700px, random(135) + px, 0);
+      clip: rect(random(135) + px, 300px, random(135) + px, 0);
     }
   }
 }
@@ -137,13 +144,14 @@ html {
   position: absolute;
   font-feature-settings: "ss02" on;
   left: 0px;
-  top: 0px;
+  top: 0;
   // color: #e6e6e6;
   color: #000;
   background: #e6e6e6;
-  overflow: hidden;
+  // background-color: red;
+  // overflow: hidden;
   clip: rect(0, 300px, 0, 0);
-  animation: noise-anim 30s infinite ease-in-out alternate;
+  animation: noise-anim-3 30s infinite ease-in-out alternate;
   animation-delay: var(--delay);
 }
 
@@ -151,7 +159,17 @@ html {
   $steps: 15;
   @for $i from 0 through $steps {
     #{percentage($i*(1/$steps))} {
-      clip: rect(random(135) + px, 600px, random(135) + px, 0);
+      clip: rect(random(135) + px, 300px, random(135) + px, 0);
+    }
+  }
+}
+
+@keyframes noise-anim-3 {
+  $steps: 15;
+
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      clip: rect(random(135) + px, 300px, random(135) + px, 0);
     }
   }
 }
@@ -170,11 +188,13 @@ html {
   position: absolute;
   font-feature-settings: "ss02" on;
   left: 0px;
-  top: 0px;
+  top: 0;
+  // z-index:9;
   color: black;
   // background: transparent;
   background: #e6e6e6;
-  overflow: hidden;
+  // background-color: blue;
+  // overflow: hidden;
   clip: rect(0, 300px, 0, 0);
   animation: noise-anim-2 30s infinite ease-in-out alternate;
   animation-delay: var(--delay);
