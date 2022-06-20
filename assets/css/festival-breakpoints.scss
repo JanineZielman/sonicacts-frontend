@@ -5,15 +5,20 @@
 		}
 
 		.text-block.small {
-			width: 100%;
+			width: 94vw;
 
 			p {
 				padding-right: 0;
+				padding-left: 3vw!important;
 			}
 		}
 
 		.article .image.small {
 			max-width: 100%;
+		}
+
+		.article h1{
+			font-size: 30px;
 		}
 
 		.Collapsible {
@@ -56,6 +61,7 @@
 					margin-top: 10px;
 					font-size: 16vw;
 					padding: 0px 12px;
+					word-wrap: break-word;
 				}
 
 				.date {
