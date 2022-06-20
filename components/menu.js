@@ -54,6 +54,9 @@ const Menu = ({ menus, page }) => {
           
               )
             })}
+             {/* <a href={'/biennial2022'} className="menu-link festival-link">
+              Biennial 2022
+            </a> */}
           </div>
            <div className="menu-search">
             <Search params={''}/>
