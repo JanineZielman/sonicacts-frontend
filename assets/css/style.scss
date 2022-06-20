@@ -87,6 +87,7 @@ html {
   .glitch{
     font-size: 64px;
     font-feature-settings: "ss02" on;
+    height: 30px;
     &:before, &:after{
       font-feature-settings: "ss03" on;
     }
@@ -111,7 +112,7 @@ html {
   position: relative!important;
   width: auto;
   margin: auto auto;
-  margin-bottom: 10vh;
+  // margin-bottom: 10vh;
   display: inline-block;
   height: 110px;
   // border: 1px solid red;
