@@ -12,19 +12,7 @@ const DiscoverItem = ({menus, page, global, relations}) => {
 }
 
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/discover-items");
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({ params, preview = null }) {
+export async function getServerSideProps({params, preview = null}) {
   const pageRes = 
     await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
@@ -32,6 +20,7 @@ export async function getStaticProps({ params, preview = null }) {
   const pageRel = 
     await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
+  
 
   const [menusRes, globalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),
@@ -43,8 +32,7 @@ export async function getStaticProps({ params, preview = null }) {
       menus: menusRes.data, 
       page: pageRes.data[0], 
       global: globalRes.data, 
-      relations: pageRel.data[0],
-      preview,
+      relations: pageRel.data[0] 
     },
   };
 }
