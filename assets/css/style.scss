@@ -505,12 +505,12 @@ h2 {
   top: 0;
   right: 0;
   width: 100vw;
-  max-width: 1400px;
+  // max-width: 1400px;
   background-color: #e6e6e6;
   background: url(../noise-fes.png);
   // background: url('../noise-bg5.png');
   background-position: top right;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   .close {
     cursor: pointer;
