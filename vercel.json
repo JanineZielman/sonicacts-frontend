@@ -9,6 +9,8 @@
 		{ "source": "/2017", "destination": "https://portal.sonicacts.com/2017", "permanent": true },
 		{ "source": "/2017/:path*", "destination": "https://portal.sonicacts.com/2017/:path*", "permanent": true },
 		{ "source": "/2018", "destination": "https://portal.sonicacts.com/2018", "permanent": true },
-		{ "source": "/2018/:path*", "destination": "https://portal.sonicacts.com/2018/:path*", "permanent": true }
+		{ "source": "/2018/:path*", "destination": "https://portal.sonicacts.com/2018/:path*", "permanent": true },
+
+		{ "source": "/biennial-2022", "destination": "/biennial2022", "permanent": true }
   ]
 }
