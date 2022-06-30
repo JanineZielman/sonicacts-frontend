@@ -26,7 +26,7 @@ const Nav = ({ menus, global, page }) => {
             {page.attributes?.slug.replace('-', ' ')}
           </a>
         </div>
-        <Menu menus={menus} page={page}/>
+        <Menu menus={menus} page={page} global={global}/>
       </div>
     </div>
   )

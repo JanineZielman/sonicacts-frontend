@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import Modal from 'react-modal';
 import Search from '../components/search'
 
-const Menu = ({ menus, page }) => {
+const Menu = ({ menus, page, global }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -54,9 +54,11 @@ const Menu = ({ menus, page }) => {
           
               )
             })}
-             {/* <a href={'/biennial2022'} className="menu-link festival-link">
-              Biennial 2022
-            </a> */}
+            {global.attributes.festival_shown == true &&
+              <a href={'/'+ global.attributes.festival_slug} className="menu-link festival-link">
+                {global.attributes.festival_title}
+              </a>
+            }
           </div>
            <div className="menu-search">
             <Search params={''}/>

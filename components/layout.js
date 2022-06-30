@@ -33,7 +33,7 @@ const Layout = ({ children, menus, page, global, relations}) => {
           <Nav menus={menus} global={global} page={page}/>
         : 
           <>
-            <Menu menus={menus} page={page}/>
+            <Menu menus={menus} page={page} global={global}/>
             <div className="top-search">
               <Search params={''}/>
             </div>
