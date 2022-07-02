@@ -72,7 +72,7 @@ const Opencalls = ({ page, opencalls }) => {
 															}
 															{date.end_date &&
 																<>
-																&nbsp;- {Moment(date.end_date).format('D MMM y')}
+																&nbsp;–{Moment(date.end_date).format('D MMM y')}
 																</>
 															}
 														</span>
