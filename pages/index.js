@@ -49,7 +49,6 @@ const Home = ({ homepage, menus, global, items, about}) => {
     autoplaySpeed: 4000
   };
 
-
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
@@ -105,9 +104,37 @@ const Home = ({ homepage, menus, global, items, about}) => {
                                     <span className="category">{item.attributes.category.data.attributes.title}</span>
                                   }
                                   {item.attributes.date && page.attributes.slug != 'discover' &&
-                                    <span>
-                                      {Moment(item.attributes.date).format('D MMM y')}
-                                    </span>
+                                    <>
+                                      {item.attributes.dates ?
+                                        <>
+                                        <span>
+                                          {Moment(item.attributes.date).format('D MMM y')}
+                                        
+                                        {item.attributes.dates.map((date, i) => {
+                                          return(
+                                            <span className="date" key={`dates-${i}`}>
+                                              {date.single_date &&
+                                                <>
+                                                , {Moment(date.single_date).format('D MMM y')}
+                                                </>
+                                              }
+                                              {date.end_date &&
+                                                <>
+                                                &nbsp;– {Moment(date.end_date).format('D MMM y')}
+                                                </>
+                                              }
+                                            </span>
+                                          )
+                                        })}
+                                        </span>
+                                        </>
+                                      : 
+                                      <span>
+                                        {Moment(item.attributes.date).format('D MMM y')}
+                                      </span>
+                                      }
+                                    </>
+                                    
                                   }
                                   {item.attributes.title &&
                                     <h2>{item.attributes.title}</h2>
