@@ -20,6 +20,7 @@ const Layout = ({ children, menus, page, global, relations}) => {
     <>
     <Head>
       <title>{global?.attributes?.title} | {slugName}</title>
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
       <meta name="description" content={page.attributes?.introTextBig ? page.attributes?.introTextBig : page.attributes?.title ? page.attributes?.title : page.attributes?.name ? page.attributes?.name : global.attributes?.description} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={`${global?.attributes?.title} | ${slugName}`} />
