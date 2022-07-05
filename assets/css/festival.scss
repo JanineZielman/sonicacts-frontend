@@ -462,3 +462,342 @@
 		-moz-font-variation-settings: 'wght' 100;
 	}
 }
+
+
+
+
+
+.festival-hero-bg{
+	.random-color {
+		div{
+			&.layer1 {
+				color: rgb(255, 203, 5);
+				font-family: Crystal2, sans-serif;
+				animation: randomYellow2 30s infinite ease-in-out;
+				animation-delay: var(--delay);
+				animation-fill-mode: forwards;
+				:nth-child(6n) {
+					color: #cfe7cc;
+					animation: randomGreen 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+1) {
+					color: rgb(255, 190, 255);
+					animation: randomPink 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+2) {
+					color: rgb(255, 255, 0);
+					animation: randomYellow 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+3) {
+					color: rgb(0, 0, 255);
+					animation: randomBlue 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+4) {
+					color: #974b8e;
+					animation: randomPurple 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+			}
+
+			&.layer2 {
+				color: rgb(0, 0, 255);
+				font-family: Crystal5, sans-serif;
+				animation: randomBlue 30s infinite ease-in-out;
+				animation-delay: var(--delay);
+				animation-fill-mode: forwards;
+				:nth-child(6n) {
+					color: #974b8e;
+					animation: randomPurple 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+1) {
+					color: rgb(255, 203, 5);
+					animation: randomYellow2 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+2) {
+					color: #cfe7cc;
+					animation: randomGreen 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+3) {
+					color: rgb(255, 190, 255);
+					animation: randomPink 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+				:nth-child(6n+4) {
+					color: rgb(255, 255, 0);
+					animation: randomYellow 30s infinite ease-in-out;
+					animation-delay: var(--delay);
+					animation-fill-mode: forwards;
+				}
+
+			}
+
+			&.layer3 {
+				color: white;
+				font-family: Grime, sans-serif;
+			}
+		}
+	}
+
+	.random-letter{
+		// font-weight: var(--random);
+		font-weight: 100;
+	}
+
+}
+
+
+
+@keyframes randomPurple {
+	0% {
+		color: #974b8e;
+	}
+
+	12.5% {
+		color: rgb(70, 0, 61);
+	}
+
+	25% {
+		color: rgb(0, 0, 255);
+	}
+
+	37.5% {
+		color: rgb(0, 82, 83)
+	}
+
+	50% {
+		color: #cfe7cc;
+	}
+
+	62.5% {
+		color: rgb(255, 255, 20);
+	}
+
+	75% {
+		color: rgb(255, 203, 5);
+	}
+
+	87.5% {
+		color: rgb(255, 190, 255);
+	}
+
+	100% {
+		color: #974b8e;
+	}
+}
+
+@keyframes randomBlue {
+	0% {
+		color: rgb(0, 0, 255);
+	}
+
+	12.5% {
+		color: rgb(0, 82, 83);
+	}
+
+	25% {
+		color: #cfe7cc;
+	}
+
+	37.5% {
+		color: rgb(255, 255, 20);
+	}
+
+	50% {
+		color: rgb(255, 203, 5);
+	}
+
+	62.5% {
+		color: rgb(255, 190, 255);
+	}
+
+	75% {
+		color: #974b8e;
+	}
+
+	87.5% {
+		color: rgb(70, 0, 61);
+	}
+
+	100% {
+		color: rgb(0, 0, 255);
+	}
+}
+
+
+@keyframes randomYellow2 {
+	0% {
+		color: rgb(255, 203, 5);
+	}
+
+	12.5% {
+		color: rgb(255, 190, 255);
+	}
+
+	25% {
+		color: #974b8e;
+	}
+
+	37.5% {
+		color: rgb(70, 0, 61);
+	}
+
+	50% {
+		color: rgb(0, 0, 255);
+	}
+
+	62.5% {
+		color: rgb(0, 82, 83);
+	}
+
+	75% {
+		color: #cfe7cc;
+	}
+
+	87.5% {
+		color: rgb(255, 255, 20);
+	}
+
+	100% {
+		color: rgb(255, 203, 5);
+	}
+}
+
+@keyframes randomYellow {
+	0% {
+		color: rgb(255, 255, 20);
+		
+	}
+
+	12.5% {
+		color: rgb(255, 203, 5);
+	}
+
+	25% {
+		color: rgb(255, 190, 255);
+	}
+
+	37.5% {
+		color: #974b8e;
+	}
+
+	50% {
+		color: rgb(70, 0, 61);
+	}
+
+	62.5% {
+		color: rgb(0, 0, 255);
+	}
+
+	75% {
+		color: rgb(0, 82, 83);
+	}
+
+	87.5% {
+		color: #cfe7cc;
+	}
+
+	100% {
+		color: rgb(255, 255, 20);
+	}
+}
+
+@keyframes randomPink {
+	0% {
+		color: rgb(255, 190, 255);
+	}
+
+	12.5% {
+		color: #974b8e;
+	}
+
+	25% {
+		color: rgb(70, 0, 61);
+	}
+
+	37.5% {
+		color: rgb(0, 0, 255);
+	}
+
+	50% {
+		color: rgb(0, 82, 83);
+	}
+
+	62.5% {
+		color: #cfe7cc;
+	}
+
+	75% {
+		color: rgb(255, 255, 20);
+	}
+
+	87.5% {
+		color: rgb(255, 203, 5);
+	}
+
+	100% {
+		color: rgb(255, 190, 255);
+	}
+}
+
+@keyframes randomGreen {
+	0% {
+		color: #cfe7cc;
+	}
+
+	12.5% {
+		color: rgb(255, 255, 20);
+	}
+
+	25% {
+		color: rgb(255, 203, 5);
+	}
+
+	37.5% {
+		color: rgb(255, 190, 255);
+	}
+
+	50% {
+		color: #974b8e;
+	}
+
+	62.5% {
+		color: rgb(70, 0, 61);
+	}
+
+	75% {
+		color: rgb(0, 0, 255);
+	}
+
+	87.5% {
+		color: rgb(0, 82, 83);
+	}
+
+	100% {
+		color: #cfe7cc;
+	}
+}
