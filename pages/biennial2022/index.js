@@ -17,20 +17,20 @@ const Festival = ({ menus, global, page, relations }) => {
 					<div><p>{page.attributes.IntroText}</p></div>
 				</div>
         <div className="festival-hero-bg">
-					<div className={`title`}>
+					<div className={`title random-color`}>
 						<div className={`layer1`}>
 							{(text).split("").map(function(char, index){
-							return <span className={``} aria-hidden="true" key={index}>{char}</span>;
+							return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
 							})}
 						</div>
 						<div className={`layer2`}>
 							{(text).split("").map(function(char, index){
-							return <span className={`letter`} aria-hidden="true" key={index}>{char}</span>;
+							return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 50) + 50 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
 							})}
 						</div>
 						<div className={`layer3`}>
 							{(text).split("").map(function(char, index){
-							return <span className={``} aria-hidden="true" key={index}>{char}</span>;
+							return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 )}}>{char}</span>;
 							})}
 						</div>
 					</div>
