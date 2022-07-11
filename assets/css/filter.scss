@@ -92,9 +92,10 @@
     font-size: inherit;
   }
   .category {
-    display: block;
+    display: flex;
     font-size: 14px;
     line-height: 1.2;
+    // justify-content: space-between;
     a {
       font-size: 14px;
       font-weight: 100;
@@ -183,15 +184,10 @@
   }
 }
 
-// .agenda-item .image{
-//   mask-image: url('../noise4.png');
-//   mask-size: cover;
-//   mask-repeat: no-repeat;
-//   mask-position: top;
-//   transition: all 0.4s ease;
-  
-//   &:hover {
-//     mask-image: url('../white.png');
-  
-//   }
-// }
+.author {
+  margin-left: 8px;
+}
+
+.category a {
+  color: #000;
+}

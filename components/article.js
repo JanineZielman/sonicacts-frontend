@@ -25,7 +25,16 @@ const Article = ({page, relations}) => {
 				{page.attributes.title &&
 					<div className="title">
 						{relations?.attributes?.category?.data &&
-							<div className="category">{relations.attributes.category.data.attributes.title}</div>
+							<div className="category">
+								<a href={'/'+page?.attributes.slug+'/filter/'+relations.attributes.category?.data?.attributes.slug}>
+									{relations.attributes.category.data.attributes.title}
+								</a>
+								 {relations?.attributes?.author?.data && 
+										<a className="author" href={'/community/'+relations.attributes.author?.data?.attributes.slug}>
+											• {relations.attributes.author?.data?.attributes.name}
+										</a>
+									}
+							</div>
 						}
 						<h1>{page.attributes.title}</h1>
 					</div>
