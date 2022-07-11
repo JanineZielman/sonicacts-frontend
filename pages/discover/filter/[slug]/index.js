@@ -13,7 +13,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
+      `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -22,6 +22,8 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
+
+  console.log(posts)
 
   return (
     <Layout page={page} menus={menus} global={global}>
