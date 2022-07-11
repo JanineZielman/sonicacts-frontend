@@ -14,7 +14,7 @@ const Error = ({menus, global}) => {
 				<h1>Sorry, an error occurred while loading the page...</h1>
 				<a href="/">
 					<p>
-						→ Homepage
+						<img className="arrow" src="/arrow.svg"/> Homepage
 					</p>
 				</a>
 			</section>

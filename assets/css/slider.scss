@@ -1,6 +1,10 @@
 .slick-slider {
 	position: relative;
 	padding: 14px 0;
+	a:hover h2{
+		font-weight: 200;
+		letter-spacing: 1.2px;
+	}
 	.slick-next{
 		right: 0;
 		&:before{
@@ -14,7 +18,8 @@
 		&:before {
 			left: 0;
 			position: absolute;
-			margin-top: -32px;
+			margin-top: -40px;
+			transform: scaleX(-1);
 		}
 	}
 	.slick-next, .slick-prev{
@@ -27,6 +32,13 @@
 			opacity: 0;
 			transition: all 0.4s ease;
 			font-size: 48px;
+			content: " ";
+			width: 48px;
+			height: 48px;
+			// background-color: red;
+			background-image: url('/arrow.svg');
+			background-position: center center;
+			background-repeat: no-repeat;
 		}
 		&:hover {
 			&:before {

@@ -103,6 +103,14 @@ html {
   }
 }
 
+.arrow{
+  height: 20px;
+}
+
+.category a:hover, .tags a:hover{
+  text-decoration: underline;
+}
+
 .glitch {
   color: #000;
   font-family: "Sonic Logo";
@@ -317,6 +325,10 @@ h2 {
       line-height: 1;
       font-weight: 500;
       padding-left: 24px;
+      &:hover{
+        font-weight: 200;
+        letter-spacing: 1.2px;
+      }
     }
   }
   .intro-text {

@@ -218,7 +218,7 @@ const Article = ({page, relations}) => {
 										return(
 											<p>
 												<a href={'/discover/'+item.attributes.slug} key={`dis-link${i}`}>
-													→ {item.attributes.title}
+													<img className="arrow" src="/arrow.svg"/> {item.attributes.title}
 												</a>
 											</p>
 										)

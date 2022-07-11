@@ -14,7 +14,7 @@ const FourOhFour = ({menus, global}) => {
 				<h1>Sorry, we couldn't find this page...</h1>
 				<a href="/">
 					<p>
-						→ Homepage
+						<img className="arrow" src="/arrow.svg"/> Homepage
 					</p>
 				</a>
 			</section>

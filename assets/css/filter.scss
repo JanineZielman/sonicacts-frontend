@@ -44,11 +44,22 @@
     }
     .sort{
       cursor: pointer;
-      &.true:before{
-        content: 'Old → New';
+      &.true{
+        &:before{
+          content: 'Old ';
+        }
+        &:after {
+          content: ' New';
+        }
       }
-      &.false:before {
-        content: 'New → Old';
+      &.false {
+        &:before {
+          content: 'New ';
+        }
+
+        &:after {
+          content: ' Old';
+        }
       }
     }
   }
@@ -122,6 +133,10 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+        &:hover{
+          font-weight: 200;
+          letter-spacing: 1.2px;
+        }
       }
       &.community {
         margin: 14px 0;

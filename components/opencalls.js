@@ -93,7 +93,7 @@ const Opencalls = ({ page, opencalls }) => {
 											}
 										</div>
 										{item.attributes.deadline &&
-											<div className="apply">→ Apply until {Moment(item.attributes.deadline).format('D MMM y')}</div>
+											<div className="apply"><img className="arrow" src="/arrow.svg"/> Apply until {Moment(item.attributes.deadline).format('D MMM y')}</div>
 										}
 									</div>
 								</div>
