@@ -23,8 +23,6 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
-  console.log(posts)
-
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">

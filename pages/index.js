@@ -9,7 +9,7 @@ import { fetchAPI } from "../lib/api"
 import LazyLoad from 'react-lazyload';
 
 
-const Home = ({ homepage, menus, global, items, about}) => {
+const Home = ({ homepage, menus, global, socials, items, about}) => {
   const settings = {
     dots: false,
     arrows: true,
@@ -49,6 +49,8 @@ const Home = ({ homepage, menus, global, items, about}) => {
     autoplaySpeed: 4000
   };
 
+  console.log(socials)
+
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
@@ -77,11 +79,22 @@ const Home = ({ homepage, menus, global, items, about}) => {
           <div className="highlight">
             <a href={homepage.attributes.highlight_url} target="_blank">
               {homepage.attributes.highlight_image.data &&
-                <Image image={homepage.attributes.highlight_image.data?.attributes}/>
+                <div className='highlight-image'>
+                  <Image image={homepage.attributes.highlight_image.data?.attributes}/>
+                </div>
               }
               <span>{homepage.attributes.highlight_subtitle}</span>
               <h3>{homepage.attributes.highlight_text}</h3>
             </a>
+            <div className='socials'>
+              {socials.map((item, i) => {
+                return(
+                  <a href={item.url} target="_blank" className='social'>
+                    <Image image={item.icon.data.attributes}/>
+                  </a>
+                )
+              })}
+            </div>
           </div>
           <div className="home-menu">
             {menus.slice(0, 3).map((page, i) => {
@@ -260,9 +273,10 @@ export async function getStaticProps() {
 
   
   // Run API calls in parallel
-  const [homepageRes, globalRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
+  const [homepageRes, globalRes, socialRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
     fetchAPI("/homepage", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[socials][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/news-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/agenda-items?filters[date][$gte]=${currentDate}&sort[0]=date&populate=*`),
@@ -275,6 +289,7 @@ export async function getStaticProps() {
     props: {
       homepage: homepageRes.data,
       global: globalRes.data,
+      socials: socialRes.data.attributes.socials,
       menus: menusRes.data,
       items: {
         0: newsRes.data,

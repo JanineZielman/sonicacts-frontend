@@ -278,8 +278,12 @@
 		display: flex;
 		width: 100%;
 		justify-content: center;
-		div{
+		.highlight-image div{
 			margin: 0!important;
+		}
+		.socials{
+			margin-left: 0;
+			margin-bottom: 24px;
 		}
 		a{
 			width: 360px;
