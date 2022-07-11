@@ -11,12 +11,15 @@ const FourOhFour = ({menus, global}) => {
   return (
     <Layout menus={menus} page={page} global={global}>
 			<section className="error">
-				<h1>Sorry, we couldn't find this page...</h1>
+				<p>Sorry, we couldn't find this page...</p>
 				<a href="/">
-					<p>
-						<img className="arrow" src="/arrow.svg"/> Homepage
-					</p>
+					<img className="arrow" src="/arrow.svg"/> Homepage
 				</a>
+        <div className="error-animation">
+          <span  data-text="4" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>4</span>
+          <span  data-text="0" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>0</span>
+          <span  data-text="4" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>4</span>
+        </div>
 			</section>
     </Layout>
   )

@@ -11,12 +11,17 @@ const Error = ({menus, global}) => {
   return (
     <Layout menus={menus} page={page} global={global}>
 			<section className="error">
-				<h1>Sorry, an error occurred while loading the page...</h1>
+				<p>Sorry, an error occurred while loading the page...</p>
 				<a href="/">
-					<p>
-						<img className="arrow" src="/arrow.svg"/> Homepage
-					</p>
+					<img className="arrow" src="/arrow.svg"/> Homepage
 				</a>
+        <div className="error-animation">
+          <span  data-text="E" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>E</span>
+          <span  data-text="r" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>r</span>
+          <span  data-text="r" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>r</span>
+          <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
+          <span  data-text="r" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>r</span>
+        </div>
 			</section>
     </Layout>
   )
