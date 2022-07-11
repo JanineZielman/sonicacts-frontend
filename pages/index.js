@@ -153,7 +153,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
                         <div className="slider-item">
                           <p className="show-more">
                             <a href={'/' + page.attributes.slug}>
-                              → {page.attributes.slug}
+                              {page.attributes.slug}
                             </a>
                           </p>
                         </div>
@@ -198,16 +198,13 @@ const Home = ({ homepage, menus, global, items, about}) => {
                                 {item.attributes.job_description &&
                                   <span> {item.attributes.job_description}</span>
                                 }
-                                {/* <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug}>
-                                  → Read more
-                                </a> */}
                               </div>
                             </a>       
                           )
                         })}
                         <div className="slider-item">
                           <p className="show-more">
-                            <a href={'/' + page.attributes.slug}>→ {page.attributes.slug}</a>
+                            <a href={'/' + page.attributes.slug}>{page.attributes.slug}</a>
                           </p>
                         </div>
                       </Slider>
