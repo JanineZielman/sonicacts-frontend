@@ -2,7 +2,6 @@ import Collapsible from 'react-collapsible';
 import Slider from "react-slick";
 import ReactMarkdown from "react-markdown";
 import Moment from 'moment';
-
 import Layout from "../components/layout"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
@@ -35,21 +34,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     // autoplay: true,
     autoplaySpeed: 4000
   };
-
-  const settings3 = {
-    dots: false,
-    arrows: true,
-    infinite: true,
-    speed: 500,
-    // slidesToShow: 2,
-    // adaptiveHeight: true,
-    slidesToScroll: 1,
-    variableWidth: true,
-    // autoplay: true,
-    autoplaySpeed: 4000
-  };
-
-  console.log(socials)
 
   return (
     <Layout page={homepage} menus={menus} global={global}>
@@ -234,21 +218,19 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
             <div className="collapsible contact">
               <Collapsible trigger={'contact'}>
                 <LazyLoad height={300}>
-                  <Slider {...settings3}>
-                    <div className="contact-item small">
-                        <ReactMarkdown 
-                          children={about.attributes.contact_links} 
-                        />
-                      </div>
+                    <div className='contact-wrapper'>
                       <div className="contact-item adres">
                         <h5>{about.attributes.contact_adres}</h5>
                       </div>
                       <div className="contact-item">
                         <p>{about.attributes.contact_info}</p>
                       </div>
-                      
-                    
-                  </Slider>
+                      <div className="contact-item small">
+                        <ReactMarkdown 
+                          children={about.attributes.contact_links} 
+                        />
+                      </div>
+                    </div>
                 </LazyLoad>
               </Collapsible>
             </div>

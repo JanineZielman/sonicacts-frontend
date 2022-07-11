@@ -143,6 +143,10 @@
 					font-size: 30px;
 					font-weight: 300;
 					display: block;
+					&:hover{
+						font-weight: 200;
+						letter-spacing: 0.7px;
+					}
 				}
 
 				font-size: 14px;
@@ -188,5 +192,46 @@
 	.slick-slide{
 		max-width: 500px;
 		
+	}
+}
+
+.contact{
+	.contact-wrapper{
+		display: flex;
+		margin-top: 14px;
+		.contact-item {
+			max-width: 400px;
+			h5 {
+				font-weight: 500;
+				margin: 0;
+				font-size: 30px;
+				max-width: 300px;
+			}
+	
+			p {
+				font-size: 24px;
+				margin: 0;
+				padding: 0 24px;
+				margin-bottom: 20px;
+				line-height: 1.2;
+			}
+	
+			&.small p {
+				a {
+					font-size: 30px;
+					font-weight: 300;
+					display: block;
+	
+					&:hover {
+						font-weight: 200;
+						letter-spacing: 0.7px;
+					}
+				}
+	
+				font-size: 14px;
+				font-weight: 100;
+				text-transform: lowercase;
+			}
+		}
 	}
 }
