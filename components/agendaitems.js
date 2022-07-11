@@ -98,7 +98,7 @@ const Agendaitems = ({ page, items }) => {
 						</LazyLoad>
 					</div>
 					
-					{items[i].attributes.date && difference[i] > 1 &&
+					{/* {items[i].attributes.date && difference[i] > 1 &&
 					<>
 					{d[i].map((item, index) => {
 						const missingMonth = parseInt(current[i]) + index
@@ -110,7 +110,7 @@ const Agendaitems = ({ page, items }) => {
 						)
 					})}
 					</>
-					}
+					} */}
 					</>
 				)
 			})}

@@ -2,6 +2,18 @@
 	h2{
 		font-size: 36px;
 	}
+	.contact {
+		.contact-wrapper {
+			flex-direction: column;
+			.contact-item{
+				max-width: 100%;
+				margin-bottom: 14px;
+				p{
+					padding: 0;
+				}
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 1100px) {
