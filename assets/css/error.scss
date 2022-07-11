@@ -1,0 +1,35 @@
+.error {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+
+	p{
+		margin: 0;
+		margin-top: 24px;
+	}
+
+	a {
+		color: black;
+	}
+
+	.error-animation{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 70vh;
+		.glitch{
+			font-family: "SuisseIntl";
+			font-weight: 300;
+			font-size: 28vw;
+			margin: 0px 1vw;
+			height: 30vh;
+		}
+		.glitch:before{
+			font-weight: 500;
+		}
+		.glitch:after {
+			font-weight: 200;
+		}
+	}
+}
