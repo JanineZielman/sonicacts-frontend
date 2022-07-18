@@ -8,7 +8,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 const Search = ({ menus, global, items, search, numberOfPosts}) => {
-  const page = search 
+  const page = {
+    attributes: {
+      slug: search
+    }
+  }  
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);

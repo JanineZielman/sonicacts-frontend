@@ -8,10 +8,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Search from "../../../../components/search"
 import LazyLoad from 'react-lazyload';
 
-const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
+const Artists = ({ festival, menus, global, items, numberOfPosts }) => {
 
 	const page = {
-		slug: 'artists'
+    attributes:
+      	{slug: 'artists'}
 	}
   
   const [posts, setPosts] = useState(items);
@@ -28,13 +29,10 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
-
-	console.log(hasMore)
   
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        {/* <h1 className="wrapper intro">{festival.attributes.ArtistsIntro}</h1> */}
         <div className="wrapper intro">
           <ReactMarkdown 
             children={festival.attributes.ArtistsIntro} 
@@ -79,7 +77,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [festivalRes, globalRes, menusRes] = await Promise.all([
-		fetchAPI("/festival", { populate: "*" }),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
@@ -94,12 +92,11 @@ export async function getServerSideProps({params}) {
 
   return {
     props: {
-			festival: festivalRes.data,
+			festival: festivalRes.data[0],
       items: items.data,
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
-      params: params,
     }
   }
 }

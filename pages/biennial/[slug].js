@@ -49,18 +49,19 @@ const Festival = ({ menus, global, page, relations }) => {
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [pageRes, relationRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/festival?populate[content][populate]=*"),
-		fetchAPI("/festival?populate[festival][populate]=*"),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[festival][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 
   return {
     props: {
-      page: pageRes.data,
-			relations: relationRes.data,
+      page: pageRes.data[0],
+			relations: relationRes.data[0],
       global: globalRes.data,
       menus: menusRes.data,
+			params: params,
     }
   }
 }

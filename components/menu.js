@@ -14,7 +14,7 @@ const Menu = ({ menus, page, global }) => {
       backgroundColor: 'transparent',
     },
   };
-  
+
   return (
     <>
       <div className="hamburger" onClick={handleShow}>

@@ -2,6 +2,11 @@ import React, { useState } from "react"
 import Menu from "./menu"
 
 const Nav = ({ menus, global, page }) => {
+  if (page?.attributes?.slug){
+    const slug = page?.attributes?.slug;
+    var last = slug.substring(slug.lastIndexOf("/") + 1, slug.length);
+  }
+
   return (
     <div className="menu">
       <div className="menu-wrapper">
@@ -23,7 +28,7 @@ const Nav = ({ menus, global, page }) => {
             </a>
           </div>
           <a href={'/' + page?.attributes?.slug}>
-            {page.attributes?.slug.replace('-', ' ')}
+            {last?.replace('-', ' ')}
           </a>
         </div>
         <Menu menus={menus} page={page} global={global}/>
