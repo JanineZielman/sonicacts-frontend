@@ -64,13 +64,13 @@ export async function getStaticProps() {
         $ne: 'opencall',
       },
     },
-    sort: ['date:asc'],
+    sort: ['date:asc', 'slug:asc'],
   }, {
     encodeValuesOnly: true,
   });
 
   const itemRes = 
-    await fetchAPI( `/agenda-items?${query}`
+    await fetchAPI( `/agenda-items?${query}&_sort=date:ASC,slug:ASC`
   );
 
 
