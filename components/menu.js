@@ -14,6 +14,8 @@ const Menu = ({ menus, page, global }) => {
       backgroundColor: 'transparent',
     },
   };
+
+  console.log(page)
   
   return (
     <>
