@@ -5,10 +5,9 @@ import Landing from "./landing"
 import Hero from "./hero"
 import ReactMarkdown from "react-markdown";
 
-const Festival = ({ menus, global, page, relations, params }) => {
+const Festival = ({ menus, global, page, relations }) => {
 	const text = "Sonic Acts Biennial 2022 _ Sonic Acts Biennial 2022"
 
-	console.log(page)
   return (
 		<>
 		<section className="festival">

@@ -15,8 +15,6 @@ const Menu = ({ menus, page, global }) => {
     },
   };
 
-  console.log(page)
-  
   return (
     <>
       <div className="hamburger" onClick={handleShow}>
