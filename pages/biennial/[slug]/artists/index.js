@@ -8,11 +8,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Search from "../../../../components/search"
 import LazyLoad from 'react-lazyload';
 
-const Artists = ({ festival, menus, global, items, numberOfPosts }) => {
+const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
 
 	const page = {
     attributes:
-      	{slug: 'artists'}
+      	{slug: `biennial/${params.slug}/artists`}
 	}
   
   const [posts, setPosts] = useState(items);
@@ -31,46 +31,48 @@ const Artists = ({ festival, menus, global, items, numberOfPosts }) => {
   }, [posts]);
   
   return (
-    <Layout page={page} menus={menus} global={global}>
-      <div className="discover">
-        <div className="wrapper intro">
-          <ReactMarkdown 
-            children={festival.attributes.ArtistsIntro} 
-          />
+    <section className="festival-wrapper">
+      <Layout page={page} menus={menus} global={global}>
+        <div className="discover">
+          <div className="wrapper intro">
+            <ReactMarkdown 
+              children={festival.attributes.ArtistsIntro} 
+            />
+          </div>
+          <div className="filter">
+            <Search params={'/community'}/>
+          </div>
+          <div className="discover-container">
+            <InfiniteScroll
+              dataLength={posts.length}
+              next={getMorePosts}
+              hasMore={hasMore}
+              loader={<h4>Loading...</h4>}
+            >
+              {posts.map((item, i) => {
+                return (
+                  <div className="discover-item community">
+                    <LazyLoad height={100}>
+                      <a href={'/community'+'/'+item.attributes.slug} key={'agenda'+i}>
+                        <div className="image">
+                          {item.attributes?.cover_image?.data &&
+                            <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                          }
+                        </div>
+                        <div className="info">
+                          {item.attributes.name} 
+                          <div>{item.attributes.job_description}</div> 
+                        </div>
+                      </a>
+                    </LazyLoad>
+                  </div>
+                )
+              })}
+            </InfiniteScroll>
+          </div>
         </div>
-        <div className="filter">
-           <Search params={'/community'}/>
-        </div>
-        <div className="discover-container">
-          <InfiniteScroll
-            dataLength={posts.length}
-            next={getMorePosts}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-          >
-            {posts.map((item, i) => {
-              return (
-                <div className="discover-item community">
-                  <LazyLoad height={100}>
-                    <a href={'/community'+'/'+item.attributes.slug} key={'agenda'+i}>
-                      <div className="image">
-                        {item.attributes?.cover_image?.data &&
-                          <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                        }
-                      </div>
-                      <div className="info">
-                        {item.attributes.name} 
-                        <div>{item.attributes.job_description}</div> 
-                      </div>
-                    </a>
-                  </LazyLoad>
-                </div>
-              )
-            })}
-          </InfiniteScroll>
-        </div>
-      </div>
-    </Layout>
+      </Layout>
+    </section>
   )
 }
 
@@ -97,6 +99,7 @@ export async function getServerSideProps({params}) {
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
+      params: params,
     }
   }
 }

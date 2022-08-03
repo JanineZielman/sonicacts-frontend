@@ -5,13 +5,18 @@ import Landing from "./landing"
 import Hero from "./hero"
 import ReactMarkdown from "react-markdown";
 
-const Festival = ({ menus, global, page, relations }) => {
+const Festival = ({ menus, global, page, relations, params }) => {
 	const text = "Sonic Acts Biennial 2022 _ Sonic Acts Biennial 2022"
+
+	const pageSlug = {
+    attributes:
+      	{slug: `biennial/${params.slug}`}
+	}
 
   return (
 		<>
 		<section className="festival">
-			<Layout page={page} menus={menus} global={global}>
+			<Layout page={pageSlug} menus={menus} global={global}>
 				<div className="intro-text">
 					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
 					<div><p>{page.attributes.IntroText}</p></div>
