@@ -1,5 +1,5 @@
 @media only screen and (max-width: 1100px) {
-	.festival-about .text-block.small {
+	.festival-wrapper .text-block.small {
 		width: 94vw;
 		p{
 			padding-right: 0;
@@ -106,7 +106,7 @@
 			}
 		}
 	}
-	.festival-about .intro-text {
+	.festival-wrapper .intro-text {
 		width: 95%;
 		z-index: 99;
 		flex-direction: column-reverse;

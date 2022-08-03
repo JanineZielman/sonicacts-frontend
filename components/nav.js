@@ -5,6 +5,7 @@ const Nav = ({ menus, global, page }) => {
   if (page?.attributes?.slug){
     const slug = page?.attributes?.slug;
     var last = slug.substring(slug.lastIndexOf("/") + 1, slug.length);
+    var first = slug.substring(slug.indexOf("/"), 0);
   }
 
   return (
@@ -31,7 +32,7 @@ const Nav = ({ menus, global, page }) => {
             {last?.replace('-', ' ')}
           </a>
         </div>
-        <Menu menus={menus} page={page} global={global}/>
+        <Menu menus={menus} page={page} global={global} first={first}/>
       </div>
     </div>
   )

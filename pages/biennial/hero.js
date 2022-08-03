@@ -10,11 +10,11 @@ const Hero = ({relations }) => {
 							<div className='bg'></div>
 							<div className="info">
 								<div>
-									<h1>{item.title}</h1>
+									<h1>{item.programme}</h1>
 									<div className="date">
-										{item.programme &&
+										{item.title &&
 											<>
-												{item.programme} <br/>
+												{item.title} <br/>
 											</>
 										}
 										{Moment(item.start_date).format('D MMM')} — {Moment(item.end_date).format('D MMM')}
