@@ -23,11 +23,11 @@ const News = ({ menus, global, items, numberOfPosts, params }) => {
     var res = '';
     if (check == true){
       res = await fetchAPI(
-        `/news-items?filters[tags][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&populate=*`
+        `/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&populate=*`
       );
     } else{
        res = await fetchAPI(
-        `/news-items?filters[tags][slug][$eq]=${params.slug}&sort[0]=date%3Aasc&populate=*`
+        `/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Aasc&populate=*`
       );
     }
     const newPosts = await res.data;
@@ -36,7 +36,7 @@ const News = ({ menus, global, items, numberOfPosts, params }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/news-items?filters[tags][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
+      `/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -105,7 +105,7 @@ const News = ({ menus, global, items, numberOfPosts, params }) => {
   )
 }
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({params, filter}) {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/news-index", { populate: "*" }),
@@ -113,10 +113,10 @@ export async function getServerSideProps({params}) {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/news-items?filters[tags][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&populate=*`);
+  const items = await fetchAPI(`/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/news-items?filters[tags][slug][$eq]=${params.slug}&sort[0]=date%3Adesc`
+    await fetchAPI( `/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Adesc`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;
