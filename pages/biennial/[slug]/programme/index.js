@@ -6,24 +6,24 @@ import LazyLoad from 'react-lazyload';
 import Image from '../../../../components/image'
 
 
-const Programme = ({ menus, global, items, params }) => {
+const Programme = ({ menus, global, items, params, categories }) => {
 	const pageslug = {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
 
-  console.log(items)
+  console.log(categories)
   return (
     <Layout page={pageslug} menus={menus} global={global}>
       <div className="discover">
         <div className="filter">
           <div><span>Filter by category</span></div>
           	<a className="active" key={'category-all'} href={`/biennial/${params.slug}/programme`}>All</a>
-            {/* {categories?.map((category, i) => {
+            {categories?.map((category, i) => {
               return (
-                <a key={'category'+i} href={`/discover/filter/${category?.attributes.slug}`}>{category?.attributes.slug}</a>
+                <a key={'category'+i} href={`#`}>{category?.attributes.slug}</a>
               )
-            })} */}
+            })}
         </div>
         <div className="discover-container">
             {items.map((item, i) => {
@@ -53,16 +53,14 @@ const Programme = ({ menus, global, items, params }) => {
                         <div className="title">
                           {item.attributes.title}
                         </div>
-                        {item.attributes.tags?.data && 
+                        {item.attributes.biennial_tags?.data && 
                           <div className="tags">
-                              {item.attributes.tags.data.map((tag, i) => {
-                                if(tag.attributes.slug != params.slug){
-                                  return(
-                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                      {tag.attributes.slug}
-                                    </a>
-                                  )
-                                }
+                            {item.attributes.biennial_tags.data.map((tag, i) => {
+                              return(
+                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                  {tag.attributes.slug}
+                                </a>
+                              )
                             })}
                           </div>
                         }
@@ -80,8 +78,9 @@ const Programme = ({ menus, global, items, params }) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [itemRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI(`/programmes?filters[tags][slug][$eq]=${params.slug}&populate=*`),
+  const [itemRes, categoryRes, globalRes, menusRes] = await Promise.all([
+    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&populate=*`),
+     fetchAPI("/biennial-tags", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
@@ -89,6 +88,7 @@ export async function getServerSideProps({params}) {
   return {
     props: {
       items: itemRes.data,
+      categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,
