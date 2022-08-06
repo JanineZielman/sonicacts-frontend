@@ -68,7 +68,7 @@ const Programme = ({ menus, global, items, params, categories }) => {
                   <div className={`discover-item ${tags}`}>
                     <LazyLoad height={600}>
                       <div className="item-wrapper">
-                        <a href={`/biennial/programme/${item.attributes.slug}`} key={'discover'+i}>
+                        <a href={`programme/${item.attributes.slug}`} key={'discover'+i}>
                           <div className="image">
                             {item.attributes.cover_image?.data &&
                               <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
