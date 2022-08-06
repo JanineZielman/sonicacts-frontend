@@ -1,16 +1,16 @@
 import { fetchAPI } from "../../../../lib/api"
 import Layout from "../../../../components/layout"
-import Article from "../../../../components/article"
+import BiennialArticle from "../../../../components/biennial-article"
 
 const ProgrammeItem = ({menus, page, global, relations, params}) => {
-	
+
   const pageSlug = {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
   return (   
     <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
-      <Article page={page} relations={relations}/>
+      <BiennialArticle page={page} relations={relations} params={params}/>
     </Layout>
   )
 }

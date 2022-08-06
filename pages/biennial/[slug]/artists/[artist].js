@@ -1,6 +1,6 @@
 import { fetchAPI } from "../../../../lib/api"
 import Layout from "../../../../components/layout"
-import Article from "../../../../components/article"
+import BiennialArticle from "../../../../components/biennial-article"
 
 const CommunityItem = ({params, page, global, relations, menus}) => {
   const pageSlug = {
@@ -11,7 +11,7 @@ const CommunityItem = ({params, page, global, relations, menus}) => {
   return (  
     <section className="festival-wrapper">
       <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
-        <Article page={page} relations={relations}/>
+        <BiennialArticle page={page} relations={relations} params={params}/>
       </Layout>
     </section> 
   )
