@@ -13,6 +13,8 @@ const Festival = ({ menus, global, page, relations, params }) => {
       	{slug: `biennial/${params.slug}`}
 	}
 
+	console.log(params)
+
   return (
 		<>
 		<section className="festival">

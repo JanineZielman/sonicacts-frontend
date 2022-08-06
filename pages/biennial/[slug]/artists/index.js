@@ -53,7 +53,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
                 return (
                   <div className="discover-item community">
                     <LazyLoad height={100}>
-                      <a href={'/community'+'/'+item.attributes.slug} key={'agenda'+i}>
+                      <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
                         <div className="image">
                           {item.attributes?.cover_image?.data &&
                             <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
