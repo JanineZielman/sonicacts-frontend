@@ -16,6 +16,18 @@
   .content {
     display: flex;
   }
+  &.visit{
+    .content .wrapper{
+      p{
+        font-size: 21px;  
+        padding-left: 150px;
+      }
+      h2{
+        margin-top: 14px;
+        font-size: 30px;
+      }
+    }
+  }
   .wrapper {
     width: 1100px;
     position: relative;
@@ -164,6 +176,12 @@
       h1, h2, h3{
         font-weight: 500;
         line-height: 1.1;
+      }
+    }
+    .locations{
+      margin-top: 14px;
+      span{
+        margin: 0;
       }
     }
     .available-links{
