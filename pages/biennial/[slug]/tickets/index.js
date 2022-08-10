@@ -9,7 +9,7 @@ const Tickets = ({ menus, global, params, tickets }) => {
     attributes:
       	{slug: `biennial/${params.slug}/tickets`}
 	}
-  console.log(tickets)
+
   return (
     <section className="festival-wrapper tickets">
       <Layout page={page} menus={menus} global={global}>
