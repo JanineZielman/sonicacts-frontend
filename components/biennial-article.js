@@ -5,7 +5,7 @@ import Collapsible from 'react-collapsible';
 import Image from "./image"
 import LazyLoad from 'react-lazyload';
 
-const Article = ({page, relations, params}) => {
+const Article = ({page, relations, params, programmes}) => {
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
@@ -19,6 +19,7 @@ const Article = ({page, relations, params}) => {
 			}
 		}
   }, []);
+
   return (   
 		<section className="article">
 			<>
@@ -106,11 +107,34 @@ const Article = ({page, relations, params}) => {
 					<div className="sidebar">
 						{page.attributes.slug == 'news' &&
 							<>
-							{page.attributes.date ?
-								<span>Posted on {Moment(page.attributes.date).format('D MMM y')}</span>
-							: <span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
-							}
+								{page.attributes.date ?
+									<span>Posted on {Moment(page.attributes.date).format('D MMM y')}</span>
+								: <span>Posted on {Moment(page.attributes.publishedAt).format('D MMM y')}</span>
+								}
 							</>
+						}
+
+						{programmes &&
+							<div>
+								<span>programme</span>
+								<h2>{programmes.title}</h2>
+								<span>locations</span>
+								<div className="date">
+									{programmes.locations.data.map((loc, j) => {
+										return(
+											<div className="location">
+												<div>{loc.attributes.title}</div>
+											</div>
+										)
+									})}
+								</div>
+								<span>when</span>
+								<div className="date">{Moment(programmes.start_date).format('D MMM y')} – {Moment(programmes.end_date).format('D MMM y')}</div>
+								<span>time</span>
+								<div className="date">{programmes.start_time.substring(0, 5)} – {programmes.end_time.substring(0, 5)}</div>
+								<br/>
+								<a href={`/biennial/${params.slug}/programme/${programmes.slug}`}>View programme</a>
+							</div>
 						}
 
 						{page.attributes.slug == 'about' &&
@@ -121,74 +145,6 @@ const Article = ({page, relations, params}) => {
 									children={page.attributes.contact_links} 
 								/>
 							</div>
-						}
-					
-						{page.attributes.slug == 'agenda' &&
-							<>
-									{relations?.attributes?.date &&
-										<span>When</span>
-									}
-									{relations?.attributes?.date && relations?.attributes?.dates == 0 &&
-										Moment(relations?.attributes?.date).format('D MMM y')
-									}
-									{relations?.attributes?.dates[0] &&
-										<>
-											{relations?.attributes?.dates.map((date, i) => {
-												return(
-													<div className="date" key={`dates-${i}`}>
-														{date.single_date &&
-															<div>
-															– {Moment(date.single_date).format('D MMM y')}
-															</div>
-														}
-														{date.end_date &&
-															<>
-															{relations?.attributes?.date &&
-																Moment(relations?.attributes?.date).format('D MMM')
-															}
-															&nbsp;– {Moment(date.end_date).format('D MMM y')}
-															</>
-														}
-													</div>
-												)
-											})}
-										</>
-									}
-									{page.attributes.time &&
-										<>
-										<span>Time</span>
-										<div>{page.attributes.time}</div>
-										</>
-									}
-									{page.attributes.location &&
-										<>
-										<span>Location</span>
-										<div>{page.attributes.location}</div>
-										</>
-									}
-									{page.attributes.price &&
-										<>
-										<span>Tickets</span>
-										<div>{page.attributes.price}</div>
-										</>
-									}
-									{page.attributes.available_at &&
-										<>
-										<span>{page.attributes.kind == 'opencall' ? 'Apply at' : 'Available at'}</span>
-										<div className="available-links">
-											<ReactMarkdown 
-												children={page.attributes.available_at}
-											/>
-										</div>
-										</>
-									}
-									{page.attributes.deadline &&
-										<>
-										<span>Deadline</span>
-										<div>{Moment(page.attributes.deadline).format('D MMM y')}</div>
-										</>
-									}
-							</>
 						}
 						
 						{relations?.attributes?.community_items?.data[0] &&

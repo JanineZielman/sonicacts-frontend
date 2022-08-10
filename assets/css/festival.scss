@@ -660,7 +660,7 @@
 			&::before{
 				content: " ";
 				background-color: yellow;
-				mask-image: url('../fes-noise.svg');
+				mask-image: url('../fes-noise-small2.svg');
 				mask-size: cover;
 				mask-repeat: no-repeat;
 				mask-position: top;
@@ -669,7 +669,7 @@
 				height: 100%;
 				left: 0;
 				z-index: 0;
-				opacity: 0.6;
+				// opacity: 0.6;
 			}
 			&.ticket.one-sun-after-another {
 				&::before{

@@ -46,6 +46,7 @@
         display: inline-block;
         .text-block.big{
           width: 750px;
+          max-width: 40vw;
           margin-left: 36px;
         }
       }
@@ -162,6 +163,7 @@
     margin-left: 24px;
     font-size: 30px;
     line-height: 1;
+    max-width: 450px;
     .contact{
       padding: 24px;
       max-width: 500px;
