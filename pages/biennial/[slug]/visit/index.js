@@ -10,7 +10,6 @@ const Visit = ({ menus, global, params, festival }) => {
       	{slug: `biennial/${params.slug}/visit`}
 	}
 
-  console.log(festival)
   return (
     <section className="festival-wrapper">
       <Layout page={page} menus={menus} global={global}>
