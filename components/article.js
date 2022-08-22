@@ -195,6 +195,22 @@ const Article = ({page, relations}) => {
 									}
 							</>
 						}
+
+						{relations?.attributes?.authors?.data[0] &&
+							<div>
+								{relations?.attributes.authors.data.length == 1 ?
+									<span>Author</span>
+								: <span>Authors</span>
+								}
+								{relations?.attributes?.authors.data.map((item, i) => {
+									return (
+										<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
+											{item.attributes.name}
+										</a>
+									)
+								})}
+							</div>
+						}
 						
 						{relations?.attributes?.community_items?.data[0] &&
 							<div>
@@ -208,6 +224,7 @@ const Article = ({page, relations}) => {
 								})}
 							</div>
 						}
+						
 
 						{page.attributes.links || relations?.attributes?.discover_items &&
 							<div className="links">
