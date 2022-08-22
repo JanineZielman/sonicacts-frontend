@@ -9,21 +9,29 @@ const Visit = ({ menus, global, params, festival }) => {
     attributes:
       	{slug: `biennial/${params.slug}/visit`}
 	}
+
+  console.log(festival)
   return (
     <section className="festival-wrapper">
       <Layout page={page} menus={menus} global={global}>
         <section className="article visit">
           <div className="content">
             <div className="wrapper">
+              
               {festival.map((item, i) => {
                 return(
                   <>
+                  {item.embed &&
+                    <div className="map">
+                      <div dangerouslySetInnerHTML={{__html: item.embed}}/>
+                    </div>
+                  }
                   {item.text &&
-                  <div className="text-block">
-                    <ReactMarkdown 
-                      children={item.text} 
-                    />
-                  </div>
+                    <div className="text-block">
+                      <ReactMarkdown 
+                        children={item.text} 
+                      />
+                    </div>
                   }
                 </>
                 )
