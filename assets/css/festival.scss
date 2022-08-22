@@ -194,6 +194,66 @@
 
 .festival-wrapper{
 	background-color: rgb(180, 200, 200);
+	.footer {
+		background-color: rgb(180, 200, 200);
+		margin-top: 0;
+		position: absolute;
+	}
+	&::before {
+		content: "";
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		top: 0;
+		mask-image: url(../fes-noise-small.svg);
+		mask-size: contain;
+		mask-repeat: repeat;
+	}
+	&.leaving-traces {
+		.menu .menu-wrapper,
+		.glitch:after,
+		.glitch:before,
+		.footer,
+		&::before {
+			background-color: rgb(255, 255, 13);
+		}
+	}
+	&.sound-art{
+		.menu .menu-wrapper,
+		.glitch:after,
+		.glitch:before,
+		.footer,
+		&::before {
+			background-color: rgb(213, 244, 213);
+		}
+	}
+	&.one-sun-after-another{
+		.menu .menu-wrapper,
+		.glitch:after,
+		.glitch:before,
+		.footer,
+		&::before {
+			background-color: rgb(252, 221, 229);
+		}
+	}
+	&.club-night {
+		.menu .menu-wrapper,
+		.glitch:after,
+		.glitch:before,
+		.footer,
+		&::before {
+			background-color: white;
+		}
+	}
+	&.practicum-workshops{
+		.menu .menu-wrapper,
+		.glitch:after,
+		.glitch:before,
+		.footer,
+		&::before {
+			background-color: rgb(255, 203, 5);
+		}
+	}
 	.menu-wrapper{
 		background-color: rgb(180, 200, 200);
 	}
@@ -676,7 +736,7 @@
 					background-color: rgb(255, 190, 255);
 				}
 			}
-			&.openings-special-events{
+			&.club-night{
 				&::before {
 					background-color: rgb(255, 203, 5);
 				}

@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react"
-import ReactMarkdown from "react-markdown";
 import Layout from "../../../../components/layout"
 import { fetchAPI } from "../../../../lib/api"
 import LazyLoad from 'react-lazyload';
 import Image from '../../../../components/image'
+import Moment from 'moment';
 
 
 const Programme = ({ menus, global, items, params }) => {
@@ -11,37 +10,6 @@ const Programme = ({ menus, global, items, params }) => {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
-
-  // useEffect(() => {
-  //   // init Isotope
-  //   var $grid = $('.discover-container').isotope({
-  //     itemSelector: '.discover-item',
-  //     layoutMode: 'fitRows'
-  //   });
-
-  //   // filter functions
-  //   var filterFns = {};
-
-  //   // bind filter button click
-  //   $('.filters-button-group').on( 'click', 'div', function() {
-  //     var filterValue = $( this ).attr('data-filter');
-  //     // use filterFn if matches value
-  //     filterValue = filterFns[ filterValue ] || filterValue;
-  //     $grid.isotope({ filter: filterValue });
-  //   });
-
-  //   // change is-checked class on buttons
-  //   $('.button-group').each( function( i, buttonGroup ) {
-  //     var $buttonGroup = $( buttonGroup );
-  //     $buttonGroup.on( 'click', 'div', function() {
-  //       $buttonGroup.find('.is-checked').removeClass('is-checked');
-  //       $( this ).addClass('is-checked');
-  //     });
-  //   });
-
-
-  // });
-
   
   return (
     <section className="festival-wrapper">
@@ -58,18 +26,32 @@ const Programme = ({ menus, global, items, params }) => {
                             {item.attributes.cover_image?.data &&
                               <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                             }
+                            <div className="info-overlay">
+                              {item.attributes.locations.data[0] && 
+                                <>
+                                  <span>Locations:</span>
+                                  <div className="locations">
+                                    {item.attributes.locations.data.map((loc, j) => {
+                                      return(
+                                        <div className="location">
+                                          <span>{loc.attributes.title}</span>
+                                        </div>
+                                      )
+                                    })}
+                                  </div>
+                                </>
+                              }
+                            </div>
                           </div>
                           {item.attributes.category?.data && 
                             <div className="category">
                               <a href={'#'} key={'discover'+i}>
                                 {item.attributes.category?.data.attributes.slug}
                               </a>
-                              {item.attributes.author?.data && 
-                                <a className="author" href={'/community/'+item.attributes.author?.data?.attributes.slug} key={'discover'+i}>
-                                  • {item.attributes.author?.data?.attributes.name}
-                                </a>
-                              }
                             </div>
+                          }
+                          {item.attributes.start_date && 
+                            <div className="when">{Moment(item.attributes.start_date).format('D MMM y')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM y')}</>}</div>
                           }
                           <div className="title">
                             {item.attributes.title}
