@@ -6,66 +6,51 @@ import LazyLoad from 'react-lazyload';
 import Image from '../../../../components/image'
 
 
-const Programme = ({ menus, global, items, params, categories }) => {
+const Programme = ({ menus, global, items, params }) => {
 	const pageslug = {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
 
-  useEffect(() => {
-    // init Isotope
-    var $grid = $('.discover-container').isotope({
-      itemSelector: '.discover-item',
-      layoutMode: 'fitRows'
-    });
+  // useEffect(() => {
+  //   // init Isotope
+  //   var $grid = $('.discover-container').isotope({
+  //     itemSelector: '.discover-item',
+  //     layoutMode: 'fitRows'
+  //   });
 
-    // filter functions
-    var filterFns = {};
+  //   // filter functions
+  //   var filterFns = {};
 
-    // bind filter button click
-    $('.filters-button-group').on( 'click', 'div', function() {
-      var filterValue = $( this ).attr('data-filter');
-      // use filterFn if matches value
-      filterValue = filterFns[ filterValue ] || filterValue;
-      $grid.isotope({ filter: filterValue });
-    });
+  //   // bind filter button click
+  //   $('.filters-button-group').on( 'click', 'div', function() {
+  //     var filterValue = $( this ).attr('data-filter');
+  //     // use filterFn if matches value
+  //     filterValue = filterFns[ filterValue ] || filterValue;
+  //     $grid.isotope({ filter: filterValue });
+  //   });
 
-    // change is-checked class on buttons
-    $('.button-group').each( function( i, buttonGroup ) {
-      var $buttonGroup = $( buttonGroup );
-      $buttonGroup.on( 'click', 'div', function() {
-        $buttonGroup.find('.is-checked').removeClass('is-checked');
-        $( this ).addClass('is-checked');
-      });
-    });
+  //   // change is-checked class on buttons
+  //   $('.button-group').each( function( i, buttonGroup ) {
+  //     var $buttonGroup = $( buttonGroup );
+  //     $buttonGroup.on( 'click', 'div', function() {
+  //       $buttonGroup.find('.is-checked').removeClass('is-checked');
+  //       $( this ).addClass('is-checked');
+  //     });
+  //   });
 
 
-  });
+  // });
 
   
   return (
     <section className="festival-wrapper">
       <Layout page={pageslug} menus={menus} global={global}>
         <div className="discover">
-          <div className="filter">
-            <div><span>Filter by category</span></div>
-              <div className="button-group filters-button-group">
-                <div class="button is-checked" data-filter="*">All</div>
-                {categories?.map((category, i) => {
-                  return (
-                    <div class="button" data-filter={`.${category?.attributes.slug}`} key={'category'+i}>{category?.attributes.title}</div>
-                  )
-                })}
-              </div>
-          </div>
-          <div className="discover-container">
+          <div className="discover-container programme-container">
               {items.map((item, i) => {
-                let tags = "";
-                for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
-                  tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
-                }
                 return (
-                  <div className={`discover-item ${tags}`}>
+                  <div className={`discover-item`}>
                     <LazyLoad height={600}>
                       <div className="item-wrapper">
                         <a href={`programme/${item.attributes.slug}`} key={'discover'+i}>
@@ -115,9 +100,8 @@ const Programme = ({ menus, global, items, params, categories }) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [itemRes, categoryRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&populate=*`),
-     fetchAPI("/biennial-tags", { populate: "*" }),
+  const [itemRes, globalRes, menusRes] = await Promise.all([
+    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
@@ -125,7 +109,6 @@ export async function getServerSideProps({params}) {
   return {
     props: {
       items: itemRes.data,
-      categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,
