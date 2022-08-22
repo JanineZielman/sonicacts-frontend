@@ -105,7 +105,10 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                         <div className="item-wrapper">
                           <a href={'/'+categories[index]+'/'+item.attributes.slug} key={'search'+i}>
                             <div className="image">
-                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                              {item.attributes.cover_image?.data?.attributes ? 
+                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                : <div className="circle"></div>
+                              }
                             </div>
                             <div className="content-wrapper">
                               {item.attributes.category?.data && 

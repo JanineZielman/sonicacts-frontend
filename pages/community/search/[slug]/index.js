@@ -79,8 +79,9 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts}) =
                   <LazyLoad height={100}>
                     <a href={'/'+page.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
                       <div className="image">
-                        {item.attributes?.cover_image?.data &&
-                          <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                        {item.attributes.cover_image?.data?.attributes ? 
+                          <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                          : <div className="circle"></div>
                         }
                       </div>
                       <div className="info">
