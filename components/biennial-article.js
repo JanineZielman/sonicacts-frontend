@@ -118,7 +118,7 @@ const Article = ({page, relations, params, programmes}) => {
 							<div>
 								<span>programme</span>
 								<h2>{programmes.title}</h2>
-								<span>locations</span>
+								<span>Locations</span>
 								<div className="date">
 									{programmes.locations.data.map((loc, j) => {
 										return(
@@ -128,22 +128,39 @@ const Article = ({page, relations, params, programmes}) => {
 										)
 									})}
 								</div>
-								<span>when</span>
+								<span>When</span>
 								<div className="date">{Moment(programmes.start_date).format('D MMM y')} – {Moment(programmes.end_date).format('D MMM y')}</div>
-								<span>time</span>
+								<span>Time</span>
 								<div className="date">{programmes.start_time.substring(0, 5)} – {programmes.end_time.substring(0, 5)}</div>
 								<br/>
 								<a href={`/biennial/${params.slug}/programme/${programmes.slug}`}>View programme</a>
 							</div>
 						}
 
-						{page.attributes.slug == 'about' &&
-							<div className="contact">
-								<h2>{page.attributes.contact_adres}</h2>
-								<p>{page.attributes.contact_info}</p>
-								<ReactMarkdown 
-									children={page.attributes.contact_links} 
-								/>
+						{relations.attributes.start_date &&
+							<>
+								<span>When</span>
+								<div className="date">{Moment(relations.attributes.start_date).format('D MMM y')} {relations.attributes.end_date && <>– {Moment(relations.attributes.end_date).format('D MMM y')}</>}</div>
+							</>
+						}
+						{relations.attributes.start_time &&
+							<>
+								<span>Time</span>
+								<div className="date">{relations.attributes.start_time.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes.end_time.substring(0, 5)}</>}</div>
+							</>
+						}
+						{relations?.attributes?.locations.data[0] && 
+							<div>
+								<span>Locations</span>
+								<div className="date">
+									{relations.attributes.locations.data.map((loc, j) => {
+										return(
+											<div className="location">
+												<div>{loc.attributes.title}</div>
+											</div>
+										)
+									})}
+								</div>
 							</div>
 						}
 						
@@ -157,34 +174,6 @@ const Article = ({page, relations, params, programmes}) => {
 										</a>
 									)
 								})}
-							</div>
-						}
-
-						{page.attributes.links || relations?.attributes?.discover_items &&
-							<div className="links">
-								{page.attributes.links &&
-									<>
-									<span>Links</span>
-									<ReactMarkdown 
-										children={page.attributes.links} 
-									/>
-									</>
-								}
-								{relations.attributes.discover_items.data[0] &&
-									<>
-									<span>Related</span>
-									{relations?.attributes?.discover_items?.data.map((item, i ) => {
-
-										return(
-											<p>
-												<a href={'/discover/'+item.attributes.slug} key={`dis-link${i}`}>
-													<img className="arrow" src="/arrow.svg"/> {item.attributes.title}
-												</a>
-											</p>
-										)
-									})}
-									</>
-								}
 							</div>
 						}
 						
