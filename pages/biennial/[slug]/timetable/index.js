@@ -10,9 +10,11 @@ const Timetable = ({ menus, global, params }) => {
       	{slug: `biennial/${params.slug}/timetable`}
 	}
   return (
-    <Layout page={page} menus={menus} global={global}>
-      
-    </Layout>
+    <section className="festival-wrapper">
+      <Layout page={page} menus={menus} global={global}>
+        
+      </Layout>
+    </section>
   )
 }
 

@@ -8,10 +8,12 @@ const ProgrammeItem = ({menus, page, global, relations, params}) => {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
-  return (   
-    <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
-      <BiennialArticle page={page} relations={relations} params={params}/>
-    </Layout>
+  return (  
+    <section className="festival-wrapper">
+      <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
+        <BiennialArticle page={page} relations={relations} params={params}/>
+      </Layout>
+    </section> 
   )
 }
 
