@@ -63,11 +63,13 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                             <a href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
                               {item.attributes.category?.data.attributes.slug}
                             </a>
-                            {item.attributes.author?.data && 
-                              <a className="author" href={'/community/'+item.attributes.author?.data?.attributes.slug} key={'discover'+i}>
-                                • {item.attributes.author?.data?.attributes.name}
-                              </a>
-                            }
+                            {item.attributes.authors?.data.map((author, i) =>{
+                              return(
+                                <a className="author" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                                , {author.attributes.name}
+                                </a>
+                              )
+                            })}
                           </div>
                         }
                         <div className="title">
@@ -75,12 +77,12 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                         </div>
                         {item.attributes.tags?.data && 
                           <div className="tags">
-                              {item.attributes.tags.data.map((tag, i) => {
-                                return(
+                            {item.attributes.tags.data.map((tag, i) => {
+                              return(
                                 <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
                                   {tag.attributes.slug}
                                 </a>
-                                )
+                              )
                             })}
                           </div>
                         }
