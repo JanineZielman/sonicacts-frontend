@@ -131,6 +131,34 @@
           padding-right: 1vw;
         }
       }
+      .when {
+        display: inline-block;
+        font-weight: 200;
+      }
+      .info-overlay{
+        position: absolute;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        span{
+          font-size: 14px;
+          font-weight: 100;
+        }
+        .locations{
+          font-size: 21px;
+        }
+        .location{
+          span{
+            font-size: 21px;
+            font-weight: 300;
+          }
+          background-color: white;
+          border-radius: 50px;
+          margin: 10px 10px 0 0;
+          padding: 5px 10px;
+          display: inline-block;
+        }
+      }
       .title{
         line-height: 1.1;
         overflow: hidden;
