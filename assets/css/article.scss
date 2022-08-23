@@ -228,4 +228,12 @@
 .sub{
   margin-top: 48px;
   width: 100%;
+  &.discover{
+    margin-top: 0;
+    padding-bottom: 100px;
+    .filter .button {
+      margin: 3px;
+      font-size: 18px;
+    }
+  }
 }

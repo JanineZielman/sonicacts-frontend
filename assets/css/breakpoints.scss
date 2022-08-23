@@ -122,6 +122,12 @@
 	.collapsible.about .Collapsible span{
 		padding: 10px;
 	}
+
+	.sub{
+		.when, .title{
+			font-size: 36px;
+		}
+	}
 }
 
 @media only screen and (max-width: 900px) {
@@ -435,6 +441,7 @@
 	}
 	.container {
 		padding: 14px 3vw;
+		margin-left: 0;
 	}
 	.article .text-block p{
 		padding-right: 0;

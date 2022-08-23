@@ -41,8 +41,6 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories}
     });
   });
 
-  console.log(sub)
-
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
@@ -52,7 +50,7 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories}
             <div className="article sub">
               <h1>Sub Programmes</h1>
             </div>
-            <div className="discover">
+            <div className="discover sub">
               <div className="filter">
                 <div className="button-group filters-button-group">
                   <div class="button is-checked" data-filter="*">All</div>

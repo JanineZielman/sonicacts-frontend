@@ -256,6 +256,12 @@
 	}
 	.menu-wrapper{
 		background-color: rgb(180, 200, 200);
+		.logo-wrapper{
+			display: none;
+		}
+		.breadcrumbs {
+			width: 98vw;
+		}
 	}
 	.glitch:after,
 	.glitch:before {
@@ -584,11 +590,32 @@
 	}
 }
 
+.festival-logo{
+	display: none;
+}
+
+.festival-wrapper .festival-logo{
+	display: block;
+	width: 550px;
+	div {
+		font-size: 80px;
+		padding: 0;
+		top: 0;
+		width: 100%;
+		position: absolute;
+		transition: all 0.4s ease-in-out;
+		font-variation-settings: 'wght' 100;
+		cursor: pointer;
+
+		&:hover .layer3{
+			font-variation-settings: 'wght' 50;
+			-moz-font-variation-settings: 'wght' 50;
+		}
+	}
+}
 
 
-
-
-.festival-hero-bg{
+.festival-hero-bg, .festival-logo{
 	.random-color {
 		div{
 			&.layer1 {
