@@ -30,23 +30,7 @@ const Nav = ({ menus, global, page }) => {
           </div>
           <div className="festival-logo">
             <a href={`/${global.attributes.festival_slug}`}>
-              <div className={`title random-color`}>
-                <div className={`layer1`}>
-                  {(global.attributes.festival_title).split("").map(function(char, index){
-                  return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
-                  })}
-                </div>
-                <div className={`layer2`}>
-                  {(global.attributes.festival_title).split("").map(function(char, index){
-                  return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 50) + 50 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
-                  })}
-                </div>
-                <div className={`layer3`}>
-                  {(global.attributes.festival_title).split("").map(function(char, index){
-                  return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 )}}>{char}</span>;
-                  })}
-                </div>
-              </div>
+             {global.attributes.festival_title}
             </a>
           </div>
           <a href={'/' + page?.attributes?.slug}>

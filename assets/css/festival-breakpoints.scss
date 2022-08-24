@@ -6,21 +6,13 @@
 			padding-left: 3vw !important;
 		}
 	}
-	.festival-wrapper .festival-logo{
-		width: 120px;
-		div{
-			font-size: 36px;
-			margin-top: 8px;
-			span{
-				display: none;
+	.festival-wrapper {
+		.menu{
+			.menu-wrapper{
+				.breadcrumbs{
+					flex-direction: column;
+				}
 			}
-			span:nth-child(1){
-				display: inline-block;
-			}
-			span:nth-last-child(4), span:nth-last-child(3), span:nth-last-child(2), span:nth-last-child(1) {
-				display: inline-block;
-			}
-			
 		}
 	}
 	.festival {

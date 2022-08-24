@@ -83,7 +83,7 @@ const Programme = ({ menus, global, items, params }) => {
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [itemRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&populate=*`),
+    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=start_date%3Aasc&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
