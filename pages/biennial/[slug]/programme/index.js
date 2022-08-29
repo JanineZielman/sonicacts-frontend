@@ -51,7 +51,7 @@ const Programme = ({ menus, global, items, params }) => {
                             </div>
                           }
                           {item.attributes.start_date && 
-                            <div className="when">{Moment(item.attributes.start_date).format('D MMM y')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM y')}</>}</div>
+                            <div className="when">{Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}</div>
                           }
                           <div className="title">
                             {item.attributes.title}
