@@ -331,6 +331,21 @@
 		}
 }
 
+.collapsible.visit {
+	cursor: pointer;
+	border-bottom: 2px solid black;
+	.Collapsible__trigger{
+		font-family: Crystal3;
+		font-variation-settings: 'wght' 50;
+		-moz-font-variation-settings: 'wght' 50;
+		transition: all 0.5s ease-in-out;
+		&:hover{
+			font-variation-settings: 'wght' 100;
+			-moz-font-variation-settings: 'wght' 100;
+		}
+	}
+}
+
 
 .festival{
 	background-color: rgb(180,200,200);

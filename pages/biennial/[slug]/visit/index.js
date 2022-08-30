@@ -2,6 +2,7 @@ import React from "react"
 import ReactMarkdown from "react-markdown";
 import Layout from "../../../../components/layout"
 import { fetchAPI } from "../../../../lib/api"
+import Collapsible from 'react-collapsible';
 
 
 const Visit = ({ menus, global, params, festival }) => {
@@ -16,7 +17,6 @@ const Visit = ({ menus, global, params, festival }) => {
         <section className="article visit">
           <div className="content">
             <div className="wrapper">
-              
               {festival.map((item, i) => {
                 return(
                   <>
@@ -30,6 +30,17 @@ const Visit = ({ menus, global, params, festival }) => {
                       <ReactMarkdown 
                         children={item.text} 
                       />
+                    </div>
+                  }
+                  {item.__component == "biennial.collapsible" &&
+                    <div className="collapsible visit">
+                      <Collapsible trigger={item.title} open={item.open == true && item.open}>
+                        <div className={'text-block ' + item.size} key={'textcol'+i}>
+                          <ReactMarkdown 
+                            children={item.text_block} 
+                          />
+                        </div>
+                      </Collapsible>
                     </div>
                   }
                 </>
