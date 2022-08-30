@@ -203,9 +203,13 @@
 		margin-top: 0;
 		position: absolute;
 	}
-	.article{
-		.title{
+	.article {
+		.title {
 			text-transform: uppercase;
+		}
+		.image.small,
+		.image.medium {
+			padding-left: 0;
 		}
 	}
 	&::before {
