@@ -5,7 +5,7 @@ import Image from '../../../../components/image'
 import Moment from 'moment';
 
 
-const Programme = ({ menus, global, items, params }) => {
+const Programme = ({ menus, global, items, params, festival }) => {
 	const pageslug = {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
@@ -13,7 +13,7 @@ const Programme = ({ menus, global, items, params }) => {
   
   return (
     <section className="festival-wrapper">
-      <Layout page={pageslug} menus={menus} global={global}>
+      <Layout page={pageslug} menus={menus} global={global} festival={festival}>
         <div className="discover">
           <div className="discover-container programme-container">
               {items.map((item, i) => {
@@ -51,7 +51,7 @@ const Programme = ({ menus, global, items, params }) => {
                             </div>
                           }
                           {item.attributes.start_date && 
-                            <div className="when">{Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}</div>
+                            <div className="when">{Moment(item.attributes.start_date).format('D MMM')}{item.attributes.end_date ? <> – {Moment(item.attributes.end_date).format('D MMM')}</> : <>, {item.attributes.start_time.substring(0, 5)} – {item.attributes.end_time.substring(0, 5)}</> }</div>
                           }
                           <div className="title">
                             {item.attributes.title}
@@ -61,7 +61,7 @@ const Programme = ({ menus, global, items, params }) => {
                               {item.attributes.biennial_tags.data.map((tag, i) => {
                                 return(
                                   <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                    {tag.attributes.slug}
+                                    {tag.attributes.title}
                                   </a>
                                 )
                               })}
@@ -82,7 +82,8 @@ const Programme = ({ menus, global, items, params }) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [itemRes, globalRes, menusRes] = await Promise.all([
+  const [festivalRes, itemRes, globalRes, menusRes] = await Promise.all([
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=start_date%3Aasc&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
@@ -90,6 +91,7 @@ export async function getServerSideProps({params}) {
 
   return {
     props: {
+      festival: festivalRes.data[0],
       items: itemRes.data,
       global: globalRes.data,
       menus: menusRes.data,

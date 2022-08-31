@@ -5,7 +5,7 @@ import { fetchAPI } from "../../../../lib/api"
 import Collapsible from 'react-collapsible';
 
 
-const Visit = ({ menus, global, params, festival }) => {
+const Visit = ({ menus, global, params, visit, festival }) => {
 	const page = {
     attributes:
       	{slug: `biennial/${params.slug}/visit`}
@@ -13,11 +13,11 @@ const Visit = ({ menus, global, params, festival }) => {
 
   return (
     <section className="festival-wrapper">
-      <Layout page={page} menus={menus} global={global}>
+      <Layout page={page} menus={menus} global={global} festival={festival}>
         <section className="article visit">
           <div className="content">
             <div className="wrapper">
-              {festival.map((item, i) => {
+              {visit.map((item, i) => {
                 return(
                   <>
                   {item.embed &&
@@ -48,7 +48,7 @@ const Visit = ({ menus, global, params, festival }) => {
               })}
             </div>
             <div className="sidebar">
-              {festival.map((item, i) => {
+              {visit.map((item, i) => {
                 return(
                   <>
                   {item.locations &&
@@ -79,7 +79,8 @@ const Visit = ({ menus, global, params, festival }) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [festivalRes, globalRes, menusRes] = await Promise.all([
+  const [festivalRes, visitRes, globalRes, menusRes] = await Promise.all([
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[visit][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
@@ -88,7 +89,8 @@ export async function getServerSideProps({params}) {
 
   return {
     props: {
-      festival: festivalRes.data[0].attributes.visit,
+      festival: festivalRes.data[0],
+      visit: visitRes.data[0].attributes.visit,
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,

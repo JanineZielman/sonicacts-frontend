@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Menu from "./menu"
 
-const Nav = ({ menus, global, page }) => {
+const Nav = ({ menus, global, page, festival }) => {
   if (page?.attributes?.slug){
     const slug = page?.attributes?.slug;
     var last = slug.substring(slug.lastIndexOf("/") + 1, slug.length);
@@ -37,7 +37,7 @@ const Nav = ({ menus, global, page }) => {
             {last?.replace('-', ' ')}
           </a>
         </div>
-        <Menu menus={menus} page={page} global={global} first={first}/>
+        <Menu menus={menus} page={page} global={global} first={first} festival={festival}/>
       </div>
     </div>
   )

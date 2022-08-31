@@ -3,8 +3,10 @@ import Menu from "./menu"
 import Search from "./search"
 import Head from 'next/head'
 import React, {useEffect, useState} from "react"
+import Image from "./image"
+import ReactMarkdown from "react-markdown";
 
-const Layout = ({ children, menus, page, global, relations}) => {
+const Layout = ({ children, menus, page, global, relations, festival}) => {
   const slug = page.attributes?.slug;
   const slugName = slug?.charAt(0).toUpperCase() + slug?.slice(1);
 
@@ -31,7 +33,7 @@ const Layout = ({ children, menus, page, global, relations}) => {
     <section className="container">
       <>
         {page?.attributes?.slug != 'homepage'  ? 
-          <Nav menus={menus} global={global} page={page}/>
+          <Nav menus={menus} global={global} page={page} festival={festival}/>
         : 
           <>
             <Menu menus={menus} page={page} global={global}/>
@@ -51,6 +53,27 @@ const Layout = ({ children, menus, page, global, relations}) => {
       </>
     </section>
     <footer className="footer">
+      {festival &&
+        <div className="prefooter">
+          <div className="text-block medium">
+            <p>{festival.attributes.prefooter.title}</p>
+            <div className="logos">
+              {festival.attributes.prefooter.logos.data.map((logo, i) => {
+                return(
+                  <div className="logo">
+                    <Image image={logo.attributes}/>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="text-block small">
+            <ReactMarkdown 
+              children={festival.attributes.prefooter.text} 
+            />
+          </div>
+        </div>
+      }
       {global.attributes.footer_links.map((link, i) => {
         return (
           <a href={'/'+link.slug} key={'link'+i} className="menu-link">

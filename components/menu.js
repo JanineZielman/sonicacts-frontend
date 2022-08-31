@@ -2,8 +2,9 @@ import React,  { useState } from "react"
 import { CSSTransition } from 'react-transition-group';
 import Modal from 'react-modal';
 import Search from '../components/search'
+import ReactMarkdown from "react-markdown";
 
-const Menu = ({ menus, page, global, first }) => {
+const Menu = ({ menus, page, global, first, festival }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -55,9 +56,21 @@ const Menu = ({ menus, page, global, first }) => {
               )
             })}
             {global.attributes.festival_shown == true &&
-              <a href={'/'+ global.attributes.festival_slug} className="menu-link festival-link">
-                {global.attributes.festival_title}
-              </a>
+              <div className="festival-menu">
+                <a href={'/'+ global.attributes.festival_slug} className="menu-link festival-link">
+                  <>
+                    {global.attributes.festival_title}
+                    {festival &&
+                      <div className="festival-sub">
+                        <ReactMarkdown 
+                          children={festival.attributes.links} 
+                        />
+                      </div>
+                    }
+                  </>
+                </a>
+                
+              </div>
             }
           </div>
            <div className="menu-search">

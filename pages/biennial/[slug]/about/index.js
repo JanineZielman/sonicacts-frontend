@@ -16,7 +16,7 @@ const About = ({ menus, global, page, params }) => {
   return (
 		<>
 		<section className="festival-wrapper">
-			<Layout page={pageSlug} menus={menus} global={global}>
+			<Layout page={pageSlug} menus={menus} global={global} festival={page}>
 				<div className="intro-text">
 					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
 					<div><p>{page.attributes.IntroText}</p></div>
@@ -34,7 +34,7 @@ const About = ({ menus, global, page, params }) => {
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
-		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[content][populate]=*&populate[prefooter][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])

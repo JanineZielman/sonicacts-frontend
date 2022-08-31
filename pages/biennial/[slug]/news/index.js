@@ -7,7 +7,7 @@ import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LazyLoad from 'react-lazyload';
 
-const News = ({ menus, global, items, numberOfPosts, params }) => {
+const News = ({ menus, global, items, numberOfPosts, params, festival }) => {
 
 	const page = {
     attributes:
@@ -48,7 +48,7 @@ const News = ({ menus, global, items, numberOfPosts, params }) => {
 
   return (
 		<section className="festival-wrapper">
-			<Layout page={page} menus={menus} global={global}>
+			<Layout page={page} menus={menus} global={global} festival={festival}>
 				<div className="discover">
 					<div className="filter">
 						<div><span>Sort By</span></div>
@@ -107,7 +107,8 @@ const News = ({ menus, global, items, numberOfPosts, params }) => {
 
 export async function getServerSideProps({params, filter}) {
   // Run API calls in parallel
-  const [pageRes, globalRes, menusRes] = await Promise.all([
+  const [festivalRes, pageRes, globalRes, menusRes] = await Promise.all([
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/news-index", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
@@ -123,6 +124,7 @@ export async function getServerSideProps({params, filter}) {
 
   return {
     props: {
+			festival: festivalRes.data[0],
       page: pageRes.data,
       items: items.data,
       numberOfPosts: +numberOfPosts,

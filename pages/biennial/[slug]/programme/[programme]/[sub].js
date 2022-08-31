@@ -1,10 +1,8 @@
 import { fetchAPI } from "../../../../../lib/api"
 import Layout from "../../../../../components/layout"
 import BiennialArticle from "../../../../../components/biennial-article"
-import LazyLoad from 'react-lazyload';
-import Image from "../../../../../components/image"
 
-const SubProgrammeItem = ({menus, page, global, relations, params, sub, categories}) => {
+const SubProgrammeItem = ({menus, page, global, relations, params, festival}) => {
 
   const pageSlug = {
     attributes:
@@ -13,7 +11,7 @@ const SubProgrammeItem = ({menus, page, global, relations, params, sub, categori
 
   return (  
     <section className="festival-wrapper">
-      <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
+      <Layout menus={menus} page={pageSlug} global={global} relations={relations} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
       </Layout>
     </section> 
@@ -29,16 +27,12 @@ export async function getServerSideProps({params, preview = null}) {
   const pageRel = 
     await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
-
-  const subRes = 
-    await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[sub_programmes][populate]=*`
-  );
   
 
-  const [menusRes, globalRes, categoryRes] = await Promise.all([
+  const [menusRes, globalRes, festivalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
-    fetchAPI(`/biennial-tags?filters[biennials][slug][$eq]=${params.slug}&populate=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
   ])
 
   return {
@@ -47,9 +41,8 @@ export async function getServerSideProps({params, preview = null}) {
       page: pageRes.data[0], 
       global: globalRes.data, 
       relations: pageRel.data[0],
-      sub: subRes.data[0],
 			params: params, 
-      categories: categoryRes.data,
+      festival: festivalRes.data[0],
     },
   };
 }
