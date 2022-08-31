@@ -18,14 +18,23 @@ const Hero = ({relations, slug }) => {
 													{item.programme.data.attributes.programme} <br/>
 												</>
 											}
-											{Moment(item.programme.data.attributes.start_date).format('D MMM')} — {Moment(item.programme.data.attributes.end_date).format('D MMM')}
+											{Moment(item.programme.data.attributes.start_date).format('MMM') == Moment(item.programme.data.attributes.end_date).format('MMM') ?
+												<>
+													{Moment(item.programme.data.attributes.start_date).format('D')} — {Moment(item.programme.data.attributes.end_date).format('D MMM')}
+												</>
+											: 
+												<>
+													{Moment(item.programme.data.attributes.start_date).format('D MMM')} — {Moment(item.programme.data.attributes.end_date).format('D MMM')}
+												</>
+											}
+											
 										</div>
 									</div>
 									<div className="locations-wrapper">
-										<div className='locations'>
+										<div className={`locations l${item.locations?.data.length}`}>
 											{item.locations?.data.map((item, i) => {
 												return(
-													<div className="location" style={{order: item.attributes.orderTitle}}>
+													<div className={`location o${item.attributes.orderTitle}`} style={{order: item.attributes.orderTitle}}>
 														{item.attributes.title}
 													</div>
 												)

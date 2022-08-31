@@ -61,7 +61,7 @@ const Programme = ({ menus, global, items, params, festival }) => {
                               {item.attributes.biennial_tags.data.map((tag, i) => {
                                 return(
                                   <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                    {tag.attributes.slug}
+                                    {tag.attributes.title}
                                   </a>
                                 )
                               })}

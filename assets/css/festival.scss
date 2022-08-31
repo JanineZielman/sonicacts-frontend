@@ -256,19 +256,32 @@
 			line-height: 1;
 			margin-top: 14px;
 			font-family: "SuisseIntl";
-			.location {
-				margin-right: 20px;
-		
-				&:after {
+			&.l3 {
+				.location:after {
 					margin-left: 20px;
 					content: '•';
 				}
 		
-				&:last-child {
+				.o3 {
 					&:after {
 						content: '';
 					}
 				}
+			}
+			&.l2 {
+				.location:after {
+					margin-left: 20px;
+					content: '•';
+				}
+
+				.o5 {
+					&:after {
+						content: '';
+					}
+				}
+			}
+			.location {
+				margin-right: 20px;
 			}
 		}
 	}
