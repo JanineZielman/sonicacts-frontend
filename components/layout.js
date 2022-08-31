@@ -53,25 +53,27 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
       </>
     </section>
     <footer className="footer">
-    <div className="prefooter">
-      <div className="text-block medium">
-        <p>{festival.attributes.prefooter.title}</p>
-        <div className="logos">
-          {festival.attributes.prefooter.logos.data.map((logo, i) => {
-            return(
-              <div className="logo">
-                <Image image={logo.attributes}/>
-              </div>
-            )
-          })}
+      {festival &&
+        <div className="prefooter">
+          <div className="text-block medium">
+            <p>{festival.attributes.prefooter.title}</p>
+            <div className="logos">
+              {festival.attributes.prefooter.logos.data.map((logo, i) => {
+                return(
+                  <div className="logo">
+                    <Image image={logo.attributes}/>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="text-block small">
+            <ReactMarkdown 
+              children={festival.attributes.prefooter.text} 
+            />
+          </div>
         </div>
-      </div>
-      <div className="text-block small">
-        <ReactMarkdown 
-          children={festival.attributes.prefooter.text} 
-        />
-      </div>
-    </div>
+      }
       {global.attributes.footer_links.map((link, i) => {
         return (
           <a href={'/'+link.slug} key={'link'+i} className="menu-link">
