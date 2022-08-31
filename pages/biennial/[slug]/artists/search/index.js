@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react"
 
 import ReactMarkdown from "react-markdown";
-import Layout from "../../../../components/layout"
-import Image from "../../../../components/image"
-import { fetchAPI } from "../../../../lib/api"
+import Layout from "../../../../../components/layout"
+import Image from "../../../../../components/image"
+import { fetchAPI } from "../../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Search from "../../../../components/search"
+import Search from "../../../../../components/search"
 import LazyLoad from 'react-lazyload';
 
 const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
@@ -32,7 +32,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
   
   return (
     <section className="festival-wrapper">
-      <Layout page={page} menus={menus} global={global} festival={festival}>
+      <Layout page={page} menus={menus} global={global}>
         <div className="discover">
           <div className="wrapper intro">
             <ReactMarkdown 
@@ -79,7 +79,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [festivalRes, globalRes, menusRes] = await Promise.all([
-		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])

@@ -6,7 +6,7 @@ import LazyLoad from 'react-lazyload';
 import Image from "../../../../components/image"
 import Moment from 'moment';
 
-const ProgrammeItem = ({menus, page, global, relations, params, sub, categories}) => {
+const ProgrammeItem = ({menus, page, global, relations, params, sub, categories, festival}) => {
 
   const pageSlug = {
     attributes:
@@ -43,7 +43,7 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories}
 
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
-      <Layout menus={menus} page={pageSlug} global={global} relations={relations}>
+      <Layout menus={menus} page={pageSlug} global={global} relations={relations} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         {sub?.attributes?.sub_programmes?.data[0] && 
           <>
@@ -147,10 +147,11 @@ export async function getServerSideProps({params, preview = null}) {
   );
   
 
-  const [menusRes, globalRes, categoryRes] = await Promise.all([
+  const [menusRes, globalRes, categoryRes, festivalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI(`/biennial-tags?filters[biennials][slug][$eq]=${params.slug}&populate=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
   ])
 
   return {
@@ -162,6 +163,7 @@ export async function getServerSideProps({params, preview = null}) {
       sub: subRes.data[0],
 			params: params, 
       categories: categoryRes.data,
+      festival: festivalRes.data[0],
     },
   };
 }

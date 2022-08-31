@@ -1,7 +1,6 @@
 import React from "react"
 import Layout from "../../components/layout"
 import { fetchAPI } from "../../lib/api"
-import Landing from "./landing"
 import Hero from "./hero"
 import ReactMarkdown from "react-markdown";
 
@@ -15,12 +14,15 @@ const Festival = ({ menus, global, page, relations, params }) => {
 
   return (
 		<>
-		<section className="festival">
-			<Layout page={pageSlug} menus={menus} global={global}>
-				<div className="intro-text">
-					<div><ReactMarkdown children={page.attributes.sidebar}/></div>
-					<div><p>{page.attributes.IntroText}</p></div>
-				</div>
+		<section className="festival-home">
+			<Layout page={pageSlug} menus={menus} global={global} festival={page}>
+				{page.attributes.links &&
+					<div className="links">
+						<ReactMarkdown 
+							children={page.attributes.links} 
+						/>
+					</div>
+				}
         <div className="festival-hero-bg">
 					<div className={`title random-color`}>
 						<div className={`layer1`}>
@@ -41,9 +43,8 @@ const Festival = ({ menus, global, page, relations, params }) => {
 					</div>
 				</div>
         <div className="content-wrapper">
-          <Hero relations={relations}/>
+          <Hero relations={relations} slug={params.slug}/>
           <br/>
-          <Landing page={page}/>
         </div>
 			</Layout>
 		</section>
@@ -54,8 +55,8 @@ const Festival = ({ menus, global, page, relations, params }) => {
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [pageRes, relationRes, globalRes, menusRes] = await Promise.all([
-		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[content][populate]=*`),
-		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[festival][populate]=*`),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[programme][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])

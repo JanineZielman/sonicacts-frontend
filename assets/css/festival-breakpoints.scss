@@ -15,6 +15,98 @@
 			}
 		}
 	}
+	.tickets{
+		margin-top: 64px;
+		.tickets-container{
+			.ticket{
+				width: 45vw;
+			}
+		}
+		.info-wrapper{
+			flex-direction: column;
+			.ticket-info {
+				width: 95%;
+			}
+		}
+	}
+	.festival-home {
+
+		.content-wrapper {
+			position: absolute;
+			top: 200px;
+			width: 98vw;
+		}
+
+		.links {
+			p{
+				 margin: 10px 0 10px 0;
+			}
+			a {
+				margin: 10px 10px 0px 0;
+				font-size: 18px;
+				line-height: 2.4;
+			}
+		}
+
+		.festival-hero-bg {
+			height: 100vh;
+			top: 0;
+
+			.title {
+				top: 100px;
+			}
+
+			div {
+				font-size: 35vw;
+			}
+
+			border-bottom: 2px solid black;
+			border-top: 2px solid black;
+		}
+
+		.bg {
+			top: -64px;
+			position: absolute;
+			width: 100vw;
+			height: 105vh;
+			z-index: 0;
+			background-image: url('../fes-noise.svg');
+			background-position: top left;
+		}
+
+		.festival-hero {
+			.wrapper {
+				border-bottom: 2px solid black;
+
+				&:after {
+					width: 36px;
+					height: 36px;
+					right: 3vw;
+					top: 55%;
+				}
+			}
+
+			h1 {
+				font-size: 48px;
+				letter-spacing: 4px;
+			}
+
+			.date {
+				font-size: 30px;
+			}
+
+			.locations {
+				font-size: 18px;
+				flex-direction: column;
+					.location{
+						margin-bottom: 5px;
+						&:after{
+							display: none;
+					}
+				}
+			}
+		}
+	}
 	.festival {
 		.content-wrapper {
 			top: 650px;
@@ -162,5 +254,53 @@
 					background-size: cover;
 			}
 		}
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.festival-home {
+		.bg {
+			top: -24px;
+		}
+	}
+	.tickets{
+		margin-top: 40px;
+		.tickets-container{
+			.ticket{
+				width: 100%;
+				height: 150px;
+			}
+		}
+	}
+	.menu-modal{
+		height: 100vh;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.prefooter {
+		.text-block {
+			text-align: left;
+
+			&.small p{
+				font-size: 18px;
+			}
+		}
+
+		.logos {
+			display: flex;
+			flex-wrap: wrap;
+
+			.logo {
+				width: 70px;
+				margin: 14px 24px 14px 0;
+			}
+		}
+	}
+	.article.visit .content .wrapper p{
+		padding: 0;
+	}
+	.content, .article{
+		width: 95%;
+		margin-top: 36px;
 	}
 }

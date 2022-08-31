@@ -123,7 +123,7 @@ const Article = ({page, relations, params, programmes}) => {
 									{programmes.locations?.data.map((loc, j) => {
 										return(
 											<div className="location">
-												<div>{loc.attributes.title}</div>
+												<a href={`/biennial/${params.slug}/visit`}>{loc.attributes.title}</a>
 											</div>
 										)
 									})}
@@ -156,7 +156,7 @@ const Article = ({page, relations, params, programmes}) => {
 									{relations.attributes.locations?.data.map((loc, j) => {
 										return(
 											<div className="location">
-												<div>{loc.attributes.title}</div>
+												<a href={`/biennial/${params.slug}/visit`}>{loc.attributes.title}</a>
 											</div>
 										)
 									})}

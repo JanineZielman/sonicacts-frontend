@@ -100,8 +100,173 @@
 	// background-image: url(../noise-fes.png);
 }
 
+
+.menu-modal {
+	.menu-search{
+		padding-bottom: 100px;
+	}
+	.menu-links a{
+		.festival-sub{
+			p {
+				margin: 0;
+				a{
+					font-size: 24px;
+				}
+			}
+		}
+	}
+}
+
+.prefooter{
+	.text-block{
+		text-align: left;
+		&.small{
+			font-size: 21px;
+			max-width: 1100px;
+		}
+	}
+	.logos{
+		display: flex;
+		flex-wrap: wrap;
+		.logo{
+			width: 100px;
+			margin: 14px 36px 14px 0;
+		}
+	}
+}
+
 .festival-home{
 	background-color: rgb(180, 200, 200);
+	.menu .menu-wrapper{
+		background-color: rgb(180, 200, 200);
+	}
+	a {
+		text-transform: uppercase!important;
+	}
+	.logo-wrapper{
+		display: none;
+	}
+	.content-wrapper{
+		position: absolute;
+		top: 200px;
+		width: 98vw;
+	}
+	.links{
+		a{
+			background-color: white;
+			border-radius: 50px;
+			margin: 10px 10px 0 0;
+			padding: 5px 15px;
+			font-size: 21px;
+			color: black;
+		}
+	}
+	.festival-hero-bg{
+		height: 100vh;
+		top: 0;
+		.title{
+			top: 200px;
+		}
+		div{
+			font-size: 30vw;
+			
+		}
+		border-bottom: 4px solid black;
+		border-top: 4px solid black;
+	}
+	.bg {
+		top: -24px;
+		position: absolute;
+		width: 100vw;
+		height: 105vh;
+		z-index: 0;
+		background-image: url('../fes-noise.svg');
+		background-position: top left;
+	}
+	.festival-hero{
+		.wrapper{
+			cursor: pointer;
+			width: 100%;
+			padding: 24px 0;
+			border-bottom: 4px solid black;
+			position: relative;
+			transition: all 0.4s ease-in-out;
+			// font-family: Grime;
+			font-variation-settings: 'wght' 50;
+			-moz-font-variation-settings: 'wght' 50;
+			text-decoration: none;
+			&.exhibition{
+				font-family: Grime3;
+			}
+			&.symposium {
+				font-family: Crystal3;
+				letter-spacing: normal;
+			}
+			&.soundart {
+				font-family: Crystal6;
+				letter-spacing: normal;
+			}
+			a{
+				color: black;
+				text-transform: uppercase;
+			}
+			&:last-child{
+				border: none;
+			}
+			&:hover {
+				font-variation-settings: 'wght' 100;
+				-moz-font-variation-settings: 'wght' 100;
+			}
+			&:after {
+				font-family: "SuisseIntl";
+				color: black;
+				transition: all 0.4s ease;
+				content: " ";
+				width: 48px;
+				height: 48px;
+				position: absolute;
+				background-image: url('/arrow.svg');
+				background-position: center center;
+				background-repeat: no-repeat;
+				right: 1vw;
+				top: 55%;
+				transform: translateY(-50%);
+			}
+		}
+		h1{
+			font-size: 5.5vw;
+			line-height: 1;
+			letter-spacing: 8px;
+			font-weight: 100;
+		}
+		.date{
+			font-size: 3vw;
+			line-height: 1;
+			font-family: "SuisseIntl";
+			font-weight: 500;
+		}
+		.locations{
+			display: flex;
+			font-size: 1.5vw;
+			line-height: 1;
+			margin-top: 14px;
+			font-family: "SuisseIntl";
+			.location {
+				margin-right: 20px;
+		
+				&:after {
+					margin-left: 20px;
+					content: '•';
+				}
+		
+				&:last-child {
+					&:after {
+						content: '';
+					}
+				}
+			}
+		}
+	}
 }
 
 .festival-hero.festival-hero-type {
@@ -198,10 +363,16 @@
 
 .festival-wrapper{
 	background-color: rgb(180, 200, 200);
+	a{
+		color: black;
+	}
 	.footer {
 		background-color: rgb(180, 200, 200);
 		margin-top: 0;
 		position: absolute;
+	}
+	.discover{
+		margin-top: 48px;
 	}
 	.article {
 		.title {
@@ -231,7 +402,7 @@
 			background-color: rgb(255, 255, 13);
 		}
 	}
-	&.sound-art{
+	&.inner-earth{
 		.menu .menu-wrapper,
 		.glitch:after,
 		.glitch:before,
@@ -305,13 +476,14 @@
 			}
 		}
 	}
-	.text-block {
+	.text-block, .ticket-info {
 		a {
 			transition: all 0.5s ease-in-out;
 			font-family: Crystal3;
 			font-variation-settings: 'wght' 50;
 			-moz-font-variation-settings: 'wght' 50;
 			text-decoration: none;
+			letter-spacing: 1.2px;
 
 			&:hover {
 				font-variation-settings: 'wght' 100;
@@ -343,6 +515,7 @@
 		font-variation-settings: 'wght' 50;
 		-moz-font-variation-settings: 'wght' 50;
 		transition: all 0.5s ease-in-out;
+		letter-spacing: 3px;
 		&:hover{
 			font-variation-settings: 'wght' 100;
 			-moz-font-variation-settings: 'wght' 100;
@@ -636,86 +809,86 @@
 			&.layer1 {
 				color: rgb(255, 203, 5);
 				font-family: Crystal2, sans-serif;
-				animation: randomYellow2 30s infinite ease-in-out;
+				animation: textAnimation2 30s infinite ease-in-out;
 				animation-delay: var(--delay);
 				animation-fill-mode: forwards;
-				:nth-child(6n) {
-					color: #cfe7cc;
-					animation: randomGreen 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n) {
+				// 	color: #cfe7cc;
+				// 	animation: randomGreen 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+1) {
-					color: rgb(255, 190, 255);
-					animation: randomPink 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+1) {
+				// 	color: rgb(255, 190, 255);
+				// 	animation: randomPink 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+2) {
-					color: rgb(255, 255, 0);
-					animation: randomYellow 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+2) {
+				// 	color: rgb(255, 255, 0);
+				// 	animation: randomYellow 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+3) {
-					color: rgb(0, 0, 255);
-					animation: randomBlue 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+3) {
+				// 	color: rgb(0, 0, 255);
+				// 	animation: randomBlue 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+4) {
-					color: #974b8e;
-					animation: randomPurple 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+4) {
+				// 	color: #974b8e;
+				// 	animation: randomPurple 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
 			}
 
 			&.layer2 {
 				color: rgb(0, 0, 255);
 				font-family: Crystal5, sans-serif;
-				animation: randomBlue 30s infinite ease-in-out;
-				animation-delay: var(--delay);
-				animation-fill-mode: forwards;
-				:nth-child(6n) {
-					color: #974b8e;
-					animation: randomPurple 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// animation: randomBlue 30s infinite ease-in-out;
+				// animation-delay: var(--delay);
+				// animation-fill-mode: forwards;
+				// :nth-child(6n) {
+				// 	color: #974b8e;
+				// 	animation: randomPurple 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+1) {
-					color: rgb(255, 203, 5);
-					animation: randomYellow2 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+1) {
+				// 	color: rgb(255, 203, 5);
+				// 	animation: randomYellow2 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+2) {
-					color: #cfe7cc;
-					animation: randomGreen 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+2) {
+				// 	color: #cfe7cc;
+				// 	animation: randomGreen 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+3) {
-					color: rgb(255, 190, 255);
-					animation: randomPink 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+3) {
+				// 	color: rgb(255, 190, 255);
+				// 	animation: randomPink 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
-				:nth-child(6n+4) {
-					color: rgb(255, 255, 0);
-					animation: randomYellow 30s infinite ease-in-out;
-					animation-delay: var(--delay);
-					animation-fill-mode: forwards;
-				}
+				// :nth-child(6n+4) {
+				// 	color: rgb(255, 255, 0);
+				// 	animation: randomYellow 30s infinite ease-in-out;
+				// 	animation-delay: var(--delay);
+				// 	animation-fill-mode: forwards;
+				// }
 
 			}
 
@@ -738,12 +911,13 @@
 		display: flex;
 		flex-wrap: wrap;
 		margin-top: 14px;
+		margin-bottom: 24px;
 		.ticket {
 			// border: 1px solid black;
 			height: 200px;
 			width: 21vw;
 			text-align: center;
-			margin: 1vw 1vw 0 0;
+			margin: 1vw 1vw 1vw 0;
 			padding: 1vw;
 			display: flex;
 			flex-direction: column;
@@ -773,6 +947,11 @@
 				z-index: 0;
 				// opacity: 0.6;
 			}
+			&.ticket.donate{
+				&::before {
+					background-color: rgb(255, 203, 5);
+				}
+			}
 			&.ticket.one-sun-after-another {
 				&::before{
 					background-color: rgb(255, 190, 255);
@@ -783,7 +962,7 @@
 					background-color: rgb(255, 203, 5);
 				}
 			}
-			&.sound-art{
+			&.inner-earth{
 				&::before {
 					background-color: #cfe7cc;
 				}
@@ -821,6 +1000,9 @@
 	.info-wrapper{
 		display: flex;
 		margin-top: 14px;
+		h2{
+			font-size: 30px;
+		}
 	}
 	.ticket-info {
 		font-size: 21px;
@@ -832,232 +1014,232 @@
 
 
 
-@keyframes randomPurple {
-	0% {
-		color: #974b8e;
-	}
+// @keyframes randomPurple {
+// 	0% {
+// 		color: #974b8e;
+// 	}
 
-	12.5% {
-		color: rgb(70, 0, 61);
-	}
+// 	12.5% {
+// 		color: rgb(70, 0, 61);
+// 	}
 
-	25% {
-		color: rgb(0, 0, 255);
-	}
+// 	25% {
+// 		color: rgb(0, 0, 255);
+// 	}
 
-	37.5% {
-		color: rgb(0, 82, 83)
-	}
+// 	37.5% {
+// 		color: rgb(0, 82, 83)
+// 	}
 
-	50% {
-		color: #cfe7cc;
-	}
+// 	50% {
+// 		color: #cfe7cc;
+// 	}
 
-	62.5% {
-		color: rgb(255, 255, 20);
-	}
+// 	62.5% {
+// 		color: rgb(255, 255, 20);
+// 	}
 
-	75% {
-		color: rgb(255, 203, 5);
-	}
+// 	75% {
+// 		color: rgb(255, 203, 5);
+// 	}
 
-	87.5% {
-		color: rgb(255, 190, 255);
-	}
+// 	87.5% {
+// 		color: rgb(255, 190, 255);
+// 	}
 
-	100% {
-		color: #974b8e;
-	}
-}
+// 	100% {
+// 		color: #974b8e;
+// 	}
+// }
 
-@keyframes randomBlue {
-	0% {
-		color: rgb(0, 0, 255);
-	}
+// @keyframes randomBlue {
+// 	0% {
+// 		color: rgb(0, 0, 255);
+// 	}
 
-	12.5% {
-		color: rgb(0, 82, 83);
-	}
+// 	12.5% {
+// 		color: rgb(0, 82, 83);
+// 	}
 
-	25% {
-		color: #cfe7cc;
-	}
+// 	25% {
+// 		color: #cfe7cc;
+// 	}
 
-	37.5% {
-		color: rgb(255, 255, 20);
-	}
+// 	37.5% {
+// 		color: rgb(255, 255, 20);
+// 	}
 
-	50% {
-		color: rgb(255, 203, 5);
-	}
+// 	50% {
+// 		color: rgb(255, 203, 5);
+// 	}
 
-	62.5% {
-		color: rgb(255, 190, 255);
-	}
+// 	62.5% {
+// 		color: rgb(255, 190, 255);
+// 	}
 
-	75% {
-		color: #974b8e;
-	}
+// 	75% {
+// 		color: #974b8e;
+// 	}
 
-	87.5% {
-		color: rgb(70, 0, 61);
-	}
+// 	87.5% {
+// 		color: rgb(70, 0, 61);
+// 	}
 
-	100% {
-		color: rgb(0, 0, 255);
-	}
-}
+// 	100% {
+// 		color: rgb(0, 0, 255);
+// 	}
+// }
 
 
-@keyframes randomYellow2 {
-	0% {
-		color: rgb(255, 203, 5);
-	}
+// @keyframes randomYellow2 {
+// 	0% {
+// 		color: rgb(255, 203, 5);
+// 	}
 
-	12.5% {
-		color: rgb(255, 190, 255);
-	}
+// 	12.5% {
+// 		color: rgb(255, 190, 255);
+// 	}
 
-	25% {
-		color: #974b8e;
-	}
+// 	25% {
+// 		color: #974b8e;
+// 	}
 
-	37.5% {
-		color: rgb(70, 0, 61);
-	}
+// 	37.5% {
+// 		color: rgb(70, 0, 61);
+// 	}
 
-	50% {
-		color: rgb(0, 0, 255);
-	}
+// 	50% {
+// 		color: rgb(0, 0, 255);
+// 	}
 
-	62.5% {
-		color: rgb(0, 82, 83);
-	}
+// 	62.5% {
+// 		color: rgb(0, 82, 83);
+// 	}
 
-	75% {
-		color: #cfe7cc;
-	}
+// 	75% {
+// 		color: #cfe7cc;
+// 	}
 
-	87.5% {
-		color: rgb(255, 255, 20);
-	}
+// 	87.5% {
+// 		color: rgb(255, 255, 20);
+// 	}
 
-	100% {
-		color: rgb(255, 203, 5);
-	}
-}
+// 	100% {
+// 		color: rgb(255, 203, 5);
+// 	}
+// }
 
-@keyframes randomYellow {
-	0% {
-		color: rgb(255, 255, 20);
+// @keyframes randomYellow {
+// 	0% {
+// 		color: rgb(255, 255, 20);
 		
-	}
+// 	}
 
-	12.5% {
-		color: rgb(255, 203, 5);
-	}
+// 	12.5% {
+// 		color: rgb(255, 203, 5);
+// 	}
 
-	25% {
-		color: rgb(255, 190, 255);
-	}
+// 	25% {
+// 		color: rgb(255, 190, 255);
+// 	}
 
-	37.5% {
-		color: #974b8e;
-	}
+// 	37.5% {
+// 		color: #974b8e;
+// 	}
 
-	50% {
-		color: rgb(70, 0, 61);
-	}
+// 	50% {
+// 		color: rgb(70, 0, 61);
+// 	}
 
-	62.5% {
-		color: rgb(0, 0, 255);
-	}
+// 	62.5% {
+// 		color: rgb(0, 0, 255);
+// 	}
 
-	75% {
-		color: rgb(0, 82, 83);
-	}
+// 	75% {
+// 		color: rgb(0, 82, 83);
+// 	}
 
-	87.5% {
-		color: #cfe7cc;
-	}
+// 	87.5% {
+// 		color: #cfe7cc;
+// 	}
 
-	100% {
-		color: rgb(255, 255, 20);
-	}
-}
+// 	100% {
+// 		color: rgb(255, 255, 20);
+// 	}
+// }
 
-@keyframes randomPink {
-	0% {
-		color: rgb(255, 190, 255);
-	}
+// @keyframes randomPink {
+// 	0% {
+// 		color: rgb(255, 190, 255);
+// 	}
 
-	12.5% {
-		color: #974b8e;
-	}
+// 	12.5% {
+// 		color: #974b8e;
+// 	}
 
-	25% {
-		color: rgb(70, 0, 61);
-	}
+// 	25% {
+// 		color: rgb(70, 0, 61);
+// 	}
 
-	37.5% {
-		color: rgb(0, 0, 255);
-	}
+// 	37.5% {
+// 		color: rgb(0, 0, 255);
+// 	}
 
-	50% {
-		color: rgb(0, 82, 83);
-	}
+// 	50% {
+// 		color: rgb(0, 82, 83);
+// 	}
 
-	62.5% {
-		color: #cfe7cc;
-	}
+// 	62.5% {
+// 		color: #cfe7cc;
+// 	}
 
-	75% {
-		color: rgb(255, 255, 20);
-	}
+// 	75% {
+// 		color: rgb(255, 255, 20);
+// 	}
 
-	87.5% {
-		color: rgb(255, 203, 5);
-	}
+// 	87.5% {
+// 		color: rgb(255, 203, 5);
+// 	}
 
-	100% {
-		color: rgb(255, 190, 255);
-	}
-}
+// 	100% {
+// 		color: rgb(255, 190, 255);
+// 	}
+// }
 
-@keyframes randomGreen {
-	0% {
-		color: #cfe7cc;
-	}
+// @keyframes randomGreen {
+// 	0% {
+// 		color: #cfe7cc;
+// 	}
 
-	12.5% {
-		color: rgb(255, 255, 20);
-	}
+// 	12.5% {
+// 		color: rgb(255, 255, 20);
+// 	}
 
-	25% {
-		color: rgb(255, 203, 5);
-	}
+// 	25% {
+// 		color: rgb(255, 203, 5);
+// 	}
 
-	37.5% {
-		color: rgb(255, 190, 255);
-	}
+// 	37.5% {
+// 		color: rgb(255, 190, 255);
+// 	}
 
-	50% {
-		color: #974b8e;
-	}
+// 	50% {
+// 		color: #974b8e;
+// 	}
 
-	62.5% {
-		color: rgb(70, 0, 61);
-	}
+// 	62.5% {
+// 		color: rgb(70, 0, 61);
+// 	}
 
-	75% {
-		color: rgb(0, 0, 255);
-	}
+// 	75% {
+// 		color: rgb(0, 0, 255);
+// 	}
 
-	87.5% {
-		color: rgb(0, 82, 83);
-	}
+// 	87.5% {
+// 		color: rgb(0, 82, 83);
+// 	}
 
-	100% {
-		color: #cfe7cc;
-	}
-}
+// 	100% {
+// 		color: #cfe7cc;
+// 	}
+// }
