@@ -25,7 +25,7 @@ const Hero = ({relations, slug }) => {
 										<div className='locations'>
 											{item.locations?.data.map((item, i) => {
 												return(
-													<div className="location">
+													<div className="location" style={{order: item.attributes.orderTitle}}>
 														{item.attributes.title}
 													</div>
 												)

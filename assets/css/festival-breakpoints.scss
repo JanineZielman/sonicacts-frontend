@@ -278,23 +278,7 @@
 		overflow-x: hidden;
 	}
 	.prefooter {
-		.text-block {
-			text-align: left;
-
-			&.small p{
-				font-size: 18px;
-			}
-		}
-
-		.logos {
-			display: flex;
-			flex-wrap: wrap;
-
-			.logo {
-				width: 70px;
-				margin: 14px 24px 14px 0;
-			}
-		}
+		display: none;
 	}
 	.article.visit .content .wrapper p{
 		padding: 0;
