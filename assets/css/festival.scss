@@ -795,7 +795,7 @@
 }
 
 .biennial-poster{
-	padding-left: 8vw;
+	// padding-left: 8vw;
 	padding-top: 5vw;
 	.type .letter {
 		animation: textAnimation2 14s 2 ease-in-out;
@@ -807,6 +807,7 @@
 		.layer2,
 		.layer3 {
 			width: 87vw;
+			padding: 6vw;
 			font-size: 25vw !important;
 			span:first-child{
 				margin-left: 35vw;
