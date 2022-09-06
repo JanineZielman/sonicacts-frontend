@@ -1,5 +1,5 @@
 const Poster = () => {
-	const text = "Sonic  Acts Bien-_nial 20 22  Son ic"
+	const text = "Sonic  Acts Bien–nial 20 22  Son ic"
 	return(
 		<section className="festival biennial-poster">
 			<div className="festival-hero-bg type">
