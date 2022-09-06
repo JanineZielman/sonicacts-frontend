@@ -84,7 +84,7 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                 )
               })}
           </div>
-          <h1>All events</h1>
+          {/* <h1>Other events</h1>
           <div className="filter"></div>
           <div className="discover-container programme-container">
               {all.map((item, i) => {
@@ -154,7 +154,7 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                   </div>
                 )
               })}
-          </div>
+          </div> */}
         </div>
       </Layout>
     </section>

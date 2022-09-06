@@ -145,9 +145,14 @@
 	.menu .menu-wrapper{
 		background-color: rgb(180, 200, 200);
 	}
-	a {
-		text-transform: uppercase!important;
+	.menu-wrapper {
+		.breadcrumbs {
+			a {
+				text-transform: uppercase;
+			}
+		}
 	}
+
 	.logo-wrapper{
 		display: none;
 	}
@@ -173,8 +178,9 @@
 			top: 200px;
 		}
 		div{
-			font-size: 30vw;
-			
+			font-size: 15vw;
+			width: 60vw;
+			padding-left: 20vw;
 		}
 		border-bottom: 4px solid black;
 		border-top: 4px solid black;
@@ -463,7 +469,7 @@
 		}
 		.breadcrumbs {
 			width: 98vw;
-			a{	
+			a{
 				text-transform: uppercase;
 			}
 		}

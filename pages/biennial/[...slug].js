@@ -24,7 +24,7 @@ const Festival = ({ menus, global, page, relations, params }) => {
 					</div>
 				}
         <div className="festival-hero-bg">
-					<div className={`title random-color`}>
+					<div className={`title`}>
 						<div className={`layer1`}>
 							{(text).split("").map(function(char, index){
 							return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
