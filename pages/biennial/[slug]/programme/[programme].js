@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import { fetchAPI } from "../../../../lib/api"
 import Layout from "../../../../components/layout"
 import BiennialArticle from "../../../../components/biennial-article"
@@ -6,7 +6,7 @@ import LazyLoad from 'react-lazyload';
 import Image from "../../../../components/image"
 import Moment from 'moment';
 
-const ProgrammeItem = ({menus, page, global, relations, params, sub, categories, festival}) => {
+const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) => {
 
   const pageSlug = {
     attributes:
@@ -17,13 +17,13 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories,
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout menus={menus} page={pageSlug} global={global} relations={relations} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
-        {sub?.attributes?.sub_programmes?.data[0] && 
+        {sub[0] && 
           <>
             <div className="discover sub">
               <div className="filter">
               </div>
               <div className="discover-container programme-container">
-                {sub?.attributes?.sub_programmes?.data.map((item, i) => {
+                {sub.map((item, i) => {
                   let tags = "";
                   for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
                     tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
@@ -114,7 +114,7 @@ export async function getServerSideProps({params, preview = null}) {
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[sub_programmes][populate]=*`
+    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
   
 
@@ -131,7 +131,7 @@ export async function getServerSideProps({params, preview = null}) {
       page: pageRes.data[0], 
       global: globalRes.data, 
       relations: pageRel.data[0],
-      sub: subRes.data[0],
+      sub: subRes.data,
 			params: params, 
       categories: categoryRes.data,
       festival: festivalRes.data[0],
