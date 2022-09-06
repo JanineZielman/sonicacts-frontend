@@ -400,7 +400,7 @@ h2 {
   }
 }
 
-.home-menu {
+.home-menu, .feshome-menu {
   width: calc(100% - 470px);
   .collapsible {
     padding: 10px 0;
@@ -488,6 +488,10 @@ h2 {
       }
     }
   }
+}
+
+.feshome-menu{
+  width: 100%;
 }
 
 .menu {
