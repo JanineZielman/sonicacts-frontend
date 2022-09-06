@@ -84,7 +84,7 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                 )
               })}
           </div>
-          {/* <h1>Other events</h1>
+          <h1>Other events</h1>
           <div className="filter"></div>
           <div className="discover-container programme-container">
               {all.map((item, i) => {
@@ -154,7 +154,7 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                   </div>
                 )
               })}
-          </div> */}
+          </div>
         </div>
       </Layout>
     </section>
@@ -166,7 +166,7 @@ export async function getServerSideProps({params}) {
   const [festivalRes, itemRes, allRes, globalRes, menusRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=start_date%3Aasc&populate=*`),
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&sort[0]=start_date%3Aasc&populate=*`),
+    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=false&sort[0]=start_date%3Aasc&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
