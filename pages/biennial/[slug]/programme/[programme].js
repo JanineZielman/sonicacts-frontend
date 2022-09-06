@@ -21,7 +21,6 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories,
           <>
             <div className="discover sub">
               <div className="filter">
-                  <h1>Sub Programmes</h1>
               </div>
               <div className="discover-container programme-container">
                 {sub?.attributes?.sub_programmes?.data.map((item, i) => {
@@ -63,7 +62,17 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories,
                               </div>
                             }
                             {item.attributes.start_date && 
-                              <div className="when">{Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}</div>
+                              <div className="when">
+                                {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
+                                  <>
+                                    {Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
+                                  </>
+                                : 
+                                  <>
+                                    {Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
+                                  </>
+                                }
+                              </div>
                             }
                             <div className="title">
                               {item.attributes.title}
