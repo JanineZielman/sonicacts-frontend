@@ -13,53 +13,15 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, categories,
       	{slug: `biennial/${params.slug}/programme`}
 	}
 
-    useEffect(() => {
-    // init Isotope
-    var $grid = $('.discover-container').isotope({
-      itemSelector: '.discover-item',
-      layoutMode: 'fitRows'
-    });
-
-    // filter functions
-    var filterFns = {};
-
-    // bind filter button click
-    $('.filters-button-group').on( 'click', 'div', function() {
-      var filterValue = $( this ).attr('data-filter');
-      // use filterFn if matches value
-      filterValue = filterFns[ filterValue ] || filterValue;
-      $grid.isotope({ filter: filterValue });
-    });
-
-    // change is-checked class on buttons
-    $('.button-group').each( function( i, buttonGroup ) {
-      var $buttonGroup = $( buttonGroup );
-      $buttonGroup.on( 'click', 'div', function() {
-        $buttonGroup.find('.is-checked').removeClass('is-checked');
-        $( this ).addClass('is-checked');
-      });
-    });
-  });
-
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
       <Layout menus={menus} page={pageSlug} global={global} relations={relations} festival={festival}>
         <BiennialArticle page={page} relations={relations} params={params}/>
         {sub?.attributes?.sub_programmes?.data[0] && 
           <>
-            <div className="article sub">
-              <h1>Sub Programmes</h1>
-            </div>
             <div className="discover sub">
               <div className="filter">
-                <div className="button-group filters-button-group">
-                  <div class="button is-checked" data-filter="*">All</div>
-                  {categories?.map((category, i) => {
-                    return (
-                      <div class="button" data-filter={`.${category?.attributes.slug}`} key={'category'+i}>{category?.attributes.title}</div>
-                    )
-                  })}
-                </div>
+                  <h1>Sub Programmes</h1>
               </div>
               <div className="discover-container programme-container">
                 {sub?.attributes?.sub_programmes?.data.map((item, i) => {
