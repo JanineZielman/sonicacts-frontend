@@ -4,8 +4,8 @@ import { fetchAPI } from "../../lib/api"
 import Hero from "./hero"
 import ReactMarkdown from "react-markdown";
 
-const Festival = ({ menus, global, page, relations, params }) => {
-	const text = "Sonic Acts Biennial 2022 _ Sonic Acts Biennial 2022"
+const Festival = ({ menus, global, page, params, biennial, programmes }) => {
+	const text = "Sonic  Acts Bien–nial 20 22 Son ic Acts Bien–nial 20 22 Sonic  Acts Bien–nial 20 22"
 
 	const pageSlug = {
     attributes:
@@ -43,7 +43,7 @@ const Festival = ({ menus, global, page, relations, params }) => {
 					</div>
 				</div>
         <div className="content-wrapper">
-          <Hero relations={relations} slug={params.slug}/>
+          <Hero slug={params.slug} biennial={biennial.attributes} programmes={programmes}/>
           <br/>
         </div>
 			</Layout>
@@ -54,20 +54,22 @@ const Festival = ({ menus, global, page, relations, params }) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [pageRes, relationRes, globalRes, menusRes] = await Promise.all([
+  const [pageRes, biennialRes, globalRes, menusRes, programmeRes] = await Promise.all([
 		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
-		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[programme][populate]=*`),
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[community_items][populate]=*&populate[news_items][populate]=*&populate[programmes][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
+		fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&sort[0]=start_date%3Aasc&populate=*`),
   ])
 
   return {
     props: {
       page: pageRes.data[0],
-			relations: relationRes.data[0],
+			biennial: biennialRes.data[0],
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,
+			programmes: programmeRes.data,
     }
   }
 }
