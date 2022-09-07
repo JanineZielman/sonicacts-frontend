@@ -5,7 +5,7 @@ import Hero from "./hero"
 import ReactMarkdown from "react-markdown";
 
 const Festival = ({ menus, global, page, params, biennial, programmes }) => {
-	const text = "Sonic  Acts Bien–nial 20 22 Son ic Acts Bien–nial 20 22 Sonic  Acts Bien–nial 20 22"
+	const text = "Sonic  Acts Bien–nial 20 22 Son ic Acts Bien–nial 20 22"
 
 	const pageSlug = {
     attributes:

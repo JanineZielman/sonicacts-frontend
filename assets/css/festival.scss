@@ -314,7 +314,7 @@
 	div {
 		position: absolute;
 		left: 0;
-		top: 0;
+		top: -7vw;
 		line-height: 0.7;
 		padding: 50px 10vw;
 		font-size: 15vw;
@@ -325,10 +325,10 @@
 		.layer1,
 		.layer2,
 		.layer3 {
-			width: 75vw;
-			padding: 5vw 15vw;
+			width: 45vw;
+			padding: 5vw 27.5vw;
 			span:first-child {
-				margin-left: 35vw;
+				margin-left: 23vw;
 			}
 		}
 		&.layer1 {
@@ -989,6 +989,7 @@
 .festival-home .landing-page.festival-hero{
 	h1{
 		letter-spacing: normal;
+		font-weight: 300;
 	}
 	.preview{
 		display: flex;
@@ -1033,6 +1034,7 @@
 						margin: 0;
 						flex-direction: column;
 						display: inline-block;
+						margin-left: 5px;
 					}
 		
 					.location {
