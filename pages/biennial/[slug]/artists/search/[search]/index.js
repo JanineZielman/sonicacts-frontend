@@ -75,19 +75,21 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, fe
             >
               {posts.map((item, i) => {
                 return (
-                  <div className="discover-item community">
-                    <LazyLoad height={100}>
-                      <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
-                        <div className="image">
-                          {item.attributes?.cover_image?.data &&
-                            <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                          }
-                        </div>
-                        <div className="info">
-                          {item.attributes.name} 
-                          <div>{item.attributes.job_description}</div> 
-                        </div>
-                      </a>
+                  <div className="discover-item artist-item">
+                    <LazyLoad height={600}>
+                      <div className="item-wrapper">
+                        <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
+                          <div className="image">
+                            {item.attributes?.cover_image?.data &&
+                              <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                            }
+                          </div>
+                          <div className="info">
+                            {item.attributes.name} 
+                            <div>{item.attributes.job_description}</div> 
+                          </div>
+                        </a>
+                      </div>
                     </LazyLoad>
                   </div>
                 )

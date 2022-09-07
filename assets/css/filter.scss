@@ -211,6 +211,11 @@
 
         }
       }
+      &.artist-item{
+        .image {
+          height: 25vw;
+        }
+      }
     }
   }
 }
