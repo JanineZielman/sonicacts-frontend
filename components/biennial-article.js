@@ -120,7 +120,7 @@ const Article = ({page, relations, params, programmes}) => {
 								<h2>{programmes.title}</h2>
 								<span>Locations</span>
 								<div className="date">
-									{programmes.locations?.data.map((loc, j) => {
+									{programmes.locations?.data?.map((loc, j) => {
 										return(
 											<div className="location">
 												<a href={`/biennial/${params.slug}/visit`}>{loc.attributes.title}</a>
@@ -146,14 +146,14 @@ const Article = ({page, relations, params, programmes}) => {
 						{relations.attributes.start_time &&
 							<>
 								<span>Time</span>
-								<div className="date">{relations.attributes.start_time.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes.end_time.substring(0, 5)}</>}</div>
+								<div className="date">{relations.attributes?.start_time?.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes?.end_time?.substring(0, 5)}</>}</div>
 							</>
 						}
 						{relations?.attributes?.locations?.data[0] && 
 							<div>
 								<span>Locations</span>
 								<div className="date">
-									{relations.attributes.locations?.data.map((loc, j) => {
+									{relations.attributes.locations?.data?.map((loc, j) => {
 										return(
 											<div className="location">
 												<a href={`/biennial/${params.slug}/visit`}>{loc.attributes.title}</a>
@@ -167,7 +167,7 @@ const Article = ({page, relations, params, programmes}) => {
 						{relations?.attributes?.community_items?.data[0] &&
 							<div>
 								<span>Artists</span>
-								{relations?.attributes?.community_items.data.map((item, i) => {
+								{relations?.attributes?.community_items?.data?.map((item, i) => {
 									return (
 										<a href={`/biennial/${params.slug}/artists/${item.attributes.slug}`} key={`com-link${i}`}>
 											{item.attributes.name}
