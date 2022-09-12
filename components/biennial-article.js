@@ -131,7 +131,7 @@ const Article = ({page, relations, params, programmes}) => {
 								<span>When</span>
 								<div className="date">{Moment(programmes.start_date).format('D MMM y')} – {Moment(programmes.end_date).format('D MMM y')}</div>
 								<span>Time</span>
-								<div className="date">{programmes.start_time.substring(0, 5)} – {programmes.end_time.substring(0, 5)}</div>
+								<div className="date">{programmes.start_time?.substring(0, 5)} – {programmes.end_time?.substring(0, 5)}</div>
 								<br/>
 								<a href={`/biennial/${params.slug}/programme/${programmes.slug}`}>View programme</a>
 							</div>
@@ -146,7 +146,7 @@ const Article = ({page, relations, params, programmes}) => {
 						{relations.attributes.start_time &&
 							<>
 								<span>Time</span>
-								<div className="date">{relations.attributes.start_time.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes.end_time.substring(0, 5)}</>}</div>
+								<div className="date">{relations.attributes.start_time?.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes.end_time?.substring(0, 5)}</>}</div>
 							</>
 						}
 						{relations?.attributes?.locations?.data[0] && 
