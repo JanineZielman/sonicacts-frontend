@@ -104,6 +104,66 @@
 	padding-left: 10px;
 }
 
+.marquee-highlight{
+	display: none;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	white-space: nowrap;
+	margin-left: 24px;
+	position: relative;
+	overflow: hidden;
+	--offset: 100%;
+	--move-initial: calc(100% + var(--offset));
+	--move-final: calc(0% - var(--offset));
+	.marquee__inner {
+		width: fit-content;
+		display: flex;
+		position: relative;
+		transform: translate3d(var(--move-initial), 0, 0);
+		animation: marquee 10s linear infinite forwards;
+		animation-play-state: running;
+	}
+	p{
+		margin: 0;
+		margin-right: 2vw;
+	}
+	&:before{
+		content: " ";
+		width: 10vw;
+		height: 100%;
+		background: url('../noise-bg-fes.png');
+		background-size: cover;
+		position: absolute;
+		z-index: 99;
+		top: 0;
+		left: 0;
+		-webkit-transform: scaleX(-1);
+		transform: scaleX(-1);
+	}
+	&:after {
+		content: " ";
+		width: 10vw;
+		height: 100%;
+		background: url('../noise-bg-fes.png');
+		background-size: cover;
+		position: absolute;
+		z-index: 99;
+		top: 0;
+		right: 0;
+	}
+}
+
+@keyframes marquee {
+	0% {
+		transform: translate3d(var(--move-initial), 0, 0);
+	}
+
+	100% {
+		transform: translate3d(var(--move-final), 0, 0);
+	}
+}
+
 
 .menu-modal {
 	.menu-search{
@@ -157,10 +217,14 @@
 	.menu .menu-wrapper{
 		background-color: rgb(180, 200, 200);
 	}
+	.marquee-highlight {
+		display: block;
+	}
 	.menu-wrapper {
 		.breadcrumbs {
 			a {
 				text-transform: uppercase;
+				white-space: nowrap;
 			}
 		}
 	}
