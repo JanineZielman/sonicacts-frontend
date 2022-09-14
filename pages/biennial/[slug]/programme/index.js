@@ -43,11 +43,15 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                               }
                             </div>
                           </div>
-                          {item.attributes.category?.data && 
+                           {item.attributes.biennial_tags?.data && 
                             <div className="category">
-                              <a href={'#'} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.slug}
-                              </a>
+                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                                return(
+                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    {tag.attributes.title} 
+                                  </a>
+                                )
+                              })}
                             </div>
                           }
                           {item.attributes.start_date && 
@@ -66,12 +70,12 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                           <div className="title">
                             {item.attributes.title}
                           </div>
-                          {item.attributes.biennial_tags?.data && 
+                          {item.attributes?.authors?.data &&
                             <div className="tags">
-                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                              {item.attributes.authors.data.map((author, i) => {
                                 return(
-                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                    {tag.attributes.title} 
+                                  <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                    {author.attributes.name}
                                   </a>
                                 )
                               })}
@@ -114,12 +118,12 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                               }
                             </div>
                           </div>
-                          {item.attributes?.authors?.data &&
+                          {item.attributes.biennial_tags?.data && 
                             <div className="category">
-                              {item.attributes.authors.data.map((author, i) => {
+                              {item.attributes.biennial_tags.data.map((tag, i) => {
                                 return(
-                                  <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
-                                    {author.attributes.name}
+                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    {tag.attributes.title} 
                                   </a>
                                 )
                               })}
@@ -141,12 +145,12 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                           <div className="title">
                             {item.attributes.title}
                           </div>
-                          {item.attributes.biennial_tags?.data && 
+                          {item.attributes?.authors?.data &&
                             <div className="tags">
-                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                              {item.attributes.authors.data.map((author, i) => {
                                 return(
-                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                    {tag.attributes.title} 
+                                  <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                    {author.attributes.name}
                                   </a>
                                 )
                               })}

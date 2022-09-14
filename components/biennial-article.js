@@ -26,7 +26,7 @@ const Article = ({page, relations, params, programmes}) => {
 		<section className="article">
 			<>
 				{relations?.attributes?.authors?.data &&
-					<div className="category">
+					<div className="tags">
 						{relations.attributes.authors.data.map((author, i) => {
 							return(
 								<a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
