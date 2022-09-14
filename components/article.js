@@ -133,11 +133,6 @@ const Article = ({page, relations}) => {
 									}
 									{relations?.attributes?.dates[0] &&
 										<>
-											{/* {relations?.attributes?.date && 
-												<div>
-												– {Moment(relations?.attributes?.date).format('D MMM y')}
-												</div>
-											} */}
 											{relations?.attributes?.dates.map((date, i) => {
 												return(
 													<div className="date" key={`dates-${i}`}>

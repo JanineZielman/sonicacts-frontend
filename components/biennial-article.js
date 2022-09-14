@@ -139,17 +139,58 @@ const Article = ({page, relations, params, programmes}) => {
 						}
 
 						{relations.attributes.start_date &&
+							<span>When</span>
+						}
+						{relations?.attributes?.start_date && relations?.attributes?.dates == 0 &&
 							<>
-								<span>When</span>
-								<div className="date">{Moment(relations.attributes.start_date).format('D MMM y')} {relations.attributes.end_date && <>– {Moment(relations.attributes.end_date).format('D MMM y')}</>}</div>
+							<div className="date">{Moment(relations.attributes.start_date).format('D MMM')} {relations.attributes.end_date && <>– {Moment(relations.attributes.end_date).format('D MMM')}</>}</div>
 							</>
 						}
+						{relations?.attributes?.dates[0] &&
+							<>
+								{relations.attributes.start_date &&
+									<div>
+										– {Moment(relations.attributes.start_date).format('D MMM')}
+									</div>
+								}
+								{relations?.attributes?.dates.map((date, i) => {
+									return(
+										<div className="date" key={`dates-${i}`}>
+											{date.single_date &&
+												<div>
+												– {Moment(date.single_date).format('D MMM')}
+												</div>
+											}
+											{date.end_date &&
+												<>
+												{relations?.attributes?.date &&
+													Moment(relations?.attributes?.start_date).format('D MMM')
+												}
+												&nbsp;– {Moment(date.end_date).format('D MMM')}
+												</>
+											}
+										</div>
+									)
+								})}
+							</>
+						}
+
 						{relations.attributes.start_time &&
 							<>
 								<span>Time</span>
 								<div className="date">{relations.attributes?.start_time?.substring(0, 5)} {relations.attributes.end_time && <>– {relations.attributes?.end_time?.substring(0, 5)}</>}</div>
 							</>
 						}
+
+
+						{relations.attributes.deadline &&
+							<>
+								<span>Deadline</span>
+								<div className="date">{Moment(relations.attributes.deadline).format('D MMM y')}</div>
+							</>
+						}
+
+
 						{relations?.attributes?.locations?.data[0] && 
 							<div>
 								<span>Locations</span>
@@ -163,6 +204,13 @@ const Article = ({page, relations, params, programmes}) => {
 									})}
 								</div>
 							</div>
+						}
+
+						{relations.attributes.price && relations.attributes.ticket_link &&
+							<a href={relations.attributes.ticket_link}>
+								<span>Tickets</span>
+								<div>€ {relations.attributes.price}</div>
+							</a>
 						}
 						
 						{relations?.attributes?.community_items?.data[0] &&

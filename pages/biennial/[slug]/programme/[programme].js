@@ -12,6 +12,8 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
+  
+  console.log(relations)
 
   return (  
     <section className={`festival-wrapper ${params.programme}`}>
@@ -21,6 +23,9 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
           <>
             <div className="discover sub">
               <div className="filter">
+                {relations.attributes.sub_programmes_title &&
+                  <h1>{relations.attributes.sub_programmes_title}</h1>
+                }
               </div>
               <div className="discover-container programme-container">
                 {sub.map((item, i) => {
