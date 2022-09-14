@@ -26,8 +26,6 @@ const Agendaitems = ({ page, items }) => {
 				const d = [];
 				d[i] = number;
 
-				console.log(item.attributes.biennial)
-
 				return (
 					<>
 					{items[i].attributes.date && 

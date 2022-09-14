@@ -34,42 +34,44 @@ const Hero = ({slug, biennial, programmes }) => {
 														}
 													</div>
 												</div>
-												{item.attributes.start_date && 
-													<p className="when">
-														{Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
-															<>
-																{Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-															</>
-														: 
-															<>
-																{Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-															</>
-														}
-													</p>
-                        }
-												{item.attributes.biennial_tags?.data && 
-													<div className="category">
-														{item.attributes.biennial_tags.data.map((tag, i) => {
-															return(
-																<a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-																	{tag.attributes.title}
-																</a>
-															)
-														})}
-													</div>
-												}
-												<p>{item.attributes.title}</p>
-												{item.attributes?.authors?.data &&
-													<div className="tags">
-														{item.attributes.authors.data.map((author, i) => {
-															return(
-																<a className="author" href={`/biennial/${slug}/artists/${author.attributes.slug}`}>
-																	{author.attributes.name}
-																</a>
-															)
-														})}
-													</div>
-												}
+												<div className='padding-left'>
+													{item.attributes.biennial_tags?.data && 
+														<div className="category">
+															{item.attributes.biennial_tags.data.map((tag, i) => {
+																return(
+																	<a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+																		{tag.attributes.title}
+																	</a>
+																)
+															})}
+														</div>
+													}
+													{item.attributes.start_date && 
+														<p className="when">
+															{Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
+																<>
+																	{Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
+																</>
+															: 
+																<>
+																	{Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
+																</>
+															}
+														</p>
+													}
+													<p>{item.attributes.title}</p>
+													{item.attributes?.authors?.data &&
+														<div className="tags">
+															{item.attributes.authors.data.map((author, i) => {
+																return(
+																	<a className="author" href={`/biennial/${slug}/artists/${author.attributes.slug}`}>
+																		{author.attributes.name}
+																	</a>
+																)
+															})}
+														</div>
+													}
+												</div>
 											</a>
 										)
 									})}
