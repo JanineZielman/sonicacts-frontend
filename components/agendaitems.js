@@ -5,7 +5,6 @@ import Moment from 'moment';
 import LazyLoad from 'react-lazyload';
 
 const Agendaitems = ({ page, items }) => {
-  var  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   return (
 		<>
@@ -26,6 +25,9 @@ const Agendaitems = ({ page, items }) => {
 				}
 				const d = [];
 				d[i] = number;
+
+				console.log(item.attributes.biennial)
+
 				return (
 					<>
 					{items[i].attributes.date && 
@@ -40,7 +42,8 @@ const Agendaitems = ({ page, items }) => {
 					}
 					<div className="agenda-item">
 						<LazyLoad height={600}>
-							<a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'agenda'+i}>
+							{/* <a href={`/${page?.attributes.slug}/${item.attributes.slug}`} key={'agenda'+i}> */}
+							<a href={item.attributes.biennial?.data?.attributes ? `/biennial/${item.attributes.biennial.data.attributes.slug}/programme/${item.attributes.slug}` : `/${page?.attributes.slug}/${item.attributes.slug}`} key={'agenda'+i}>
 								<div className="image">
 									{item.attributes.cover_image.data &&
 										<Image image={item.attributes.cover_image.data?.attributes} layout='fill' objectFit='cover' sizes="50vw"/>
@@ -97,20 +100,6 @@ const Agendaitems = ({ page, items }) => {
 							</a>
 						</LazyLoad>
 					</div>
-					
-					{/* {items[i].attributes.date && difference[i] > 1 &&
-					<>
-					{d[i].map((item, index) => {
-						const missingMonth = parseInt(current[i]) + index
-						return(
-							<div className="timeline-item missing">
-								<div className="line"></div>
-									{months[missingMonth]}
-							</div>
-						)
-					})}
-					</>
-					} */}
 					</>
 				)
 			})}

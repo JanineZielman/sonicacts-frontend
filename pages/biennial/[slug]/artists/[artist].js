@@ -13,8 +13,6 @@ const CommunityItem = ({params, page, global, relations, menus, programmes, fest
 
   page.attributes.slug = `community`
 
-  console.log(programmes)
-
   return (  
     <section className="festival-wrapper">
       <Layout menus={menus} page={pageSlug} global={global} relations={relations} festival={festival}>

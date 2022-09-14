@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout"
 import { fetchAPI } from "../../lib/api"
@@ -6,7 +6,41 @@ import { fetchAPI } from "../../lib/api"
 import AgendaItems from '../../components/agendaitems'
 import OpenCalls from '../../components/opencalls'
 
-const Agenda = ({ menus, global, page, items, opencalls }) => {
+const Agenda = ({ menus, global, page, items, opencalls, programs }) => {
+  const [mergedItems, setMergedItems] = useState('');
+
+  useEffect(() => {
+    programs.forEach( function(data) {
+      data.attributes['date'] = data.attributes['start_date'];
+    });
+
+    const mergeSortedArrays = (items = [], programs = []) => {
+      const res = [];
+      let i = 0;
+      let j = 0;
+      while(i < items.length && j < programs.length){
+          if(items[i].attributes.date < programs[j].attributes.date){
+            res.push(items[i]);
+            i++;
+          }else{
+            res.push(programs[j]);
+            j++;
+          }
+      };
+      while(i < items.length){
+          res.push(items[i]);
+          i++;
+      };
+      while(j < programs.length){
+          res.push(programs[j]);
+          j++;
+      };
+      return res;
+    };
+
+    setMergedItems(mergeSortedArrays(items, programs));
+  }, []);
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
@@ -25,12 +59,12 @@ const Agenda = ({ menus, global, page, items, opencalls }) => {
               <OpenCalls page={page} opencalls={opencalls}/>
             </>
           }
-          {items[0] &&
+          {mergedItems[0] &&
             <>
               <div className="seperator">
                 <h2>Upcoming</h2>
               </div>
-              <AgendaItems page={page} items={items}/>
+              <AgendaItems page={page} items={mergedItems}/>
             </>
           }
         </div>
@@ -97,6 +131,26 @@ export async function getStaticProps() {
     await fetchAPI( `/agenda-items?${queryoc}`
   );
 
+  const queryprogram = qs.stringify({
+    populate: '*', 
+    filters: {
+      $or: [
+        {
+          start_date: {
+            $gte: currentDate,
+          },
+        }
+      ],
+    },
+    sort: ['start_date:asc', 'slug:asc'],
+  }, {
+    encodeValuesOnly: true,
+  });
+
+  const programRes = 
+    await fetchAPI( `/programmes?${queryprogram}&_sort=start_date:ASC,slug:ASC`
+  );
+
   return {
     props: {
       page: pageRes.data,
@@ -104,6 +158,7 @@ export async function getStaticProps() {
       global: globalRes.data,
       menus: menusRes.data,
       opencalls: opencallRes.data,
+      programs: programRes.data,
     },
     revalidate: 1,
   }
