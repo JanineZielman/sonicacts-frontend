@@ -100,6 +100,70 @@
 	// background-image: url(../noise-fes.png);
 }
 
+.padding-left{
+	padding-left: 10px;
+}
+
+.marquee-highlight{
+	display: none;
+	font-size: 18px;
+	width: 100%;
+	text-align: center;
+	white-space: nowrap;
+	margin-left: 24px;
+	position: relative;
+	overflow: hidden;
+	--offset: 100%;
+	--move-initial: calc(100% + var(--offset));
+	--move-final: calc(0% - var(--offset));
+	.marquee__inner {
+		width: fit-content;
+		display: flex;
+		position: relative;
+		transform: translate3d(var(--move-initial), 0, 0);
+		animation: marquee 10s linear infinite forwards;
+		animation-play-state: running;
+	}
+	p{
+		margin: 0;
+		margin-right: 2vw;
+	}
+	&:before{
+		content: " ";
+		width: 10vw;
+		height: 100%;
+		background: url('../noise-bg-fes.png');
+		background-size: cover;
+		position: absolute;
+		z-index: 99;
+		top: 0;
+		left: 0;
+		-webkit-transform: scaleX(-1);
+		transform: scaleX(-1);
+	}
+	&:after {
+		content: " ";
+		width: 10vw;
+		height: 100%;
+		background: url('../noise-bg-fes.png');
+		background-size: cover;
+		position: absolute;
+		z-index: 99;
+		top: 0;
+		right: 0;
+	}
+}
+
+@keyframes marquee {
+	0% {
+		transform: translate3d(var(--move-initial), 0, 0);
+	}
+
+	100% {
+		transform: translate3d(var(--move-final), 0, 0);
+	}
+}
+
 
 .menu-modal {
 	.menu-search{
@@ -142,13 +206,25 @@
 
 .festival-home{
 	background-color: rgb(180, 200, 200);
+	footer.footer{
+		// position: absolute;
+		// bottom: 0;
+		// z-index: 9;
+		margin-top: 200px;
+		background-color: rgb(180, 200, 200);
+		border-top: 2px solid black;
+	}
 	.menu .menu-wrapper{
 		background-color: rgb(180, 200, 200);
+	}
+	.marquee-highlight {
+		display: block;
 	}
 	.menu-wrapper {
 		.breadcrumbs {
 			a {
 				text-transform: uppercase;
+				white-space: nowrap;
 			}
 		}
 	}
@@ -157,11 +233,12 @@
 		display: none;
 	}
 	.content-wrapper{
-		position: absolute;
-		top: 200px;
+		margin-top: 100px;
 		width: 98vw;
 	}
 	.links{
+		position: absolute;
+		z-index: 9;
 		a{
 			background-color: white;
 			border-radius: 50px;
@@ -171,25 +248,11 @@
 			color: black;
 		}
 	}
-	.festival-hero-bg{
-		height: 100vh;
-		top: 0;
-		.title{
-			top: 200px;
-		}
-		div{
-			font-size: 15vw;
-			width: 60vw;
-			padding-left: 20vw;
-		}
-		border-bottom: 4px solid black;
-		border-top: 4px solid black;
-	}
 	.bg {
-		top: -24px;
-		position: absolute;
+		top: 0px;
+		position: fixed;
 		width: 100vw;
-		height: 105vh;
+		height: 100vh;
 		z-index: 0;
 		background-image: url('../fes-noise.svg');
 		background-position: top left;
@@ -206,17 +269,17 @@
 			font-variation-settings: 'wght' 50;
 			-moz-font-variation-settings: 'wght' 50;
 			text-decoration: none;
-			&.exhibition{
-				font-family: Grime3;
-			}
-			&.symposium {
-				font-family: Crystal3;
-				letter-spacing: normal;
-			}
-			&.soundart {
-				font-family: Crystal6;
-				letter-spacing: normal;
-			}
+			// &.exhibition{
+			// 	font-family: Grime3;
+			// }
+			// &.symposium {
+			// 	font-family: Crystal3;
+			// 	letter-spacing: normal;
+			// }
+			// &.soundart {
+			// 	font-family: Crystal6;
+			// 	letter-spacing: normal;
+			// }
 			a{
 				color: black;
 				text-transform: uppercase;
@@ -224,30 +287,29 @@
 			&:last-child{
 				border: none;
 			}
-			&:hover {
-				font-variation-settings: 'wght' 100;
-				-moz-font-variation-settings: 'wght' 100;
-			}
-			&:after {
-				font-family: "SuisseIntl";
-				color: black;
-				transition: all 0.4s ease;
-				content: " ";
-				width: 48px;
-				height: 48px;
-				position: absolute;
-				background-image: url('/arrow.svg');
-				background-position: center center;
-				background-repeat: no-repeat;
-				right: 15vw;
-				top: 55%;
-				transform: translateY(-50%);
-			}
+			// &:hover {
+			// 	font-variation-settings: 'wght' 100;
+			// 	-moz-font-variation-settings: 'wght' 100;
+			// }
+			// &:after {
+			// 	font-family: "SuisseIntl";
+			// 	color: black;
+			// 	transition: all 0.4s ease;
+			// 	content: " ";
+			// 	width: 48px;
+			// 	height: 48px;
+			// 	position: absolute;
+			// 	background-image: url('/arrow.svg');
+			// 	background-position: center center;
+			// 	background-repeat: no-repeat;
+			// 	right: 15vw;
+			// 	top: 55%;
+			// 	transform: translateY(-50%);
+			// }
 		}
 		h1{
 			font-size: 5.5vw;
 			line-height: 1;
-			letter-spacing: 8px;
 			font-weight: 100;
 		}
 		.date{
@@ -308,29 +370,34 @@
 
 .festival-hero-bg {
 	width: 100vw;
-	height: 250vh;
-	position: relative;
-	overflow: hidden;
+	height: 180vh;
+	position: absolute;
+	overflow: visible;
+	top: -100px;
 	.title {
-		height: 250vh;
 		position: absolute;
 		z-index: 0;
-		top: 450px;
+		top: 120px;
 	}
 	div {
 		position: absolute;
-		top: -200px;
 		left: 0;
-		font-size: 50vh;
+		top: -7vw;
 		line-height: 0.7;
-		width: 80vw;
 		padding: 50px 10vw;
-		// text-align: left;
-		// height: 100vh;
-		// overflow: hidden;
-
+		font-size: 15vw;
+		padding-left: 20vw;
 		span {
 			display: inline-block;
+		}
+		.layer1,
+		.layer2,
+		.layer3 {
+			width: 45vw;
+			padding: 5vw 27.5vw;
+			span:first-child {
+				margin-left: 23vw;
+			}
 		}
 		&.layer1 {
 			color: rgb(255, 203, 5);
@@ -395,12 +462,25 @@
 		margin-top: 0;
 		position: absolute;
 	}
+	.category {
+		a {
+			background-color: white;
+			display: inline-block;
+			width: auto;
+			margin-right: 8px;
+			margin-bottom: 5px;
+			padding: 5px 10px;
+			border-radius: 25px;
+			font-size: 14px;
+		}
+	}
 	.discover{
 		margin-top: 48px;
 	}
 	.article {
 		.title {
 			text-transform: uppercase;
+
 		}
 		.image.small,
 		.image.medium {
@@ -984,5 +1064,109 @@
 		font-size: 21px;
 		width: 33vw;
 		margin-right: 24px;
+	}
+}
+
+.festival-home .landing-page.festival-hero{
+	h1{
+		letter-spacing: normal;
+		font-weight: 300;
+	}
+	.preview{
+		display: flex;
+	}
+	.category {
+		margin-top: 0px;
+		line-height: 1;
+		a {
+			background-color: white;
+			display: inline-block;
+			width: auto;
+			margin-right: 8px;
+			margin-bottom: 0px;
+			padding: 5px 10px;
+			border-radius: 25px;
+			font-size: 12px;
+			line-height: 1;
+		}
+	}
+	.tags{
+		margin-top: 5px;
+	}
+	.wrapper .info .image-text{
+		p{
+			text-transform: capitalize;
+			font-family: "SuisseIntl";
+			font-size: 30px;
+			margin: 5px 0 0 0;
+			width: 22vw;
+			line-height: 1;
+			font-weight: 500;
+		}
+		.when{
+			font-weight: 300;
+		}
+	}
+	.image{
+		height: 16vw;
+		width: 23vw;
+		margin-right: 1vw;
+		margin-top: 1vw;
+		mask-image: url('../noise6.png');
+		mask-size: cover;
+		mask-repeat: no-repeat;
+		mask-position: top;
+		transition: all 0.4s ease;
+		position: relative;
+		&:hover {
+			mask-image: url('../white.png');
+		}
+				.info-overlay {
+					position: absolute;
+					padding: 5px;
+					display: flex;
+					flex-wrap: wrap;
+					flex-direction: column;
+					top: 0;
+					height: 20px;
+					.locations{
+						margin: 0;
+						flex-direction: column;
+						display: inline-block;
+						margin-left: 5px;
+					}
+		
+					.location {
+						span {
+							font-size: 14px;
+							font-weight: 300;
+							line-height: 1;
+						}
+						font-size: 14px;
+						background-color: white;
+						border-radius: 50px;
+						margin: 5px 5px 0 0;
+						padding: 5px 10px 0px 10px;
+						width: auto;
+						display: inline-block;
+					}
+				}
+		div{
+			width: 100%;
+			height: 100%;
+			img{
+				z-index: 0;
+			}
+		}
+	}
+	.artists-preview{
+		.image{
+			height: 14vw;
+			width: 14vw;
+		}
+	}
+	.wrapper .info .artists-preview .image-text p{
+		width: 14vw;
+		font-size: 21px;
 	}
 }

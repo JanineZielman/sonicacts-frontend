@@ -21,6 +21,9 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
           <>
             <div className="discover sub">
               <div className="filter">
+                {relations.attributes.sub_programmes_title &&
+                  <h1>{relations.attributes.sub_programmes_title}</h1>
+                }
               </div>
               <div className="discover-container programme-container">
                 {sub.map((item, i) => {
@@ -54,11 +57,15 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                 }
                               </div>
                             </div>
-                            {item.attributes.category?.data && 
+                            {item.attributes.biennial_tags?.data && 
                               <div className="category">
-                                <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                                  {item.attributes.category?.data.attributes.slug}
-                                </a>
+                                {item.attributes.biennial_tags.data.map((tag, i) => {
+                                  return(
+                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                      {tag.attributes.title}
+                                    </a>
+                                  )
+                                })}
                               </div>
                             }
                             {item.attributes.start_date && 
@@ -77,12 +84,12 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                             <div className="title">
                               {item.attributes.title}
                             </div>
-                            {item.attributes.biennial_tags?.data && 
+                            {item.attributes?.authors?.data &&
                               <div className="tags">
-                                {item.attributes.biennial_tags.data.map((tag, i) => {
+                                {item.attributes.authors.data.map((author, i) => {
                                   return(
-                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                      {tag.attributes.title}
+                                    <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                      {author.attributes.name}
                                     </a>
                                   )
                                 })}
@@ -114,7 +121,7 @@ export async function getServerSideProps({params, preview = null}) {
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=order%3Aasc&sort[1]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
   
 

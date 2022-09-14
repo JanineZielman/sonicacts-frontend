@@ -51,7 +51,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
             >
               {posts.map((item, i) => {
                 return (
-                  <div className="discover-item">
+                  <div className="discover-item artist-item">
                     <LazyLoad height={600}>
                       <div className="item-wrapper">
                         <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>

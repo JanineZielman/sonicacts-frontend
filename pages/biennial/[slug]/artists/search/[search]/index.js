@@ -8,10 +8,15 @@ import ReactMarkdown from "react-markdown";
 import Search from "../../../../../../components/search"
 import LazyLoad from 'react-lazyload';
 
-const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, festival}) => {
+const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, festival, params}) => {
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
+
+  const pageSlug = {
+    attributes:
+      	{slug: `biennial/${params.slug}/artists`}
+	}
 
 
   useEffect(() => {
@@ -56,7 +61,7 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, fe
 
   return (
 		<section className="festival-wrapper">
-      <Layout page={page} menus={menus} global={global}>
+      <Layout page={pageSlug} menus={menus} global={global}>
         <div className="discover">
           <div className="wrapper intro">
             <ReactMarkdown 
@@ -75,19 +80,21 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, fe
             >
               {posts.map((item, i) => {
                 return (
-                  <div className="discover-item community">
-                    <LazyLoad height={100}>
-                      <a href={'artists/' + item.attributes.slug} key={'agenda'+i}>
-                        <div className="image">
-                          {item.attributes?.cover_image?.data &&
-                            <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
-                          }
-                        </div>
-                        <div className="info">
-                          {item.attributes.name} 
-                          <div>{item.attributes.job_description}</div> 
-                        </div>
-                      </a>
+                  <div className="discover-item artist-item">
+                    <LazyLoad height={600}>
+                      <div className="item-wrapper">
+                        <a href={`/biennial/${params.slug}/artists/${item.attributes.slug}`} key={'agenda'+i}>
+                          <div className="image">
+                            {item.attributes?.cover_image?.data &&
+                              <Image image={item.attributes.cover_image.data.attributes} layout='fill' objectFit='cover'/>
+                            }
+                          </div>
+                          <div className="info">
+                            {item.attributes.name} 
+                            <div>{item.attributes.job_description}</div> 
+                          </div>
+                        </a>
+                      </div>
                     </LazyLoad>
                   </div>
                 )
@@ -142,6 +149,7 @@ export async function getServerSideProps({params}) {
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
+      params: params,
     },
   };
 }

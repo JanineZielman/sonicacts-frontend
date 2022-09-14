@@ -43,11 +43,15 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                               }
                             </div>
                           </div>
-                          {item.attributes.category?.data && 
+                           {item.attributes.biennial_tags?.data && 
                             <div className="category">
-                              <a href={'#'} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.slug}
-                              </a>
+                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                                return(
+                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    {tag.attributes.title} 
+                                  </a>
+                                )
+                              })}
                             </div>
                           }
                           {item.attributes.start_date && 
@@ -66,12 +70,12 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                           <div className="title">
                             {item.attributes.title}
                           </div>
-                          {item.attributes.biennial_tags?.data && 
+                          {item.attributes?.authors?.data &&
                             <div className="tags">
-                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                              {item.attributes.authors.data.map((author, i) => {
                                 return(
-                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                    {tag.attributes.title} 
+                                  <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                    {author.attributes.name}
                                   </a>
                                 )
                               })}
@@ -84,7 +88,7 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                 )
               })}
           </div>
-          {/* <h1>Other events</h1>
+          <h1>Other events</h1>
           <div className="filter"></div>
           <div className="discover-container programme-container">
               {all.map((item, i) => {
@@ -114,11 +118,15 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                               }
                             </div>
                           </div>
-                          {item.attributes.category?.data && 
+                          {item.attributes.biennial_tags?.data && 
                             <div className="category">
-                              <a href={'#'} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.slug}
-                              </a>
+                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                                return(
+                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    {tag.attributes.title} 
+                                  </a>
+                                )
+                              })}
                             </div>
                           }
                           {item.attributes.start_date && 
@@ -137,12 +145,12 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                           <div className="title">
                             {item.attributes.title}
                           </div>
-                          {item.attributes.biennial_tags?.data && 
+                          {item.attributes?.authors?.data &&
                             <div className="tags">
-                              {item.attributes.biennial_tags.data.map((tag, i) => {
+                              {item.attributes.authors.data.map((author, i) => {
                                 return(
-                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                    {tag.attributes.title} 
+                                  <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                    {author.attributes.name}
                                   </a>
                                 )
                               })}
@@ -154,7 +162,7 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                   </div>
                 )
               })}
-          </div> */}
+          </div>
         </div>
       </Layout>
     </section>
@@ -165,8 +173,8 @@ export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [festivalRes, itemRes, allRes, globalRes, menusRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=start_date%3Aasc&populate=*`),
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&sort[0]=start_date%3Aasc&populate=*`),
+    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=order%3Aasc&sort[1]=start_date%3Aasc&populate=*`),
+    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=false&sort[0]=order%3Aasc&sort[1]=start_date%3Aasc&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
