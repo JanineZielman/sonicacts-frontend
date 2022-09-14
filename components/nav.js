@@ -37,13 +37,15 @@ const Nav = ({ menus, global, page, festival }) => {
           <a href={'/' + page?.attributes?.slug}>
             {last?.replace('-', ' ')}
           </a>
-          <div className="marquee-highlight">
-            <div class="marquee__inner" aria-hidden="true">
-              <ReactMarkdown 
-                children={festival.attributes.highlight} 
-              />
+          {festival?.attributes?.highlight &&
+            <div className="marquee-highlight">
+              <div class="marquee__inner" aria-hidden="true">
+                <ReactMarkdown 
+                  children={festival?.attributes?.highlight} 
+                />
+              </div>
             </div>
-          </div>
+          }
         </div>
         <Menu menus={menus} page={page} global={global} first={first} festival={festival}/>
       </div>
