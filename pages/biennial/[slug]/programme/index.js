@@ -114,11 +114,15 @@ const Programme = ({ menus, global, items, params, festival, all }) => {
                               }
                             </div>
                           </div>
-                          {item.attributes.category?.data && 
+                          {item.attributes?.authors?.data &&
                             <div className="category">
-                              <a href={'#'} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.slug}
-                              </a>
+                              {item.attributes.authors.data.map((author, i) => {
+                                return(
+                                  <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                    {author.attributes.name}
+                                  </a>
+                                )
+                              })}
                             </div>
                           }
                           {item.attributes.start_date && 

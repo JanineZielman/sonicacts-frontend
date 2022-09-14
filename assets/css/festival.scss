@@ -394,12 +394,24 @@
 		margin-top: 0;
 		position: absolute;
 	}
+	.category {
+		a {
+			background-color: white;
+			display: inline-block;
+			width: auto;
+			margin-right: 8px;
+			padding: 5px 10px;
+			border-radius: 25px;
+			font-size: 14px;
+		}
+	}
 	.discover{
 		margin-top: 48px;
 	}
 	.article {
 		.title {
 			text-transform: uppercase;
+
 		}
 		.image.small,
 		.image.medium {

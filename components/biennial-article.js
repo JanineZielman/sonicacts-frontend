@@ -20,23 +20,24 @@ const Article = ({page, relations, params, programmes}) => {
 		}
   }, []);
 
+	console.log(relations)
+
   return (   
 		<section className="article">
 			<>
+				{relations?.attributes?.authors?.data &&
+					<div className="category">
+						{relations.attributes.authors.data.map((author, i) => {
+							return(
+								<a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+									{author.attributes.name}
+								</a>
+							)
+						})}
+					</div>
+				}
 				{page.attributes.title &&
 					<div className="title">
-						{relations?.attributes?.category?.data &&
-							<div className="category">
-								<a href={'/'+page?.attributes.slug+'/filter/'+relations.attributes.category?.data?.attributes.slug}>
-									{relations.attributes.category.data.attributes.title}
-								</a>
-								 {relations?.attributes?.author?.data && 
-										<a className="author" href={'/community/'+relations.attributes.author?.data?.attributes.slug}>
-											• {relations.attributes.author?.data?.attributes.name}
-										</a>
-									}
-							</div>
-						}
 						<h1>{page.attributes.title}</h1>
 					</div>
 				}
