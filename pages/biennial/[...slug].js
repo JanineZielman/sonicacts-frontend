@@ -59,7 +59,7 @@ export async function getServerSideProps({params}) {
 		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[community_items][populate]=*&populate[news_items][populate]=*&populate[programmes][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-		fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&sort[0]=start_date%3Aasc&populate=*`),
+		fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&sort[0]=order%3Aasc&sort[1]=start_date%3Aasc&populate=*`),
   ])
 
   return {

@@ -1007,6 +1007,24 @@
 	.preview{
 		display: flex;
 	}
+	.category {
+		margin-top: 0px;
+		line-height: 1;
+		a {
+			background-color: white;
+			display: inline-block;
+			width: auto;
+			margin-right: 8px;
+			margin-bottom: 0px;
+			padding: 5px 10px;
+			border-radius: 25px;
+			font-size: 12px;
+			line-height: 1;
+		}
+	}
+	.tags{
+		margin-top: 5px;
+	}
 	.wrapper .info .image-text{
 		p{
 			text-transform: capitalize;
