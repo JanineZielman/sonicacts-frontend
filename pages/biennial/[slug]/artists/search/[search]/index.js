@@ -91,7 +91,7 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, fe
                           </div>
                           <div className="info">
                             {item.attributes.name} 
-                            <div>{item.attributes.job_description}</div> 
+                            {/* <div>{item.attributes.job_description}</div>  */}
                           </div>
                         </a>
                       </div>
