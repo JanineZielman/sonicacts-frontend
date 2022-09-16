@@ -144,7 +144,7 @@ const Article = ({page, relations, params, programmes}) => {
 							<div className="date">{Moment(relations.attributes.start_date).format('D MMM')} {relations.attributes.end_date && <>– {Moment(relations.attributes.end_date).format('D MMM')}</>}</div>
 							</>
 						}
-						{relations?.attributes?.dates[0] &&
+						{relations?.attributes?.dates?.[0] &&
 							<>
 								{relations.attributes.start_date &&
 									<div>
