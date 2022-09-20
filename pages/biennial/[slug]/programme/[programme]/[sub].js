@@ -67,19 +67,32 @@ const SubProgrammeItem = ({menus, page, global, relations, params, festival, sub
                                 })}
                               </div>
                             }
-                            {item.attributes.start_date && 
-                              <div className="when">
-                                {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
-                                  <>
-                                    {Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-                                  </>
-                                : 
-                                  <>
-                                    {Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
-                                  </>
+                            {relations.attributes.sub_programmes_show_times == true ? 
+                              <>
+                                {item.attributes.start_time &&
+                                  <div className="when">
+                                    {item.attributes.start_time?.substring(0, 5)} {item.attributes.end_time && `– ${item.attributes.end_time?.substring(0, 5)}`}
+                                  </div>
                                 }
-                              </div>
+                              </>
+                              :
+                              <>
+                                {item.attributes.start_date && 
+                                  <div className="when">
+                                    {Moment(item.attributes.start_date).format('MMM') == Moment(item.attributes.end_date).format('MMM') ?
+                                      <>
+                                        {Moment(item.attributes.start_date).format('D')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
+                                      </>
+                                    : 
+                                      <>
+                                        {Moment(item.attributes.start_date).format('D MMM')} {item.attributes.end_date && <>– {Moment(item.attributes.end_date).format('D MMM')}</>}
+                                      </>
+                                    }
+                                  </div>
+                                }
+                              </>
                             }
+                            
                             <div className="title">
                               {item.attributes.title}
                             </div>
