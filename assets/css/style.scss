@@ -30,7 +30,7 @@
 
 @font-face {
   font-family: "Sonic Logo";
-  src: url("../fonts/Sonic-Acts-Logo-V03.woff2");
+  src: url("../fonts/Sonic-Acts-Logo-V05.woff2");
   font-weight: 100;
 }
 
@@ -87,10 +87,10 @@ html {
   }
   .glitch{
     font-size: 64px;
-    font-feature-settings: "ss02" on;
+    font-feature-settings: "ss04" on;
     height: 30px;
     &:before, &:after{
-      font-feature-settings: "ss03" on;
+      font-feature-settings: "ss05" on;
     }
   }
   .glitch:before {
@@ -551,7 +551,7 @@ h2 {
   width: 100vw;
   // max-width: 1400px;
   background-color: #e6e6e6;
-  background: url(../noise-fes.png);
+  background: url(../noise-bg5-portal.png);
   // background: url('../noise-bg5.png');
   background-position: top right;
   background-size: contain;
