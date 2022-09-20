@@ -1,0 +1,12 @@
+.timetable{
+	.timetable-menu{
+		display: flex;
+		margin-top: 24px;
+		.date{
+			margin-right: 24px;
+			background-color: white;
+			padding: 5px 20px;
+			border-radius: 25px;
+		}
+	}
+}

@@ -209,7 +209,10 @@ const Article = ({page, relations, params, programmes}) => {
 									{relations.attributes.locations?.data?.map((loc, j) => {
 										return(
 											<div className="location">
-												<a href={`/biennial/${params.slug}/visit`}>{loc.attributes.title}</a>
+												<a href={`/biennial/${params.slug}/visit`}>
+													{loc.attributes.title} {loc.attributes.subtitle && <> – {loc.attributes.subtitle} </>}
+												</a>
+												
 											</div>
 										)
 									})}
