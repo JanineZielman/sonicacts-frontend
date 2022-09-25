@@ -30,7 +30,7 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
       <meta name="image" content={relations?.attributes?.cover_image.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
       <meta property="og:image" content={relations?.attributes?.cover_image?.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
     </Head>
-    <section className="container">
+    <section className={`container ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <>
         {page?.attributes?.slug != 'homepage'  ? 
           <Nav menus={menus} global={global} page={page} festival={festival}/>

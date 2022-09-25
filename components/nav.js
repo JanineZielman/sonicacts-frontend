@@ -10,7 +10,13 @@ const Nav = ({ menus, global, page, festival }) => {
   }
 
   return (
-    <div className="menu">
+    <>
+    {festival?.attributes?.radio &&
+      <div className="radio">
+        <div className="radio-wrapper" dangerouslySetInnerHTML={{__html: festival.attributes.radio}}/>
+      </div>
+    }
+    <div className={`menu ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <div className="menu-wrapper">
         <div className="breadcrumbs">
           <div className="logo-wrapper">
@@ -50,6 +56,7 @@ const Nav = ({ menus, global, page, festival }) => {
         <Menu menus={menus} page={page} global={global} first={first} festival={festival}/>
       </div>
     </div>
+    </>
   )
 }
 

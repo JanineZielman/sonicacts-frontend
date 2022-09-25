@@ -5,7 +5,11 @@ import Article from "../components/article"
 const Page = ({menus, page, global}) => {
   return (
     <Layout menus={menus} page={page} global={global}>
-      <Article page={page}/>
+      {page.attributes.embed ?
+        <div className="full-iframe" dangerouslySetInnerHTML={{__html: page.attributes.content[0].url}}/>
+      :
+        <Article page={page}/>
+      }
     </Layout>
   )
 }
