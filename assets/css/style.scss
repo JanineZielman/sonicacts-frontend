@@ -692,3 +692,20 @@ h2 {
     transform: rotate(360deg);
   }
 }
+
+.full-iframe{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  overflow: hidden;
+  iframe{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
