@@ -1170,3 +1170,22 @@
 		font-size: 21px;
 	}
 }
+
+.program-side-wrapper{
+	margin-top: 14px;
+	span{
+		margin-top: 10px!important;
+	}
+}
+
+.program-side{
+	padding-top: 14px;
+	border-top: 2px solid black;
+	margin-bottom: 14px;
+	.date{
+		margin: 5px 0;
+	}
+	.view{
+		margin-top: 14px;
+	}
+}

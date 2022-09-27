@@ -1,12 +1,66 @@
 .timetable{
 	.timetable-menu{
 		display: flex;
+		flex-wrap: wrap;
 		margin-top: 24px;
 		.date{
-			margin-right: 24px;
+			margin: 0 14px 10px 0;
 			background-color: white;
 			padding: 5px 20px;
 			border-radius: 25px;
+			font-size: 18px;
+			cursor: pointer;
+		}
+	}
+	.timetable-content{
+		width: 98vw;
+		overflow-x: scroll;
+
+		.timetable-times {
+			display: flex;
+			margin-left: 250px;
+			height: calc(100% - 220px);
+			// position: absolute;
+			.time{
+				min-width: 400px;
+				border-right: 1px solid blue;
+				display: inline-block;
+				height: calc(100% - 220px);
+				// white-space: nowrap;
+			}
+		}
+
+		.timetable-wrapper{
+			display: flex;
+			position: relative;
+			.location {
+				height: 200px;
+				width: 250px;
+				min-width: 250px;
+				display: flex;
+				align-items: center;
+				border-bottom: 1px solid black;
+				padding-left: 14px;
+				// background-color: #b4c8c8;
+				// position: fixed;
+				// z-index: 9;
+			}
+			.timetable-item-wrapper{
+				display: flex;
+				white-space: nowrap;
+				width: calc(100vw - 250px);
+				.timetable-item {
+					border: 1px solid red;
+					// width: 100%;
+					min-width: 400px;
+					height: 200px;
+					margin-left: var(--margin);
+					min-width:  var(--width);
+					// &.w1{
+					// 	width: calc(400px)
+					// }
+				}
+			}
 		}
 	}
 }
