@@ -5,7 +5,7 @@ import Collapsible from 'react-collapsible';
 import Image from "./image"
 import LazyLoad from 'react-lazyload';
 
-const Article = ({page, relations, params, programmes}) => {
+const Article = ({page, relations, params}) => {
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
@@ -19,6 +19,8 @@ const Article = ({page, relations, params, programmes}) => {
 			}
 		}
   }, []);
+
+	console.log(relations)
 
   return (   
 		<section className="article">
@@ -113,31 +115,6 @@ const Article = ({page, relations, params, programmes}) => {
 							</>
 						}
 
-						{programmes &&
-							<div>
-								<span>programme</span>
-								<h2>{programmes.title}</h2>
-								<span>Locations</span>
-								<div className="date">
-									{programmes.locations?.data?.map((loc, j) => {
-										return(
-											<div className="location">
-												<a href={`/biennial/${params.slug}/visit`}>{loc.attributes.title}</a>
-											</div>
-										)
-									})}
-								</div>
-								<span>When</span>
-								<div className="date">{Moment(programmes?.start_date).format('D MMM')} {programmes?.end_date && <> – {Moment(programmes?.end_date).format('D MMM')} </>}</div>
-								<span>Time</span>
-								<div className="date">
-									{programmes?.start_time?.substring(0, 5)} {programmes?.end_time && `– ${programmes?.end_time?.substring(0, 5)}`}
-								</div>
-								<br/>
-								<a href={`/biennial/${params.slug}/programme/${programmes.slug}`}>View programme</a>
-							</div>
-						}
-
 						{relations.attributes.start_date &&
 							<span>When</span>
 						}
@@ -204,7 +181,7 @@ const Article = ({page, relations, params, programmes}) => {
 
 						{relations?.attributes?.locations?.data[0] && 
 							<div>
-								<span>Locations</span>
+								<span>Location</span>
 								<div className="date">
 									{relations.attributes.locations?.data?.map((loc, j) => {
 										return(
@@ -237,6 +214,36 @@ const Article = ({page, relations, params, programmes}) => {
 										</a>
 									)
 								})}
+							</div>
+						}
+
+						{relations.attributes.main_programmes?.data[0] &&
+							<div className="program-side-wrapper">
+								<span>Programmes</span>
+								{relations.attributes.main_programmes.data.map((programme, i) => {
+									return(
+										<div className="program-side">
+											<h2>{programme.attributes.title}</h2>
+											{programme.attributes.start_date &&
+												<>
+												{/* <span>When</span> */}
+												<div className="date">{Moment(programme.attributes.start_date).format('D MMM')} {programme.attributes.end_date && <> – {Moment(programme.attributes.end_date).format('D MMM')} </>}</div>
+												</>
+											}
+											{programme.attributes.start_time &&
+												<>
+												{/* <span>Time</span> */}
+												<div className="date">
+													{programme.attributes.start_time?.substring(0, 5)} {programme.attributes.end_time && `– ${programme.attributes.end_time?.substring(0, 5)}`}
+												</div>
+												</>
+											}
+											{/* <br/> */}
+											<a className="view" href={`/biennial/${params.slug}/programme/${programme.attributes.slug}`}>View programme</a>
+										</div>
+									)
+								})}
+								
 							</div>
 						}
 						
