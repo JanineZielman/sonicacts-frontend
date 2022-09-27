@@ -339,7 +339,13 @@
 		width: 95%;
 		margin-top: 36px;
 	}
-	.marquee-highlight {
+	.festival-home .marquee-highlight, .marquee-highlight {
 		display: none;
+	}
+	.radio .radio-wrapper {
+		font-size: 14px;
+		p{
+			font-size: 14px;
+		}
 	}
 }
