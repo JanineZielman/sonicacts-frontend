@@ -91,13 +91,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
       <Layout page={page} menus={menus} global={global}>
         <div className="timetable">
           <div className="timetable-menu" id="dates">
-            {/* {dates.map((item,i) => {
-              return(
-                <div className="date" id={item.slice(0, 10)} onClick={setDate}>
-                  {Moment(item).format('ddd D MMM')}
-                </div>
-              )
-            })} */}
            Date:
             <select onChange={setDate}>
               {dates.map((item,i) => {
@@ -134,7 +127,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
                         return(
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
-                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 200) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 + 'px'}}>
+                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 200) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 295 + 'px'}}>
                                 <div className="inner-programme">
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data.attributes.title}</div>

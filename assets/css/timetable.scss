@@ -9,6 +9,10 @@
 			padding: 5px 20px;
 			border-radius: 25px;
 			border: none;
+			color: black;
+			option{
+				color: black;
+			}
 		}
 		.date{
 			margin: 0 14px 10px 0;
@@ -32,7 +36,7 @@
 			height: 200px;
 			border-bottom: 1px solid black;
 			position: sticky;
-			z-index: 999;
+			z-index: 5;
 			left: 0;
 			width: 200px;
 			background-color: #b4c8c8;
@@ -61,12 +65,14 @@
 			background-color: white;
 			vertical-align: middle;
 			left: var(--margin);
+			margin-left: 5px;
 			margin-top: 50px;
-			min-width: 300px;
+			min-width: 295px;
 			width: var(--width);
 			position: absolute;
 			height: 150px;
 			border-radius: 10px;
+			// margin: 50px 0px 0 10px;
 			.inner-programme {
 				padding: 10px;
 				.time{
