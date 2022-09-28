@@ -1,8 +1,15 @@
 .timetable{
 	.timetable-menu{
-		display: flex;
-		flex-wrap: wrap;
+		// display: flex;
+		// flex-wrap: wrap;
 		margin-top: 24px;
+		select{
+			margin-left: 14px;
+			font-size: 24px;
+			padding: 5px 20px;
+			border-radius: 25px;
+			border: none;
+		}
 		.date{
 			margin: 0 14px 10px 0;
 			background-color: white;
@@ -121,5 +128,29 @@
 	.date.active{
 		background-color: #000;
 		color: white;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.timetable{
+		.timetable-menu{
+			margin-top: 48px;
+		}
+		.timetable-row{
+			display: flex;
+			flex-direction: column;
+			height: 300px;
+			.location{
+				display: block;
+				height: 80px;
+				width: 95vw;
+			}
+			.programme{
+				margin-top: 150px;
+				&.small-bar{
+					margin-top: 90px;
+				}
+			}
+		}
 	}
 }

@@ -48,7 +48,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
           let startDate = new Date(item.date?.substring(0, 10)).getTime();
           let endDate = new Date(item.end_date?.substring(0, 10)).getTime();
           let current = new Date(currentDate).getTime();
-          console.log(endDate >= current)
           if (item.date.substring(0, 10) === currentDate || endDate >= current && startDate <= current) {
             if(!map.has(item.location.data.attributes.slug)){
                 map.set(item.location.data.attributes.slug, true);    // set any value to Map
@@ -65,40 +64,48 @@ const Timetable = ({ menus, global, params, timetable}) => {
   
 
   function setDate(e){
-    if (currentDate != e.target.id){
+    console.log(e.target[e.target.selectedIndex].value)
+    if (currentDate != e.target[e.target.selectedIndex].value){
       setProgrammes([])
       setLocations([])
-      setCurrentDate(e.target.id)
+      setCurrentDate(e.target[e.target.selectedIndex].value)
     }
+    // selectBox.options[selectBox.selectedIndex].value
 
-    var current = document.getElementsByClassName("active");
+    // var current = document.getElementsByClassName("active");
 
-    // If there's no active class
-    if (current.length > 0) { 
-      current[0].className = current[0].className.replace(" active", "");
-    }
+    // // If there's no active class
+    // if (current.length > 0) { 
+    //   current[0].className = current[0].className.replace(" active", "");
+    // }
 
-    // Add the active class to the current/clicked button
-    e.target.className += " active";
+    // // Add the active class to the current/clicked button
+    // e.target.className += " active";
     
     
     
   }
-
-  console.log(programmes)
   
   return (
     <section className="festival-wrapper">
       <Layout page={page} menus={menus} global={global}>
         <div className="timetable">
           <div className="timetable-menu" id="dates">
-            {dates.map((item,i) => {
+            {/* {dates.map((item,i) => {
               return(
                 <div className="date" id={item.slice(0, 10)} onClick={setDate}>
                   {Moment(item).format('ddd D MMM')}
                 </div>
               )
-            })}
+            })} */}
+           Date:
+            <select onChange={setDate}>
+              {dates.map((item,i) => {
+                return(
+                  <option className="date" id={item.slice(0, 10)} value={item.slice(0, 10)}>{Moment(item).format('ddd D MMM')}</option>
+                )
+                })}
+            </select>
           </div>
 
           {loading ?
@@ -127,7 +134,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
                         return(
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
-                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 200) + 'px',  '--width':  ( (item.end_time.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 + 'px'}}>
+                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 200) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 + 'px'}}>
                                 <div className="inner-programme">
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data.attributes.title}</div>
