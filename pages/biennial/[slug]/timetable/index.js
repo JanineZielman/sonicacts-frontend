@@ -45,10 +45,11 @@ const Timetable = ({ menus, global, params, timetable}) => {
       const map = new Map();
       if (programmes.length == 0) {
         for (const item of timetable.event) {
+          let startDate = new Date(item.date?.substring(0, 10)).getTime();
           let endDate = new Date(item.end_date?.substring(0, 10)).getTime();
           let current = new Date(currentDate).getTime();
           console.log(endDate >= current)
-          if (item.date.substring(0, 10) === currentDate || endDate >= current ) {
+          if (item.date.substring(0, 10) === currentDate || endDate >= current && startDate <= current) {
             if(!map.has(item.location.data.attributes.slug)){
                 map.set(item.location.data.attributes.slug, true);    // set any value to Map
                 locations.push(item.location.data.attributes);
