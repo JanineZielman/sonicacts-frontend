@@ -62,7 +62,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
     }, 500);
   }, [currentDate]);
   
-
   function setDate(e){
     console.log(e.target[e.target.selectedIndex].value)
     if (currentDate != e.target[e.target.selectedIndex].value){
@@ -70,19 +69,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
       setLocations([])
       setCurrentDate(e.target[e.target.selectedIndex].value)
     }
-    // selectBox.options[selectBox.selectedIndex].value
-
-    // var current = document.getElementsByClassName("active");
-
-    // // If there's no active class
-    // if (current.length > 0) { 
-    //   current[0].className = current[0].className.replace(" active", "");
-    // }
-
-    // // Add the active class to the current/clicked button
-    // e.target.className += " active";
-    
-    
     
   }
   
@@ -90,12 +76,14 @@ const Timetable = ({ menus, global, params, timetable}) => {
     <section className="festival-wrapper">
       <Layout page={page} menus={menus} global={global}>
         <div className="timetable">
-          <div className="timetable-menu" id="dates">
+          <div className="timetable-menu custom-select" id="dates">
            Date:
             <select onChange={setDate}>
               {dates.map((item,i) => {
                 return(
+                
                   <option className="date" id={item.slice(0, 10)} value={item.slice(0, 10)}>{Moment(item).format('ddd D MMM')}</option>
+                  
                 )
                 })}
             </select>
