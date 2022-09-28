@@ -5,138 +5,145 @@ import { fetchAPI } from "../../../../lib/api"
 import Moment from 'moment'
 
 
-const Timetable = ({ menus, global, params, programmes, locations }) => {
+const Timetable = ({ menus, global, params, timetable}) => {
 	const page = {
     attributes:
       	{slug: `biennial/${params.slug}/timetable`}
 	}
+
   const [loading, setLoading] = useState(true);
 
-  let today = new Date().toISOString().slice(0, 10)
+  const [dates, setDates] = useState([]);
+  const [programmes, setProgrammes] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [currentDate, setCurrentDate] = useState('2022-09-30');
+  const [array, setArray] = useState([]);
 
-  const [startDate, setStartDate] = useState('2022-09-30')
-  const [dates, setDates] = useState([])
-  const [allLocations, setAllLocations] = useState([])
+
 
   const times = [
     '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', 
     '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
   ]
 
-  console.log(times)
+  useEffect(() => {
+    var getDaysArray = function(s,e) {for(var a=[],d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(new Date(d));}return a;};
+    var daylist = getDaysArray(new Date("2022-09-30"),new Date("2022-10-23"));
+    daylist.map((v)=>v.toISOString().slice(0,10)).join("")
+    setDates(daylist.map((v)=>v.toISOString().slice(0,10)))
+
+    var btns = document.getElementsByClassName("date");
+    setArray(Array.prototype.slice.call(btns));
+    
+  }, [])
 
   useEffect(() => {
-    // setResult(programmes.filter(item => item.attributes.start_date === startDate));
-    setLoading(true)
-    const map = new Map();
-    if (dates.length == 0) {
-      for (const item of programmes) {
-          if(!map.has(item.attributes.start_date)){
-              map.set(item.attributes.start_date, true);    // set any value to Map
-              dates.push({
-                  start_date: item.attributes.start_date,
-                  title: item.attributes.title,
-                  start_time: item.attributes.start_time
-              });
-          }
-      }
-    }
+    setLoading(true)   
+
 
     setTimeout(() => {
-      const map2 = new Map();
-      if (allLocations.length == 0) {
-        for (const item of locations) {
-            if(!map2.has(item.attributes.title)){
-                map2.set(item.attributes.title, true);    // set any value to Map
-                allLocations.push({
-                    title: item.attributes.title,
-                    location: item.attributes.location,
-                    programmes: item.attributes.programmes.data.filter(item => item.attributes.start_date?.substring(0, 10) === startDate),
-                });
+      const map = new Map();
+      if (programmes.length == 0) {
+        for (const item of timetable.event) {
+          let endDate = new Date(item.end_date?.substring(0, 10)).getTime();
+          let current = new Date(currentDate).getTime();
+          console.log(endDate >= current)
+          if (item.date.substring(0, 10) === currentDate || endDate >= current ) {
+            if(!map.has(item.location.data.attributes.slug)){
+                map.set(item.location.data.attributes.slug, true);    // set any value to Map
+                locations.push(item.location.data.attributes);
             }
+            programmes.push(item);
+          }
+
         }
       }
       setLoading(false)
     }, 500);
-
-
-    
-
-  }, [startDate]);
+  }, [currentDate]);
+  
 
   function setDate(e){
-    setAllLocations([])
-    setStartDate(e.target.id)
+    if (currentDate != e.target.id){
+      setProgrammes([])
+      setLocations([])
+      setCurrentDate(e.target.id)
+    }
+
+    var current = document.getElementsByClassName("active");
+
+    // If there's no active class
+    if (current.length > 0) { 
+      current[0].className = current[0].className.replace(" active", "");
+    }
+
+    // Add the active class to the current/clicked button
+    e.target.className += " active";
+    
+    
+    
   }
 
+  console.log(programmes)
   
   return (
     <section className="festival-wrapper">
       <Layout page={page} menus={menus} global={global}>
-        {loading ?
-          <div className="loader"></div>
-        :
-          <div className="timetable">
-            <div className="timetable-menu">
-              {dates?.map((item, i) => {
-                return(
-                  <>
-                    {item.start_date &&
-                      <div className="date" id={item.start_date.slice(0, 10)} onClick={setDate}>
-                        {Moment(item.start_date).format('ddd D MMM')}
+        <div className="timetable">
+          <div className="timetable-menu" id="dates">
+            {dates.map((item,i) => {
+              return(
+                <div className="date" id={item.slice(0, 10)} onClick={setDate}>
+                  {Moment(item).format('ddd D MMM')}
+                </div>
+              )
+            })}
+          </div>
+
+          {loading ?
+            <div className="loader"></div>
+          :
+
+            <div className="timetable-locations">
+              <div className="timetable-wrapper">
+                <div className="timetable-times">
+                  {times.map((time, i) => {
+                    return(
+                      <div className="time-block">
+                        <div className="time">{time}</div>
                       </div>
-                    }
-                  </>
-                )
-              })}
-            </div>
-            <div className="timetable-content">
-              <div className="timetable-times">
-                {times.map((time, i) => {
+                    )
+                  })}
+                </div>
+                {locations.map((loc,j) => {
                   return(
-                    <div className="time-block">
-                      <div className="time">{time}</div>
-                    </div>
-                  )
-                })}
-              </div>
-              {allLocations?.map((loc, i) => {
-                return(
-                  <div className="timetable-wrapper">
-                    {loc.title && loc.programmes[0] &&
+                    <div className="timetable-row">
                       <div className="location">
-                        {loc.title}
+                        <h4>{loc.title}</h4>
+                        <p>{loc.subtitle}</p>
                       </div>
-                    }
-                    <div className="timetable-item-wrapper">
-                      {times.map((time, i) => {
+                      {programmes.map((item,i) => {
                         return(
                           <>
-                            {loc?.programmes.map((item, j) => {
-                              console.log(item.attributes.end_time)
-                              return(
-                                <>
-                                {item.attributes.start_time?.substring(0, 5) == time &&
-                                  <div className={`timetable-item w${i}`} style={{'--margin': (400 * i) + 'px',  '--width':  ( (item.attributes.end_time.substring(0, 2) <= 6 ? 24 : 0) +  (item.attributes.end_time?.substring(0, 2) - item.attributes.start_time?.substring(0, 2) ) ) * 400 + 'px'}}>
-                                    <h3>{item.attributes.title}</h3>
-                                    <div className="date">
-                                      {item.attributes.start_time?.substring(0, 5)} {item.attributes.end_time && `– ${item.attributes.end_time?.substring(0, 5)}`}
-                                    </div>
-                                  </div>
-                                }
-                                </>
-                              )
-                            })}
+                            {item.location.data.attributes.slug == loc.slug &&
+                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 200) + 'px',  '--width':  ( (item.end_time.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 + 'px'}}>
+                                <div className="inner-programme">
+                                  <div className="time">{item.start_time} - {item.end_time}</div>
+                                  <div className="title">{item.programme.data.attributes.title}</div>
+                                </div>
+                              </div>
+                            }
                           </>
                         )
                       })}
                     </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        }
+          }
+          
+        </div>
       </Layout>
     </section>
   )
@@ -144,20 +151,18 @@ const Timetable = ({ menus, global, params, programmes, locations }) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [globalRes, menusRes, programmesRes, locationsRes] = await Promise.all([
+  const [globalRes, menusRes, timetableRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&pagination[limit]=100&sort[0]=start_date%3Aasc&populate=*`),
-    fetchAPI(`/locations?pagination[limit]=100&sort[0]=slug%3Aasc&populate[programmes][populate]=*`),
+    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate]=*`),
   ])
 
   return {
     props: {
       global: globalRes.data,
       menus: menusRes.data,
-      programmes: programmesRes.data,
 			params: params,
-      locations: locationsRes.data,
+      timetable: timetableRes.data[0].attributes,
     }
   }
 }

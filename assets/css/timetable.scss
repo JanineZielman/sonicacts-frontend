@@ -12,55 +12,114 @@
 			cursor: pointer;
 		}
 	}
-	.timetable-content{
-		width: 98vw;
+	.timetable-locations{
+		margin-top: 24px;
+		.timetable-wrapper {
+			width: calc(22 * 300px + 200px);
+			position: relative;
+		}
 		overflow-x: scroll;
-
-		.timetable-times {
-			display: flex;
-			margin-left: 250px;
-			height: calc(100% - 220px);
-			// position: absolute;
-			.time{
-				min-width: 400px;
-				border-right: 1px solid blue;
-				display: inline-block;
-				height: calc(100% - 220px);
-				// white-space: nowrap;
+		overflow-y: hidden;
+		min-height: 80vh;
+		.location{
+			height: 200px;
+			border-bottom: 1px solid black;
+			position: sticky;
+			z-index: 999;
+			left: 0;
+			width: 200px;
+			background-color: #b4c8c8;
+			display: inline-block;
+			vertical-align: middle;
+			word-break: break-all;
+			h4{
+				font-weight: 500;
+				margin: 0;
+			}
+			p{
+				font-weight: 300;
+				margin: 0;
+				font-size: 24px;
 			}
 		}
-
-		.timetable-wrapper{
-			display: flex;
-			position: relative;
-			.location {
-				height: 200px;
-				width: 250px;
-				min-width: 250px;
-				display: flex;
-				align-items: center;
-				border-bottom: 1px solid black;
-				padding-left: 14px;
-				// background-color: #b4c8c8;
-				// position: fixed;
-				// z-index: 9;
+	}
+	.timetable-row{
+		vertical-align: middle;
+		&:nth-child(2){
+			margin-top: 48px;
+		}
+		margin-top: 10px;
+		.programme{
+			display: inline-block;
+			background-color: white;
+			vertical-align: middle;
+			left: var(--margin);
+			margin-top: 50px;
+			min-width: 300px;
+			width: var(--width);
+			position: absolute;
+			height: 150px;
+			border-radius: 10px;
+			.inner-programme {
+				padding: 10px;
+				.time{
+					font-size: 18px;
+				}
+				.title{
+					font-weight: 500;
+				}
 			}
-			.timetable-item-wrapper{
-				display: flex;
-				white-space: nowrap;
-				width: calc(100vw - 250px);
-				.timetable-item {
-					border: 1px solid red;
-					// width: 100%;
-					min-width: 400px;
-					height: 200px;
-					margin-left: var(--margin);
-					min-width:  var(--width);
-					// &.w1{
-					// 	width: calc(400px)
-					// }
+			&.small-bar{
+				height: 45px;
+				margin-top: 0;
+				// border-radius: 25px;
+				&.one-sun-after-another{
+					background-color: rgb(252, 221, 229);
+				}
+				&.inner-earth{
+					background-color: rgb(213, 244, 213);
+				}
+				&.leaving-traces{
+					background-color: rgb(255, 255, 13);
+				}
+				&.symposium-leaving-traces {
+					background-color: rgb(255, 255, 13);
+				}
+				.inner-programme{
+					display: flex;
+					align-items: center;
+					padding: 0;
+					margin: 0px 20px;
+					.time{
+						margin-top: 5px;
+					}
+					.title{
+						margin-left: 24px;
+					}
 				}
 			}
 		}
+	}
+	.timetable-times{
+		white-space: nowrap;
+		margin-left: 200px;
+		width: calc(22 * 300px + 200px);
+		position: absolute;
+		height: 100vh;
+		top: -48px;
+		.time-block{
+			display: inline-block;
+			width: 300px;
+			border-left: 1px solid black;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			height: 100vh;
+			padding-left: 10px;
+		}
+	}
+	.date.active{
+		background-color: #000;
+		color: white;
 	}
 }
