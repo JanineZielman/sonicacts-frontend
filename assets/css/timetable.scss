@@ -84,9 +84,11 @@
 				padding: 10px;
 				.time{
 					font-size: 18px;
+					margin-left: 10px;
 				}
 				.title{
 					font-weight: 500;
+					margin-left: 10px;
 				}
 			}
 			&.small-bar{
@@ -112,6 +114,7 @@
 					margin: 0px 20px;
 					.time{
 						margin-top: 5px;
+						margin-left: 0px;
 					}
 					.title{
 						margin-left: 24px;
@@ -146,6 +149,12 @@
 
 @media only screen and (max-width: 900px) {
 	.timetable{
+		.timetable-times {
+			height:100%;
+			.time-block{
+				height: 100%;
+			}
+		}
 		.timetable-menu{
 			margin-top: 48px;
 		}
@@ -160,6 +169,7 @@
 			}
 			.programme{
 				margin-top: 150px;
+				height: 150px;
 				&.small-bar{
 					margin-top: 90px;
 				}
