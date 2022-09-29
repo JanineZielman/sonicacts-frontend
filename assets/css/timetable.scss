@@ -1,5 +1,7 @@
 
 .timetable{
+	height: auto;
+	overflow-y: hidden;
 	.timetable-menu{
 		// display: flex;
 		// flex-wrap: wrap;
@@ -31,14 +33,14 @@
 	.timetable-locations{
 		margin-top: 24px;
 		.timetable-wrapper {
-			width: calc(21 * 300px + 250px);
+			width: calc(21 * 200px + 250px);
 			position: relative;
 		}
 		overflow-x: scroll;
 		overflow-y: hidden;
 		min-height: 80vh;
 		.location{
-			height: 280px;
+			height: 220px;
 			border-top: 1px solid black;
 			// border-bottom: 1px solid black;
 			position: sticky;
@@ -75,10 +77,10 @@
 			left: var(--margin);
 			margin-left: 5px;
 			margin-top: 100px;
-			min-width: 295px;
+			min-width: 190px;
 			width: var(--width);
 			position: absolute;
-			height: 180px;
+			height: 120px;
 			border-radius: 10px;
 			transition: all 0.4s ease-in-out;
 			&:hover{
@@ -88,8 +90,9 @@
 			// margin: 50px 0px 0 10px;
 			.inner-programme {
 				padding: 10px;
+				font-size: 18px;
 				.time{
-					font-size: 18px;
+					// font-size: 18px;
 					margin-left: 10px;
 				}
 				.title{
@@ -107,7 +110,7 @@
 					left: 800px;
 				}
 				top: 0;
-				margin-top: -235px;
+				margin-top: -180px;
 				width: 550px;
 				.inner-programme{
 					justify-content: center;
@@ -133,13 +136,15 @@
 					display: flex;
 					align-items: center;
 					padding: 0;
-					margin: 0px 20px;
+					height: 100%;
+					margin-left: 20px;
 					.time{
-						margin-top: 5px;
+						// margin-top: 5px;
 						margin-left: 0px;
 					}
 					.title{
 						margin-left: 24px;
+						margin-top: 0;
 					}
 				}
 			}
@@ -148,19 +153,17 @@
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 250px;
-		width: calc(21 * 300px + 250px);
+		width: calc(21 * 200px + 250px);
 		position: absolute;
-		min-height: 100vh;
 		height: 100%;
 		top: -48px;
 		.time-block{
 			display: inline-block;
-			width: 300px;
+			width: 200px;
 			border-left: 1px solid black;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			-webkit-box-sizing: border-box;
-			min-height: 100vh;
 			height: 100%;
 			padding-left: 10px;
 		}
@@ -190,7 +193,7 @@
 			.location{
 				display: block;
 				height: 80px;
-				width: 95vw;
+				width: 98vw;
 			}
 			.programme{
 				margin-top: 180px;
@@ -200,7 +203,7 @@
 				&.small-bar{
 					margin-top: 130px;
 					.inner-programme{
-						margin-top: 5px;
+						margin-top: 0px;
 					}
 				}
 				&.small-bar.whole-day {
