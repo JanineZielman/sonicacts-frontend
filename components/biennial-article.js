@@ -39,6 +39,17 @@ const Article = ({page, relations, params}) => {
 				{page.attributes.title &&
 					<div className="title">
 						<h1>{page.attributes.title}</h1>
+						{relations.attributes.biennial_tags?.data && 
+							<div className="category">
+								{relations.attributes.biennial_tags.data.map((tag, i) => {
+									return(
+										<a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+											{tag.attributes.title}
+										</a>
+									)
+								})}
+							</div>
+						}
 					</div>
 				}
 				{page.attributes.name &&

@@ -480,7 +480,9 @@
 	.article {
 		.title {
 			text-transform: uppercase;
-
+			.category{
+				padding-top: 10px;
+			}
 		}
 		.image.small,
 		.image.medium {
