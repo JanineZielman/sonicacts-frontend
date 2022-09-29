@@ -1,10 +1,14 @@
 
 .timetable{
+	height: auto;
+	overflow-y: hidden;
 	.timetable-menu{
-		// display: flex;
-		// flex-wrap: wrap;
-		width: 500px;
-		margin-top: 24px;
+		width: 100%;
+		background-color: #b4c8c8;
+		position: fixed;
+		top: 80px;
+		z-index: 6;
+		padding: 14px 0;
 		select{
 			outline: none;
 			appearance: none;
@@ -31,14 +35,31 @@
 	.timetable-locations{
 		margin-top: 24px;
 		.timetable-wrapper {
-			width: calc(22 * 300px + 250px);
+			width: calc(21 * 200px + 250px);
 			position: relative;
 		}
 		overflow-x: scroll;
+		/* width */
+		&::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: transparent;
+			border: 1px solid black;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: black;
+			border-radius: 25px;
+		}
+
 		overflow-y: hidden;
 		min-height: 80vh;
 		.location{
-			height: 230px;
+			height: 220px;
 			border-top: 1px solid black;
 			// border-bottom: 1px solid black;
 			position: sticky;
@@ -63,8 +84,9 @@
 	}
 	.timetable-row{
 		vertical-align: middle;
+		position: relative;
 		&:nth-child(2){
-			margin-top: 48px;
+			margin-top: 100px;
 		}
 		margin-top: 10px;
 		.programme{
@@ -73,25 +95,49 @@
 			vertical-align: middle;
 			left: var(--margin);
 			margin-left: 5px;
-			margin-top: 50px;
-			min-width: 295px;
+			margin-top: 100px;
+			min-width: 190px;
 			width: var(--width);
 			position: absolute;
-			height: 180px;
+			height: 120px;
 			border-radius: 10px;
+			transition: all 0.4s ease-in-out;
+			&:hover{
+				background-color: #000!important;
+				color: white;
+			}
 			// margin: 50px 0px 0 10px;
 			.inner-programme {
 				padding: 10px;
+				font-size: 18px;
 				.time{
-					font-size: 18px;
+					// font-size: 18px;
+					margin-left: 10px;
 				}
 				.title{
 					font-weight: 500;
+					margin-left: 10px;
+				}
+			}
+			&.small-bar.whole-day{
+				height: 45px;
+				left: 250px;
+				// margin-top: -5px;
+				position: sticky;
+				left: 250px;
+				&:nth-child(3){
+					left: 800px;
+				}
+				top: 0;
+				margin-top: -180px;
+				width: 550px;
+				.inner-programme{
+					justify-content: center;
 				}
 			}
 			&.small-bar{
 				height: 45px;
-				margin-top: 0;
+				margin-top: 50px;
 				// border-radius: 25px;
 				&.one-sun-after-another{
 					background-color: rgb(252, 221, 229);
@@ -109,12 +155,15 @@
 					display: flex;
 					align-items: center;
 					padding: 0;
-					margin: 0px 20px;
+					height: 100%;
+					margin-left: 20px;
 					.time{
-						margin-top: 5px;
+						// margin-top: 5px;
+						margin-left: 0px;
 					}
 					.title{
 						margin-left: 24px;
+						margin-top: 0;
 					}
 				}
 			}
@@ -123,18 +172,18 @@
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 250px;
-		width: calc(22 * 300px + 250px);
+		width: calc(21 * 200px + 250px);
 		position: absolute;
-		height: 100vh;
+		height: 100%;
 		top: -48px;
 		.time-block{
 			display: inline-block;
-			width: 300px;
+			width: 200px;
 			border-left: 1px solid black;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			-webkit-box-sizing: border-box;
-			height: 100vh;
+			height: 100%;
 			padding-left: 10px;
 		}
 	}
@@ -146,22 +195,61 @@
 
 @media only screen and (max-width: 900px) {
 	.timetable{
+		width: 97vw;
+		.timetable-times {
+			height:100%;
+			margin-left: 0;
+			width: calc(21 * 200px);
+			.time-block{
+				height: 100%;
+			}
+		}
 		.timetable-menu{
-			margin-top: 48px;
+			margin-top: 24px;
+		}
+		.timetable-locations{
+			.timetable-wrapper {
+					width: calc(21 * 200px);
+			}
 		}
 		.timetable-row{
 			display: flex;
 			flex-direction: column;
 			height: 300px;
+			position: relative;
+			&:nth-child(2){
+				margin-top: 120px;
+			}
 			.location{
 				display: block;
 				height: 80px;
-				width: 95vw;
+				width: 98vw;
 			}
 			.programme{
-				margin-top: 150px;
+				margin-top: 180px;
+				height: 130px;
+				.inner-programme {
+				}
 				&.small-bar{
-					margin-top: 90px;
+					margin-top: 130px;
+					.inner-programme{
+						margin-top: 0px;
+					}
+				}
+				&.small-bar.whole-day {
+					height: 45px;
+					margin-top: 0px;
+					position: sticky;
+					left: 0;
+					top: 0;
+					width: 96vw;
+					&:nth-child(3) {
+						
+					}
+
+					.inner-programme {
+						justify-content: center;
+					}
 				}
 			}
 		}
