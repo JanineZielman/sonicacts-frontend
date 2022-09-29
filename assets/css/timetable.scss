@@ -79,6 +79,11 @@
 			position: absolute;
 			height: 180px;
 			border-radius: 10px;
+			transition: all 0.4s ease-in-out;
+			&:hover{
+				background-color: #000!important;
+				color: white;
+			}
 			// margin: 50px 0px 0 10px;
 			.inner-programme {
 				padding: 10px;
