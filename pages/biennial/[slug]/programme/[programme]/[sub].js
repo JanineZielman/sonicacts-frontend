@@ -133,7 +133,7 @@ export async function getServerSideProps({params, preview = null}) {
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.sub}&sort[0]=order%3Aasc&sort[1]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.sub}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
   
 
