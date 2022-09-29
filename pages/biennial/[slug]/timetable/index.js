@@ -65,7 +65,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
 
     if(currentDate){
       setTimeout(() => {
-        console.log(currentDate)
         const map = new Map();
         if (programmes.length == 0) {
           for (const item of timetable.event) {
@@ -88,7 +87,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
   }, [currentDate]);
   
   function setDate(e){
-    console.log(e.target[e.target.selectedIndex].value)
     if (currentDate != e.target[e.target.selectedIndex].value){
       setProgrammes([])
       setLocations([])

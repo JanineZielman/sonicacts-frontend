@@ -20,8 +20,6 @@ const Article = ({page, relations, params}) => {
 		}
   }, []);
 
-	console.log(relations)
-
   return (   
 		<section className="article biennial-article">
 			<>

@@ -23,12 +23,13 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
       {
         discover:[...items.discover],
         news:[...items.news],
-        agenda:[...items.agenda]
+        agenda:[...items.agenda],
+        programme:[...items.programme]
       }
     ))
   }, [search]);
 
-  const postNumber = posts.discover.length + posts.news.length + posts.agenda.length
+  const postNumber = posts.discover.length + posts.news.length + posts.agenda.length + posts.programme.length
 
   const getMorePosts = async () => {
     const qs = require('qs');
@@ -57,20 +58,48 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
     }, {
       encodeValuesOnly: true,
     });
+    const query2 = qs.stringify({
+      filters: {
+        $or: [
+          {
+            slug: {
+              $containsi: search,
+            },
+          },
+          {
+            title: {
+              $containsi: search,
+            },
+          },
+          {
+            biennial_tags: {
+              slug: {
+                $containsi: search,
+              },
+            },
+          }
+        ],
+      },
+    }, {
+      encodeValuesOnly: true,
+    });
 
     const discoverItems = await fetchAPI(`/discover-items?${query}&pagination[start]=${posts.discover.length}&populate=*`);
     const newsItems = await fetchAPI(`/news-items?${query}&pagination[start]=${posts.news.length}&populate=*`);
     const agendaItems = await fetchAPI(`/agenda-items?${query}&pagination[start]=${posts.agenda.length}&populate=*`);
+    const programmeItems = await fetchAPI(`/programmes?${query2}&pagination[start]=${posts.programme.length}&populate=*`);
 
     const newDiscover = await discoverItems.data;
     const newNews = await newsItems.data;
     const newAgenda = await agendaItems.data;
+    const newProgramme = await programmeItems.data;
 
     setPosts((posts) => (
       {
         discover:[...posts.discover, ...newDiscover],
         news:[...posts.news, ...newNews],
-        agenda:[...posts.agenda, ...newAgenda]
+        agenda:[...posts.agenda, ...newAgenda],
+        programme:[...posts.programme, ...newProgramme]
       }
     ))
   };
@@ -85,7 +114,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
 	  <Layout page={page} menus={menus} global={global}>
       <div className="search-title">
         <span>you've searched for:</span>
-        <h2>{search}</h2>
+        <h2>{search.replace('-', ' ')}</h2>
       </div>
       <InfiniteScroll
         dataLength={postNumber}
@@ -103,7 +132,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                     return(
                       <div key={`results${i}`} className={`search-item ${item.attributes?.category?.data?.attributes?.slug}`}>
                         <div className="item-wrapper">
-                          <a href={'/'+categories[index]+'/'+item.attributes.slug} key={'search'+i}>
+                          <a href={item.attributes.biennial ? `/biennial/${item.attributes.biennial?.data.attributes.slug}/programme/${ item.attributes.main ? item.attributes.slug : `sub/${item.attributes.slug}`}` : `/${categories[index]}/${item.attributes.slug}`} key={'search'+i}>
                             <div className="image">
                               {item.attributes.cover_image?.data?.attributes ? 
                                 <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
@@ -186,17 +215,46 @@ export async function getServerSideProps({params}) {
   }, {
     encodeValuesOnly: true,
   });
+
+  const query2 = qs.stringify({
+    filters: {
+      $or: [
+        {
+          slug: {
+            $containsi: params.slug,
+          },
+        },
+        {
+          title: {
+            $containsi: params.slug,
+          },
+        },
+        {
+          biennial_tags: {
+            slug: {
+              $containsi: params.slug,
+            },
+          },
+        },
+      ],
+    },
+  }, {
+    encodeValuesOnly: true,
+  });
   
   const discover = await fetchAPI(`/discover-items?${query}&populate=*`);
   const news = await fetchAPI(`/news-items?${query}&populate=*`);
   const agenda = await fetchAPI(`/agenda-items?${query}&populate=*`);
+  const programme = await fetchAPI(`/programmes?${query2}&populate=*`);
 
 
   const discoverAmount = discover.meta.pagination.total;
   const newsAmount = news.meta.pagination.total;
   const agendaAmount = agenda.meta.pagination.total;
+  const programmeAmount = programme.meta.pagination.total;
 
-  const numberOfPosts = parseInt(discoverAmount) + parseInt(newsAmount) + parseInt(agendaAmount)
+
+  const numberOfPosts = parseInt(discoverAmount) + parseInt(newsAmount) + parseInt(agendaAmount) +  parseInt(programmeAmount)
   
 
   return {
@@ -206,6 +264,7 @@ export async function getServerSideProps({params}) {
         discover: discover.data,
         news: news.data,
         agenda: agenda.data,
+        programme: programme.data,
       },
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
