@@ -20,10 +20,10 @@ const Article = ({page, relations, params}) => {
 		}
   }, []);
 
-	console.log(relations.attributes.WhenWhere)
+	console.log(relations)
 
   return (   
-		<section className="article">
+		<section className="article biennial-article">
 			<>
 				{relations?.attributes?.authors?.data &&
 					<div className="tags">
@@ -91,6 +91,17 @@ const Article = ({page, relations, params}) => {
 									{item.url &&
 										<div className={`iframe-wrapper ${item.sound}`}  key={'url'+i}>
 											<iframe className="iframe" src={item.url.match(/\bhttps?:\/\/\S+/gi)[0]} frameBorder="0"/>
+										</div>
+									}
+									{item.__component == 'basic.collapsible' &&
+										<div className="collapsible about">
+											<Collapsible trigger={item.title} open={item.open == true && item.open}>
+												<div className={'text-block ' + item.text?.size} key={'textcol'+i}>
+													<ReactMarkdown 
+														children={item.text?.text_block} 
+													/>
+												</div>
+											</Collapsible>
 										</div>
 									}
 								</div>
@@ -255,7 +266,7 @@ const Article = ({page, relations, params}) => {
 							</a>
 						}
 						
-						{relations?.attributes?.community_items?.data[0] &&
+						{/* {relations?.attributes?.community_items?.data[0] &&
 							<div>
 								<span>Artists</span>
 								{relations?.attributes?.community_items?.data?.map((item, i) => {
@@ -266,7 +277,7 @@ const Article = ({page, relations, params}) => {
 									)
 								})}
 							</div>
-						}
+						} */}
 
 						{relations.attributes.main_programmes?.data[0] &&
 							<div className="program-side-wrapper">
@@ -294,21 +305,6 @@ const Article = ({page, relations, params}) => {
 					</div>
 				</div>
 			</>
-			{page.attributes.content?.map((item, i) => {
-				return(
-					item.__component == 'basic.collapsible' &&
-					<div className="collapsible about">
-						<Collapsible trigger={item.title} open={item.open == true && item.open}>
-							<div className={'text-block ' + item.text?.size} key={'textcol'+i}>
-								<ReactMarkdown 
-									children={item.text?.text_block} 
-								/>
-							</div>
-						</Collapsible>
-					</div>
-					
-				)
-			})}
 		</section>
   )
 }

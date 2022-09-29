@@ -619,11 +619,13 @@ h2 {
 }
 
 .tags {
+  padding-top: 5px;
   a {
     display: inline-block!important;
 
-    &:not(:first-child):before {
-      content: ', ';
+    &:not(:last-child):after {
+      content: ',';
+      margin-right: 10px;
     }
   }
 }
