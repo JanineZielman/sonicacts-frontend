@@ -51,6 +51,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   width: 100vw;
+  position: absolute;
 }
 
 *:focus {
@@ -271,6 +272,7 @@ a {
   width: 98vw;
   position: relative;
   margin-left: 0;
+  overflow-x: hidden;
 }
 
 h1,

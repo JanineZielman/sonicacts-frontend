@@ -186,16 +186,37 @@
 			display: flex;
 			flex-direction: column;
 			height: 300px;
+			position: relative;
 			.location{
 				display: block;
 				height: 80px;
 				width: 95vw;
 			}
 			.programme{
-				margin-top: 150px;
-				height: 150px;
+				margin-top: 180px;
+				height: 130px;
+				.inner-programme {
+				}
 				&.small-bar{
-					margin-top: 90px;
+					margin-top: 130px;
+					.inner-programme{
+						margin-top: 5px;
+					}
+				}
+				&.small-bar.whole-day {
+					height: 45px;
+					margin-top: 0px;
+					position: sticky;
+					left: 0;
+					top: 0;
+					width: 96vw;
+					&:nth-child(3) {
+						
+					}
+
+					.inner-programme {
+						justify-content: center;
+					}
 				}
 			}
 		}
