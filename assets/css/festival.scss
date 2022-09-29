@@ -1182,10 +1182,26 @@
 	padding-top: 14px;
 	border-top: 2px solid black;
 	margin-bottom: 14px;
+	h2{
+		margin-bottom: 10px;
+	}
 	.date{
 		margin: 5px 0;
 	}
 	.view{
 		margin-top: 14px;
+	}
+}
+
+.sidebar-info{
+	border-top: 2px solid black;
+	padding: 10px 0;
+	.date{
+		margin: 5px 0;
+	}
+	&:nth-child(2){
+		border-top: none;
+		margin-top: 0;
+		padding-top: 0;
 	}
 }
