@@ -120,7 +120,8 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
         dataLength={postNumber}
         next={getMorePosts}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={<h4></h4>}
+        // loader={<h4>Loading...</h4>}
       >
       <div className="search">
         <div className="search-container">
