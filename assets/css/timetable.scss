@@ -37,6 +37,23 @@
 			position: relative;
 		}
 		overflow-x: scroll;
+		/* width */
+		&::-webkit-scrollbar {
+			width: 10px;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background: transparent;
+			border: 1px solid black;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: black;
+			border-radius: 25px;
+		}
+
 		overflow-y: hidden;
 		min-height: 80vh;
 		.location{
@@ -176,14 +193,22 @@
 
 @media only screen and (max-width: 900px) {
 	.timetable{
+		width: 97vw;
 		.timetable-times {
 			height:100%;
+			margin-left: 0;
+			width: calc(21 * 200px);
 			.time-block{
 				height: 100%;
 			}
 		}
 		.timetable-menu{
 			margin-top: 48px;
+		}
+		.timetable-locations{
+			.timetable-wrapper {
+					width: calc(21 * 200px);
+			}
 		}
 		.timetable-row{
 			display: flex;
