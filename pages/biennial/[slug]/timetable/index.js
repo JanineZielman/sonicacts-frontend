@@ -116,10 +116,10 @@ const Timetable = ({ menus, global, params, timetable}) => {
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
                               <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 250) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 - 10 + 'px'}}>
-                                <div className="inner-programme">
+                                <a className="inner-programme" href={item.programme.data.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data.attributes.main_programmes.data[0].attributes.slug}/${item.programme.data.attributes.slug}`}>
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data.attributes.title}</div>
-                                </div>
+                                </a>
                               </div>
                             }
                           </>
@@ -140,10 +140,11 @@ const Timetable = ({ menus, global, params, timetable}) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [globalRes, menusRes, timetableRes] = await Promise.all([
+  const [globalRes, menusRes, timetableRes, programmesRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate]=*`),
+    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*`),
   ])
 
   return {
@@ -151,7 +152,8 @@ export async function getServerSideProps({params}) {
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,
-      timetable: timetableRes.data[0].attributes,
+      timetable: programmesRes.data[0].attributes,
+      // programlist: programmesRes.data[0].attributes,
     }
   }
 }
