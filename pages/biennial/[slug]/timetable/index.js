@@ -22,7 +22,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
 
 
   const times = [
-    '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', 
+    '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', 
     '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
   ]
 
@@ -115,7 +115,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
                         return(
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
-                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 9 ) * 300 + 250) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 - 10 + 'px'}}>
+                              <div className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data.attributes.slug}`} style={{'--margin': ((item.start_time?.substring(0, 2) - 10 ) * 300 + 250) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 300 - 10 + 'px'}}>
                                 <a className="inner-programme" href={item.programme.data.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data.attributes.main_programmes.data[0].attributes.slug}/${item.programme.data.attributes.slug}`}>
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data.attributes.title}</div>

@@ -31,7 +31,7 @@
 	.timetable-locations{
 		margin-top: 24px;
 		.timetable-wrapper {
-			width: calc(22 * 300px + 250px);
+			width: calc(21 * 300px + 250px);
 			position: relative;
 		}
 		overflow-x: scroll;
@@ -126,7 +126,7 @@
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 250px;
-		width: calc(22 * 300px + 250px);
+		width: calc(21 * 300px + 250px);
 		position: absolute;
 		height: 100vh;
 		top: -48px;
