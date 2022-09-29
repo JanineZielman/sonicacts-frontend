@@ -11,12 +11,17 @@ const Timetable = ({ menus, global, params, timetable}) => {
       	{slug: `biennial/${params.slug}/timetable`}
 	}
 
+  let today = new Date().getTime()
+  let todayDate = new Date().toISOString().slice(0, 10)
+  let start = new Date('2022-09-30').getTime();
+  let end = new Date('2022-10-23').getTime();
+
   const [loading, setLoading] = useState(true);
 
   const [dates, setDates] = useState([]);
   const [programmes, setProgrammes] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [currentDate, setCurrentDate] = useState('2022-09-30');
+  const [currentDate, setCurrentDate] = useState(null);
   const [array, setArray] = useState([]);
 
 
@@ -34,32 +39,53 @@ const Timetable = ({ menus, global, params, timetable}) => {
 
     var btns = document.getElementsByClassName("date");
     setArray(Array.prototype.slice.call(btns));
+
+    setCurrentDate(todayDate)
+
+    if (today < start || today > end){
+        setCurrentDate('2022-09-30')
+    }
+    
+    setTimeout(() => {
+      if (today > start && today <= end){
+        document.getElementById('select').value = todayDate
+      }
+    }, 100);
+    
     
   }, [])
 
   useEffect(() => {
     setLoading(true)   
 
+    if (today < start){
+        setCurrentDate('2022-09-30')
+    }
 
-    setTimeout(() => {
-      const map = new Map();
-      if (programmes.length == 0) {
-        for (const item of timetable.event) {
-          let startDate = new Date(item.date?.substring(0, 10)).getTime();
-          let endDate = new Date(item.end_date?.substring(0, 10)).getTime();
-          let current = new Date(currentDate).getTime();
-          if (item.date.substring(0, 10) === currentDate || endDate >= current && startDate <= current) {
-            if(!map.has(item.location.data.attributes.slug)){
-                map.set(item.location.data.attributes.slug, true);    // set any value to Map
-                locations.push(item.location.data.attributes);
+
+    if(currentDate){
+      setTimeout(() => {
+        console.log(currentDate)
+        const map = new Map();
+        if (programmes.length == 0) {
+          for (const item of timetable.event) {
+            let startDate = new Date(item.date?.substring(0, 10)).getTime();
+            let endDate = new Date(item.end_date?.substring(0, 10)).getTime();
+            let current = new Date(currentDate).getTime();
+            // console.log( currentDate)
+            if (item.date.substring(0, 10) === currentDate || endDate >= current && startDate <= current) {
+              if(!map.has(item.location.data.attributes.slug)){
+                  map.set(item.location.data.attributes.slug, true);    // set any value to Map
+                  locations.push(item.location.data.attributes);
+              }
+              programmes.push(item);
             }
-            programmes.push(item);
-          }
 
+          }
         }
-      }
-      setLoading(false)
-    }, 500);
+        setLoading(false)
+      }, 500);
+    }
   }, [currentDate]);
   
   function setDate(e){
@@ -78,7 +104,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
         <div className="timetable">
           <div className="timetable-menu custom-select" id="dates">
            Date:
-            <select onChange={setDate}>
+            <select onChange={setDate} id="select">
               {dates.map((item,i) => {
                 return(
                 
