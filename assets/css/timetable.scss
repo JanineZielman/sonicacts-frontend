@@ -3,10 +3,12 @@
 	height: auto;
 	overflow-y: hidden;
 	.timetable-menu{
-		// display: flex;
-		// flex-wrap: wrap;
-		width: 500px;
-		margin-top: 24px;
+		width: 100%;
+		background-color: #b4c8c8;
+		position: fixed;
+		top: 80px;
+		z-index: 6;
+		padding: 14px 0;
 		select{
 			outline: none;
 			appearance: none;
@@ -84,7 +86,7 @@
 		vertical-align: middle;
 		position: relative;
 		&:nth-child(2){
-			margin-top: 48px;
+			margin-top: 100px;
 		}
 		margin-top: 10px;
 		.programme{
@@ -203,7 +205,7 @@
 			}
 		}
 		.timetable-menu{
-			margin-top: 48px;
+			margin-top: 24px;
 		}
 		.timetable-locations{
 			.timetable-wrapper {
@@ -215,6 +217,9 @@
 			flex-direction: column;
 			height: 300px;
 			position: relative;
+			&:nth-child(2){
+				margin-top: 120px;
+			}
 			.location{
 				display: block;
 				height: 80px;
