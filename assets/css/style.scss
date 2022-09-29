@@ -502,6 +502,8 @@ h2 {
   margin: -14px 0 0 0;
   padding: 0;
   height: 80px;
+  max-width: 100vw;
+  overflow-x: hidden;
   .menu-wrapper {
     z-index: 888;
     background-color: #e6e6e6;
@@ -627,7 +629,7 @@ h2 {
 }
 
 .footer{
-  width: 100%;
+  width: 98vw;
   margin-top: 40px;
   padding: 14px 1vw;
   text-align: center;
