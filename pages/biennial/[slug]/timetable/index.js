@@ -154,7 +154,21 @@ const Timetable = ({ menus, global, params, timetable}) => {
   )
 }
 
-export async function getServerSideProps({params}) {
+
+export async function getStaticPaths() {
+  const pagesRes = await fetchAPI("/biennials");
+  return {
+    paths: pagesRes.data.map((page) => ({
+      params: {
+        slug: page.attributes.slug,
+      },
+    })),
+    fallback: false,
+  }
+}
+
+
+export async function getStaticProps({ params }) {
   // Run API calls in parallel
   const [globalRes, menusRes, programmesRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
