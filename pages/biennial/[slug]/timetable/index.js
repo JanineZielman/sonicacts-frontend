@@ -22,7 +22,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
   const [programmes, setProgrammes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [currentDate, setCurrentDate] = useState(null);
-  const [array, setArray] = useState([]);
+  // const [array, setArray] = useState([]);
 
 
 
@@ -37,8 +37,8 @@ const Timetable = ({ menus, global, params, timetable}) => {
     daylist.map((v)=>v.toISOString().slice(0,10)).join("")
     setDates(daylist.map((v)=>v.toISOString().slice(0,10)))
 
-    var btns = document.getElementsByClassName("date");
-    setArray(Array.prototype.slice.call(btns));
+    // var btns = document.getElementsByClassName("date");
+    // setArray(Array.prototype.slice.call(btns));
 
     setCurrentDate(todayDate)
 
