@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react"
-import ReactMarkdown from "react-markdown";
 import Layout from "../../../../components/layout"
 import { fetchAPI } from "../../../../lib/api"
 import Moment from 'moment'
@@ -22,9 +21,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
   const [programmes, setProgrammes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [currentDate, setCurrentDate] = useState(null);
-  // const [array, setArray] = useState([]);
-
-
 
   const times = [
     '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', 
@@ -36,9 +32,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
     var daylist = getDaysArray(new Date("2022-09-30"),new Date("2022-10-23"));
     daylist.map((v)=>v.toISOString().slice(0,10)).join("")
     setDates(daylist.map((v)=>v.toISOString().slice(0,10)))
-
-    // var btns = document.getElementsByClassName("date");
-    // setArray(Array.prototype.slice.call(btns));
 
     setCurrentDate(todayDate)
 
@@ -163,10 +156,9 @@ const Timetable = ({ menus, global, params, timetable}) => {
 
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
-  const [globalRes, menusRes, timetableRes, programmesRes] = await Promise.all([
+  const [globalRes, menusRes, programmesRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate]=*`),
     fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*`),
   ])
 
@@ -176,7 +168,6 @@ export async function getServerSideProps({params}) {
       menus: menusRes.data,
 			params: params,
       timetable: programmesRes.data[0].attributes,
-      // programlist: programmesRes.data[0].attributes,
     }
   }
 }
