@@ -2,6 +2,21 @@
 .timetable{
 	height: auto;
 	overflow-y: hidden;
+	.artists {
+		display: flex;
+		flex-wrap: wrap;
+
+		div {
+			margin-left: 10px;
+		}
+
+		div:after {
+			content: ', '
+		}
+		div:last-child:after {
+			content: ''
+		}
+	}
 	.timetable-menu{
 		width: 100%;
 		background-color: #b4c8c8;
@@ -99,7 +114,7 @@
 			min-width: 190px;
 			width: var(--width);
 			position: absolute;
-			height: 120px;
+			height: auto;
 			border-radius: 10px;
 			transition: all 0.4s ease-in-out;
 			&:hover{
@@ -141,15 +156,27 @@
 				// border-radius: 25px;
 				&.one-sun-after-another{
 					background-color: rgb(252, 221, 229);
+					& .artists{
+						display: none;
+					}
 				}
 				&.inner-earth{
 					background-color: rgb(213, 244, 213);
+					& .artists {
+						display: none;
+					}
 				}
 				&.leaving-traces{
 					background-color: rgb(255, 255, 13);
+					& .artists {
+						display: none;
+					}
 				}
 				&.symposium-leaving-traces {
 					background-color: rgb(255, 255, 13);
+					& .artists {
+						display: none;
+					}
 				}
 				.inner-programme{
 					display: flex;
@@ -227,6 +254,7 @@
 			}
 			.programme{
 				margin-top: 180px;
+				margin-left: -250px;
 				height: 130px;
 				.inner-programme {
 				}

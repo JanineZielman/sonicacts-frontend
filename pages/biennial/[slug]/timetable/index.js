@@ -83,7 +83,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
       setLocations([])
       setCurrentDate(e.target[e.target.selectedIndex].value)
     }
-    
   }
   
   return (
@@ -128,9 +127,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
                       {programmes.map((item,i) => {
                         const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
                         const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
-
-                        console.log(startTime);
-                        console.log(endTime);
                         return(
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
@@ -138,6 +134,13 @@ const Timetable = ({ menus, global, params, timetable}) => {
                                 <div className="inner-programme">
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data?.attributes.title}</div>
+                                  <div className="artists">
+                                    {item.programme.data?.attributes?.community_items?.data?.map((artist, i) => {
+                                      return(
+                                        <div>{artist.attributes.name}</div>
+                                      )
+                                    })}
+                                  </div>
                                 </div>
                               </a>
                             }
@@ -176,7 +179,7 @@ export async function getStaticProps({ params }) {
   const [globalRes, menusRes, programmesRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*`),
+    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*&populate[event][populate][programme][populate][community_items][populate]=*`),
   ])
 
   return {
