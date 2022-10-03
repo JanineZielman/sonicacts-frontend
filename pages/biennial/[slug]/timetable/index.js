@@ -23,8 +23,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
   const [currentDate, setCurrentDate] = useState(null);
 
   const times = [
-    '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', 
-    '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
+    '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
   ]
 
   useEffect(() => {
@@ -71,7 +70,6 @@ const Timetable = ({ menus, global, params, timetable}) => {
               }
               programmes.push(item);
             }
-
           }
         }
         setLoading(false)
@@ -128,10 +126,15 @@ const Timetable = ({ menus, global, params, timetable}) => {
                         <p>{loc.subtitle}</p>
                       </div>
                       {programmes.map((item,i) => {
+                        const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
+                        const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
+
+                        console.log(startTime);
+                        console.log(endTime);
                         return(
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
-                              <a href={item.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data?.attributes.main_programmes.data[0].attributes.slug}/${item.programme.data?.attributes.slug}`} className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data?.attributes.slug} ${item.whole_day ? 'whole-day' : ''} `} style={{'--margin': ((item.start_time?.substring(0, 2) - 10 ) * 200 + 250) + 'px',  '--width':  ( (item.end_time?.substring(0, 2) <= 6 ? 24 : 0) +  (item.end_time?.substring(0, 2) - item.start_time?.substring(0, 2) ) ) * 200 - 10 + 'px'}}>
+                              <a href={item.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data?.attributes.main_programmes.data[0].attributes.slug}/${item.programme.data?.attributes.slug}`} className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data?.attributes.slug} ${item.whole_day ? 'whole-day' : ''} `} style={{'--margin': ((startTime - 8) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
                                 <div className="inner-programme">
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data?.attributes.title}</div>

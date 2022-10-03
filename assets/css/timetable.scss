@@ -35,7 +35,7 @@
 	.timetable-locations{
 		margin-top: 24px;
 		.timetable-wrapper {
-			width: calc(21 * 200px + 250px);
+			width: calc(23 * 200px + 250px);
 			position: relative;
 		}
 		overflow-x: scroll;
@@ -172,7 +172,7 @@
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 250px;
-		width: calc(21 * 200px + 250px);
+		width: calc(23 * 200px + 250px);
 		position: absolute;
 		height: 100%;
 		top: -48px;
@@ -199,7 +199,7 @@
 		.timetable-times {
 			height:100%;
 			margin-left: 0;
-			width: calc(21 * 200px);
+			width: calc(23 * 200px);
 			.time-block{
 				height: 100%;
 			}
@@ -209,7 +209,7 @@
 		}
 		.timetable-locations{
 			.timetable-wrapper {
-					width: calc(21 * 200px);
+					width: calc(23 * 200px);
 			}
 		}
 		.timetable-row{
