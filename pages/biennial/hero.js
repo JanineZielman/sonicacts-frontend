@@ -3,6 +3,12 @@ import Image from "../../components/image"
 
 const Hero = ({slug, biennial, programmes }) => {
 	const number = Math.floor(Math.random() * (biennial.community_items.data.length - 6));
+
+	biennial.news_items.data.sort(function(a,b){
+		// Turn your strings into dates, and then subtract them
+		// to get a value that is either negative, positive, or zero.
+		return new Date(b.attributes.date) - new Date(a.attributes.date);
+	});
   return (
 		<>
 			<div className="festival-hero landing-page">
