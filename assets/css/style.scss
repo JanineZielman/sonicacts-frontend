@@ -733,7 +733,8 @@ h2 {
     width: 95%;
     display: flex;
     justify-content: space-between;
-    filter: invert(1);
+    // filter: invert(1) contrast(100);
+    color: white;
     font-size: 16px;
     font-weight: 100;
     p{
@@ -743,9 +744,25 @@ h2 {
       width: 100%;
       font-weight: 100;
     }
+    audio::-webkit-media-controls-panel{
+      background-color: black;
+      padding-top: 8px;
+    }
+    audio::-webkit-media-controls-mute-button, audio::-webkit-media-controls-play-button, audio::-webkit-media-controls-timeline-container, audio::-webkit-media-controls-current-time-display, audio::-webkit-media-controls-time-remaining-display, audio::-webkit-media-controls-timeline, audio::-webkit-media-controls-volume-slider-container,audio::-webkit-media-controls-volume-slider, audio::-webkit-media-controls-seek-back-button, audio::-webkit-media-controls-seek-forward-button, audio::-webkit-media-controls-fullscreen-button, audio::-webkit-media-controls-rewind-button, audio::-webkit-media-controls-return-to-realtime-button, audio::-webkit-media-controls-toggle-closed-captions-button {
+      filter: invert(1);
+    }
+    audio::-webkit-media-controls-timeline-container{
+      filter: invert(1);
+    }
     audio{
       height: 25px;
+      max-height: 25px;
       outline: none;
+      transform: scale(0.85);
+      margin-top: -4px;
+      margin-left: -10px;
+      filter: contrast(100);
+
       // filter: invert(1);
     }
   }
