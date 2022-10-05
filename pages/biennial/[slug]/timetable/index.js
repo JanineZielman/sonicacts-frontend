@@ -130,7 +130,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
                         return(
                           <>
                             {item.location.data.attributes.slug == loc.slug &&
-                              <a href={item.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${item.programme.data?.attributes.slug}`} className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data?.attributes.slug} ${item.whole_day ? 'whole-day' : ''} `} style={{'--margin': ((startTime - 8) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                              <a href={item.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${item.programme.data?.attributes.slug}`} className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data?.attributes.slug} ${item.whole_day ? 'whole-day' : ''} `} style={{'--margin': ((startTime - 8) * 400 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 400 - 8 + 'px'}}>
                                 <div className="inner-programme">
                                   <div className="time">{item.start_time} - {item.end_time}</div>
                                   <div className="title">{item.programme.data?.attributes.title}</div>

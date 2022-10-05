@@ -50,7 +50,7 @@
 	.timetable-locations{
 		margin-top: 24px;
 		.timetable-wrapper {
-			width: calc(23 * 200px + 250px);
+			width: calc(23 * 400px + 250px);
 			position: relative;
 		}
 		overflow-x: scroll;
@@ -199,13 +199,13 @@
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 250px;
-		width: calc(23 * 200px + 250px);
+		width: calc(23 * 400px + 250px);
 		position: absolute;
 		height: 100%;
 		top: -48px;
 		.time-block{
 			display: inline-block;
-			width: 200px;
+			width: 400px;
 			border-left: 1px solid black;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
@@ -226,7 +226,7 @@
 		.timetable-times {
 			height:100%;
 			margin-left: 0;
-			width: calc(23 * 200px);
+			width: calc(23 * 400px);
 			.time-block{
 				height: 100%;
 			}
@@ -236,7 +236,7 @@
 		}
 		.timetable-locations{
 			.timetable-wrapper {
-					width: calc(23 * 200px);
+					width: calc(23 * 400px);
 			}
 		}
 		.timetable-row{
