@@ -84,6 +84,8 @@ const Timetable = ({ menus, global, params, timetable}) => {
       setCurrentDate(e.target[e.target.selectedIndex].value)
     }
   }
+
+  console.log(programmes)
   
   return (
     <section className="festival-wrapper">
@@ -136,7 +138,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
                                     <div className="time">{item.start_time} - {item.end_time}</div>
                                     <div className="title">{item.programme.data?.attributes.title}</div>
                                     <div className="artists">
-                                      {item.programme.data?.attributes?.community_items?.data?.map((artist, i) => {
+                                      {item.programme.data?.attributes?.authors?.data?.map((artist, i) => {
                                         return(
                                           <div>{artist.attributes.name}</div>
                                         )
@@ -181,7 +183,7 @@ export async function getStaticProps({ params }) {
   const [globalRes, menusRes, programmesRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*&populate[event][populate][programme][populate][community_items][populate]=*`),
+    fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*&populate[event][populate][programme][populate][authors][populate]=*`),
   ])
 
   return {
