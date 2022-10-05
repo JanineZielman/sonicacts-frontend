@@ -151,33 +151,41 @@
 				top: 0;
 				margin-top: 50px;
 			}
+			&.one-sun-after-another {
+				background-color: rgb(252, 221, 229);
+
+				& .artists {
+					display: none;
+				}
+			}
+
+			&.inner-earth {
+				background-color: rgb(213, 244, 213);
+
+				& .artists {
+					display: none;
+				}
+			}
+
+			&.leaving-traces {
+				background-color: rgb(255, 255, 13);
+
+				& .artists {
+					display: none;
+				}
+			}
+
+			&.symposium-leaving-traces {
+				background-color: rgb(255, 255, 13);
+
+				& .artists {
+					display: none;
+				}
+			}
 			&.small-bar{
 				height: 45px;
 				margin-top: 0px;
-				&.one-sun-after-another{
-					background-color: rgb(252, 221, 229);
-					& .artists{
-						display: none;
-					}
-				}
-				&.inner-earth{
-					background-color: rgb(213, 244, 213);
-					& .artists {
-						display: none;
-					}
-				}
-				&.leaving-traces{
-					background-color: rgb(255, 255, 13);
-					& .artists {
-						display: none;
-					}
-				}
-				&.symposium-leaving-traces {
-					background-color: rgb(255, 255, 13);
-					& .artists {
-						display: none;
-					}
-				}
+				
 				.inner-programme{
 					display: flex;
 				}
