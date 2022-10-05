@@ -117,6 +117,7 @@
 			height: auto;
 			border-radius: 10px;
 			transition: all 0.4s ease-in-out;
+			top: 0;
 			&:hover{
 				background-color: #000!important;
 				color: white;
@@ -125,8 +126,16 @@
 			.inner-programme {
 				padding: 10px;
 				font-size: 18px;
+				width: 98%;
+				position: relative;
+				display: flex;
+				.inner-wrapper{
+					position: sticky;
+					left: 260px;
+					display: flex;
+					flex-wrap: wrap;
+				}
 				.time{
-					// font-size: 18px;
 					margin-left: 10px;
 				}
 				.title{
@@ -134,26 +143,17 @@
 					margin-left: 10px;
 				}
 			}
-			&.small-bar.whole-day{
+			&.whole-day{
 				height: 45px;
-				left: 250px;
-				// margin-top: -5px;
-				position: sticky;
-				left: 250px;
-				&:nth-child(3){
-					left: 800px;
-				}
+				// &:nth-child(3){
+				// 	left: 800px;
+				// }
 				top: 0;
-				margin-top: -180px;
-				width: 550px;
-				.inner-programme{
-					justify-content: center;
-				}
+				margin-top: 50px;
 			}
 			&.small-bar{
 				height: 45px;
-				margin-top: 50px;
-				// border-radius: 25px;
+				margin-top: 0px;
 				&.one-sun-after-another{
 					background-color: rgb(252, 221, 229);
 					& .artists{
@@ -180,18 +180,6 @@
 				}
 				.inner-programme{
 					display: flex;
-					align-items: center;
-					padding: 0;
-					height: 100%;
-					margin-left: 20px;
-					.time{
-						// margin-top: 5px;
-						margin-left: 0px;
-					}
-					.title{
-						margin-left: 24px;
-						margin-top: 0;
-					}
 				}
 			}
 		}
@@ -257,26 +245,24 @@
 				margin-left: -250px;
 				height: 130px;
 				.inner-programme {
+					.inner-wrapper{
+						left: 10px;
+					}
 				}
 				&.small-bar{
-					margin-top: 130px;
+					margin-top: 80px;
 					.inner-programme{
 						margin-top: 0px;
 					}
 				}
-				&.small-bar.whole-day {
-					height: 45px;
-					margin-top: 0px;
-					position: sticky;
-					left: 0;
+				&.whole-day {
+					height: auto;
+					margin-top: 130px;
+					// position: sticky;
+					// left: 0;
 					top: 0;
-					width: 96vw;
 					&:nth-child(3) {
 						
-					}
-
-					.inner-programme {
-						justify-content: center;
 					}
 				}
 			}
