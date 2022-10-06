@@ -84,10 +84,9 @@ const Timetable = ({ menus, global, params, timetable}) => {
       setCurrentDate(e.target[e.target.selectedIndex].value)
     }
   }
-
-  console.log(programmes)
   
   return (
+    <>
     <section className="festival-wrapper">
       <Layout page={page} menus={menus} global={global}>
         <div className="timetable">
@@ -161,6 +160,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
         </div>
       </Layout>
     </section>
+    </>
   )
 }
 
