@@ -78,7 +78,8 @@
     position: absolute;
     left: 1100px;
     margin-left: 48px;
-    width: 500px;
+    max-width: 500px;
+    width: calc(100vw - 1200px);
     a{
       font-size: inherit;
     }
