@@ -1,8 +1,25 @@
 import { fetchAPI } from "../lib/api"
 import Layout from "../components/layout"
 import Article from "../components/article"
+import React, {useState, useEffect} from "react"
 
 const Page = ({menus, page, global}) => {
+
+  useEffect(() => {
+    setTimeout(function() {
+      if(page.attributes.geoblocking === true){
+        $.get("https://freegeoip.app/json/", function (response) {
+          // $("#ip").html("IP: " + response.ip);
+          // $("#country_code").html(response.country_code);
+          console.log(response.country_code)
+          if(response.country_code=='NL'){
+            console.log('NL')
+          }
+        }, "jsonp");
+      }
+    }, 1000);
+  }, []);
+
   return (
     <Layout menus={menus} page={page} global={global}>
       {page.attributes.embed ?
