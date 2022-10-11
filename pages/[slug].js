@@ -12,13 +12,13 @@ const Page = ({menus, page, global}) => {
       if(page.attributes.geoblocking === true){
         $.getJSON('https://geolocation-db.com/json/')
          .done (function(location) {
-            
             setLoading(false);
-            if(location.country_code != 'NL'){
+            if(location.country_code == 'NL'){
               setGeoBlocked(true);
               console.log(location.country_code)
             } else {
               setGeoBlocked(false);
+              console.log(location.country_code)
             }
         });
       }
