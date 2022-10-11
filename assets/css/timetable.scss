@@ -2,6 +2,8 @@
 .timetable{
 	height: auto;
 	overflow-y: hidden;
+	zoom: 90%;
+	margin-top: 24px;
 	.artists {
 		display: flex;
 		flex-wrap: wrap;
@@ -21,7 +23,7 @@
 		width: 100%;
 		background-color: #b4c8c8;
 		position: fixed;
-		top: 80px;
+		top: 100px;
 		z-index: 6;
 		padding: 14px 0;
 		select{

@@ -717,6 +717,12 @@ h2 {
   }
 }
 
+.text-block{
+  h1{
+    margin-top: 10px;
+  }
+}
+
 .radio{
   // display: none;
   
@@ -774,4 +780,32 @@ h2 {
 
 .container.topbanner{
   margin-top: 25px;
+}
+
+.mobile-radio{
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .radio{
+    display: flex;
+    justify-content: space-between;
+    .radio-wrapper {
+      p{
+        display: none;
+      }
+      width: 45%;
+    }
+  }
+  .mobile-radio {
+    display: inline-block;
+    color: white;
+    font-size: 16px;
+    font-weight: 100;
+    margin: 2px;
+    padding-right: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
 }
