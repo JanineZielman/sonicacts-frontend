@@ -21,6 +21,8 @@ const Page = ({menus, page, global}) => {
               console.log(location.country_code)
             }
         });
+      } else {
+        setLoading(false);
       }
     }, 100);
   }, []);
