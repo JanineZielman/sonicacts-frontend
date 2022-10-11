@@ -4,7 +4,7 @@ import { fetchAPI } from "../../../../lib/api"
 import Moment from 'moment'
 
 
-const Timetable = ({ menus, global, params, timetable}) => {
+const Timetable = ({ menus, global, params, timetable, festival}) => {
 	const page = {
     attributes:
       	{slug: `biennial/${params.slug}/timetable`}
@@ -88,7 +88,7 @@ const Timetable = ({ menus, global, params, timetable}) => {
   return (
     <>
     <section className="festival-wrapper">
-      <Layout page={page} menus={menus} global={global}>
+      <Layout page={page} menus={menus} global={global} festival={festival}>
         <div className="timetable">
           <div className="timetable-menu custom-select" id="dates">
            Date:
@@ -180,7 +180,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // Run API calls in parallel
-  const [globalRes, menusRes, programmesRes] = await Promise.all([
+  const [festivalRes, globalRes, menusRes, programmesRes] = await Promise.all([
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI(`/timetables?filters[biennial][slug][$eq]=${params.slug}&populate[event][populate][programme][populate][main_programmes][populate]=*&populate[event][populate][location][populate]=*&populate[event][populate][programme][populate][authors][populate]=*`),
@@ -188,6 +189,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
+      festival: festivalRes.data[0],
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,
