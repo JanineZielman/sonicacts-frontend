@@ -1,14 +1,8 @@
 import Moment from 'moment';
 import Image from "../../components/image"
 
-const Hero = ({slug, biennial, programmes }) => {
-	const number = Math.floor(Math.random() * (biennial.community_items.data.length - 6));
+const Hero = ({slug, programmes, artists, news }) => {
 
-	biennial.news_items.data.sort(function(a,b){
-		// Turn your strings into dates, and then subtract them
-		// to get a value that is either negative, positive, or zero.
-		return new Date(b.attributes.date) - new Date(a.attributes.date);
-	});
   return (
 		<>
 			<div className="festival-hero landing-page">
@@ -92,7 +86,7 @@ const Hero = ({slug, biennial, programmes }) => {
 							<div>
 								<h1>Artists</h1>
 								<div className='artists-preview preview'>
-									{biennial.community_items.data.slice(number,number+6).map((item, i) => {
+									{artists.map((item, i) => {
 										return(
 											<a href={`/biennial/${slug}/artists/${item.attributes.slug}`} className='image-text'>
 												<div className='image'><Image image={item.attributes.cover_image?.data?.attributes} /></div>
@@ -111,7 +105,7 @@ const Hero = ({slug, biennial, programmes }) => {
 							<div>
 								<h1>News</h1>
 								<div className='news-preview preview'>
-									{biennial.news_items.data.slice(0,4).map((item, i) => {
+									{news.map((item, i) => {
 										return(
 											<a href={`/news/${item.attributes.slug}`} className='image-text'>
 												<div className='image'><Image image={item.attributes.cover_image?.data?.attributes} /></div>
