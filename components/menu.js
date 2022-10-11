@@ -41,20 +41,6 @@ const Menu = ({ menus, page, global, first, festival }) => {
             <a href="/" className="home">
               Sonic <br/> Acts
             </a>
-            {menus.map((page, i) => {
-              return (
-                page.attributes.slug != 'shop' ?
-
-                <a href={'/'+page.attributes.slug} key={'link'+i} className="menu-link">
-                  {page.attributes.slug}
-                </a>
-                :
-                <a href={'https://sonicacts.com/sashop/'} key={'link'+i} className="menu-link" target={'_blank'}>
-                  {page.attributes.slug}
-                </a>
-          
-              )
-            })}
             {global.attributes.festival_shown == true &&
               <div className="festival-menu">
                 <a href={'/'+ global.attributes.festival_slug} className="menu-link festival-link">
@@ -72,6 +58,21 @@ const Menu = ({ menus, page, global, first, festival }) => {
                 
               </div>
             }
+            {menus.map((page, i) => {
+              return (
+                page.attributes.slug != 'shop' ?
+
+                <a href={'/'+page.attributes.slug} key={'link'+i} className="menu-link">
+                  {page.attributes.slug}
+                </a>
+                :
+                <a href={'https://sonicacts.com/sashop/'} key={'link'+i} className="menu-link" target={'_blank'}>
+                  {page.attributes.slug}
+                </a>
+          
+              )
+            })}
+            
           </div>
            <div className="menu-search">
             <Search params={''}/>

@@ -53,7 +53,7 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
       </>
     </section>
     <footer className="footer">
-      {festival &&
+      {festival && festival.attributes.prefooter &&
         <div className="prefooter">
           <div className="text-block medium">
             <p>{festival.attributes.prefooter.title}</p>
