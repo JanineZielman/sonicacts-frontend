@@ -64,9 +64,11 @@ const Timetable = ({ menus, global, params, timetable, festival}) => {
             let endDate = new Date(item.end_date?.substring(0, 10)).getTime();
             let current = new Date(currentDate).getTime();
             if (item.date.substring(0, 10) === currentDate || endDate >= current && startDate <= current) {
-              if(!map.has(item.location.data.attributes.slug)){
-                  map.set(item.location.data.attributes.slug, true);    // set any value to Map
-                  locations.push(item.location.data.attributes);
+              if (item.location.data){
+                if(!map.has(item.location.data.attributes.slug)){
+                    map.set(item.location.data.attributes.slug, true);    // set any value to Map
+                    locations.push(item.location.data.attributes);
+                }
               }
               programmes.push(item);
             }
@@ -118,41 +120,45 @@ const Timetable = ({ menus, global, params, timetable, festival}) => {
                     )
                   })}
                 </div>
-                {locations?.map((loc,j) => {
-                  return(
-                    <div className="timetable-row">
-                      <div className="location">
-                        <h4>{loc.title}</h4>
-                        <p>{loc.subtitle}</p>
-                      </div>
-                      {programmes?.map((item,i) => {
-                        const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
-                        const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
-                        return(
-                          <>
-                            {item.location.data.attributes.slug == loc.slug &&
-                              <a href={item.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${item.programme.data?.attributes.slug}`} className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data?.attributes.slug} ${item.whole_day ? 'whole-day' : ''} `} style={{'--margin': ((startTime - 8) * 400 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 400 - 8 + 'px'}}>
-                                <div className="inner-programme">
-                                  <div className="inner-wrapper">
-                                    <div className="time">{item.start_time} - {item.end_time}</div>
-                                    <div className="title">{item.programme.data?.attributes.title}</div>
-                                    <div className="artists">
-                                      {item.programme.data?.attributes?.authors?.data?.map((artist, i) => {
-                                        return(
-                                          <div>{artist.attributes.name}</div>
-                                        )
-                                      })}
+                {locations[0] &&
+                  <>
+                    {locations?.map((loc,j) => {
+                      return(
+                        <div className="timetable-row">
+                          <div className="location">
+                            <h4>{loc.title}</h4>
+                            <p>{loc.subtitle}</p>
+                          </div>
+                          {programmes?.map((item,i) => {
+                            const startTime = parseFloat(item.start_time?.substring(0, 2)) + parseFloat(item.start_time?.substring(3, 5) / 60);
+                            const endTime = parseFloat(item.end_time?.substring(0, 2)) + parseFloat(item.end_time?.substring(3, 5) / 60);
+                            return(
+                              <>
+                                {item.location.data?.attributes.slug == loc.slug &&
+                                  <a href={item.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${item.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${item.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${item.programme.data?.attributes.slug}`} className={`programme ${item.end_date ? 'small-bar' : ''} ${item.programme.data?.attributes.slug} ${item.whole_day ? 'whole-day' : ''} `} style={{'--margin': ((startTime - 8) * 400 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 400 - 8 + 'px'}}>
+                                    <div className="inner-programme">
+                                      <div className="inner-wrapper">
+                                        <div className="time">{item.start_time} - {item.end_time}</div>
+                                        <div className="title">{item.programme.data?.attributes.title}</div>
+                                        <div className="artists">
+                                          {item.programme.data?.attributes?.authors?.data?.map((artist, i) => {
+                                            return(
+                                              <div>{artist.attributes.name}</div>
+                                            )
+                                          })}
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                </div>
-                              </a>
-                            }
-                          </>
-                        )
-                      })}
-                    </div>
-                  )
-                })}
+                                  </a>
+                                }
+                              </>
+                            )
+                          })}
+                        </div>
+                      )
+                    })}
+                  </>
+                }
               </div>
             </div>
           }
