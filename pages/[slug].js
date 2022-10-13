@@ -40,7 +40,9 @@ const Page = ({menus, page, global}) => {
                   <div className="full-iframe" id="full-iframe" dangerouslySetInnerHTML={{__html: page.attributes.content[0].url}}/>
                 </>
               : 
-                <p>{page.attributes.geoblocking_error}</p>
+                <div className="content padding">
+                  <p>{page.attributes.geoblocking_error}</p>
+                </div>
               }
             </>
           }
