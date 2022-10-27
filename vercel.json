@@ -1,7 +1,5 @@
 {
-  "redirects": [
-		{ "source": "/", "destination": "/biennial/biennial-2022", "permanent": false },
-		
+  "redirects": [		
     { "source": "/portal", "destination": "https://portal.sonicacts.com/portal", "permanent": true },
 		{ "source": "/portal/:path*", "destination": "https://portal.sonicacts.com/portal/:path*", "permanent": true },
 		{ "source": "/sashop", "destination": "https://shop.sonicacts.com/", "permanent": true },
