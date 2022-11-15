@@ -61,7 +61,6 @@ const News = ({ menus, global, items, numberOfPosts, params, festival }) => {
 							hasMore={hasMore}
 							loader={<h4>Loading...</h4>}
 						>
-							{/* {posts.slice(1).map((item, i) => { */}
 							{posts.map((item, i) => {
 								return (
 									<div className="discover-item">
@@ -69,7 +68,9 @@ const News = ({ menus, global, items, numberOfPosts, params, festival }) => {
 											<div className="item-wrapper">
 												<a href={'/news/'+item.attributes.slug} key={'link'+i}>
 													<div className="image">
-														<Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+														{item.attributes.cover_image?.data?.attributes &&
+															<Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+														}
 													</div>
 													<div className="date">
 														{item.attributes.date &&
@@ -105,7 +106,19 @@ const News = ({ menus, global, items, numberOfPosts, params, festival }) => {
   )
 }
 
-export async function getServerSideProps({params, filter}) {
+export async function getStaticPaths() {
+  const pagesRes = await fetchAPI(`/biennials`);
+  return {
+    paths: pagesRes.data.map((page) => ({
+      params: {
+        slug: page.attributes.slug,
+      },
+    })),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps({params}) {
   // Run API calls in parallel
   const [festivalRes, pageRes, globalRes, menusRes] = await Promise.all([
 		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),

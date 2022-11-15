@@ -11,9 +11,21 @@ const AgendaItem = ({menus, page, global, relations}) => {
   )
 }
 
+export async function getStaticPaths({preview = null}) {
+  const pagesRes = await fetchAPI(`/agenda-items?${preview ? "&publicationState=preview" : '&publicationState=live'}`);
+  return {
+    paths: pagesRes.data.map((page) => ({
+      params: {
+        slug: page.attributes.slug,
+      },
+    })),
+    fallback: false,
+  }
+}
 
-export async function getServerSideProps({params, preview = null}) {
-  const pageRes = 
+
+export async function getStaticProps({ params,  preview = null}) {
+	const pageRes = 
     await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
