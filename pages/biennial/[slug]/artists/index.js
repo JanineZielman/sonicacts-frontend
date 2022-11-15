@@ -78,7 +78,19 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
   )
 }
 
-export async function getServerSideProps({params}) {
+export async function getStaticPaths({preview = null}) {
+  const pagesRes = await fetchAPI(`/biennials?${preview ? "&publicationState=preview" : '&publicationState=live'}`);
+  return {
+    paths: pagesRes.data.map((page) => ({
+      params: {
+        slug: page.attributes.slug,
+      },
+    })),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps({params}) {
   // Run API calls in parallel
   const [festivalRes, globalRes, menusRes] = await Promise.all([
 		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
