@@ -141,6 +141,10 @@
 		font-size: 36px;
 	}
 
+	.biennial-article{
+		margin-top: 36px;
+	}
+
 	.menu {
 		height: 60px;
 		margin-left: -10px;
@@ -330,6 +334,13 @@
 	.article .text-block.small p {
 		padding-left: 24px;
 		font-size: 18px;
+	}
+
+	.article .sidenote{
+		width: 98%;
+		p{
+			padding-left: 14px;
+		}
 	}
 
 	.article .sidebar {

@@ -91,7 +91,7 @@ export async function getStaticProps({ params }) {
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
 		fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=order%3Adesc&sort[1]=start_date%3Aasc&pagination[limit]=${4}&populate=*`),
-		fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${number}&pagination[limit]=${6}&populate=*`),
+		fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${number}&pagination[limit]=${6}&populate=*`),
 		fetchAPI(`/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&pagination[limit]=${4}&populate=*`),
   ])
 
