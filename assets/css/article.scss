@@ -75,17 +75,11 @@
     }
   }
   .sidenote {
-    // position: absolute;
-    // left: 1100px;
-    // margin-left: 48px;
-    // max-width: 500px;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    width: 100%;
-    p{
-      padding-left: 150px;
-    }
-    // width: calc(100vw - 1200px);
+    position: absolute;
+    left: 1100px;
+    margin-left: 24px;
+    max-width: 500px;
+    width: calc(100vw - 1200px);
     a{
       font-size: inherit;
     }
