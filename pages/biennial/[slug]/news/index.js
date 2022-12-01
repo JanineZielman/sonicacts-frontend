@@ -106,19 +106,7 @@ const News = ({ menus, global, items, numberOfPosts, params, festival }) => {
   )
 }
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI(`/biennials`);
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({params}) {
+export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [festivalRes, pageRes, globalRes, menusRes] = await Promise.all([
 		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),

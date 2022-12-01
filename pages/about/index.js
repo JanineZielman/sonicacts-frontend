@@ -11,7 +11,7 @@ const About = ({ menus, global, page }) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/about?populate[content][populate]=*"),
@@ -25,7 +25,6 @@ export async function getStaticProps() {
       global: globalRes.data,
       menus: menusRes.data,
     },
-    revalidate: 1,
   }
 }
 
