@@ -26,7 +26,7 @@ const FourOhFour = ({menus, global}) => {
 }
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
   const [globalRes, menusRes] = await Promise.all([
     fetchAPI("/global", { populate: "*" }),
@@ -38,6 +38,7 @@ export async function getServerSideProps() {
       global: globalRes.data,
       menus: menusRes.data
     },
+    revalidate: 1,
   };
 }
 
