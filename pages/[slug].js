@@ -54,19 +54,8 @@ const Page = ({menus, page, global}) => {
   )
 }
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/pages");
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const pagesRes = 
     await fetchAPI( `/pages?filters[slug][$eq]=${params.slug}&populate=*`
   );
@@ -86,7 +75,6 @@ export async function getStaticProps({ params }) {
       global: globalRes.data,
       menus: menusRes.data
     },
-    revalidate: 1,
   };
 }
 

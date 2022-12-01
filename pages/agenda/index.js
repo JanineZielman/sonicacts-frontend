@@ -73,7 +73,7 @@ const Agenda = ({ menus, global, page, items, opencalls, programs }) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const qs = require('qs');
   const currentDate = new Date(Date.now()).toISOString().split('T')[0].replace('///g', '-')
 
@@ -160,7 +160,6 @@ export async function getStaticProps() {
       opencalls: opencallRes.data,
       programs: programRes.data,
     },
-    revalidate: 1,
   }
 }
 

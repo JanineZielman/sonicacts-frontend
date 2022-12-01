@@ -241,7 +241,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const totalCom = await fetchAPI( `/discover-items`);
   const numberCom = totalCom.meta.pagination.total / 6;
@@ -281,7 +281,6 @@ export async function getStaticProps() {
       },
       about: aboutRes.data,
     },
-    revalidate: 1,
   }
 }
 

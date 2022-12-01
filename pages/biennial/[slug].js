@@ -65,20 +65,7 @@ const Festival = ({ menus, global, page, params, programmes, artists, news }) =>
   )
 }
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/biennials");
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
-
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	const totalItems = 
     await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
   );

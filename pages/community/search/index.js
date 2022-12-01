@@ -70,7 +70,7 @@ const Community = ({ menus, global, page, items, numberOfPosts }) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/community", { populate: "*" }),
@@ -94,7 +94,6 @@ export async function getStaticProps() {
       global: globalRes.data,
       menus: menusRes.data,
     },
-    revalidate: 1,
   }
 }
 
