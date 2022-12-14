@@ -223,3 +223,20 @@
 .category a {
   color: #000;
 }
+
+.author{
+  &:nth-child(2){
+    &:before {
+      content: ", By "
+    }
+  }
+  &:after{
+    content: ",";
+    margin-right: 5px;
+  }
+  &:last-child{
+    &:after {
+      content: ""
+    }
+  }
+}

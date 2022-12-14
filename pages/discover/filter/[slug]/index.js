@@ -70,7 +70,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                             {item.attributes.authors?.data.map((author, i) =>{
                               return(
                                 <a className="author" href={'/community/'+author.attributes.slug} key={'discover'+i}>
-                                , {author.attributes.name}
+                                  {author.attributes.name}
                                 </a>
                               )
                             })}
