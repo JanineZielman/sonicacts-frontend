@@ -13,12 +13,21 @@ const DiscoverItem = ({menus, page, global, relations}) => {
 
 
 export async function getServerSideProps({params, preview = null}) {
+
   const pageRes = 
     await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
+  const agendaRes = 
+    await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+  );
+
   const pageRel = 
     await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+  );
+
+  const agendaRel = 
+    await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
   
 
@@ -30,9 +39,9 @@ export async function getServerSideProps({params, preview = null}) {
   return {
     props: { 
       menus: menusRes.data, 
-      page: pageRes.data[0], 
+      page: pageRes.data[0] ? pageRes.data[0] : agendaRes.data[0], 
       global: globalRes.data, 
-      relations: pageRel.data[0] 
+      relations: pageRel.data[0] ? pageRel.data[0] : agendaRel.data[0] 
     },
   };
 }
