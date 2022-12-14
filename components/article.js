@@ -221,7 +221,7 @@ const Article = ({page, relations}) => {
 						}
 						
 
-						{page.attributes.links || relations?.attributes?.discover_items &&
+						{ (page.attributes.links || relations?.attributes?.discover_items) &&
 							<div className="links">
 								{page.attributes.links &&
 									<>
