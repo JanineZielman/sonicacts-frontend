@@ -221,6 +221,14 @@
       max-width: 300px;
       font-size: 14px;
       line-height: 1.2;
+      p{
+        display: flex;
+        font-size: 30px;
+        margin: 10px 0;
+        a{
+          margin-left: 5px;
+        }
+      }
     }
   }
 }

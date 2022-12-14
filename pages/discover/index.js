@@ -11,10 +11,14 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   const [hasMore, setHasMore] = useState(true);
 
   const getMorePosts = async () => {
-    const res = await fetchAPI(
+    const res1 = await fetchAPI(
       `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
-    const newPosts = await res.data;
+    const res2 = await fetchAPI(
+      `/agenda-items?sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
+    );
+    var res = res1.data.concat(res2.data)
+    const newPosts = await res;
     setPosts((posts) => [...posts, ...newPosts]);
   };
 
@@ -101,21 +105,30 @@ export async function getServerSideProps() {
   ])
 
   const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
+  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&populate=*`);
+
+  var mergedItems = items.data.concat(agendaItems.data)
+
 
 	const totalItems = 
     await fetchAPI( `/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
   );
 
-  const numberOfPosts = totalItems.meta.pagination.total;
+  const totalItemsAgenda = 
+    await fetchAPI( `/agenda-items`
+  );
+
+  const numberOfPosts = totalItems.meta.pagination.total + totalItemsAgenda.meta.pagination.total;
 
   return {
     props: {
-      items: items.data,
+      items: mergedItems,
       numberOfPosts: +numberOfPosts,
       page: pageRes.data,
       categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
+      agenda: agendaItems.data,
     },
   };
 }
