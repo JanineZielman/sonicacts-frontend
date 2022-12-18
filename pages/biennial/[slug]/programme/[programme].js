@@ -25,12 +25,13 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                   <h1>{relations.attributes.sub_programmes_title}</h1>
                 }
               </div>
-              <div className="discover-container programme-container">
+              <div className="discover-container programme-container sub-programme-container">
                 {sub.map((item, i) => {
                   let tags = "";
                   for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
                     tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
                   }
+                  console.log(item)
                   return(
                       <div className={`discover-item ${tags}`}>
                       <LazyLoad height={600}>
@@ -43,7 +44,6 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                               <div className="info-overlay">
                                 {item.attributes.locations.data[0] && 
                                   <>
-                                    <span>Locations:</span>
                                     <div className="locations">
                                       {item.attributes.locations.data.map((loc, j) => {
                                         return(

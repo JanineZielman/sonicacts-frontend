@@ -89,7 +89,7 @@ const Programme = ({ menus, global, items, params, festival}) => {
               })}
               <div className="divider"></div>
           </div>
-          <div className="discover-container programme-container">
+          <div className="discover-container programme-container all-programme-container">
             <>
               {items.slice(3).map((item, i) => {
                 return (
