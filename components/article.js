@@ -22,6 +22,7 @@ const Article = ({page, relations}) => {
 			}
 		}
   }, []);
+	console.log(relations)
   return (   
 		<section className="article">
 			<>
@@ -125,16 +126,17 @@ const Article = ({page, relations}) => {
 								/>
 							</div>
 						}
+
+						{page.attributes.slug == 'community' &&
+							<span>Last updated on {Moment(page.attributes.updatedAt).format('D MMM y')}</span>
+						}
 					
-						{page.attributes.slug == 'agenda' &&
+						{page.attributes.slug != 'news' && page.attributes.slug != 'community' && page.attributes.slug != 'about' &&
 							<>
 									{relations?.attributes?.date &&
 										<span>When</span>
 									}
-									{relations?.attributes?.date && relations?.attributes?.dates == 0 &&
-										Moment(relations?.attributes?.date).format('D MMM y')
-									}
-									{relations?.attributes?.dates[0] &&
+									{relations?.attributes?.dates?.[0] ?
 										<div>
 											{relations?.attributes.dates.map((date, i) => {
 												return(
@@ -166,6 +168,8 @@ const Article = ({page, relations}) => {
 												)
 											})}
 										</div>
+										:
+										Moment(relations?.attributes?.date).format('D MMM y')
 									}
 									{page.attributes.time &&
 										<>
