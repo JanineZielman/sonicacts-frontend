@@ -22,7 +22,7 @@ const Article = ({page, relations}) => {
 			}
 		}
   }, []);
-	console.log(relations)
+
   return (   
 		<section className="article">
 			<>
@@ -40,7 +40,7 @@ const Article = ({page, relations}) => {
 									}
 							</div>
 						}
-						<h1>{page.attributes.title}</h1>
+						<h1>{page.attributes.title} {page.attributes.additional_info && page.attributes.additional_info}</h1>
 					</div>
 				}
 				{page.attributes.name &&

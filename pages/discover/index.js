@@ -47,7 +47,6 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
             loader={<h4>Loading...</h4>}
           >
             {posts.map((item, i) => {
-              console.log(item)
               return (
                 <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
                    <LazyLoad height={600}>
