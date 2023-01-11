@@ -29,8 +29,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     autoplaySpeed: 4000
   };
 
-  console.log(homepage)
-
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
@@ -102,35 +100,43 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                                     {item.attributes.date && page.attributes.slug != 'discover' &&
                                       <>
                                         {item.attributes.dates ?
-                                          <>
                                           <span>
-                                            {Moment(item.attributes.date).format('D MMM y')}
-                                          
-                                          {item.attributes.dates.map((date, i) => {
-                                            return(
-                                              <span className="date" key={`dates-${i}`}>
-                                                {date.single_date &&
-                                                  <>
-                                                  , {Moment(date.single_date).format('D MMM y')}
-                                                  </>
-                                                }
-                                                {date.end_date &&
-                                                  <>
-                                                  &nbsp;– {Moment(date.end_date).format('D MMM y')}
-                                                  </>
-                                                }
-                                              </span>
-                                            )
-                                          })}
+                                            {item.attributes.dates.map((date, i) => {
+                                              return(
+                                                <span className={`date ${i}`} key={`dates-${i}`}>
+                                                  {date.single_date &&
+                                                    <>
+                                                    {i == 0 && Moment(item.attributes.date).format('D MMM y')}
+                                                    , {Moment(date.single_date).format('D MMM y')}
+                                                    </>
+                                                  }
+                                                  {date.end_date &&
+                                                    <>
+                                                      {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+                                                        <>
+                                                          {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+                                                            <>{Moment(item.attributes.date).format('D')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                          :
+                                                            <>{Moment(item.attributes.date).format('D MMM')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                          }
+                                                        </>
+                                                        :
+                                                        <>
+                                                          {Moment(item.attributes.date).format('D MMM y')} &nbsp;– {Moment(date.end_date).format('D MMM y')}
+                                                        </>
+                                                      }
+                                                    </>
+                                                  }
+                                                </span>
+                                              )
+                                            })}
                                           </span>
-                                          </>
                                         : 
                                         <span>
                                           {Moment(item.attributes.date).format('D MMM y')}
                                         </span>
                                         }
                                       </>
-                                      
                                     }
                                     {item.attributes.title &&
                                       <h2>{item.attributes.title}</h2>

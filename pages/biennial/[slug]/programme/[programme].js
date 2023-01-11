@@ -31,7 +31,6 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                   for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {
                     tags += `${item.attributes.biennial_tags.data[i].attributes.slug} `;
                   }
-                  console.log(item)
                   return(
                       <div className={`discover-item ${tags}`}>
                       <LazyLoad height={600}>

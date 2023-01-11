@@ -132,27 +132,37 @@ const Article = ({page, relations}) => {
 										Moment(relations?.attributes?.date).format('D MMM y')
 									}
 									{relations?.attributes?.dates[0] &&
-										<>
-											{relations?.attributes?.dates.map((date, i) => {
+										<div>
+											{relations?.attributes.dates.map((date, i) => {
 												return(
-													<div className="date" key={`dates-${i}`}>
+													<div className={`date ${i}`} key={`dates-${i}`}>
 														{date.single_date &&
-															<div>
-															– {Moment(date.single_date).format('D MMM y')}
-															</div>
+															<>
+															{i == 0 && Moment(relations?.attributes?.date).format('D MMM y')}
+															, {Moment(date.single_date).format('D MMM y')}
+															</>
 														}
 														{date.end_date &&
 															<>
-															{relations?.attributes?.date &&
-																Moment(relations?.attributes?.date).format('D MMM')
-															}
-															&nbsp;– {Moment(date.end_date).format('D MMM y')}
+																{(Moment(relations?.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+																	<>
+																		{(Moment(relations?.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+																			<>{Moment(relations?.attributes.date).format('D')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+																		:
+																			<>{Moment(relations?.attributes.date).format('D MMM')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+																		}
+																	</>
+																	:
+																	<>
+																		{Moment(relations?.attributes.date).format('D MMM y')} &nbsp;– {Moment(date.end_date).format('D MMM y')}
+																	</>
+																}
 															</>
 														}
 													</div>
 												)
 											})}
-										</>
+										</div>
 									}
 									{page.attributes.time &&
 										<>
