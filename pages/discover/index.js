@@ -4,7 +4,7 @@ import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LazyLoad from 'react-lazyload';
-
+import Moment from 'moment';
 
 const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   const [posts, setPosts] = useState(items);
@@ -47,6 +47,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
             loader={<h4>Loading...</h4>}
           >
             {posts.map((item, i) => {
+              console.log(item)
               return (
                 <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
                    <LazyLoad height={600}>
@@ -72,17 +73,23 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                         <div className="title">
                           {item.attributes.title}
                         </div>
-                        {item.attributes.tags?.data && 
-                          <div className="tags">
-                              {item.attributes.tags.data.map((tag, i) => {
-                                return(
-                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  {tag.attributes.slug}
-                                </a>
-                                )
+                  
+                        <div className="tags">
+                          {item.attributes.tags?.data && 
+                            <>
+                            {item.attributes.tags.data.map((tag, i) => {
+                              return(
+                              <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                {tag.attributes.slug}
+                              </a>
+                              )
                             })}
-                          </div>
-                        }
+                            </>
+                          }
+                          {item.attributes.date &&
+                            <span>{Moment(item.attributes.date).format('y')}</span>
+                          }
+                        </div>
                       </a>
                     </div>
                   </LazyLoad>

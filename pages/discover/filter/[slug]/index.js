@@ -5,8 +5,9 @@ import Image from "../../../../components/image"
 import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LazyLoad from 'react-lazyload';
+import Moment from 'moment';
 
-const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPosts, filter}) => {
+const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPosts, filter, category}) => {
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
@@ -27,10 +28,18 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
+  console.log(category)
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        <p className="wrapper">{page?.attributes.intro}</p>
+        <p className="wrapper">
+          {category?.[0].attributes?.description ?
+            category?.[0].attributes?.description
+            :
+            page?.attributes.intro
+          }
+        </p>
         <div className="filter">
           <div><span>Filter by category</span></div>
 						<a key={'category-all'} href={`/discover`}>All</a>
@@ -79,17 +88,23 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                         <div className="title">
                           {item.attributes.title}
                         </div>
-                        {item.attributes.tags?.data && 
-                          <div className="tags">
-                            {item.attributes.tags.data.map((tag, i) => {
-                              return(
-                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  {tag.attributes.slug}
-                                </a>
-                              )
-                            })}
-                          </div>
-                        }
+          
+                        <div className="tags">
+                          {item.attributes.tags?.data && 
+                            <>
+                              {item.attributes.tags.data.map((tag, i) => {
+                                return(
+                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    {tag.attributes.slug}
+                                  </a>
+                                )
+                              })}
+                            </>
+                          }
+                          {item.attributes.date &&
+                            <span>{Moment(item.attributes.date).format('y')}</span>
+                          }
+                        </div>
                       </a>
                     </div>
                   </LazyLoad>
@@ -124,6 +139,11 @@ export async function getServerSideProps({params}) {
     await fetchAPI( `/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}`
   );
 
+  const categoryFil = 
+    await fetchAPI( `/categories?filters[slug][$eq]=${params.slug}`
+  );
+
+
   const numberOfPosts = totalItems.meta.pagination.total + totalItemsAgenda.meta.pagination.total;
 
   return {
@@ -134,7 +154,8 @@ export async function getServerSideProps({params}) {
       categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
-			filter: params.slug
+			filter: params.slug,
+      category: categoryFil.data,
     },
   };
 }
