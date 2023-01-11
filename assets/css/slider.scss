@@ -154,6 +154,19 @@
 				text-transform: lowercase;
 			}
 		}
+		.shop-slider-item{
+			max-width: 700px!important;
+			.category{
+				font-size: 21px;
+			}
+			.image{
+				width: 40%;
+				height: auto;
+			}
+			.text{
+				width: 60%;
+			}
+		}
 	}
 	.show-more {
 		width: 100%;

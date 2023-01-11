@@ -96,6 +96,12 @@
 				.text{
 					width: 100%;
 				}
+				&.shop-slider-item {
+					.image {
+						width: 100%;
+						height: auto;
+					}
+				}
 			}
 		}
 		.slick-list {

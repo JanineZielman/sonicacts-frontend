@@ -29,6 +29,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     autoplaySpeed: 4000
   };
 
+  console.log(homepage)
+
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
@@ -198,10 +200,35 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 </div>
               )
             })}
-            <div className="collapsible">
+            <div className="collapsible shop">
               <a href="https://shop.sonicacts.com/" target="_blank" className="show-more-link">
                 Shop
               </a>
+              <LazyLoad height={300}>
+                <Slider {...settings}>
+                  {homepage.attributes.shop_item.map((item, i) => {
+                    return(
+                      <a href={item.link} target="_blank" className="slider-item shop-slider-item">
+                        {item.image?.data &&
+                          <div className="image">
+                            <Image image={item.image?.data?.attributes} objectFit='cover'/>
+                          </div>
+                        }
+                        <div className="text">
+                          <div>
+                            {item.price &&
+                              <span className="category">{item.price}</span>
+                            }
+                            {item.title &&
+                              <h2>{item.title}</h2>
+                            }
+                          </div>
+                        </div>
+                      </a>       
+                    )
+                  })}
+                </Slider>
+              </LazyLoad>
             </div>
             <div className="collapsible contact">
               <div>
@@ -245,7 +272,7 @@ export async function getServerSideProps() {
   
   // Run API calls in parallel
   const [homepageRes, globalRes, socialRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
-    fetchAPI("/homepage", { populate: "*" }),
+    fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate=*"),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/global?populate[socials][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
