@@ -143,6 +143,20 @@
 			font-size: 36px;
 		}
 	}
+	.article {
+		.sidenote{
+			max-width: 100%;
+		}
+		.sidebar {
+			margin: 0;
+			width: 100%;
+			max-width: 100%;
+
+			.contact {
+				padding: 0;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 900px) {
@@ -268,6 +282,7 @@
 	.article .image.community{
 		margin: 24px auto 10px auto;
 	}
+	
 
 }
 
