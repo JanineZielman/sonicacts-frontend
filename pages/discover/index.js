@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react"
+import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
@@ -29,7 +30,11 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        <p className="wrapper">{page?.attributes.intro}</p>
+        <p className="wrapper">
+          <ReactMarkdown 
+            children={page?.attributes.intro} 
+          />
+        </p>
         <div className="filter">
           <div><span>Filter by category</span></div>
           	<a className="active" key={'category-all'} href={`/discover`}>All</a>
