@@ -334,10 +334,14 @@
 
 	.home-menu .collapsible {
 		font-size: 36px;
+		.show-more-link{
+			font-size: 36px;
+		}
 	}
 
 	.article .wrapper,
-	.article .text-block, .article .columns .caption, .article .columns .image {
+	.article .text-block, .article .columns .caption, .article .columns .image,
+	.article .wrapper.about, .article .sidebar .contact {
 		width: 100%;
 	}
 

@@ -613,6 +613,17 @@
 		}
 }
 
+.content-parent {
+	// height: 0px;
+	overflow: hidden;
+	transition: height ease 0.5s;
+}
+
+.content-show {
+	// height: 600px;
+	transition: height ease 0.5s;
+}
+
 .collapsible.visit {
 	cursor: pointer;
 	border-bottom: 2px solid black;
@@ -1220,14 +1231,14 @@
 	}
 }
 
-.discover .discover-container.sub-programme-container{
-	.discover-item{
-		width: 20%;
-		.item-wrapper{
-			padding-right: 1vw;
-		}
-		.image{
-			height: 15vw;
-		}
-	}
-}
+// .discover .discover-container.sub-programme-container{
+// 	.discover-item{
+// 		width: 20%;
+// 		.item-wrapper{
+// 			padding-right: 1vw;
+// 		}
+// 		.image{
+// 			height: 15vw;
+// 		}
+// 	}
+// }

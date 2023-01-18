@@ -55,6 +55,9 @@
         }
       }
     }
+    &.about{
+      width: calc(100% - 550px);
+    }
   }
   h1 {
     font-size: 36px;
@@ -173,9 +176,15 @@
     max-width: 20vw;
     position: relative;
     margin-right: 24px;
+    &.about{
+      width: 100%;
+      min-width: auto;
+      max-width: auto!important;
+    }
     .contact{
       padding: 24px;
-      max-width: 500px;
+      // max-width: 500px;
+      width: 500px;
       p{
         font-size: 21px;
         font-weight: 100;

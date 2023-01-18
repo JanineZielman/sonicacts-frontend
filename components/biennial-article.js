@@ -1,9 +1,9 @@
 import ReactMarkdown from "react-markdown";
 import React, {useEffect} from "react"
 import Moment from 'moment';
-import Collapsible from 'react-collapsible';
 import Image from "./image"
 import LazyLoad from 'react-lazyload';
+import Collapsible from "./collapsible";
 
 const Article = ({page, relations, params}) => {
 	useEffect(() => {
