@@ -29,6 +29,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     autoplaySpeed: 4000
   };
 
+  console.log(about)
+
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
@@ -161,7 +163,37 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 </>
               )
             })}
-            {menus.slice(3,4).map((page, i) => {
+            <div className="collapsible shop">
+              <a href="https://shop.sonicacts.com/" target="_blank" className="show-more-link">
+                Shop
+              </a>
+              <LazyLoad height={300}>
+                <Slider {...settings}>
+                  {homepage.attributes.shop_item.map((item, i) => {
+                    return(
+                      <a href={item.link} target="_blank" className="slider-item shop-slider-item">
+                        {item.image?.data &&
+                          <div className="image">
+                            <Image image={item.image?.data?.attributes} objectFit='cover'/>
+                          </div>
+                        }
+                        <div className="text">
+                          <div>
+                            {item.price &&
+                              <span className="category">{item.price}</span>
+                            }
+                            {item.title &&
+                              <h2>{item.title}</h2>
+                            }
+                          </div>
+                        </div>
+                      </a>       
+                    )
+                  })}
+                </Slider>
+              </LazyLoad>
+            </div>
+                        {menus.slice(3,4).map((page, i) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <div>
@@ -206,51 +238,20 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 </div>
               )
             })}
-            <div className="collapsible shop">
-              <a href="https://shop.sonicacts.com/" target="_blank" className="show-more-link">
-                Shop
-              </a>
-              <LazyLoad height={300}>
-                <Slider {...settings}>
-                  {homepage.attributes.shop_item.map((item, i) => {
-                    return(
-                      <a href={item.link} target="_blank" className="slider-item shop-slider-item">
-                        {item.image?.data &&
-                          <div className="image">
-                            <Image image={item.image?.data?.attributes} objectFit='cover'/>
-                          </div>
-                        }
-                        <div className="text">
-                          <div>
-                            {item.price &&
-                              <span className="category">{item.price}</span>
-                            }
-                            {item.title &&
-                              <h2>{item.title}</h2>
-                            }
-                          </div>
-                        </div>
-                      </a>       
-                    )
-                  })}
-                </Slider>
-              </LazyLoad>
-            </div>
             <div className="collapsible contact">
               <div>
                 <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
                 <LazyLoad height={300}>
                     <div className='contact-wrapper'>
                       <div className="contact-item adres">
-                        <h5>{about.attributes.contact_adres}</h5>
+                        <h5>
+                          {about.attributes.content[0].text_block}
+                        </h5>
                       </div>
                       <div className="contact-item">
-                        <p>{about.attributes.contact_info}</p>
-                      </div>
-                      <div className="contact-item small">
-                        <ReactMarkdown 
-                          children={about.attributes.contact_links} 
-                        />
+                        <p>
+                          <ReactMarkdown children={about.attributes.content[1].text_block}/>
+                        </p>
                       </div>
                     </div>
                 </LazyLoad>

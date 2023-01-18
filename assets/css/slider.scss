@@ -119,12 +119,7 @@
 			}
 		}
 		.contact-item {
-			width: 400px;
-			&.adres {
-				width: 400px;
-				max-width: 400px;
-			}
-
+			width: calc(100% - 300px);
 			h5 {
 				font-weight: 500;
 				margin: 0;
@@ -213,7 +208,7 @@
 		display: flex;
 		margin-top: 14px;
 		.contact-item {
-			max-width: 400px;
+			max-width: calc(100% - 300px);
 			h5 {
 				font-weight: 500;
 				margin: 0;
