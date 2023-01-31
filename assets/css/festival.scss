@@ -1231,14 +1231,68 @@
 	}
 }
 
-// .discover .discover-container.sub-programme-container{
-// 	.discover-item{
-// 		width: 20%;
-// 		.item-wrapper{
-// 			padding-right: 1vw;
-// 		}
-// 		.image{
-// 			height: 15vw;
-// 		}
-// 	}
-// }
+.discover .discover-container.sub-programme-container{
+	.category a{
+		font-size: 10px;
+	}
+	.tags {
+			a {
+				font-size: 10px!important;
+			}
+		}
+	.discover-item{
+		width: 16.5%;
+		.info-overlay .locations{
+			font-size: 14px;
+			span{
+				font-size: 14px;
+			}
+		}
+		.item-wrapper{
+			padding-right: 1vw;
+			.title{
+				font-size: 24px;
+			}
+		}
+		.image{
+			height: 11vw;
+		}
+	}
+	.day-programme{
+		width: 100%;
+		display: block;
+		.info-overlay{
+			padding: 5px;
+			justify-content: flex-start;
+			display: inline-block;
+			.times{
+			}
+			.time{
+				font-size: 20px;
+				span{
+					background-color: white;
+					padding: 0 5px;
+					border-radius: 10px;
+				}
+			}
+		}
+		.day{
+			border-bottom: 2px solid black;
+			position: relative;
+			margin-bottom: 48px;
+		}
+		.day-wrapper{
+			display: inline-block;
+		}
+		.discover-item{
+			padding-top: 14px;
+			margin-top: 14px;
+			border-top: 1px solid black;
+		}
+		.loc-item{
+			margin-top: -52px;
+			margin-bottom: 12px;
+			white-space: nowrap;
+		}
+	}
+}

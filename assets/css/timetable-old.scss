@@ -7,9 +7,9 @@
 	.artists {
 		display: flex;
 		flex-wrap: wrap;
-		font-size: 80%;
+
 		div {
-			margin-left: 5px;
+			margin-left: 10px;
 		}
 
 		div:after {
@@ -26,7 +26,6 @@
 		top: 100px;
 		z-index: 6;
 		padding: 14px 0;
-		margin-top: -10px;
 		select{
 			outline: none;
 			appearance: none;
@@ -53,7 +52,7 @@
 	.timetable-locations{
 		margin-top: 24px;
 		.timetable-wrapper {
-			width: calc(24 * 200px + 250px);
+			width: calc(23 * 400px + 250px);
 			position: relative;
 		}
 		overflow-x: scroll;
@@ -77,9 +76,9 @@
 		overflow-y: hidden;
 		min-height: 80vh;
 		.location{
-			// min-height: 150px;
-			height: 100%;
+			height: 220px;
 			border-top: 1px solid black;
+			// border-bottom: 1px solid black;
 			position: sticky;
 			z-index: 5;
 			left: 0;
@@ -91,66 +90,36 @@
 			h4{
 				font-weight: 500;
 				margin: 0;
-				padding: 20px 0;
-			}
-			:nth-child(2) {
-				padding-top: 14px;
-
+				margin-top: 10px;
 			}
 			p{
 				font-weight: 300;
 				margin: 0;
 				font-size: 24px;
-				padding: 24px 0;
-				border-bottom: 1px solid black;
-				padding-left: 14px;
 			}
 		}
 	}
 	.timetable-row{
 		vertical-align: middle;
 		position: relative;
-		display: flex;
-		// height: auto;
 		&:nth-child(2){
 			margin-top: 100px;
 		}
-		// margin-top: 10px;
-		.sub-bar{
-			height: 80px;
-			position: sticky;
-			margin-left: -250px;
-			&:first-child{
-				margin-top: 70px;
-			}
-			.sub-loc{
-				height: 90px;
-				max-height: 90px;
-			}
-		}
-		.subloc-wrapper{
-			position: sticky;
-			margin-left: -250px;
-			.subloc {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-			}
-		}
+		margin-top: 10px;
 		.programme{
 			display: inline-block;
 			background-color: white;
 			vertical-align: middle;
 			left: var(--margin);
 			margin-left: 5px;
-			// min-width: 190px;
+			margin-top: 100px;
+			min-width: 190px;
 			width: var(--width);
 			position: absolute;
 			height: auto;
 			border-radius: 10px;
 			transition: all 0.4s ease-in-out;
 			top: 0;
-			margin-top: 10px;
 			&:hover{
 				background-color: #000!important;
 				color: white;
@@ -158,31 +127,29 @@
 			// margin: 50px 0px 0 10px;
 			.inner-programme {
 				padding: 10px;
-				font-size: 16px;
+				font-size: 18px;
 				width: 98%;
 				position: relative;
 				display: flex;
 				.inner-wrapper{
 					position: sticky;
 					left: 260px;
-					
-					// display: flex;
-					// flex-wrap: wrap;
+					display: flex;
+					flex-wrap: wrap;
 				}
 				.time{
-					margin-left: 5px;
+					margin-left: 10px;
 				}
 				.title{
 					font-weight: 500;
-					margin-left: 5px;
-					display: -webkit-box;
-					-webkit-line-clamp: 1;
-					-webkit-box-orient: vertical;
-					overflow: hidden;
+					margin-left: 10px;
 				}
 			}
 			&.whole-day{
 				height: 45px;
+				// &:nth-child(3){
+				// 	left: 800px;
+				// }
 				top: 0;
 				margin-top: 50px;
 			}
@@ -193,24 +160,12 @@
 					display: none;
 				}
 			}
-			&.one-sun-after-another-sub {
-				background: linear-gradient(-90deg, rgba(255, 255, 255, 1) 10%, rgba(252, 221, 229, 1) 100%);
-				&:hover {
-					background: #000;
-				}
-			}
 
 			&.inner-earth {
 				background-color: rgb(213, 244, 213);
 
 				& .artists {
 					display: none;
-				}
-			}
-			&.inner-earth-sub{
-				background: linear-gradient(-90deg, rgba(255, 255, 255, 1) 10%, rgba(213, 244, 213, 1) 100%);
-				&:hover {
-					background: #000;
 				}
 			}
 
@@ -222,28 +177,6 @@
 				}
 			}
 
-			&.leaving-traces-sub {
-				background: linear-gradient(-90deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 13, 1) 100%);
-				&:hover {
-					background: #000;
-				}
-			}
-
-			&.practicum {
-				background-color: #bababa;
-
-				& .artists {
-					display: none;
-				}
-			}
-
-			&.practicum-sub {
-				background: linear-gradient(-90deg, rgba(255, 255, 255, 1) 10%, #bababa 100%);
-				&:hover{
-					background: #000;
-				}
-			}
-
 			&.symposium-leaving-traces {
 				background-color: rgb(255, 255, 13);
 
@@ -251,23 +184,31 @@
 					display: none;
 				}
 			}
+			&.small-bar{
+				height: 45px;
+				margin-top: 0px;
+				
+				.inner-programme{
+					display: flex;
+				}
+			}
 		}
 	}
 	.timetable-times{
 		white-space: nowrap;
 		margin-left: 250px;
-		width: calc(24 * 200px + 250px);
+		width: calc(23 * 400px + 250px);
 		position: absolute;
 		height: 100%;
 		top: -48px;
 		.time-block{
 			display: inline-block;
-			width: 200px;
+			width: 400px;
 			border-left: 1px solid black;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			-webkit-box-sizing: border-box;
-			height: calc(100% + 50px);
+			height: 100%;
 			padding-left: 10px;
 		}
 	}
@@ -279,49 +220,62 @@
 
 @media only screen and (max-width: 900px) {
 	.timetable{
-		.timetable-menu{
-			margin-top: 14px;
-			select{
-				font-size: 80%;
+		width: 97vw;
+		.timetable-times {
+			height:100%;
+			margin-left: 0;
+			width: calc(23 * 400px);
+			.time-block{
+				height: 100%;
 			}
 		}
-		.timetable-times{
-			margin-left: 100px;
-			width: calc(24 * 100px + 50px);
+		.timetable-menu{
+			margin-top: 24px;
 		}
 		.timetable-locations{
-			.timetable-wrapper{
-				width: calc(24 * 100px + 50px);
-			}
-			.location{
-				width: 100px;
-				margin-left: -5px;
-				h4{
-					padding: 24px 0;
-					font-size: 80%;
-				}
-				p{
-					font-size: 70%;
-					padding-left: 0px;
-					word-break: keep-all;
-				}
+			.timetable-wrapper {
+					width: calc(23 * 400px);
 			}
 		}
 		.timetable-row{
-			.sub-bar{
-				&:first-child{
-					margin-top: 74px;
-				}
-				height: 68px;
+			display: flex;
+			flex-direction: column;
+			height: 300px;
+			position: relative;
+			&:nth-child(2){
+				margin-top: 120px;
+			}
+			.location{
+				display: block;
+				height: 80px;
+				width: 98vw;
 			}
 			.programme{
-				left: calc(var(--margin) - 150px);
-				.inner-programme{
+				margin-top: 180px;
+				margin-left: -250px;
+				height: 130px;
+				.inner-programme {
 					.inner-wrapper{
-						left: 110px;
+						left: 10px;
+					}
+				}
+				&.small-bar{
+					margin-top: 80px;
+					.inner-programme{
+						margin-top: 0px;
+					}
+				}
+				&.whole-day {
+					height: auto;
+					margin-top: 130px;
+					// position: sticky;
+					// left: 0;
+					top: 0;
+					&:nth-child(3) {
+						
 					}
 				}
 			}
-		} 
+		}
 	}
 }
