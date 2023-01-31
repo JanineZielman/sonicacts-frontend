@@ -29,8 +29,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     autoplaySpeed: 4000
   };
 
-  console.log(about)
-
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">

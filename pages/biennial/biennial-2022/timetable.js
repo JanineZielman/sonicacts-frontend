@@ -30,9 +30,6 @@ const Timetable = ({ menus, global, festival, timetable}) => {
 				}
 		});
 	}, [])
-
-	console.log(timetable)
-
   
   return (
     <>

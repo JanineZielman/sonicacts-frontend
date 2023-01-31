@@ -1271,9 +1271,22 @@
 				font-size: 20px;
 				span{
 					background-color: white;
-					padding: 0 5px;
+					padding: 2px 5px 0 5px;
 					border-radius: 10px;
+					border-bottom: 0;
 				}
+			}
+		}
+		.Collapsible{
+			span{
+				width: 100%;
+				display: block;
+				border-bottom: 2px solid black;
+				position: relative;
+				margin-bottom: 10px;
+			}
+			.collapsible-content{
+				padding-top: 10px;
 			}
 		}
 		.day{
