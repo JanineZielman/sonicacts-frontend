@@ -1232,8 +1232,11 @@
 }
 
 .discover .discover-container.sub-programme-container{
-	.category a{
-		font-size: 10px;
+	.category{
+		flex-wrap: wrap;
+		a{
+			font-size: 10px;
+		}
 	}
 	.tags {
 			a {
