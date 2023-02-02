@@ -5,7 +5,7 @@ import BiennialArticle from "../../../../components/biennial-article"
 import LazyLoad from 'react-lazyload';
 import Image from "../../../../components/image"
 import Moment from 'moment';
-import Collapsible from "../../../../components/collapsible";
+import Collapsible from "react-collapsible";
 
 const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) => {
 

@@ -1265,8 +1265,6 @@
 			padding: 5px;
 			justify-content: flex-start;
 			display: inline-block;
-			.times{
-			}
 			.time{
 				font-size: 20px;
 				span{
@@ -1285,7 +1283,7 @@
 				position: relative;
 				margin-bottom: 10px;
 			}
-			.collapsible-content{
+			.Collapsible__contentInner{
 				padding-top: 10px;
 			}
 		}
