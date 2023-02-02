@@ -90,57 +90,55 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                               {i == 0 &&
                                                 <div className="loc-item">{loc}</div>
                                               }
-                                              <LazyLoad height={600}>
-                                                <div className="item-wrapper">
-                                                  <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                                                    <div className="image">
-                                                      {item.attributes.cover_image?.data &&
-                                                        <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                              <div className="item-wrapper">
+                                                <a href={page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                                                  <div className="image">
+                                                    {item.attributes.cover_image?.data &&
+                                                      <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                                                    }
+                                                    <div className="info-overlay">
+                                                      {item.attributes.WhenWhere[0]?.times[0] && 
+                                                        <>
+                                                          <div className="times">
+                                                            {item.attributes.WhenWhere[0]?.times.map((time, j) => {
+                                                              return(
+                                                                <div className="time">
+                                                                  <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
+                                                                </div>
+                                                              )
+                                                            })}
+                                                          </div>
+                                                        </>
                                                       }
-                                                      <div className="info-overlay">
-                                                        {item.attributes.WhenWhere[0]?.times[0] && 
-                                                          <>
-                                                            <div className="times">
-                                                              {item.attributes.WhenWhere[0]?.times.map((time, j) => {
-                                                                return(
-                                                                  <div className="time">
-                                                                    <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
-                                                                  </div>
-                                                                )
-                                                              })}
-                                                            </div>
-                                                          </>
-                                                        }
-                                                      </div>
                                                     </div>
-                                                    {item.attributes.biennial_tags?.data && 
-                                                      <div className="category">
-                                                        {item.attributes.biennial_tags.data.map((tag, i) => {
-                                                          return(
-                                                            <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                                              {tag.attributes.title}
-                                                            </a>
-                                                          )
-                                                        })}
-                                                      </div>
-                                                    }
-                                                    <div className="title">
-                                                      {item.attributes.title}
+                                                  </div>
+                                                  {item.attributes.biennial_tags?.data && 
+                                                    <div className="category">
+                                                      {item.attributes.biennial_tags.data.map((tag, i) => {
+                                                        return(
+                                                          <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                                            {tag.attributes.title}
+                                                          </a>
+                                                        )
+                                                      })}
                                                     </div>
-                                                    {item.attributes?.authors?.data &&
-                                                      <div className="tags">
-                                                        {item.attributes.authors.data.map((author, i) => {
-                                                          return(
-                                                            <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
-                                                              {author.attributes.name}
-                                                            </a>
-                                                          )
-                                                        })}
-                                                      </div>
-                                                    }
-                                                  </a>
-                                                </div>
-                                              </LazyLoad>
+                                                  }
+                                                  <div className="title">
+                                                    {item.attributes.title}
+                                                  </div>
+                                                  {item.attributes?.authors?.data &&
+                                                    <div className="tags">
+                                                      {item.attributes.authors.data.map((author, i) => {
+                                                        return(
+                                                          <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                                            {author.attributes.name}
+                                                          </a>
+                                                        )
+                                                      })}
+                                                    </div>
+                                                  }
+                                                </a>
+                                              </div>
                                             </div>
                                             }
                                           </>
