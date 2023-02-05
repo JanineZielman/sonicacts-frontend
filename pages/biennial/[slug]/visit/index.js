@@ -77,6 +77,7 @@ const Visit = ({ menus, global, params, visit, festival }) => {
   )
 }
 
+
 export async function getServerSideProps({params}) {
   // Run API calls in parallel
   const [festivalRes, visitRes, globalRes, menusRes] = await Promise.all([

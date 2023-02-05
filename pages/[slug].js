@@ -1,12 +1,52 @@
 import { fetchAPI } from "../lib/api"
 import Layout from "../components/layout"
 import Article from "../components/article"
+import React, {useState, useEffect} from "react"
 
 const Page = ({menus, page, global}) => {
+  const [loading, setLoading] = useState(true);
+  const [geoBlocked, setGeoBlocked] = useState(false);
+
+  useEffect(() => {
+    setTimeout(function() {
+      if(page.attributes.geoblocking === true){
+        $.getJSON('https://geolocation-db.com/json/')
+         .done (function(location) {
+            setLoading(false);
+            if(location.country_code == 'NL'){
+              setGeoBlocked(true);
+              console.log(location.country_code)
+            } else {
+              setGeoBlocked(false);
+              console.log(location.country_code)
+            }
+        });
+      } else {
+        setLoading(false);
+      }
+    }, 100);
+  }, []);
+
   return (
     <Layout menus={menus} page={page} global={global}>
       {page.attributes.embed ?
-        <div className="full-iframe" dangerouslySetInnerHTML={{__html: page.attributes.content[0].url}}/>
+        <>
+          {loading ?
+            <div className="loader"></div>
+          :
+            <>
+              {geoBlocked == false ?
+                <>
+                  <div className="full-iframe" id="full-iframe" dangerouslySetInnerHTML={{__html: page.attributes.content[0].url}}/>
+                </>
+              : 
+                <div className="content padding">
+                  <p>{page.attributes.geoblocking_error}</p>
+                </div>
+              }
+            </>
+          }
+        </>
       :
         <Article page={page}/>
       }
@@ -14,19 +54,8 @@ const Page = ({menus, page, global}) => {
   )
 }
 
-export async function getStaticPaths() {
-  const pagesRes = await fetchAPI("/pages");
-  return {
-    paths: pagesRes.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-}
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const pagesRes = 
     await fetchAPI( `/pages?filters[slug][$eq]=${params.slug}&populate=*`
   );
@@ -46,7 +75,6 @@ export async function getStaticProps({ params }) {
       global: globalRes.data,
       menus: menusRes.data
     },
-    revalidate: 1,
   };
 }
 

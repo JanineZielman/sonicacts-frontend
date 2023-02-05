@@ -16,6 +16,7 @@
   }
   .content {
     display: flex;
+    
   }
   &.visit{
     .content .wrapper{
@@ -30,7 +31,9 @@
     }
   }
   .wrapper {
-    width: 1100px;
+    // width: 1100px;
+    width: auto;
+    max-width: 1100px;
     position: relative;
     &.community{
       display: flex;
@@ -52,16 +55,19 @@
         }
       }
     }
+    &.about{
+      width: calc(100% - 550px);
+    }
   }
   h1 {
     font-size: 36px;
     font-weight: 300;
-    max-width: 700px;
+    // max-width: 1100px;
     line-height: 1.1;
   }
   .columns {
     display: flex;
-    width: 1100px;
+    // width: 1100px;
     margin-top: 14px;
     .image {
       width: 75%;
@@ -76,9 +82,9 @@
   }
   .sidenote {
     position: absolute;
-    left: 1100px;
-    margin-left: 48px;
-    width: 500px;
+    left: calc(100% + 24px);
+    width: 100%;
+    max-width: 20vw;
     a{
       font-size: inherit;
     }
@@ -121,7 +127,7 @@
     }
   }
   .text-block {
-    max-width: 1100px;
+    // max-width: 1100px;
     width: 100%;
     padding-bottom: 24px;
     position: relative;
@@ -164,10 +170,20 @@
     margin-left: 24px;
     font-size: 30px;
     line-height: 1;
-    max-width: 450px;
+    width: 100%;
+    min-width: 20vw;
+    max-width: 20vw;
+    position: relative;
+    margin-right: 24px;
+    &.about{
+      width: 100%;
+      min-width: auto;
+      max-width: auto!important;
+    }
     .contact{
       padding: 24px;
-      max-width: 500px;
+      // max-width: 500px;
+      width: 500px;
       p{
         font-size: 21px;
         font-weight: 100;
@@ -220,6 +236,14 @@
       max-width: 300px;
       font-size: 14px;
       line-height: 1.2;
+      p{
+        display: flex;
+        font-size: 30px;
+        margin: 10px 0;
+        a{
+          margin-left: 5px;
+        }
+      }
     }
   }
 }

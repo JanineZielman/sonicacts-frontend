@@ -1,9 +1,9 @@
 import ReactMarkdown from "react-markdown";
 import React, {useEffect} from "react"
 import Moment from 'moment';
-import Collapsible from 'react-collapsible';
 import Image from "./image"
 import LazyLoad from 'react-lazyload';
+import Collapsible from "./collapsible";
 
 const Article = ({page, relations, params}) => {
 	useEffect(() => {
@@ -15,6 +15,9 @@ const Article = ({page, relations, params}) => {
 					links[j].setAttribute('target', '_blank');
 				} else {
 					links[j].classList.add('footnote')
+				}
+				if (links[j].href.includes('.pdf') == true) {
+					links[j].href = 'https://cms.sonicacts.com/uploads/' + links[j].href.substring(links[j].href.lastIndexOf("/") + 1)
 				}
 			}
 		}

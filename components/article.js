@@ -1,9 +1,9 @@
 import ReactMarkdown from "react-markdown";
 import React, {useEffect} from "react"
 import Moment from 'moment';
-import Collapsible from 'react-collapsible';
 import Image from "./image"
 import LazyLoad from 'react-lazyload';
+import Collapsible from "./collapsible";
 
 const Article = ({page, relations}) => {
 	useEffect(() => {
@@ -16,9 +16,13 @@ const Article = ({page, relations}) => {
 				} else {
 					links[j].classList.add('footnote')
 				}
+				if (links[j].href.includes('.pdf') == true) {
+					links[j].href = 'https://cms.sonicacts.com/uploads/' + links[j].href.substring(links[j].href.lastIndexOf("/") + 1)
+				}
 			}
 		}
   }, []);
+
   return (   
 		<section className="article">
 			<>
@@ -36,7 +40,7 @@ const Article = ({page, relations}) => {
 									}
 							</div>
 						}
-						<h1>{page.attributes.title}</h1>
+						<h1>{page.attributes.title} {page.attributes.additional_info && page.attributes.additional_info}</h1>
 					</div>
 				}
 				{page.attributes.name &&
@@ -103,7 +107,7 @@ const Article = ({page, relations}) => {
 						}
 						</>
 					</div>
-					<div className="sidebar">
+					<div className={`sidebar ${page.attributes.slug}`}>
 						{page.attributes.slug == 'news' &&
 							<>
 							{page.attributes.date ?
@@ -122,37 +126,50 @@ const Article = ({page, relations}) => {
 								/>
 							</div>
 						}
+
+						{page.attributes.slug == 'community' &&
+							<span>Last updated on {Moment(page.attributes.updatedAt).format('D MMM y')}</span>
+						}
 					
-						{page.attributes.slug == 'agenda' &&
+						{page.attributes.slug != 'news' && page.attributes.slug != 'community' && page.attributes.slug != 'about' &&
 							<>
 									{relations?.attributes?.date &&
 										<span>When</span>
 									}
-									{relations?.attributes?.date && relations?.attributes?.dates == 0 &&
-										Moment(relations?.attributes?.date).format('D MMM y')
-									}
-									{relations?.attributes?.dates[0] &&
-										<>
-											{relations?.attributes?.dates.map((date, i) => {
+									{relations?.attributes?.dates?.[0] ?
+										<div>
+											{relations?.attributes.dates.map((date, i) => {
 												return(
-													<div className="date" key={`dates-${i}`}>
+													<div className={`date ${i}`} key={`dates-${i}`}>
 														{date.single_date &&
-															<div>
-															– {Moment(date.single_date).format('D MMM y')}
-															</div>
+															<>
+															{i == 0 && Moment(relations?.attributes?.date).format('D MMM y')}
+															, {Moment(date.single_date).format('D MMM y')}
+															</>
 														}
 														{date.end_date &&
 															<>
-															{relations?.attributes?.date &&
-																Moment(relations?.attributes?.date).format('D MMM')
-															}
-															&nbsp;– {Moment(date.end_date).format('D MMM y')}
+																{(Moment(relations?.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+																	<>
+																		{(Moment(relations?.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+																			<>{Moment(relations?.attributes.date).format('D')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+																		:
+																			<>{Moment(relations?.attributes.date).format('D MMM')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+																		}
+																	</>
+																	:
+																	<>
+																		{Moment(relations?.attributes.date).format('D MMM y')} &nbsp;– {Moment(date.end_date).format('D MMM y')}
+																	</>
+																}
 															</>
 														}
 													</div>
 												)
 											})}
-										</>
+										</div>
+										:
+										Moment(relations?.attributes?.date).format('D MMM y')
 									}
 									{page.attributes.time &&
 										<>
@@ -221,7 +238,7 @@ const Article = ({page, relations}) => {
 						}
 						
 
-						{page.attributes.links || relations?.attributes?.discover_items &&
+						{ (page.attributes.links || relations?.attributes?.discover_items) &&
 							<div className="links">
 								{page.attributes.links &&
 									<>

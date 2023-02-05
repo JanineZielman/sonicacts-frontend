@@ -33,6 +33,9 @@
 	.menu-modal{
 		background-size: cover;
 	}
+	.biennial-article{
+		margin-top: 80px;
+	}
 	.top-search {
 		justify-content: flex-start;
 		.note{
@@ -44,6 +47,12 @@
 			margin-top: -25px;
 			margin-left: 0;
 		}
+	}
+	.article .sidenote {
+		position: relative;
+		width: 100%;
+		left: 0;
+		margin: 0;
 	}
 	.community .slick-slider .slick-slide{
 		.slider-item {
@@ -100,6 +109,12 @@
 				.text{
 					width: 100%;
 				}
+				&.shop-slider-item {
+					.image {
+						width: 100%;
+						height: auto;
+					}
+				}
 			}
 		}
 		.slick-list {
@@ -121,7 +136,7 @@
 		width: 100%;
 	}
 	.article .content {
-		flex-direction: column;
+		flex-direction: column-reverse;
 	}
 	.article .text-block{
 		width: 100%;
@@ -138,11 +153,29 @@
 			font-size: 36px;
 		}
 	}
+	.article {
+		.sidenote{
+			max-width: 100%;
+		}
+		.sidebar {
+			margin: 0;
+			width: 100%;
+			max-width: 100%;
+
+			.contact {
+				padding: 0;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 900px) {
 	h1 {
 		font-size: 36px;
+	}
+
+	.biennial-article{
+		margin-top: 36px;
 	}
 
 	.menu {
@@ -252,12 +285,14 @@
 		.text-block.big{
 			margin-left: 0;
 			width: 100%;
+			max-width: 100%;
 		}
 	}
 
 	.article .image.community{
 		margin: 24px auto 10px auto;
 	}
+	
 
 }
 
@@ -302,6 +337,10 @@
 		justify-content: center;
 	}
 
+	.article .wrapper.community .columns{
+		width: 100%;
+	}
+
 	.columns .highlight{
 		display: flex;
 		width: 100%;
@@ -320,15 +359,20 @@
 
 	.home-menu .collapsible {
 		font-size: 36px;
+		.show-more-link{
+			font-size: 36px;
+		}
 	}
 
 	.article .wrapper,
-	.article .text-block, .article .columns .caption, .article .columns .image {
+	.article .text-block, .article .columns .caption, .article .columns .image,
+	.article .wrapper.about, .article .sidebar .contact {
 		width: 100%;
 	}
 
 	.article .content {
-		flex-direction: column;
+		flex-direction: column-reverse;
+		margin-top: 0;
 	}
 
 	.article .text-block.small p {
@@ -338,7 +382,8 @@
 
 	.article .sidebar {
 		margin: 0;
-
+		width: 100%;
+		max-width: 100%;
 		.contact {
 			padding: 0;
 		}
@@ -377,7 +422,7 @@
 
 			.infinite-scroll-component {
 				position: relative;
-				width: 98vw;
+				// width: 98vw;
 			}
 
 			.discover-item {
@@ -452,6 +497,7 @@
 	.container {
 		padding: 14px 3vw;
 		margin-left: 0;
+		width: 95vw;
 	}
 	.article .text-block p{
 		padding-right: 0;
@@ -474,5 +520,8 @@
 	}
 	.collapsible.about{
 		font-size: 30px;
+	}
+	.content.padding{
+		padding-top: 10px;
 	}
 }

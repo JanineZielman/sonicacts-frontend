@@ -120,12 +120,7 @@
 			}
 		}
 		.contact-item {
-			width: 400px;
-			&.adres {
-				width: 400px;
-				max-width: 400px;
-			}
-
+			width: calc(100% - 300px);
 			h5 {
 				font-weight: 500;
 				margin: 0;
@@ -153,6 +148,19 @@
 				font-size: 14px;
 				font-weight: 100;
 				text-transform: lowercase;
+			}
+		}
+		.shop-slider-item{
+			max-width: 700px!important;
+			.category{
+				font-size: 21px;
+			}
+			.image{
+				width: 40%;
+				height: auto;
+			}
+			.text{
+				width: 60%;
 			}
 		}
 	}
@@ -201,7 +209,7 @@
 		display: flex;
 		margin-top: 14px;
 		.contact-item {
-			max-width: 400px;
+			max-width: calc(100% - 300px);
 			h5 {
 				font-weight: 500;
 				margin: 0;

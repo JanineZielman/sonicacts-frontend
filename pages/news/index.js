@@ -92,7 +92,9 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
                     <div className="item-wrapper">
                       <a href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
                         <div className="image">
-                          <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                          {item.attributes.cover_image?.data?.attributes &&
+                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                          }
                         </div>
                         <div className="date">
                           {item.attributes.date &&
@@ -128,7 +130,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/news-index", { populate: "*" }),
@@ -152,7 +154,6 @@ export async function getStaticProps() {
       global: globalRes.data,
       menus: menusRes.data,
     },
-    revalidate: 1,
   }
 }
 

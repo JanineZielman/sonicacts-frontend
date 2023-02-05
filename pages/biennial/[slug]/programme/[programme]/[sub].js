@@ -24,7 +24,7 @@ const SubProgrammeItem = ({menus, page, global, relations, params, festival, sub
                   <h1>{relations.attributes.sub_programmes_title}</h1>
                 }
               </div>
-              <div className="discover-container programme-container">
+              <div className="discover-container programme-container sub2-programme-container">
                 {sub.map((item, i) => {
                   let tags = "";
                   for (let i = 0; i < item.attributes.biennial_tags.data.length; i++) {

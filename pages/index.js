@@ -1,4 +1,3 @@
-import Collapsible from 'react-collapsible';
 import Slider from "react-slick";
 import ReactMarkdown from "react-markdown";
 import Moment from 'moment';
@@ -14,11 +13,9 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     arrows: true,
     infinite: true,
     speed: 500,
-    // slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: true,
     adaptiveHeight: true,
-    // autoplay: true,
     autoplaySpeed: 4000
   };
 
@@ -27,13 +24,12 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     arrows: true,
     infinite: true,
     speed: 500,
-    // slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: true,
-    // adaptiveHeight: true,
-    // autoplay: true,
     autoplaySpeed: 4000
   };
+
+  console.log(about)
 
   return (
     <Layout page={homepage} menus={menus} global={global}>
@@ -83,88 +79,125 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
           <div className="home-menu">
             {menus.slice(0, 3).map((page, i) => {
               return (
-                <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
-                  <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
-                    <LazyLoad height={600}>
-                      <Slider {...settings}>
-                        {items[i].slice(0, 3).map((item, i) => {
-                          return(
-                            <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
-                              {item.attributes.cover_image?.data &&
-                                <div className="image">
-                                  <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
-                                </div>
-                              }
-                              <div className="text">
-                                <div>
-                                  {item.attributes.category?.data &&
-                                    <span className="category">{item.attributes.category.data.attributes.title}</span>
-                                  }
-                                  {item.attributes.date && page.attributes.slug != 'discover' &&
-                                    <>
-                                      {item.attributes.dates ?
-                                        <>
+                <>
+                {items[i].length > 0 &&
+                  <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
+                    <div>
+                      <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
+                      <LazyLoad height={600}>
+                        <Slider {...settings}>
+                          {items[i].slice(0, 3).map((item, i) => {
+                            return(
+                              <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
+                                {item.attributes.cover_image?.data &&
+                                  <div className="image">
+                                    <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                                  </div>
+                                }
+                                <div className="text">
+                                  <div>
+                                    {item.attributes.category?.data &&
+                                      <span className="category">{item.attributes.category.data.attributes.title}</span>
+                                    }
+                                    {item.attributes.date && page.attributes.slug != 'discover' &&
+                                      <>
+                                        {item.attributes.dates ?
+                                          <span>
+                                            {item.attributes.dates.map((date, i) => {
+                                              return(
+                                                <span className={`date ${i}`} key={`dates-${i}`}>
+                                                  {date.single_date &&
+                                                    <>
+                                                    {i == 0 && Moment(item.attributes.date).format('D MMM y')}
+                                                    , {Moment(date.single_date).format('D MMM y')}
+                                                    </>
+                                                  }
+                                                  {date.end_date &&
+                                                    <>
+                                                      {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+                                                        <>
+                                                          {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+                                                            <>{Moment(item.attributes.date).format('D')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                          :
+                                                            <>{Moment(item.attributes.date).format('D MMM')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                          }
+                                                        </>
+                                                        :
+                                                        <>
+                                                          {Moment(item.attributes.date).format('D MMM y')} &nbsp;– {Moment(date.end_date).format('D MMM y')}
+                                                        </>
+                                                      }
+                                                    </>
+                                                  }
+                                                </span>
+                                              )
+                                            })}
+                                          </span>
+                                        : 
                                         <span>
                                           {Moment(item.attributes.date).format('D MMM y')}
-                                        
-                                        {item.attributes.dates.map((date, i) => {
-                                          return(
-                                            <span className="date" key={`dates-${i}`}>
-                                              {date.single_date &&
-                                                <>
-                                                , {Moment(date.single_date).format('D MMM y')}
-                                                </>
-                                              }
-                                              {date.end_date &&
-                                                <>
-                                                &nbsp;– {Moment(date.end_date).format('D MMM y')}
-                                                </>
-                                              }
-                                            </span>
-                                          )
-                                        })}
                                         </span>
-                                        </>
-                                      : 
-                                      <span>
-                                        {Moment(item.attributes.date).format('D MMM y')}
-                                      </span>
-                                      }
-                                    </>
-                                    
+                                        }
+                                      </>
+                                    }
+                                    {item.attributes.title &&
+                                      <h2>{item.attributes.title}</h2>
+                                    }
+                                  </div>
+                                  {item.attributes.name &&
+                                  <h2>{item.attributes.name}</h2>
                                   }
-                                  {item.attributes.title &&
-                                    <h2>{item.attributes.title}</h2>
+                                  {item.attributes.job_description &&
+                                    <span> {item.attributes.job_description}</span>
                                   }
                                 </div>
-                                {item.attributes.name &&
-                                <h2>{item.attributes.name}</h2>
-                                }
-                                {item.attributes.job_description &&
-                                  <span> {item.attributes.job_description}</span>
-                                }
-                              </div>
-                            </a>       
-                          )
-                        })}
-                        <div className="slider-item">
-                          <p className="show-more">
-                            <a href={'/' + page.attributes.slug}>
-                              {page.attributes.slug}
-                            </a>
-                          </p>
-                        </div>
-                      </Slider>
-                    </LazyLoad>
-                  </Collapsible>
-                  
-                </div>
+                              </a>       
+                            )
+                          })}
+                        </Slider>
+                      </LazyLoad>
+                    </div>
+                    
+                  </div>
+                }
+                </>
               )
             })}
-            {menus.slice(3,4).map((page, i) => {
+            <div className="collapsible shop">
+              <a href="https://shop.sonicacts.com/" target="_blank" className="show-more-link">
+                Shop
+              </a>
+              <LazyLoad height={300}>
+                <Slider {...settings}>
+                  {homepage.attributes.shop_item.map((item, i) => {
+                    return(
+                      <a href={item.link} target="_blank" className="slider-item shop-slider-item">
+                        {item.image?.data &&
+                          <div className="image">
+                            <Image image={item.image?.data?.attributes} objectFit='cover'/>
+                          </div>
+                        }
+                        <div className="text">
+                          <div>
+                            {item.price &&
+                              <span className="category">{item.price}</span>
+                            }
+                            {item.title &&
+                              <h2>{item.title}</h2>
+                            }
+                          </div>
+                        </div>
+                      </a>       
+                    )
+                  })}
+                </Slider>
+              </LazyLoad>
+            </div>
+                        {menus.slice(3,4).map((page, i) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
-                  <Collapsible trigger={page.attributes.slug} open={page.attributes.open_on_homepage}>
+                  <div>
+                    <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
                     <LazyLoad height={300}>
                       <Slider {...settings2}>
                         {items[3].slice(0, 6).map((item, i) => {
@@ -199,40 +232,30 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                             </a>       
                           )
                         })}
-                        <div className="slider-item">
-                          <p className="show-more">
-                            <a href={'/' + page.attributes.slug}>{page.attributes.slug}</a>
-                          </p>
-                        </div>
                       </Slider>
                     </LazyLoad>
-                  </Collapsible>
+                  </div>
                 </div>
               )
             })}
-            <div className="collapsible">
-              <a href="https://sonicacts.com/sashop/" target="_blank">
-                Shop
-              </a>
-            </div>
             <div className="collapsible contact">
-              <Collapsible trigger={'contact'}>
+              <div>
+                <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
                 <LazyLoad height={300}>
                     <div className='contact-wrapper'>
                       <div className="contact-item adres">
-                        <h5>{about.attributes.contact_adres}</h5>
+                        <h5>
+                          {about.attributes.content[0].text_block}
+                        </h5>
                       </div>
                       <div className="contact-item">
-                        <p>{about.attributes.contact_info}</p>
-                      </div>
-                      <div className="contact-item small">
-                        <ReactMarkdown 
-                          children={about.attributes.contact_links} 
-                        />
+                        <p>
+                          <ReactMarkdown children={about.attributes.content[1].text_block}/>
+                        </p>
                       </div>
                     </div>
                 </LazyLoad>
-              </Collapsible>
+              </div>
             </div>
           </div>
         </div>
@@ -241,7 +264,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const totalCom = await fetchAPI( `/discover-items`);
   const numberCom = totalCom.meta.pagination.total / 6;
@@ -256,7 +279,7 @@ export async function getStaticProps() {
   
   // Run API calls in parallel
   const [homepageRes, globalRes, socialRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
-    fetchAPI("/homepage", { populate: "*" }),
+    fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate=*"),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/global?populate[socials][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
@@ -281,7 +304,6 @@ export async function getStaticProps() {
       },
       about: aboutRes.data,
     },
-    revalidate: 1,
   }
 }
 

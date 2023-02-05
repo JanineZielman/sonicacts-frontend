@@ -5,7 +5,7 @@ import Image from '../../../../components/image'
 import Moment from 'moment';
 
 
-const Programme = ({ menus, global, items, params, festival, relations }) => {
+const Programme = ({ menus, global, items, params, festival}) => {
 	const pageslug = {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
@@ -89,7 +89,7 @@ const Programme = ({ menus, global, items, params, festival, relations }) => {
               })}
               <div className="divider"></div>
           </div>
-          <div className="discover-container programme-container">
+          <div className="discover-container programme-container all-programme-container">
             <>
               {items.slice(3).map((item, i) => {
                 return (
@@ -173,13 +173,11 @@ const Programme = ({ menus, global, items, params, festival, relations }) => {
 export async function getServerSideProps({params}) {
 
   // Run API calls in parallel
-  const [festivalRes, itemRes, globalRes, menusRes, relationsRes] = await Promise.all([
+  const [festivalRes, itemRes, globalRes, menusRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=order%3Adesc&sort[1]=start_date%3Aasc&populate=*`),
-    // fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=false&sort[0]=order%3Aasc&sort[1]=start_date%3Aasc&populate=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=order%3Adesc&sort[1]=start_date%3Aasc&populate[WhenWhere][populate]=*`),
   ])
 
   return {
@@ -189,7 +187,6 @@ export async function getServerSideProps({params}) {
       global: globalRes.data,
       menus: menusRes.data,
 			params: params,
-      relations: relationsRes.data,
     }
   }
 }

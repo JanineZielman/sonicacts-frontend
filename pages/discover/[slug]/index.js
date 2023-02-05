@@ -1,25 +1,96 @@
 import { fetchAPI } from "../../../lib/api"
 import Layout from "../../../components/layout"
 import Article from "../../../components/article"
+import LazyLoad from 'react-lazyload';
+import Moment from 'moment';
+import Image from "../../../components/image"
 
-const DiscoverItem = ({menus, page, global, relations}) => {
+const DiscoverItem = ({menus, page, global, relations, items}) => {
   page.attributes.slug = 'discover'
   return (   
     <Layout menus={menus} page={page} global={global} relations={relations}>
       <Article page={page} relations={relations}/>
+      {items[0] &&
+        <div className="discover">
+          <div className="discover-container">
+          {items.map((item, i) => {
+                return (
+                  <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
+                    <LazyLoad height={600}>
+                      <div className="item-wrapper">
+                        <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                          <div className="image">
+                            {item.attributes.cover_image?.data &&
+                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                            }
+                          </div>
+                          {item.attributes.category?.data && 
+                            <div className="category">
+                              <a href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                                {item.attributes.category?.data.attributes.slug}
+                              </a>
+                              {item.attributes.authors?.data.map((author, i) =>{
+                                return(
+                                  <a className="author" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                                    {author.attributes.name}
+                                  </a>
+                                )
+                              })}
+                            </div>
+                          }
+                          <div className="title">
+                            {item.attributes.title}
+                          </div>
+            
+                          <div className="tags">
+                            {item.attributes.tags?.data && 
+                              <>
+                                {item.attributes.tags.data.map((tag, i) => {
+                                  return(
+                                    <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                      {tag.attributes.slug}
+                                    </a>
+                                  )
+                                })}
+                              </>
+                            }
+                            {item.attributes.date &&
+                              <span>{Moment(item.attributes.date).format('y')}</span>
+                            }
+                          </div>
+                        </a>
+                      </div>
+                    </LazyLoad>
+                  </div>
+                )
+              })}
+          </div>
+        </div>
+      }
     </Layout>
   )
 }
 
 
 export async function getServerSideProps({params, preview = null}) {
+
   const pageRes = 
     await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+  );
+
+  const agendaRes = 
+    await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
   const pageRel = 
     await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
+
+  const agendaRel = 
+    await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+  );
+
+  const itemsRel = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
   
 
   const [menusRes, globalRes] = await Promise.all([
@@ -30,9 +101,10 @@ export async function getServerSideProps({params, preview = null}) {
   return {
     props: { 
       menus: menusRes.data, 
-      page: pageRes.data[0], 
+      page: pageRes.data[0] ? pageRes.data[0] : agendaRes.data[0], 
       global: globalRes.data, 
-      relations: pageRel.data[0] 
+      relations: pageRel.data[0] ? pageRel.data[0] : agendaRel.data[0],
+      items: itemsRel.data
     },
   };
 }

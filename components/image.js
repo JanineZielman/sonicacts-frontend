@@ -5,9 +5,8 @@ const Image = ({ image, layout, objectFit, sizes  }) => {
 
   const { alternativeText, width, height } = image
 
-
   const loader = ({ width, quality }) => {
-    return `${getStrapiMedia(image)}?w=1920&q=${quality || 75}`
+    return `${getStrapiMedia(image)}?w=${width}&q=${quality || 75}`
   }
 
   return (
@@ -26,8 +25,8 @@ const Image = ({ image, layout, objectFit, sizes  }) => {
      <NextImage
         loader={loader}
         layout={layout}
-        width={width || ""} 
-        height={height || ""}
+        width={width || 300} 
+        height={height || 300}
         objectFit={objectFit}
         src={getStrapiMedia(image)}
         alt={alternativeText || ""}

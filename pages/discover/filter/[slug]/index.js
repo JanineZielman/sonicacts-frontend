@@ -1,21 +1,26 @@
 import React, {useEffect, useState} from "react"
-
+import ReactMarkdown from "react-markdown";
 import Layout from "../../../../components/layout"
 import Image from "../../../../components/image"
 import { fetchAPI } from "../../../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LazyLoad from 'react-lazyload';
+import Moment from 'moment';
 
-const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPosts, filter}) => {
+const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPosts, filter, category}) => {
 
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
   const getMorePosts = async () => {
-    const res = await fetchAPI(
-      `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
+    const res1 = await fetchAPI(
+      `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
     );
-    const newPosts = await res.data;
+    const res2 = await fetchAPI(
+      `/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
+    );
+    var res = res1.data.concat(res2.data)
+    const newPosts = await res;
     setPosts((posts) => [...posts, ...newPosts]);
   };
 
@@ -23,10 +28,21 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        <p className="wrapper">{page?.attributes.intro}</p>
+        <p className="wrapper">
+          {category?.[0].attributes?.description ?
+            <ReactMarkdown 
+              children={category?.[0].attributes?.description} 
+            />
+            :
+            <ReactMarkdown 
+              children={page?.attributes.intro} 
+            />
+          }
+        </p>
         <div className="filter">
           <div><span>Filter by category</span></div>
 						<a key={'category-all'} href={`/discover`}>All</a>
@@ -66,7 +82,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                             {item.attributes.authors?.data.map((author, i) =>{
                               return(
                                 <a className="author" href={'/community/'+author.attributes.slug} key={'discover'+i}>
-                                , {author.attributes.name}
+                                  {author.attributes.name}
                                 </a>
                               )
                             })}
@@ -75,17 +91,23 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                         <div className="title">
                           {item.attributes.title}
                         </div>
-                        {item.attributes.tags?.data && 
-                          <div className="tags">
-                            {item.attributes.tags.data.map((tag, i) => {
-                              return(
-                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  {tag.attributes.slug}
-                                </a>
-                              )
-                            })}
-                          </div>
-                        }
+          
+                        <div className="tags">
+                          {item.attributes.tags?.data && 
+                            <>
+                              {item.attributes.tags.data.map((tag, i) => {
+                                return(
+                                  <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                    {tag.attributes.slug}
+                                  </a>
+                                )
+                              })}
+                            </>
+                          }
+                          {item.attributes.date &&
+                            <span>{Moment(item.attributes.date).format('y')}</span>
+                          }
+                        </div>
                       </a>
                     </div>
                   </LazyLoad>
@@ -102,29 +124,42 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
 export async function getServerSideProps({params}) {
   const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
-    fetchAPI("/categories?sort[0]=order&populate=*"),
+    fetchAPI("/categories?sort[0]=order&filters[$or][0][sub_category][$null]=true&filters[$or][1][sub_category][$eq]=false&populate=*"),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
-  
+  // const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
+  const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
+  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
+
+  var mergedItems = items.data.concat(agendaItems.data)
 
 	const totalItems = 
-    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}`
+    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}`
   );
 
-  const numberOfPosts = totalItems.meta.pagination.total;
+  const totalItemsAgenda = 
+    await fetchAPI( `/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}`
+  );
+
+  const categoryFil = 
+    await fetchAPI( `/categories?filters[slug][$eq]=${params.slug}`
+  );
+
+
+  const numberOfPosts = totalItems.meta.pagination.total + totalItemsAgenda.meta.pagination.total;
 
   return {
     props: {
-      items: items.data,
+      items: mergedItems,
       numberOfPosts: +numberOfPosts,
       page: pageRes.data,
       categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
-			filter: params.slug
+			filter: params.slug,
+      category: categoryFil.data,
     },
   };
 }
