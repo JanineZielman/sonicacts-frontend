@@ -4,10 +4,10 @@ import { fetchAPI } from "../../../../lib/api"
 import Moment from 'moment'
 
 
-const Timetable = ({ menus, global, festival, timetable}) => {
+const Timetable = ({ menus, global, params, festival, timetable}) => {
 	const page = {
     attributes:
-      	{slug: `biennial/biennial-2022/timetable`}
+      	{slug: `biennial/${params.slug}/timetable`}
 	}
 
 	const [currentDate, setCurrentDate] = useState('2022-09-30');
@@ -86,7 +86,7 @@ const Timetable = ({ menus, global, festival, timetable}) => {
 															return(
 																<>
 																	{event.sub_location.data == null &&
-																		<a href={event.programme.data?.attributes.main ? `/biennial/biennial-2022/programme/${event.programme.data?.attributes.slug}` : `/biennial/biennial-2022/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
+																		<a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
 																		className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
 																		style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
 																			<div className="inner-programme">
@@ -123,7 +123,7 @@ const Timetable = ({ menus, global, festival, timetable}) => {
 																		return(
 																			<>
 																				{sub.attributes.title === event.sub_location.data?.attributes.title &&
-																					<a href={event.programme.data?.attributes.main ? `/biennial/biennial-2022/programme/${event.programme.data?.attributes.slug}` : `/biennial/biennial-2022/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
+																					<a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
 																					className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} subloc ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
 																					style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
 																						<div className="inner-programme">
@@ -169,7 +169,7 @@ const Timetable = ({ menus, global, festival, timetable}) => {
 															const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
 															const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
 															return(
-																<a href={event.programme.data?.attributes.main ? `/biennial/biennial-2022/programme/${event.programme.data?.attributes.slug}` : `/biennial/biennial-2022/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
+																<a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
 																className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
 																style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
 																	<div className="inner-programme">
@@ -208,13 +208,13 @@ const Timetable = ({ menus, global, festival, timetable}) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ params }) {
   // Run API calls in parallel
   const [festivalRes, globalRes, menusRes, timetableRes] = await Promise.all([
-    fetchAPI(`/biennials?filters[slug][$eq]=biennial-2022&populate[prefooter][populate]=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-		fetchAPI(`/timetable-news?filters[slug][$eq]=biennial-2022-2&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
+		fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
   ])
 
 	
@@ -224,7 +224,8 @@ export async function getServerSideProps() {
       festival: festivalRes.data[0],
       global: globalRes.data,
       menus: menusRes.data,
-			timetable: timetableRes.data[0],
+	  params: params,
+	  timetable: timetableRes.data[0],
     }
   }
 }
