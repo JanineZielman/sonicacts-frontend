@@ -11,6 +11,8 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
+  console.log(items)
+
   const getMorePosts = async () => {
     const res1 = await fetchAPI(
       `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
@@ -120,9 +122,13 @@ export async function getServerSideProps() {
 
   var mergedItems = items.data.concat(agendaItems.data)
 
+  mergedItems.sort(function(a,b){
+    return new Date(b.attributes.date) - new Date(a.attributes.date);
+  });
+
 
 	const totalItems = 
-    await fetchAPI( `/discover-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
+    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
   );
 
   const totalItemsAgenda = 
@@ -139,7 +145,6 @@ export async function getServerSideProps() {
       categories: categoryRes.data,
       global: globalRes.data,
       menus: menusRes.data,
-      agenda: agendaItems.data,
     },
   };
 }

@@ -51,7 +51,7 @@ const Opencalls = ({ page, opencalls }) => {
 										<div>
 											{item.attributes.category?.data && 
 												<div className="category">
-													<a href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+													<a href={'/search/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
 														{item.attributes.category?.data.attributes.slug}
 													</a>
 												</div>

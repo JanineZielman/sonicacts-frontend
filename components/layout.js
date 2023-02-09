@@ -33,7 +33,10 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
     <section className={`container ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <>
         {page?.attributes?.slug != 'homepage'  ? 
-          <Nav menus={menus} global={global} page={page} festival={festival}/>
+          <>
+            <Nav menus={menus} global={global} page={page} festival={festival}/>
+          </>
+          
         : 
           <>
             <Menu menus={menus} page={page} global={global}/>

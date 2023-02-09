@@ -76,7 +76,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                         </div>
                         {item.attributes.category?.data && 
                           <div className="category">
-                            <a href={'/'+page?.attributes.slug+'/categories/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                            <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
                               {item.attributes.category?.data.attributes.slug}
                             </a>
                             {item.attributes.authors?.data.map((author, i) =>{
@@ -134,6 +134,10 @@ export async function getServerSideProps({params}) {
   const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
 
   var mergedItems = items.data.concat(agendaItems.data)
+
+  mergedItems.sort(function(a,b){
+    return new Date(b.attributes.date) - new Date(a.attributes.date);
+  });
 
 	const totalItems = 
     await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}`
