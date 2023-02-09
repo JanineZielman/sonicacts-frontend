@@ -1,4 +1,23 @@
 @media only screen and (max-width: 1100px) {
+	.discover .discover-container.sub-programme-container {
+		.day-programme {
+			.loc-item{
+				margin-top: -50px;
+			}
+			.discover-item {
+				margin-top: 24px;
+				padding-top: 10px;
+			}
+		}
+		.discover-item {
+			width: 33%;
+			margin-top: 5px;
+			padding-top: 5px;
+			.image{
+				height: 20vw;
+			}
+		}
+	}
 	.festival-wrapper .text-block.small {
 		width: 94vw;
 		p{
@@ -204,6 +223,18 @@
 }
 
 @media only screen and (max-width: 900px) {
+	.discover .discover-container.sub-programme-container {
+		.day-programme {
+			.loc-item {
+				margin-top: -40px;
+			}
+
+			.discover-item {
+				margin-top: 24px;
+				padding-top: 10px;
+			}
+		}
+	}
 	.festival-home .festival-hero .wrapper:after{
 		top: auto;
 		bottom: 0%;
@@ -315,6 +346,16 @@
 }
 
 @media only screen and (max-width: 600px) {
+	.discover .discover-container.sub-programme-container {
+		justify-content: flex-start;
+		.discover-item {
+			width: 50%;
+
+			.image {
+				height: 30vw;
+			}
+		}
+	}
 	.tickets{
 		margin-top: 40px;
 		.tickets-container{

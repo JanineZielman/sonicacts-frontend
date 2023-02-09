@@ -97,9 +97,7 @@ const Timetable = ({ menus, global, params, timetable, festival}) => {
             <select onChange={setDate} id="select">
               {dates.map((item,i) => {
                 return(
-                
                   <option className="date" id={item.slice(0, 10)} value={item.slice(0, 10)}>{Moment(item).format('ddd D MMM')}</option>
-                  
                 )
                 })}
             </select>
