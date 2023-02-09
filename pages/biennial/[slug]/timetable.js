@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
-import Layout from "../../../../components/layout"
-import { fetchAPI } from "../../../../lib/api"
+import Layout from "../../../components/layout"
+import { fetchAPI } from "../../../lib/api"
 import Moment from 'moment'
 
 
@@ -214,7 +214,7 @@ export async function getServerSideProps({ params }) {
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-		fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
+	fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
   ])
 
 	
