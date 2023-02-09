@@ -31,7 +31,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
                               </a>
                               {item.attributes.authors?.data.map((author, i) =>{
                                 return(
-                                  <a className="author" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                                  <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
                                     {author.attributes.name}
                                   </a>
                                 )
