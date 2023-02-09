@@ -46,162 +46,155 @@ const Timetable = ({ menus, global, params, festival, timetable}) => {
                 })}
             </select>
           </div>
-					<div className="timetable-locations">
-              <div className="timetable-wrapper">		
-								{timetable.attributes.day.filter(item => item.date === currentDate).map((item, i) => {
-									const number = times.indexOf(timetable.attributes.day.filter(item => item.date === currentDate)[0].programme[0].start_time.replace('30', '00'));
-									return(
-										<>
-											{i == 0 &&
-												<>
-													<div className="timetable-times">
-														{times?.slice(number, 24).map((time, i) => {
-															return(
-																<div className="time-block">
-																	<div className="time">{time}</div>
-																</div>
-															)
-														})}
-													</div>
-												</>
-											}
-											{item.sub_locations.data[0] ?
-												<>
-												<div className="timetable-row">
-													<div className="location">
-														<h4>{item.location.data.attributes.title}</h4>
-														{item.sub_locations.data.map((sub, i) => {
-															return(
-																<>
-																	{sub.attributes.title && <p>{sub.attributes.title}</p>}
-																</>
-															)
-														})}
-													</div>
+		    <div className="timetable-locations">
+          <div className="timetable-wrapper">		
+              {timetable.attributes.day.filter(item => item.date === currentDate).map((item, i) => {
+                const number = times.indexOf(timetable.attributes.day.filter(item => item.date === currentDate)[0].programme[0].start_time.replace('30', '00'));
+                return(
+                  <>
+                    {i == 0 &&
+                      <>
+                        <div className="timetable-times">
+                          {times?.slice(number, 24).map((time, i) => {
+                            return(
+                              <div className="time-block">
+                                <div className="time">{time}</div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </>
+                    }
+                    {item.sub_locations.data[0] ?
+                      <>
+                      <div className="timetable-row">
+                        <div className="location">
+                          <h4>{item.location.data.attributes.title}</h4>
+                          {item.sub_locations.data.map((sub, i) => {
+                            return(
+                              <>
+                                {sub.attributes.title && <p>{sub.attributes.title}</p>}
+                              </>
+                            )
+                          })}
+                        </div>
 
-													<div id="programme_wrapper" className={`programme-wrapper`}>
-														{item.programme.map((event, i) => {
-															const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
-															const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
-															return(
-																<>
-																	{event.sub_location.data == null &&
-																		<a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
-																		className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
-																		style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-																			<div className="inner-programme">
-																				<div className="inner-wrapper">
-																					<div className="time">
-																						{event.start_time.substring(0,5)} - {event.end_time.substring(0,5)}
-																					</div>
-																					<div className="title">
-																						{event.programme.data.attributes.title}
-																					</div>
-																					<div className="artists">
-																						{event.programme.data.attributes?.authors?.data?.map((artist, i) => {
-																							return(
-																								<div>{artist.attributes.name}</div>
-																							)
-																						})}
-																					</div>
-																				</div>
-																			</div>
-																		</a>
-																	}
-																</>
-															)
-														})}
-													</div>
+                        <div id="programme_wrapper" className={`programme-wrapper`}>
+                          {item.programme.map((event, i) => {
+                            const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
+                            const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
+                            return(
+                              <>
+                                {event.sub_location.data == null &&
+                                  <a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
+                                  className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
+                                  style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                    <div className="inner-programme">
+                                      <div className="inner-wrapper">
+                                        <div className="time">
+                                          {event.start_time.substring(0,5)} - {event.end_time.substring(0,5)}
+                                        </div>
+                                        <div className="title">
+                                          {event.programme.data.attributes.title}
+                                        </div>
+                                        <div className="artists">
+                                          {event.programme.data.attributes?.authors?.data?.map((artist, i) => {
+                                            return(
+                                              <div>{artist.attributes.name}</div>
+                                            )
+                                          })}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </a>
+                                }
+                              </>
+                            )
+                          })}
+                        </div>
 
-													<div className="programme-wrapper">
-														{item.sub_locations.data.map((sub, index) => {
-															return(
-																<div className={`sub-bar`}>
-																	{item.programme.map((event, i) => {
-																		const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
-																		const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
-																		return(
-																			<>
-																				{sub.attributes.title === event.sub_location.data?.attributes.title &&
-																					<a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
-																					className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} subloc ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
-																					style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-																						<div className="inner-programme">
-																							<div className="inner-wrapper">
-																								<div className="time">
-																									{event.start_time.substring(0,5)} 
-																									{/* - {event.end_time.substring(0,5)} */}
-																									{/* {event.sub_location.data?.attributes.title} */}
-																								</div>
-																								<div className="title">
-																									{event.programme.data.attributes.title}
-																								</div>
-																								<div className="artists">
-																									{event.programme.data.attributes?.authors?.data?.map((artist, i) => {
-																										return(
-																											<div>{artist.attributes.name}</div>
-																										)
-																									})}
-																								</div>
-																							</div>
-																						</div>
-																					</a>
-																				}
-																			</>
-																		)
-																	})}
-																</div>
-															)
-														})}
-													</div>
-												</div>
-												</>
-											:
-												<div className="timetable-row">
-													<div className="location">
-														<h4>{item.location.data.attributes.title}</h4>
-														{item.location.data.attributes.subtitle &&
-															<p>{item.location.data.attributes.subtitle}</p>
-														}
-													</div>
-													<div id="programme_wrapper" className={`programme-wrapper`}>
-														{item.programme.map((event, i) => {
-															const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
-															const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
-															return(
-																<a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} 
-																className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} 
-																style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
-																	<div className="inner-programme">
-																		<div className="inner-wrapper">
-																			<div className="time">
-																				{event.start_time.substring(0,5)} - {event.end_time.substring(0,5)}
-																			</div>
-																			<div className="title">
-																				{event.programme.data.attributes.title}
-																			</div>
-																			<div className="artists">
-																				{event.programme.data.attributes?.authors?.data?.map((artist, i) => {
-																					return(
-																						<div>{artist.attributes.name}</div>
-																					)
-																				})}
-																			</div>
-																		</div>
-																	</div>
-																</a>
-															)
-														})}
-													</div>
-												</div>	
-											}
-										</>
-									)
-								})}
-
-							</div>
+                        <div className="programme-wrapper">
+                          {item.sub_locations.data.map((sub, index) => {
+                            return(
+                              <div className={`sub-bar`}>
+                                {item.programme.map((event, i) => {
+                                  const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
+                                  const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
+                                  return(
+                                    <>
+                                      {sub.attributes.title === event.sub_location.data?.attributes.title &&
+                                        <a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} subloc ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                          <div className="inner-programme">
+                                            <div className="inner-wrapper">
+                                              <div className="time">
+                                                {event.start_time.substring(0,5)} 
+                                              </div>
+                                              <div className="title">
+                                                {event.programme.data.attributes.title}
+                                              </div>
+                                              <div className="artists">
+                                                {event.programme.data.attributes?.authors?.data?.map((artist, i) => {
+                                                  return(
+                                                    <div>{artist.attributes.name}</div>
+                                                  )
+                                                })}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </a>
+                                      }
+                                    </>
+                                  )
+                                })}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                      </>
+                    :
+                      <div className="timetable-row">
+                        <div className="location">
+                          <h4>{item.location.data.attributes.title}</h4>
+                          {item.location.data.attributes.subtitle &&
+                            <p>{item.location.data.attributes.subtitle}</p>
+                          }
+                        </div>
+                        <div id="programme_wrapper" className={`programme-wrapper`}>
+                          {item.programme.map((event, i) => {
+                            const startTime = parseFloat(event.start_time?.substring(0, 2)) + parseFloat(event.start_time?.substring(3, 5) / 60);
+                            const endTime = parseFloat(event.end_time?.substring(0, 2)) + parseFloat(event.end_time?.substring(3, 5) / 60);
+                            return(
+                              <a href={event.programme.data?.attributes.main ? `/biennial/${params.slug}/programme/${event.programme.data?.attributes.slug}` : `/biennial/${params.slug}/programme/${event.programme.data?.attributes.main_programmes?.data[0]?.attributes.slug}/${event.programme.data?.attributes.slug}`} className={`programme ${event.programme.data?.attributes.slug.replace(/[\(\)]/g, '').toLowerCase()} ${event.programme.data.attributes.main_programmes.data[0]?.attributes.title.replaceAll(' ', '-').replace(/[\(\)]/g, '').toLowerCase()}-sub`} style={{'--margin': ((startTime - 7 - number) * 200 + 250) + 'px',  '--width':  ( (endTime <= 6 ? 24 : 0) +  ( endTime  - startTime ) ) * 200 - 8 + 'px'}}>
+                                <div className="inner-programme">
+                                  <div className="inner-wrapper">
+                                    <div className="time">
+                                      {event.start_time.substring(0,5)} - {event.end_time.substring(0,5)}
+                                    </div>
+                                    <div className="title">
+                                      {event.programme.data.attributes.title}
+                                    </div>
+                                    <div className="artists">
+                                      {event.programme.data.attributes?.authors?.data?.map((artist, i) => {
+                                        return(
+                                          <div>{artist.attributes.name}</div>
+                                        )
+                                      })}
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            )
+                          })}
+                        </div>
+                      </div>	
+                    }
+                  </>
+                )
+              })}
+            </div>
 					</div>
-				</div>
+		    </div>
       </Layout>
     </section>
     </>
@@ -214,7 +207,7 @@ export async function getServerSideProps({ params }) {
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/global", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
-	fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
+	  fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
   ])
 
 	
@@ -224,8 +217,8 @@ export async function getServerSideProps({ params }) {
       festival: festivalRes.data[0],
       global: globalRes.data,
       menus: menusRes.data,
-	  params: params,
-	  timetable: timetableRes.data[0],
+	    params: params,
+	    timetable: timetableRes.data[0],
     }
   }
 }
