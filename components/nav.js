@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Menu from "./menu"
 import ReactMarkdown from "react-markdown";
+import Search from "./search"
 
 const Nav = ({ menus, global, page, festival }) => {
   if (page?.attributes?.slug){
@@ -41,9 +42,13 @@ const Nav = ({ menus, global, page, festival }) => {
              {global.attributes.festival_title}
             </a>
           </div>
-          <a href={'/' + page?.attributes?.slug}>
-            {last?.replace('-', ' ')}
-          </a>
+          {page?.attributes?.slug == 'search' ?
+            <></>
+          : 
+            <a href={'/' + page?.attributes?.slug}>
+              {last?.replace('-', ' ')}
+            </a>
+          }
           {festival?.attributes?.highlight &&
             <div className="marquee-highlight">
               <div class="marquee__inner" aria-hidden="true">
@@ -54,6 +59,9 @@ const Nav = ({ menus, global, page, festival }) => {
             </div>
           }
         </div>
+        <div className={`top-search search-fixed ${page.attributes.slug}`}>
+              <Search params={''}/>
+            </div>
         <Menu menus={menus} page={page} global={global} first={first} festival={festival}/>
       </div>
     </div>

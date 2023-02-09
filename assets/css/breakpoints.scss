@@ -485,6 +485,14 @@
 
 
 @media only screen and (max-width: 600px) {
+	.search-fixed{
+		display: none;
+		&.search{
+			display: inline-block;
+			margin-top: 25px;
+			margin-bottom: -25px;
+		}
+	}
 	.slick-slider {
 		.slick-slide {
 			.slider-item {

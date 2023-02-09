@@ -10,7 +10,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const Search = ({ menus, global, items, search, numberOfPosts}) => {
   const page = {
     attributes: {
-      // slug: search
+      slug: 'search'
     }
   }  
 
