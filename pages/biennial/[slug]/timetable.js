@@ -5,31 +5,31 @@ import Moment from 'moment'
 
 
 const Timetable = ({ menus, global, params, festival, timetable}) => {
-	// const page = {
-  //   attributes:
-  //     	{slug: `biennial/${params.slug}/timetable`}
-	// }
+	const page = {
+    attributes:
+      	{slug: `biennial/${params.slug}/timetable`}
+	}
 
-	// const [currentDate, setCurrentDate] = useState('2022-09-30');
-	// const [dates, setDates] = useState([]);
+	const [currentDate, setCurrentDate] = useState('2022-09-30');
+	const [dates, setDates] = useState([]);
 
-	// function setDate(e){
-  //   if (currentDate != e.target[e.target.selectedIndex].value){
-  //     setCurrentDate(e.target[e.target.selectedIndex].value)
-  //   }
-  // }
+	function setDate(e){
+    if (currentDate != e.target[e.target.selectedIndex].value){
+      setCurrentDate(e.target[e.target.selectedIndex].value)
+    }
+  }
 
-	// const times = [
-  //   '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
-  // ]
+	const times = [
+    '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00'
+  ]
 
-	// useEffect(() => {
-	// 	timetable.attributes.day.forEach((element) => {
-	// 			if (!dates.includes(element.date)) {
-	// 					dates.push(element.date);
-	// 			}
-	// 	});
-	// }, [])
+	useEffect(() => {
+		timetable.attributes.day.forEach((element) => {
+				if (!dates.includes(element.date)) {
+						dates.push(element.date);
+				}
+		});
+	}, [])
   
   return (
     <>
