@@ -240,11 +240,6 @@
 }
 
 .author{
-  // &:nth-child(1){
-  //   &:before {
-  //     content: ", By "
-  //   }
-  // }
   &.by-line{
     &:nth-child(2){
       &:before {

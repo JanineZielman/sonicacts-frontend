@@ -10,7 +10,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 const Search = ({ menus, global, items, search, numberOfPosts}) => {
   const page = {
     attributes: {
-      slug: search
+      // slug: search
     }
   }  
 
@@ -24,12 +24,13 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
         discover:[...items.discover],
         news:[...items.news],
         agenda:[...items.agenda],
-        programme:[...items.programme]
+        programme:[...items.programme],
+        community:[...items.community]
       }
     ))
   }, [search]);
 
-  const postNumber = posts.discover.length + posts.news.length + posts.agenda.length + posts.programme.length
+  const postNumber = posts.discover.length + posts.news.length + posts.agenda.length + posts.programme.length + posts.community.length
 
   const getMorePosts = async () => {
     const qs = require('qs');
@@ -88,18 +89,21 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
     const newsItems = await fetchAPI(`/news-items?${query}&pagination[start]=${posts.news.length}&populate=*`);
     const agendaItems = await fetchAPI(`/agenda-items?${query}&pagination[start]=${posts.agenda.length}&populate=*`);
     const programmeItems = await fetchAPI(`/programmes?${query2}&pagination[start]=${posts.programme.length}&populate=*`);
+    const communityItems = await fetchAPI(`/community-items?filters[slug][$contains]=${search}&pagination[start]=${posts.community.length}&populate=*`);
 
     const newDiscover = await discoverItems.data;
     const newNews = await newsItems.data;
     const newAgenda = await agendaItems.data;
     const newProgramme = await programmeItems.data;
+    const newCommunity = await communityItems.data;
 
     setPosts((posts) => (
       {
         discover:[...posts.discover, ...newDiscover],
         news:[...posts.news, ...newNews],
         agenda:[...posts.agenda, ...newAgenda],
-        programme:[...posts.programme, ...newProgramme]
+        programme:[...posts.programme, ...newProgramme],
+        community:[...posts.community, ...newCommunity],
       }
     ))
   };
@@ -156,7 +160,15 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                                   }
                                 </div>
                               }
-                              {item.attributes.title}
+                              {item.attributes.title && item.attributes.title}
+                              {item.attributes.name && 
+                                <>
+                                {item.attributes.name}
+                                <div className="tags">
+                                  {item.attributes.job_description}
+                                </div>
+                                </>
+                              }
                               {item.attributes.tags?.data && 
                                 <div className="tags">
                                     {item.attributes.tags.data.map((tag, i) => {
@@ -247,15 +259,17 @@ export async function getServerSideProps({params}) {
   const news = await fetchAPI(`/news-items?${query}&populate=*`);
   const agenda = await fetchAPI(`/agenda-items?${query}&populate=*`);
   const programme = await fetchAPI(`/programmes?${query2}&populate=*`);
+  const community = await fetchAPI(`/community-items?filters[slug][$contains]=${params.slug}&populate=*`);
 
 
   const discoverAmount = discover.meta.pagination.total;
   const newsAmount = news.meta.pagination.total;
   const agendaAmount = agenda.meta.pagination.total;
   const programmeAmount = programme.meta.pagination.total;
+  const communityAmount = community.meta.pagination.total;
 
 
-  const numberOfPosts = parseInt(discoverAmount) + parseInt(newsAmount) + parseInt(agendaAmount) +  parseInt(programmeAmount)
+  const numberOfPosts = parseInt(discoverAmount) + parseInt(newsAmount) + parseInt(agendaAmount) +  parseInt(programmeAmount) + parseInt(communityAmount) 
   
 
   return {
@@ -266,6 +280,7 @@ export async function getServerSideProps({params}) {
         news: news.data,
         agenda: agenda.data,
         programme: programme.data,
+        community: community.data,
       },
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
