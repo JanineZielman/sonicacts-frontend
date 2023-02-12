@@ -815,6 +815,43 @@ h2 {
   display: none;
 }
 
+.max-length{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 20; /* number of lines to show */
+  line-clamp: 20; 
+  -webkit-box-orient: vertical;
+  // max-height: 720px;
+  .margin{
+    margin-bottom: 10px;
+  }
+  &.show-more{
+    max-height: 100%;
+    display: block;
+    -webkit-line-clamp: none; /* number of lines to show */
+    line-clamp: none; 
+    -webkit-box-orient: none;
+  }
+}
+
+.show-all-button{
+  margin-top: 5px;
+  width: 100%;
+  border-top: 2px solid black;
+  padding-top: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  &:before{
+    content: "Show all"
+  }
+  &.show-more{
+    &:before{
+      content: "Show less"
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .radio{
     display: flex;
