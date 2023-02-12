@@ -86,12 +86,12 @@
 	justify-content: flex-end;
 	.note{
 		margin-top: 13px;
-		width: 300px;
+		width: 250px;
 		margin-right: 100px;
 		margin-left: auto;
 	}
 	.search-bar{
-		width: 300px;
+		width: 250px;
 		margin-right: 100px;
 		margin-left: auto;
 		margin-top: -20px;
@@ -105,11 +105,11 @@
 }
 
 .menu-search .search-bar {
-	margin-left: calc(100% - 300px);
+	margin-left: calc(100% - 250px);
 }
 
 .menu-modal .note{
-	margin-left: calc(100% - 300px);
+	margin-left: calc(100% - 250px);
 }
 
 .note{
@@ -117,4 +117,10 @@
 	font-weight: 100;
 	position: absolute;
 	margin-top: -8px;
+}
+
+.search-fixed{
+	margin-top: 14px;
+	position: fixed;
+	right: 0;
 }

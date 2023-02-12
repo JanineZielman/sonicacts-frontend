@@ -160,6 +160,20 @@
           display: inline-block;
         }
       }
+      .title-wrapper {
+        .authors{
+          line-height: 1.1;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          font-size: 24px;
+        }
+        &:hover{
+          font-weight: 200;
+          letter-spacing: 1.2px;
+        }
+      }
       .title{
         line-height: 1.1;
         overflow: hidden;
@@ -226,11 +240,14 @@
 }
 
 .author{
-  &:nth-child(2){
-    &:before {
-      content: ", By "
+  &.by-line{
+    &:nth-child(2){
+      &:before {
+        content: ", By "
+      }
     }
   }
+  display: inline-block;
   &:after{
     content: ",";
     margin-right: 5px;

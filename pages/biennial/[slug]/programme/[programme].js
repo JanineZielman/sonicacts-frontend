@@ -69,9 +69,8 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                     {dates.map((date, j) => {
                       return(
                         <div className="day-programme">
-                          {/* <div className="day">{Moment(date).format('D MMM')}</div> */}
                           <div className="collapsible">
-                            <Collapsible trigger={Moment(date).format('D MMM')}>
+                            <Collapsible trigger={Moment(date).format('D MMM')} open={true}>
                               <div className="discover-container programme-container sub-programme-container">
                                 {locations.map((loc, l) => {
                                   return(
@@ -114,7 +113,7 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                                   </div>
                                                   {item.attributes.biennial_tags?.data && 
                                                     <div className="category">
-                                                      {item.attributes.biennial_tags.data.map((tag, i) => {
+                                                      {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
                                                         return(
                                                           <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
                                                             {tag.attributes.title}
@@ -123,20 +122,18 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                                       })}
                                                     </div>
                                                   }
-                                                  <div className="title">
-                                                    {item.attributes.title}
-                                                  </div>
-                                                  {item.attributes?.authors?.data &&
-                                                    <div className="tags">
-                                                      {item.attributes.authors.data.map((author, i) => {
-                                                        return(
-                                                          <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
-                                                            {author.attributes.name}
-                                                          </a>
-                                                        )
-                                                      })}
+                                                  <div className="title-wrapper">
+                                                    <div className="authors">
+                                                      {item.attributes?.authors?.data &&
+                                                        item.attributes.authors.data.map((author, i) => {
+                                                          return( 
+                                                            <div className="author">{author.attributes.name}</div>
+                                                          )
+                                                        })
+                                                      }
                                                     </div>
-                                                  }
+                                                    <div className="title">{item.attributes.title}</div>
+                                                  </div>
                                                 </a>
                                               </div>
                                             </div>
@@ -193,7 +190,7 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                             </div>
                                             {item.attributes.biennial_tags?.data && 
                                               <div className="category">
-                                                {item.attributes.biennial_tags.data.map((tag, i) => {
+                                                {item.attributes.biennial_tags.data.slice(0,1).map((tag, i) => {
                                                   return(
                                                     <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
                                                       {tag.attributes.title}
@@ -202,20 +199,18 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                                 })}
                                               </div>
                                             }
-                                            <div className="title">
-                                              {item.attributes.title}
-                                            </div>
-                                            {item.attributes?.authors?.data &&
-                                              <div className="tags">
-                                                {item.attributes.authors.data.map((author, i) => {
-                                                  return(
-                                                    <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
-                                                      {author.attributes.name}
-                                                    </a>
-                                                  )
-                                                })}
+                                            <div className="title-wrapper">
+                                              <div className="authors">
+                                                {item.attributes?.authors?.data &&
+                                                  item.attributes.authors.data.map((author, i) => {
+                                                    return( 
+                                                      <div className="author">{author.attributes.name}</div>
+                                                    )
+                                                  })
+                                                }
                                               </div>
-                                            }
+                                              <div className="title">{item.attributes.title}</div>
+                                            </div>
                                           </a>
                                         </div>
                                       </LazyLoad>
