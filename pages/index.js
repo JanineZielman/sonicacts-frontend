@@ -99,7 +99,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                                     }
                                     {item.attributes.date && page.attributes.slug != 'discover' &&
                                       <>
-                                        {item.attributes.dates ?
+                                        {item.attributes.dates?.[0] ?
                                           <span>
                                             {item.attributes.dates.map((date, i) => {
                                               return(
@@ -191,7 +191,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 </Slider>
               </LazyLoad>
             </div>
-                        {menus.slice(3,4).map((page, i) => {
+            {menus.slice(3,4).map((page, i) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <div>
