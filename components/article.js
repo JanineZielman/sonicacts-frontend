@@ -5,7 +5,7 @@ import Image from "./image"
 import LazyLoad from 'react-lazyload';
 import Collapsible from "./collapsible";
 
-const Article = ({page, relations}) => {
+const Article = ({page, relations, discover, agenda}) => {
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
@@ -22,6 +22,21 @@ const Article = ({page, relations}) => {
 			}
 		}
   }, []);
+
+  function toggleShow() {
+	var element = document.getElementById("maxLength");
+	var button = document.getElementById("show-button");
+	element.classList.toggle("show-more");
+	button.classList.toggle("show-more");
+  }
+
+  function toggleShow2() {
+	var element = document.getElementById("maxLength2");
+	var button = document.getElementById("show-button2");
+	element.classList.toggle("show-more");
+	button.classList.toggle("show-more");
+  }
+
 
   return (   
 		<section className="article">
@@ -227,13 +242,18 @@ const Article = ({page, relations}) => {
 						{relations?.attributes?.community_items?.data[0] &&
 							<div>
 								<span>Community</span>
-								{relations?.attributes?.community_items.data.map((item, i) => {
-									return (
-										<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
-											{item.attributes.name}
-										</a>
-									)
-								})}
+								<div className="max-length" id="maxLength">
+									{relations?.attributes?.community_items.data.map((item, i) => {
+										return (
+											<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
+												{item.attributes.name}
+											</a>
+										)
+									})}
+								</div>
+								{relations?.attributes?.community_items?.data.length > 20 &&
+									<div className="show-all-button" onClick={toggleShow} id="show-button"></div>
+								}
 							</div>
 						}
 						
@@ -248,19 +268,35 @@ const Article = ({page, relations}) => {
 									/>
 									</>
 								}
-								{relations.attributes.discover_items.data[0] &&
+								{(relations.attributes.discover_items.data[0] || discover?.[0] || agenda?.[0]) &&
 									<>
 									<span>Related</span>
-									{relations?.attributes?.discover_items?.data.map((item, i ) => {
-
-										return(
-											<p>
-												<a href={'/discover/'+item.attributes.slug} key={`dis-link${i}`}>
+									<div className="max-length" id="maxLength2">
+										{discover?.[0] &&
+											discover.map((item, i) => {
+												return(
+													<a className="margin" key={`rel1-link${i}`} href={`/discover/${item.attributes.slug}`}><img class="arrow" src="/arrow.svg"/> {item.attributes.title}</a>
+												)
+											})
+										}
+										{agenda?.[0] &&
+											agenda.map((item, i) => {
+												return(
+													<a className="margin" key={`rel2-link${i}`} href={`/agenda/${item.attributes.slug}`}><img class="arrow" src="/arrow.svg"/> {item.attributes.title}</a>
+												)
+											})
+										}
+										{relations?.attributes?.discover_items?.data.map((item, i ) => {
+											return(
+												<a className="margin" key={`dis-link${i}`} href={'/discover/'+item.attributes.slug}>
 													<img className="arrow" src="/arrow.svg"/> {item.attributes.title}
 												</a>
-											</p>
-										)
-									})}
+											)
+										})}
+									</div>
+									{(discover.length + agenda.length + relations?.attributes?.discover_items?.data.length) > 20 &&
+										<div className="show-all-button" onClick={toggleShow2} id="show-button2"></div>
+									}
 									</>
 								}
 							</div>

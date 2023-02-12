@@ -11,8 +11,6 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
-  console.log(items)
-
   const getMorePosts = async () => {
     const res1 = await fetchAPI(
       `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`

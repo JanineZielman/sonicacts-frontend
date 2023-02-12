@@ -59,7 +59,7 @@ const Agendaitems = ({ page, items }) => {
 											}
 											{item.attributes.date &&
 												<>
-													{item.attributes.dates ?
+													{item.attributes.dates?.[0] ?
 														<span>
 															{item.attributes.dates.map((date, i) => {
 																return(
