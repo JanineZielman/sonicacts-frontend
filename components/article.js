@@ -294,7 +294,7 @@ const Article = ({page, relations, discover, agenda}) => {
 											)
 										})}
 									</div>
-									{(discover.length + agenda.length + relations?.attributes?.discover_items?.data.length) > 20 &&
+									{(discover?.length + agenda?.length + relations?.attributes?.discover_items?.data.length) > 20 &&
 										<div className="show-all-button" onClick={toggleShow2} id="show-button2"></div>
 									}
 									</>
