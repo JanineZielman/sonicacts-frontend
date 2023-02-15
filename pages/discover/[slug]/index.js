@@ -13,7 +13,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
       {items[0] &&
         <div className="discover">
           <div className="discover-container">
-          {items.map((item, i) => {
+          {items?.map((item, i) => {
                 return (
                   <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
                     <LazyLoad height={600}>
@@ -29,7 +29,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
                               <a href={'/search/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
                                 {item.attributes.category?.data.attributes.slug}
                               </a>
-                              {item.attributes.authors?.data.map((author, i) =>{
+                              {item.attributes.authors?.data?.map((author, i) =>{
                                 return(
                                   <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
                                     {author.attributes.name}
@@ -45,7 +45,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
                           <div className="tags">
                             {item.attributes.tags?.data && 
                               <>
-                                {item.attributes.tags.data.map((tag, i) => {
+                                {item.attributes.tags?.data?.map((tag, i) => {
                                   return(
                                     <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
                                       {tag.attributes.slug}
