@@ -168,10 +168,11 @@
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           font-size: 24px;
+          font-weight: 200;
         }
         &:hover{
           font-weight: 200;
-          letter-spacing: 1.2px;
+          // letter-spacing: 1.2px;
         }
       }
       .title{
