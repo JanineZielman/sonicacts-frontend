@@ -152,6 +152,12 @@
     }
     &.small {
       font-size: 21px;
+      ul{
+        padding-left: 150px;
+        p{
+          padding-left: 0;
+        }
+      }
       p {
         padding-left: 150px;
       }

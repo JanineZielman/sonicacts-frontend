@@ -12,11 +12,11 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
       <Article page={page} relations={relations}/>
       {items[0] &&
         <div className="discover">
-          <div className="discover-container">
-          {items?.map((item, i) => {
+          <div className="discover-container programme-container">
+            {items?.map((item, i) => {
                 return (
                   <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
-                    <LazyLoad height={600}>
+                    {/* <LazyLoad height={300}> */}
                       <div className="item-wrapper">
                         <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
                           <div className="image">
@@ -60,10 +60,10 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
                           </div>
                         </a>
                       </div>
-                    </LazyLoad>
+                    {/* </LazyLoad> */}
                   </div>
                 )
-              })}
+            })}
           </div>
         </div>
       }
@@ -91,7 +91,9 @@ export async function getServerSideProps({params, preview = null}) {
   );
 
   const itemsRel = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
-  
+  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
+
+  var mergedItems = itemsRel.data.concat(agendaItems.data)
 
   const [menusRes, globalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),
@@ -104,7 +106,7 @@ export async function getServerSideProps({params, preview = null}) {
       page: pageRes.data[0] ? pageRes.data[0] : agendaRes.data[0], 
       global: globalRes.data, 
       relations: pageRel.data[0] ? pageRel.data[0] : agendaRel.data[0],
-      items: itemsRel.data
+      items: mergedItems
     },
   };
 }
