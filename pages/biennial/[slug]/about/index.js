@@ -1,8 +1,7 @@
 import React from "react"
 import Layout from "../../../../components/layout"
 import { fetchAPI } from "../../../../lib/api"
-import Landing from "../../landing"
-import Hero from "../../hero"
+import Landing from "../../../../components/landing"
 import ReactMarkdown from "react-markdown";
 
 const About = ({ menus, global, page, params }) => {

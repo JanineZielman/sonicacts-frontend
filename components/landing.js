@@ -1,9 +1,7 @@
 
 import ReactMarkdown from "react-markdown";
-import Moment from 'moment';
 import Collapsible from 'react-collapsible';
-import Image from "../../components/image"
-import LazyLoad from 'react-lazyload';
+import Image from "./image"
 
 const Landing = ({page }) => {
   return (
