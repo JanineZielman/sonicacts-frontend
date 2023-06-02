@@ -38,7 +38,7 @@ const Nav = ({ menus, global, page, festival }) => {
             </a>
           </div>
           <div className="festival-logo">
-            <a href={`/${global.attributes.festival_slug}`}>
+            <a href={`${global.attributes.festival_slug.replace('https://sonicacts.com', '')}`}>
              {global.attributes.festival_title}
             </a>
           </div>
