@@ -65,7 +65,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                         {item.attributes.category?.data && 
                           <div className="category">
                             <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              {item.attributes.category?.data.attributes.slug}
+                              {item.attributes.category?.data.attributes.title}
                             </a>
                             {item.attributes.author?.data && 
                               <a className="author" href={'/community/'+item.attributes.author?.data?.attributes.slug} key={'discover'+i}>

@@ -77,7 +77,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                         {item.attributes.category?.data && 
                           <div className="category">
                             <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              {item.attributes.category?.data.attributes.slug}
+                              {item.attributes.category?.data.attributes.title}
                             </a>
                             {item.attributes.authors?.data.map((author, i) =>{
                               return(

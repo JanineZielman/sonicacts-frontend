@@ -27,7 +27,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
                           {item.attributes.category?.data && 
                             <div className="category">
                               <a href={'/search/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.slug}
+                                {item.attributes.category?.data.attributes.title}
                               </a>
                               {item.attributes.authors?.data?.map((author, i) =>{
                                 return(
