@@ -7,9 +7,15 @@ const FourOhFour = ({menus, global}) => {
 			slug: '404'
 		}
 	}
+
+  const festival = {
+		attributes: {
+			slug: '404'
+		}
+	}
 	
   return (
-    <Layout menus={menus} page={page} global={global}>
+    <Layout menus={menus} page={page} global={global} festival={festival}>
 			<section className="error">
 				<p>Sorry, we couldn't find this page...</p>
 				<a href="/">

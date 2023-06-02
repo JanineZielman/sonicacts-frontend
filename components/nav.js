@@ -39,7 +39,7 @@ const Nav = ({ menus, global, page, festival }) => {
           </div>
           <div className="festival-logo">
             <a href={`/biennial/${festival.attributes.slug}`}>
-             {festival.attributes.slug.replace('-', ' ')}
+             {festival?.attributes?.slug.replace('-', ' ')}
             </a>
           </div>
           {page?.attributes?.slug == 'search' ?
