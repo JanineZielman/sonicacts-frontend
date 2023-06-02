@@ -5,12 +5,15 @@ import Hero from "./hero"
 import ReactMarkdown from "react-markdown";
 
 const Festival = ({ menus, global, page, params, programmes, artists, news }) => {
-	const text = "Sonic  Acts Bien–nial 20 22 Son ic Acts Bien–nial 20 22"
+	var text;
+	if (page.attributes.slug == 'biennial-2022'){
+		text = "Sonic  Acts Bien–nial 20 22 Son ic Acts Bien–nial 20 22"
+	}
 	const [loading, setLoading] = useState(true);
 
 	const pageSlug = {
     attributes:
-      	{slug: `biennial/${params.slug}`}
+      	{slug: `biennial/${page.attributes.slug}`}
 	}
 
 	useEffect(() => {
@@ -18,6 +21,7 @@ const Festival = ({ menus, global, page, params, programmes, artists, news }) =>
        setLoading(false)
     }, 100);
   }, []);
+
 
   return (
 		<>
@@ -34,25 +38,27 @@ const Festival = ({ menus, global, page, params, programmes, artists, news }) =>
 								/>
 							</div>
 						}
-						<div className="festival-hero-bg">
-							<div className={`title`}>
-								<div className={`layer1`}>
-									{(text).split("").map(function(char, index){
-									return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
-									})}
-								</div>
-								<div className={`layer2`}>
-									{(text).split("").map(function(char, index){
-									return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 50) + 50 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
-									})}
-								</div>
-								<div className={`layer3`}>
-									{(text).split("").map(function(char, index){
-									return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 )}}>{char}</span>;
-									})}
+						{text &&
+							<div className="festival-hero-bg">
+								<div className={`title`}>
+									<div className={`layer1`}>
+										{(text).split("").map(function(char, index){
+										return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
+										})}
+									</div>
+									<div className={`layer2`}>
+										{(text).split("").map(function(char, index){
+										return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 50) + 50 ), '--delay': (Math.floor(Math.random() * 10) * 0.5) + 's'}}>{char}</span>;
+										})}
+									</div>
+									<div className={`layer3`}>
+										{(text).split("").map(function(char, index){
+										return <span className={`random-letter`} aria-hidden="true" key={index} style={{'--random': (Math.floor(Math.random() * 10) + 90 )}}>{char}</span>;
+										})}
+									</div>
 								</div>
 							</div>
-						</div>
+						}
 						<div className="content-wrapper">
 							<Hero slug={params.slug} programmes={programmes} artists={artists} news={news}/>
 							<br/>

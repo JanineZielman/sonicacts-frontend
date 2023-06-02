@@ -10,7 +10,6 @@ const Programme = ({ menus, global, items, params, festival}) => {
     attributes:
       	{slug: `biennial/${params.slug}/programme`}
 	}
-  console.log(items)
   
   return (
     <section className="festival-wrapper">
