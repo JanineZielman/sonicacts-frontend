@@ -16,7 +16,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
       `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     const res2 = await fetchAPI(
-      `/agenda-items?sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
+      `/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     var res = res1.data.concat(res2.data)
     const newPosts = await res;
@@ -128,7 +128,7 @@ export async function getServerSideProps() {
   ])
 
   const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
-  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&populate=*`);
+  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
 
   var mergedItems = items.data.concat(agendaItems.data)
 
