@@ -142,7 +142,7 @@ export async function getServerSideProps() {
   );
 
   const totalItemsAgenda = 
-    await fetchAPI( `/agenda-items`
+    await fetchAPI( `/agenda-items&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total + totalItemsAgenda.meta.pagination.total;
