@@ -245,7 +245,7 @@ export async function getServerSideProps({params, preview = null}) {
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate[authors][populate]=*&populate=*`
+    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&pagination[limit]=${100}&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate[authors][populate]=*&populate=*`
   );
   
 

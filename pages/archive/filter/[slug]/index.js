@@ -14,10 +14,10 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
 
   const getMorePosts = async () => {
     const res1 = await fetchAPI(
-      `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
+      `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
     );
     const res2 = await fetchAPI(
-      `/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
+      `/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${filter}&pagination[start]=${posts.length}&populate=*`
     );
     var res = res1.data.concat(res2.data)
     const newPosts = await res;
@@ -77,7 +77,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                         {item.attributes.category?.data && 
                           <div className="category">
                             <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              {item.attributes.category?.data.attributes.slug}
+                              {item.attributes.category?.data.attributes.title}
                             </a>
                             {item.attributes.authors?.data.map((author, i) =>{
                               return(
@@ -142,8 +142,8 @@ export async function getServerSideProps({params}) {
   ])
 
   // const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
-  const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
-  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
+  const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
+  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}&populate=*`);
 
   var mergedItems = items.data.concat(agendaItems.data)
 
@@ -152,11 +152,11 @@ export async function getServerSideProps({params}) {
   });
 
 	const totalItems = 
-    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}`
+    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}`
   );
 
   const totalItemsAgenda = 
-    await fetchAPI( `/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}`
+    await fetchAPI( `/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&filters[category][slug][$eq]=${params.slug}`
   );
 
   const categoryFil = 

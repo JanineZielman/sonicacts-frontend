@@ -16,7 +16,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
       `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     const res2 = await fetchAPI(
-      `/agenda-items?sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
+      `/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
     var res = res1.data.concat(res2.data)
     const newPosts = await res;
@@ -65,7 +65,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                         {item.attributes.category?.data && 
                           <div className="category">
                             <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              {item.attributes.category?.data.attributes.slug}
+                              {item.attributes.category?.data.attributes.title}
                             </a>
                             {item.attributes.author?.data && 
                               <a className="author" href={'/community/'+item.attributes.author?.data?.attributes.slug} key={'discover'+i}>
@@ -128,7 +128,7 @@ export async function getServerSideProps() {
   ])
 
   const items = await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
-  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&populate=*`);
+  const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
 
   var mergedItems = items.data.concat(agendaItems.data)
 
@@ -142,7 +142,7 @@ export async function getServerSideProps() {
   );
 
   const totalItemsAgenda = 
-    await fetchAPI( `/agenda-items`
+    await fetchAPI( `/agenda-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total + totalItemsAgenda.meta.pagination.total;

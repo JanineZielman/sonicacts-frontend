@@ -43,7 +43,7 @@ const Menu = ({ menus, page, global, first, festival }) => {
             </a>
             {global.attributes.festival_shown == true &&
               <div className="festival-menu">
-                <a href={'/'+ global.attributes.festival_slug} className="menu-link festival-link">
+                <a href={global.attributes.festival_slug.replace('https://sonicacts.com', '')} className="menu-link festival-link">
                   <>
                     {global.attributes.festival_title}
                     {festival &&

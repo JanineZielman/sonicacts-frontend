@@ -27,7 +27,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
                           {item.attributes.category?.data && 
                             <div className="category">
                               <a href={'/search/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.slug}
+                                {item.attributes.category?.data.attributes.title}
                               </a>
                               {item.attributes.authors?.data?.map((author, i) =>{
                                 return(
@@ -94,6 +94,10 @@ export async function getServerSideProps({params, preview = null}) {
   const agendaItems = await fetchAPI(`/agenda-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
 
   var mergedItems = itemsRel.data.concat(agendaItems.data)
+  
+  mergedItems.sort(function(a,b){
+    return new Date(b.attributes.date) - new Date(a.attributes.date);
+  });
 
   const [menusRes, globalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),

@@ -40,7 +40,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
             />
           </div>
           <div className="filter">
-            <Search params={'/biennial/biennial-2022/artists'}/>
+            <Search params={`biennial/${params.slug}/artists`}/>
           </div>
           <div className="discover-container">
             <InfiniteScroll

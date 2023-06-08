@@ -281,7 +281,7 @@ const Article = ({page, relations, discover, agenda}) => {
 										{discover?.[0] &&
 											discover.map((item, i) => {
 												return(
-													<a className="margin" key={`rel1-link${i}`} href={`/discover/${item.attributes.slug}`}><img class="arrow" src="/arrow.svg"/> {item.attributes.title}</a>
+													<a className="margin" key={`rel1-link${i}`} href={`/archive/${item.attributes.slug}`}><img class="arrow" src="/arrow.svg"/> {item.attributes.title}</a>
 												)
 											})
 										}
@@ -294,7 +294,7 @@ const Article = ({page, relations, discover, agenda}) => {
 										}
 										{relations?.attributes?.discover_items?.data.map((item, i ) => {
 											return(
-												<a className="margin" key={`dis-link${i}`} href={'/discover/'+item.attributes.slug}>
+												<a className="margin" key={`dis-link${i}`} href={'/archive/'+item.attributes.slug}>
 													<img className="arrow" src="/arrow.svg"/> {item.attributes.title}
 												</a>
 											)

@@ -148,7 +148,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                               {item.attributes.category?.data && 
                                 <div className="category">
                                   <a href={'/'+categories[index]+'/filter/'+item.attributes?.category?.data?.attributes.slug} key={'search'+i}>
-                                    {item.attributes.category?.data.attributes.slug}
+                                    {item.attributes.category?.data.attributes.title}
                                   </a>
                                 </div>
                               }
