@@ -8,7 +8,7 @@ export const getServerSideProps = async (ctx) => {
   let posts = await fetchAPI("/discover-items");
   // posts = await posts.json();
   const newsSitemaps = posts.data.map((item) => ({
-    loc: `${siteURL}/discover/${item.slug}`,
+    loc: `${siteURL}/archive/${item.slug}`,
     lastmod: new Date().toISOString(),
   }));
 
