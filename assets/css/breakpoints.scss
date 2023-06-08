@@ -503,6 +503,17 @@
 			}
 		}
 	}
+	.prefooter.prefooter-portal{
+		display: block;
+		.logos{
+			flex-wrap: wrap;
+			.logo{
+				img{
+					height: 35px;
+				}
+			}
+		}
+	}
 	.container {
 		padding: 14px 3vw;
 		margin-left: 0;

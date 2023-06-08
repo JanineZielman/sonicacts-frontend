@@ -184,6 +184,23 @@
 	}
 }
 
+.prefooter.prefooter-portal{
+	.logos{
+		.logo{
+			height: auto;
+			width: auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			img{
+				height: 50px;
+				width: auto;
+			}
+		}
+	}
+}
+
 .prefooter{
 	.text-block{
 		text-align: center;
@@ -199,7 +216,7 @@
 		align-items: center;
 		.logo{
 			width: 60px;
-			margin: 0px 36px 14px 0;
+			margin: 0px 18px 14px 18px;
 			img{
 				filter: grayscale(1);
 			}

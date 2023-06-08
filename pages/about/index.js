@@ -15,7 +15,7 @@ export async function getServerSideProps() {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/about?populate[content][populate]=*"),
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 

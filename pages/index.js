@@ -68,7 +68,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
               {socials.map((item, i) => {
                 return(
                   <a href={item.url} target="_blank" className='social'>
-                    <Image image={item.icon.data.attributes}/>
+                    <Image image={item.icon?.data.attributes}/>
                   </a>
                 )
               })}
@@ -278,8 +278,8 @@ export async function getServerSideProps() {
   // Run API calls in parallel
   const [homepageRes, globalRes, socialRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
     fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate=*"),
-    fetchAPI("/global", { populate: "*" }),
-    fetchAPI("/global?populate[socials][populate]=*"),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/news-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/agenda-items?filters[date][$gte]=${currentDate}&sort[0]=date&sort[1]=slug:ASC&populate=*`),
