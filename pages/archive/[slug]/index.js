@@ -6,7 +6,7 @@ import Moment from 'moment';
 import Image from "../../../components/image"
 
 const DiscoverItem = ({menus, page, global, relations, items}) => {
-  page.attributes.slug = 'discover'
+  page.attributes.slug = 'archive'
   return (   
     <Layout menus={menus} page={page} global={global} relations={relations}>
       <Article page={page} relations={relations} agenda={relations?.attributes?.agenda_items?.data}/>
