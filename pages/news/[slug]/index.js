@@ -6,7 +6,7 @@ const NewsItem = ({menus, page, global, relations}) => {
   page.attributes.slug = 'news'
   return (   
     <Layout menus={menus} page={page} global={global} relations={relations}>
-      <Article page={page} relations={relations}/>
+      <Article page={page} relations={relations} agenda={relations?.attributes?.agenda_items?.data}/>
     </Layout>
   )
 }

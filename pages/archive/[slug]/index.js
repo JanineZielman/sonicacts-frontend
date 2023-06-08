@@ -9,7 +9,7 @@ const DiscoverItem = ({menus, page, global, relations, items}) => {
   page.attributes.slug = 'discover'
   return (   
     <Layout menus={menus} page={page} global={global} relations={relations}>
-      <Article page={page} relations={relations}/>
+      <Article page={page} relations={relations} agenda={relations?.attributes?.agenda_items?.data}/>
       {items[0] &&
         <div className="discover">
           <div className="discover-container programme-container">
