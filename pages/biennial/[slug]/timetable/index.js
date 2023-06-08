@@ -213,7 +213,7 @@ export async function getServerSideProps({ params }) {
   // Run API calls in parallel
   const [festivalRes, globalRes, menusRes, timetableRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
 	  fetchAPI(`/timetable-news?filters[slug][$eq]=${params.slug}&populate[day][populate][programme][populate][programme][populate][main_programmes][populate]=*&populate[day][populate][programme][populate][location][populate]=*&populate[day][populate][location][populate][programme][populate][authors][populate]=*&populate[day][populate][programme][populate][sub_location][populate]=*&populate[day][populate][sub_locations][populate]=*`),
   ])

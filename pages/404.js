@@ -35,7 +35,7 @@ const FourOhFour = ({menus, global}) => {
 export async function getStaticProps() {
 
   const [globalRes, menusRes] = await Promise.all([
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 

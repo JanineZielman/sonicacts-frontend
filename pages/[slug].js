@@ -64,7 +64,7 @@ export async function getServerSideProps({ params }) {
   // const allPagesRes = await fetchAPI("/api/pages");
   const [allPagesRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/pages", { populate: "*" }),
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
   ])
 

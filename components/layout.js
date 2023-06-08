@@ -56,7 +56,7 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
       </>
     </section>
     <footer className="footer">
-      {festival && festival.attributes.prefooter &&
+      {festival && festival.attributes.prefooter ?
         <div className="prefooter">
           <div className="text-block medium">
             <p>{festival.attributes.prefooter.title}</p>
@@ -74,6 +74,21 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
             <ReactMarkdown 
               children={festival.attributes.prefooter.text} 
             />
+          </div>
+        </div>
+        :
+        <div className="prefooter">
+          <div className="text-block medium">
+            <p>{global.attributes.prefooter.title}</p>
+            <div className="logos">
+              {global.attributes.prefooter.logos.data.map((logo, i) => {
+                return(
+                  <div className="logo">
+                    <Image image={logo.attributes}/>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       }

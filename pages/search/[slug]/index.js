@@ -198,7 +198,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
 
 export async function getServerSideProps({params}) {
   const [globalRes, menusRes] = await Promise.all([
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 

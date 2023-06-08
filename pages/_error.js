@@ -31,7 +31,7 @@ const Error = ({menus, global}) => {
 export async function getServerSideProps() {
 
   const [globalRes, menusRes] = await Promise.all([
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
   ])
 

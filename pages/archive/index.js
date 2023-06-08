@@ -123,7 +123,7 @@ export async function getServerSideProps() {
   const [pageRes, categoryRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/discover-overview", { populate: "*" }),
     fetchAPI("/categories?sort[0]=order&filters[$or][0][sub_category][$null]=true&filters[$or][1][sub_category][$eq]=false&populate=*"),
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 

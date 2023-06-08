@@ -111,7 +111,7 @@ export async function getServerSideProps({params}) {
   const [festivalRes, pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate=*`),
 		fetchAPI("/community", { populate: "*" }),
-    fetchAPI("/global", { populate: "*" }),
+    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 
