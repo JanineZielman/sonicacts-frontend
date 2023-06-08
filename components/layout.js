@@ -77,7 +77,7 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
           </div>
         </div>
         :
-        <div className="prefooter">
+        <div className="prefooter prefooter-portal">
           <div className="text-block medium">
             <p>{global.attributes.prefooter.title}</p>
             <div className="logos">

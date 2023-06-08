@@ -184,6 +184,23 @@
 	}
 }
 
+.prefooter.prefooter-portal{
+	.logos{
+		.logo{
+			height: auto;
+			width: auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			img{
+				height: 50px;
+				width: auto;
+			}
+		}
+	}
+}
+
 .prefooter{
 	.text-block{
 		text-align: center;
