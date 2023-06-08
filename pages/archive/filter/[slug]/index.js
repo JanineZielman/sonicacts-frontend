@@ -45,10 +45,10 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
         </p>
         <div className="filter">
           <div><span>Filter by category</span></div>
-						<a key={'category-all'} href={`/discover`}>All</a>
+						<a key={'category-all'} href={`/archive`}>All</a>
 						{categories?.map((category, i) => {
 							return (
-								<a key={'category'+i} href={`/discover/filter/${category?.attributes.slug}`}
+								<a key={'category'+i} href={`/archive/filter/${category?.attributes.slug}`}
 									className={category?.attributes.slug == filter && 'active'}
 								>
 									{category?.attributes.slug}
