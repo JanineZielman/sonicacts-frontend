@@ -6,6 +6,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* eslint-disable-next-line */}
+          <link rel="canonical" href="https://sonicacts.com/" />
           <script
             async
             src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"
