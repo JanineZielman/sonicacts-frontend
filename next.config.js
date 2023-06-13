@@ -25,7 +25,9 @@ const nextConfig = {
       { source: "/2018/:path*", destination: "https://portal.sonicacts.com/2018/:path*", permanent: true },
 
       { source: "/biennial-2022", destination: "/biennial/biennial-2022", permanent: true },
-      { source: "/biennial2022", destination: "/biennial/biennial-2022", permanent: true }
+      { source: "/biennial2022", destination: "/biennial/biennial-2022", permanent: true },
+
+      { source: "/discover/:path*", destination: "/archive/:path*", permanent: true }
     ]
   },
 }
