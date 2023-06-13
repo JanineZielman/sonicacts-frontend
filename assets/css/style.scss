@@ -449,11 +449,12 @@ h2 {
         }
       }
     }
-    &.discover{
+    &.archive{
       .slider-item {
         .text {
           span {
-            font-weight: 200;
+            // font-weight: 200;
+            font-size: 21px;
           }
         }
       }
@@ -462,9 +463,10 @@ h2 {
       .slider-item {
         .text {
           span {
-            font-weight: 200;
+            // font-weight: 200;
             line-height: 1;
             margin-top: 5px;
+            font-size: 21px;
           }
         }
       }
