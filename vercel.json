@@ -1,7 +1,7 @@
 {
   "redirects": [		
-    { "source": "/portal", "destination": "https://portal.sonicacts.com/portal", "permanent": true },
-		{ "source": "/portal/:path*", "destination": "https://portal.sonicacts.com/portal/:path*", "permanent": true },
+    { "source": "/portal", "destination": "https://sonicacts.com/", "permanent": true },
+		{ "source": "/portal/:path*", "destination": "https://sonicacts.com/", "permanent": true },
 		{ "source": "/sashop", "destination": "https://shop.sonicacts.com/", "permanent": true },
 		{ "source": "/sashop/:path*", "destination": "https://shop.sonicacts.com/:path*", "permanent": true },
 		{ "source": "/darkecology", "destination": "https://portal.sonicacts.com/darkecology", "permanent": true },
