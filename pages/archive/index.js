@@ -87,11 +87,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                             </div>
                           }
                           <div className="title">{item.attributes.title}</div>
-                        </div>
-                        {/* <div className="title">
-                          {item.attributes.title}
-                        </div> */}
-                  
+                        </div>                  
                         <div className="tags">
                           {item.attributes.tags?.data && 
                             <>
