@@ -84,7 +84,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                       <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
                       <LazyLoad height={600}>
                         <Slider {...settings}>
-                          {items[i].slice(0, 3).map((item, i) => {
+                          {items[i].slice(0, 5).map((item, i) => {
                             return(
                               <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
                                 {item.attributes.cover_image?.data &&
