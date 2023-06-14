@@ -75,21 +75,19 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                           </div>
                         }
                         <div className="title-wrapper main-title-wrapper">
-                          <div className="authors">
-                            {item.attributes?.community_items?.data &&
-                              item.attributes.community_items.data.map((author, i) => {
-                                return( 
-                                  <div className="author">{author.attributes.name}</div>
-                                )
-                              })
-                            }
-                          </div>
+                          {item.attributes.hide_names == false &&
+                            <div className="authors">
+                              {item.attributes?.community_items?.data &&
+                                item.attributes.community_items.data.map((author, i) => {
+                                  return( 
+                                    <div className="author">{author.attributes.name}</div>
+                                  )
+                                })
+                              }
+                            </div>
+                          }
                           <div className="title">{item.attributes.title}</div>
-                        </div>
-                        {/* <div className="title">
-                          {item.attributes.title}
-                        </div> */}
-                  
+                        </div>                  
                         <div className="tags">
                           {item.attributes.tags?.data && 
                             <>
