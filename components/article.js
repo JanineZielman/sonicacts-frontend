@@ -24,19 +24,20 @@ const Article = ({page, relations, discover, agenda}) => {
   }, []);
 
   function toggleShow() {
-	var element = document.getElementById("maxLength");
-	var button = document.getElementById("show-button");
-	element.classList.toggle("show-more");
-	button.classList.toggle("show-more");
+		var element = document.getElementById("maxLength");
+		var button = document.getElementById("show-button");
+		element.classList.toggle("show-more");
+		button.classList.toggle("show-more");
   }
 
   function toggleShow2() {
-	var element = document.getElementById("maxLength2");
-	var button = document.getElementById("show-button2");
-	element.classList.toggle("show-more");
-	button.classList.toggle("show-more");
+		var element = document.getElementById("maxLength2");
+		var button = document.getElementById("show-button2");
+		element.classList.toggle("show-more");
+		button.classList.toggle("show-more");
   }
 
+	console.log(page)
 
   return (   
 		<section className="article">
@@ -69,7 +70,7 @@ const Article = ({page, relations, discover, agenda}) => {
 						<>
 						{page.attributes.content?.map((item, i) => {							
 							return (
-								<div key={`content${i}`} className={`${page.attributes.slug}-block`}>
+								<div key={`content${i}`} className={`${page.attributes.slug}-block ${item.__component.replace('basic.', '')}`}>
 									{item.image?.data &&
 										<LazyLoad height={600}>
 											{item.image_caption ?
