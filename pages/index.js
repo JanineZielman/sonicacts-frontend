@@ -264,15 +264,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
 
 export async function getServerSideProps() {
 
-  const totalCom = await fetchAPI( `/discover-items`);
-  const numberCom = totalCom.meta.pagination.total / 6;
-
   const currentDate = new Date(Date.now()).toISOString().split('T')[0].replace('///g', '-')
-
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max)) + 1;
-  }
-  const firstID = getRandomInt(numberCom);
 
   
   // Run API calls in parallel
@@ -284,7 +276,7 @@ export async function getServerSideProps() {
     fetchAPI("/news-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/agenda-items?filters[date][$gte]=${currentDate}&sort[0]=date&sort[1]=slug:ASC&populate=*`),
     fetchAPI("/discover-items?sort[0]=date%3Adesc&populate=*"),
-    fetchAPI(`/community-items?pagination[pageSize]=6&pagination[page]=${firstID}&populate=*`),
+    fetchAPI(`/community-items?sort[0]=id%3Adesc&pagination[pageSize]=6&populate=*`),
     fetchAPI("/about", { populate: "*" }),
   ])
 

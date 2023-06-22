@@ -77,7 +77,9 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                     <>
                                       {sub.filter(el2 => el2.attributes.locations.data[0]?.attributes.title === `${loc}`).map((item, i) => {
                                         let allDates = [];
+                                        let repeatedEvent = 0;
                                         for (let j = 0; j < item.attributes.WhenWhere?.length; j++) {
+                                          repeatedEvent = j;
                                           for (let k = 0; k < item.attributes.WhenWhere[j]?.dates.length; k++) {
                                             allDates.push(item.attributes.WhenWhere[j]?.dates[k].start_date);
                                           }
@@ -99,7 +101,7 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
                                                       {item.attributes.WhenWhere[0]?.times[0] && 
                                                         <>
                                                           <div className="times">
-                                                            {item.attributes.WhenWhere[0]?.times.map((time, j) => {
+                                                            {item.attributes.WhenWhere[repeatedEvent]?.times.map((time, j) => {
                                                               return(
                                                                 <div className="time">
                                                                   <span>{time.start_time} {time.end_time && `— ${time.end_time}`}</span>
