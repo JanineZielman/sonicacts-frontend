@@ -48,6 +48,9 @@
       }
       .community-block {
         width: auto;
+        &.embed{
+          width: 100%;
+        }
         display: inline-block;
         .text-block.big{
           width: 750px;
