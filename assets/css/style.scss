@@ -422,6 +422,15 @@ h2 {
 
 .home-menu, .feshome-menu {
   width: calc(100% - 470px);
+  .index-authors{
+    line-height: 1.1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    font-weight: 200;
+    letter-spacing: initial;
+  }
   .collapsible {
     padding: 14px 0;
     border-bottom: 2px solid #000;
