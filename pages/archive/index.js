@@ -27,6 +27,8 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
+  console.log(items)
+
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
@@ -67,11 +69,13 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                             <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
                               {item.attributes.category?.data.attributes.title}
                             </a>
-                            {item.attributes.author?.data && 
-                              <a className="author" href={'/community/'+item.attributes.author?.data?.attributes.slug} key={'discover'+i}>
-                                • {item.attributes.author?.data?.attributes.name}
-                              </a>
-                            }
+                            {item.attributes.authors?.data.map((author, i) =>{
+                              return(
+                                <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                                  {author.attributes.name}
+                                </a>
+                              )
+                            })}
                           </div>
                         }
                         <div className="title-wrapper main-title-wrapper">

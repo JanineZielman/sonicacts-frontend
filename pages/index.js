@@ -29,6 +29,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     autoplaySpeed: 4000
   };
 
+  console.log(items)
+
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
@@ -137,6 +139,17 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                                         </span>
                                         }
                                       </>
+                                    }
+                                    {item.attributes.hide_names == false &&
+                                      <h2 className="authors index-authors">
+                                        {item.attributes?.community_items?.data &&
+                                          item.attributes.community_items.data.map((author, i) => {
+                                            return( 
+                                              <div className="author">{author.attributes.name}</div>
+                                            )
+                                          })
+                                        }
+                                      </h2>
                                     }
                                     {item.attributes.title &&
                                       <h2>{item.attributes.title}</h2>
