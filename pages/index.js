@@ -12,10 +12,11 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     dots: false,
     arrows: true,
     infinite: true,
-    speed: 500,
+    speed: 700,
     slidesToScroll: 1,
     variableWidth: true,
     adaptiveHeight: true,
+    autoplay: true,
     autoplaySpeed: 4000
   };
 
@@ -23,13 +24,12 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     dots: false,
     arrows: true,
     infinite: true,
-    speed: 500,
+    speed: 700,
     slidesToScroll: 1,
     variableWidth: true,
+    autoplay: true,
     autoplaySpeed: 4000
   };
-
-  console.log(items)
 
   return (
     <Layout page={homepage} menus={menus} global={global}>
