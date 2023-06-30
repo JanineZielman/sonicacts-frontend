@@ -196,6 +196,9 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                             {item.title &&
                               <h2>{item.title}</h2>
                             }
+                            {item.info &&
+                              <div className="tags">{item.info}</div>
+                            }
                           </div>
                         </div>
                       </a>       
