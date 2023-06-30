@@ -32,11 +32,12 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">
-        <p className="wrapper">
+        <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+        <div className="wrapper intro">
           <ReactMarkdown 
-            children={page?.attributes.intro} 
+            children={page.attributes.introTextSmall} 
           />
-        </p>
+        </div>
         <div className="filter">
           <div><span>Filter by category</span></div>
           	<a className="active" key={'category-all'} href={`/archive`}>All</a>
