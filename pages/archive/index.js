@@ -43,7 +43,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
           	<a className="active" key={'category-all'} href={`/archive`}>All</a>
             {categories?.map((category, i) => {
               return (
-                <a key={'category'+i} href={`/archive/filter/${category?.attributes.slug}`}>{category?.attributes.slug}</a>
+                <a key={'category'+i} href={`/archive/filter/${category?.attributes.slug}`}>{category?.attributes.title}</a>
               )
             })}
         </div>

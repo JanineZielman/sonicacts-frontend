@@ -51,7 +51,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
 								<a key={'category'+i} href={`/archive/filter/${category?.attributes.slug}`}
 									className={category?.attributes.slug == filter && 'active'}
 								>
-									{category?.attributes.slug}
+									{category?.attributes.title}
 								</a>
 							)
 						})}
