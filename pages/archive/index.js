@@ -27,8 +27,6 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
-  console.log(items)
-
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover">

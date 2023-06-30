@@ -37,8 +37,6 @@ const Article = ({page, relations, discover, agenda}) => {
 		button.classList.toggle("show-more");
   }
 
-	console.log(page)
-
   return (   
 		<section className="article">
 			<>
