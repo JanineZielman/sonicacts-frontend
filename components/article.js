@@ -172,14 +172,14 @@ const Article = ({page, relations, discover, agenda}) => {
 																		{(Moment(relations?.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
 																			<>
 																				{(Moment(relations?.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
-																					<>{Moment(relations?.attributes.date).format('D')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+																					<>{Moment(relations?.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
 																				:
-																					<>{Moment(relations?.attributes.date).format('D MMM')} &nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+																					<>{Moment(relations?.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
 																				}
 																			</>
 																			:
 																			<>
-																				{Moment(relations?.attributes.date).format('D MMM y')} &nbsp;– {Moment(date.end_date).format('D MMM y')}
+																				{Moment(relations?.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
 																			</>
 																		}
 																	</>
