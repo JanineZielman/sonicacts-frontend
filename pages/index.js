@@ -84,89 +84,87 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                   <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                     <div>
                       <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
-                      <LazyLoad height={600}>
-                        <Slider {...settings}>
-                          {items[i].slice(0, 5).map((item, i) => {
-                            return(
-                              <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
-                                {item.attributes.cover_image?.data &&
-                                  <div className="image">
-                                    <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
-                                  </div>
-                                }
-                                <div className="text">
-                                  <div>
-                                    {item.attributes.category?.data &&
-                                      <span className="category">{item.attributes.category.data.attributes.title}</span>
-                                    }
-                                    {item.attributes.date && page.attributes.slug != 'discover' &&
-                                      <>
-                                        {item.attributes.dates?.[0] ?
-                                          <span>
-                                            {item.attributes.dates.map((date, i) => {
-                                              return(
-                                                <span className={`date ${i}`} key={`dates-${i}`}>
-                                                  {date.single_date &&
-                                                    <>
-                                                    {i == 0 && Moment(item.attributes.date).format('D MMM y')}
-                                                    , {Moment(date.single_date).format('D MMM y')}
-                                                    </>
-                                                  }
-                                                  {date.end_date &&
-                                                    <>
-                                                      {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
-                                                        <>
-                                                          {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
-                                                            <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                          :
-                                                            <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                          }
-                                                        </>
-                                                        :
-                                                        <>
-                                                          {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
-                                                        </>
-                                                      }
-                                                    </>
-                                                  }
-                                                </span>
-                                              )
-                                            })}
-                                          </span>
-                                        : 
-                                        <span>
-                                          {Moment(item.attributes.date).format('D MMM y')}
-                                        </span>
-                                        }
-                                      </>
-                                    }
-                                    {item.attributes.hide_names == false &&
-                                      <h2 className="authors index-authors">
-                                        {item.attributes?.community_items?.data &&
-                                          item.attributes.community_items.data.map((author, i) => {
-                                            return( 
-                                              <div className="author">{author.attributes.name}</div>
-                                            )
-                                          })
-                                        }
-                                      </h2>
-                                    }
-                                    {item.attributes.title &&
-                                      <h2>{item.attributes.title}</h2>
-                                    }
-                                  </div>
-                                  {item.attributes.name &&
-                                  <h2>{item.attributes.name}</h2>
+                      <Slider {...settings}>
+                        {items[i].slice(0, 5).map((item, i) => {
+                          return(
+                            <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
+                              {item.attributes.cover_image?.data &&
+                                <div className="image">
+                                  <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                                </div>
+                              }
+                              <div className="text">
+                                <div>
+                                  {item.attributes.category?.data &&
+                                    <span className="category">{item.attributes.category.data.attributes.title}</span>
                                   }
-                                  {item.attributes.job_description &&
-                                    <span> {item.attributes.job_description}</span>
+                                  {item.attributes.date && page.attributes.slug != 'discover' &&
+                                    <>
+                                      {item.attributes.dates?.[0] ?
+                                        <span>
+                                          {item.attributes.dates.map((date, i) => {
+                                            return(
+                                              <span className={`date ${i}`} key={`dates-${i}`}>
+                                                {date.single_date &&
+                                                  <>
+                                                  {i == 0 && Moment(item.attributes.date).format('D MMM y')}
+                                                  , {Moment(date.single_date).format('D MMM y')}
+                                                  </>
+                                                }
+                                                {date.end_date &&
+                                                  <>
+                                                    {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+                                                      <>
+                                                        {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+                                                          <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                        :
+                                                          <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                        }
+                                                      </>
+                                                      :
+                                                      <>
+                                                        {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
+                                                      </>
+                                                    }
+                                                  </>
+                                                }
+                                              </span>
+                                            )
+                                          })}
+                                        </span>
+                                      : 
+                                      <span>
+                                        {Moment(item.attributes.date).format('D MMM y')}
+                                      </span>
+                                      }
+                                    </>
+                                  }
+                                  {item.attributes.hide_names == false &&
+                                    <h2 className="authors index-authors">
+                                      {item.attributes?.community_items?.data &&
+                                        item.attributes.community_items.data.map((author, i) => {
+                                          return( 
+                                            <div className="author">{author.attributes.name}</div>
+                                          )
+                                        })
+                                      }
+                                    </h2>
+                                  }
+                                  {item.attributes.title &&
+                                    <h2>{item.attributes.title}</h2>
                                   }
                                 </div>
-                              </a>       
-                            )
-                          })}
-                        </Slider>
-                      </LazyLoad>
+                                {item.attributes.name &&
+                                <h2>{item.attributes.name}</h2>
+                                }
+                                {item.attributes.job_description &&
+                                  <span> {item.attributes.job_description}</span>
+                                }
+                              </div>
+                            </a>       
+                          )
+                        })}
+                      </Slider>
                     </div>
                     
                   </div>
