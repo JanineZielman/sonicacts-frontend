@@ -116,7 +116,6 @@ html {
 
 .columns .highlight .socials{
   margin-left: 24px;
-  margin-top: 24px;
   border-top: 2px solid #000;
   width: 100%;
   .social {
@@ -326,11 +325,19 @@ h2 {
     width: 360px;
     display: flex;
     flex-direction: column;
+    .newsletter{
+      margin-top: 24px;
+      margin-bottom: 10px;
+      h3{
+        font-size: 24px;
+        font-weight: 300;
+      }
+    }
     .highlight-image div{
       border-radius: 50%;
       width: 360px;
       height: 360px;
-      margin: 0px 20px 20px 10px!important;
+      margin: 0px 20px 0px 10px!important;
       mask-image: url('../noise5.png');
       mask-size: cover;
       mask-repeat: no-repeat;
@@ -430,6 +437,9 @@ h2 {
     -webkit-box-orient: vertical;
     font-weight: 200;
     letter-spacing: 1.2px;
+    .author{
+      display: inline-block!important;
+    }
   }
   .collapsible {
     padding: 14px 0;
