@@ -67,7 +67,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
               <h3>{homepage.attributes.highlight_text}</h3>
             </a>
             <div className="newsletter">
-              <a href="#"><h3>Newsletter</h3></a>
+              {/* <a href="#"><h3>Newsletter</h3></a> */}
             </div>
             <div className='socials'>
               {socials.map((item, i) => {
