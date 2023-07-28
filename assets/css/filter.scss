@@ -245,7 +245,7 @@
   &.by-line{
     &:nth-child(2){
       &:before {
-        content: ", By "
+        content: ", with "
       }
     }
   }
