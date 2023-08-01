@@ -53,6 +53,13 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
                 $containsi: search,
               },
             },
+          },
+          {
+            tags: {
+              slug: {
+                $containsi: search,
+              },
+            },
           }
         ],
       },
@@ -223,6 +230,13 @@ export async function getServerSideProps({params}) {
             },
           },
         },
+        {
+          tags: {
+            slug: {
+              $containsi: params.slug,
+            },
+          },
+        }
       ],
     },
   }, {
