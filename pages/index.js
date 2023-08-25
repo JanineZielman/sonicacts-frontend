@@ -55,7 +55,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
             <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
           </svg>
         </div>
-        {/* <NewsletterSubscribe/> */}
+        <NewsletterSubscribe/>
       </Modal>
       <div className="columns">
         <div className="wrapper-medium">
