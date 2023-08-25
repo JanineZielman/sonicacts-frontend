@@ -5,6 +5,9 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
 import LazyLoad from 'react-lazyload';
+import NewsletterSubscribe from "../components/NewsletterSubscribe";
+import React, {useState} from "react";
+import Modal from 'react-modal';
 
 
 const Home = ({ homepage, menus, global, socials, items, about}) => {
@@ -31,8 +34,29 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     autoplaySpeed: 4000
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const modalStyles = {
+    overlay: {
+      backgroundColor: 'transparent',
+    },
+  };
+
   return (
     <Layout page={homepage} menus={menus} global={global}>
+
+      <Modal  isOpen={show} onHide={handleClose} className={`mail-modal`} ariaHideApp={false} closeTimeoutMS={500} style={modalStyles}>
+        <div onClick={handleClose} className="close">
+          <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+            <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
+          </svg>
+        </div>
+        <NewsletterSubscribe/>
+      </Modal>
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image logo">
@@ -67,7 +91,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
               <h3>{homepage.attributes.highlight_text}</h3>
             </a>
             <div className="newsletter">
-              {/* <a href="#"><h3>Newsletter</h3></a> */}
+              <div onClick={handleShow}><h3>Newsletter</h3></div>
             </div>
             <div className='socials'>
               {socials.map((item, i) => {
