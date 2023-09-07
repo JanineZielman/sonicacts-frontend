@@ -34,8 +34,6 @@
   font-weight: 100;
 }
 
-
-
 body,
 html {
   font-family: "SuisseIntl";
@@ -980,13 +978,16 @@ p img{
   width: 100px;
 }
 
-	// .menu .menu-wrapper{
-	// 	.breadcrumbs{
-	// 		a{
-	// 			max-width: 500px;
-  //       overflow: hidden;
-  //       white-space: nowrap;
-  //       text-overflow: ellipsis;
-	// 		}
-	// 	}
-	// }
+.article .sidebar .image-item-sidebar{
+  img{
+    width: 100%;
+    height: auto;
+  }
+  .caption{
+    margin-top: 0;
+    display: block;
+    font-size: 14px;
+    font-weight: 100;
+    margin-bottom: 24px;
+  }
+}
