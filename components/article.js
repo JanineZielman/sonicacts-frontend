@@ -54,7 +54,13 @@ const Article = ({page, relations, discover, agenda}) => {
 									}
 							</div>
 						}
-						<h1>{page.attributes.title} {page.attributes.additional_info && page.attributes.additional_info}</h1>
+						<h1>{page.attributes.title}
+							{page.attributes.additional_info && 
+								<>
+									<br/>	{page.attributes.additional_info}
+								</>
+							}
+						</h1>
 					</div>
 				}
 				{page.attributes.name &&
@@ -228,22 +234,6 @@ const Article = ({page, relations, discover, agenda}) => {
 							</>
 						}
 
-						{relations?.attributes?.authors?.data[0] &&
-							<div>
-								{relations?.attributes.authors.data.length == 1 ?
-									<span>Author</span>
-								: <span>Authors</span>
-								}
-								{relations?.attributes?.authors.data.map((item, i) => {
-									return (
-										<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
-											{item.attributes.name}
-										</a>
-									)
-								})}
-							</div>
-						}
-						
 						{relations?.attributes?.community_items?.data[0] &&
 							<div>
 								<span>Community</span>
@@ -259,6 +249,22 @@ const Article = ({page, relations, discover, agenda}) => {
 								{relations?.attributes?.community_items?.data.length > 20 &&
 									<div className="show-all-button" onClick={toggleShow} id="show-button"></div>
 								}
+							</div>
+						}
+
+						{relations?.attributes?.authors?.data[0] &&
+							<div>
+								{relations?.attributes.authors.data.length == 1 ?
+									<span>Author</span>
+								: <span>Authors</span>
+								}
+								{relations?.attributes?.authors.data.map((item, i) => {
+									return (
+										<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
+											{item.attributes.name}
+										</a>
+									)
+								})}
 							</div>
 						}
 						
