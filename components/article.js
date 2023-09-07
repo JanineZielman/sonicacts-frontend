@@ -150,7 +150,7 @@ const Article = ({page, relations, discover, agenda}) => {
 							</>
 						}
 
-						{page.attributes.slug == 'about' &&
+						{page.attributes.slug == 'about' && page.attributes.contact_adres &&
 							<div className="contact">
 								<h2>{page.attributes.contact_adres}</h2>
 								<p>{page.attributes.contact_info}</p>
