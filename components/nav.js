@@ -46,7 +46,7 @@ const Nav = ({ menus, global, page, festival }) => {
             <></>
           : 
             <a href={'/' + page?.attributes?.slug}>
-              {last?.replace('-', ' ')}
+              {last?.replace('-', ' ').replace('-', ' ')}
             </a>
           }
           {festival?.attributes?.highlight &&
