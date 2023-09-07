@@ -24,6 +24,20 @@
 			}
 		}
 	}
+	.menu .menu-wrapper{
+		.breadcrumbs{
+			a{
+				font-size: 50px;
+				margin-top: 1px;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.top-search{
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 1100px) {
@@ -36,18 +50,18 @@
 	.biennial-article{
 		margin-top: 80px;
 	}
-	.top-search {
-		justify-content: flex-start;
-		.note{
-			margin-top: 0px;
-			margin-left: 0;
-			margin-right: auto;
-		}
-		.search-bar{
-			margin-top: -25px;
-			margin-left: 0;
-		}
-	}
+	// .top-search {
+	// 	justify-content: flex-start;
+	// 	.note{
+	// 		margin-top: 0px;
+	// 		margin-left: 0;
+	// 		margin-right: auto;
+	// 	}
+	// 	.search-bar{
+	// 		margin-top: -25px;
+	// 		margin-left: 0;
+	// 	}
+	// }
 	.article .sidenote {
 		position: relative;
 		width: 100%;
@@ -256,11 +270,11 @@
 		font-size: 90px;
 	}
 	
-	.top-search {
-		height: 50px;
-		display: flex;
-		align-items: center;
-	}
+	// .top-search {
+	// 	height: 50px;
+	// 	display: flex;
+	// 	align-items: center;
+	// }
 	
 	.logo .s2 {
 		top: 120px;
