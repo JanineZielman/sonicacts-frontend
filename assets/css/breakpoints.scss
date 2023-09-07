@@ -68,6 +68,9 @@
 		left: 0;
 		margin: 0;
 	}
+	.article .wrapper.about{
+		width: 100%;
+	}
 	.community .slick-slider .slick-slide{
 		.slider-item {
 			display: flex;
@@ -151,6 +154,9 @@
 	}
 	.article .content {
 		flex-direction: column-reverse;
+	}
+	.about-page .article .content {
+		flex-direction: column;
 	}
 	.article .text-block{
 		width: 100%;

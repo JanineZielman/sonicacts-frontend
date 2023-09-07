@@ -6,7 +6,9 @@ import { fetchAPI } from "../../lib/api"
 const About = ({ menus, global, page }) => {
   return (
     <Layout page={page} menus={menus} global={global}>
-      <Article page={page}/>
+      <div className="about-page">
+        <Article page={page}/>
+      </div>
     </Layout>
   )
 }
@@ -14,7 +16,7 @@ const About = ({ menus, global, page }) => {
 export async function getServerSideProps() {
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/about?populate[content][populate]=*"),
+    fetchAPI("/about?populate[content][populate]=*&populate[images][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])

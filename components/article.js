@@ -6,6 +6,7 @@ import LazyLoad from 'react-lazyload';
 import Collapsible from "./collapsible";
 
 const Article = ({page, relations, discover, agenda}) => {
+	console.log(page)
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
@@ -128,6 +129,18 @@ const Article = ({page, relations, discover, agenda}) => {
 						</>
 					</div>
 					<div className={`sidebar ${page.attributes.slug}`}>
+
+					{page.attributes.images.data.map((item, i) => {
+            return(
+              <div className="image-item-sidebar">
+                <Image image={item.attributes}/>
+                <span className="caption">
+                  {item.attributes.caption}
+                </span>
+              </div>
+            )
+          })}
+
 						{page.attributes.slug == 'news' &&
 							<>
 							{page.attributes.date ?
