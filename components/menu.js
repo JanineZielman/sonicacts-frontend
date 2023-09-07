@@ -1,4 +1,4 @@
-import React,  { useState } from "react"
+import React,  { useState, useEffect } from "react"
 import { CSSTransition } from 'react-transition-group';
 import Modal from 'react-modal';
 import Search from '../components/search'
@@ -15,6 +15,11 @@ const Menu = ({ menus, page, global, first, festival }) => {
       backgroundColor: 'transparent',
     },
   };
+  
+  useEffect(() => {
+    menus.sort(function(a, b){return a.attributes.order-b.attributes.order})
+  }, [])
+
 
   return (
     <>
@@ -63,7 +68,7 @@ const Menu = ({ menus, page, global, first, festival }) => {
                 page.attributes.slug != 'shop' ?
 
                 <a href={'/'+page.attributes.slug} key={'link'+i} className="menu-link">
-                  {page.attributes.slug}
+                  {page.attributes.slug.replace('-', ' ').replace('-', ' ')}
                 </a>
                 :
                 <a href={'https://sonicacts.com/sashop/'} key={'link'+i} className="menu-link" target={'_blank'}>
