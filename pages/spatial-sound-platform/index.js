@@ -41,6 +41,9 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
             return(
               <div className="image-item">
                 <Image image={item.attributes}/>
+                <span className="caption">
+                  {item.attributes.caption}
+                </span>
               </div>
             )
           })}
