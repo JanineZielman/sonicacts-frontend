@@ -35,7 +35,7 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
           />
         </div>
         <div className="images-grid">
-          {page.attributes.images.data.map((item, i) => {
+          {page.attributes.images?.data.map((item, i) => {
             return(
               <div className="image-item">
                 <Image image={item.attributes}/>
