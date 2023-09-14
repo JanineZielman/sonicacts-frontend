@@ -104,7 +104,8 @@ const CommunityItem = ({params, page, global, relations, menus, programmes, fest
   )
 }
 
-export async function getServerSideProps({params, preview = null}) {
+export async function getServerSideProps({params, query}) {
+  const preview = query.preview
   const pageRes = 
     await fetchAPI( `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );

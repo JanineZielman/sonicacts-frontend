@@ -11,7 +11,8 @@ const AgendaItem = ({menus, page, global, relations}) => {
   )
 }
 
-export async function getServerSideProps({ params,  preview = null}) {
+export async function getServerSideProps({ params,  query}) {
+  const preview = query.preview
 	const pageRes = 
     await fetchAPI( `/agenda-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );

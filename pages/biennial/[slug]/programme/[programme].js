@@ -237,7 +237,8 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
 }
 
 
-export async function getServerSideProps({params, preview = null}) {
+export async function getServerSideProps({params, query}) {
+  const preview = query.preview
   const pageRes = 
     await fetchAPI( `/programmes?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );

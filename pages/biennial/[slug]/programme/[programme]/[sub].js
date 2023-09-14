@@ -123,7 +123,8 @@ const SubProgrammeItem = ({menus, page, global, relations, params, festival, sub
 }
 
 
-export async function getServerSideProps({params, preview = null}) {
+export async function getServerSideProps({params, query}) {
+  const preview = query.preview
   const pageRes = 
     await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );

@@ -72,8 +72,8 @@ const SpatialItem = ({menus, page, global, relations, items}) => {
 }
 
 
-export async function getServerSideProps({params, preview = null}) {
-
+export async function getServerSideProps({params, query}) {
+  const preview = query.preview
   const pageRes = 
     await fetchAPI( `/spatial-sound-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
