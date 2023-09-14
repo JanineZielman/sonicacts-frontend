@@ -6,7 +6,6 @@ import LazyLoad from 'react-lazyload';
 import Collapsible from "./collapsible";
 
 const Article = ({page, relations, discover, agenda}) => {
-	console.log(page)
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 
