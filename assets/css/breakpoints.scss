@@ -588,14 +588,14 @@
 }
 
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 900px) and (max-width: 1600px) {
 	html{
-		zoom: 0.8;
+		zoom: 0.7;
 	}
 	.container{
-		min-height: 125vh;
+		min-height: 145vh;
 	}
 	.menu-modal, .full-iframe, .full-iframe div{
-		height: 125vh;
+		height: 145vh;
 	}
 }
