@@ -1327,3 +1327,11 @@
 		}
 	}
 }
+
+.festival-home, .festival-wrapper{
+	zoom: 1.2;
+	.container{
+		height: 100%;
+		overflow-y: visible;
+	}
+}

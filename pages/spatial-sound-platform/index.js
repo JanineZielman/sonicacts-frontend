@@ -125,7 +125,7 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
 
 export async function getServerSideProps() {
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/spatial-sound-overview", { populate: "*" }),
+    fetchAPI("/spatial-sound-overview?populate[images][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
