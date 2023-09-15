@@ -215,12 +215,12 @@ export async function getServerSideProps({params}) {
       $or: [
         {
           slug: {
-            $containsi: params.slug,
+            $containsi: params.slug.replace(' ', '-'),
           },
         },
         {
           title: {
-            $containsi: params.slug,
+            $containsi: params.slug.replace(' ', '-'),
           },
         },
         {
@@ -248,12 +248,12 @@ export async function getServerSideProps({params}) {
       $or: [
         {
           slug: {
-            $containsi: params.slug,
+            $containsi: params.slug.replace(' ', '-'),
           },
         },
         {
           title: {
-            $containsi: params.slug,
+            $containsi: params.slug.replace(' ', '-'),
           },
         },
         {
@@ -273,7 +273,7 @@ export async function getServerSideProps({params}) {
   const news = await fetchAPI(`/news-items?${query}&populate=*`);
   const agenda = await fetchAPI(`/agenda-items?${query}&populate=*`);
   const programme = await fetchAPI(`/programmes?${query2}&populate=*`);
-  const community = await fetchAPI(`/community-items?filters[slug][$contains]=${params.slug}&populate=*`);
+  const community = await fetchAPI(`/community-items?filters[slug][$contains]=${params.slug.replace(' ', '-')}&populate=*`);
 
 
   const discoverAmount = discover.meta.pagination.total;
@@ -288,7 +288,7 @@ export async function getServerSideProps({params}) {
 
   return {
     props: {
-      search: params.slug,
+      search: params.slug.replace(' ', '-'),
       items: {
         discover: discover.data,
         news: news.data,
