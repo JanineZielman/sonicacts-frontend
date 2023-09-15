@@ -54,7 +54,7 @@
         display: inline-block;
         .text-block.big{
           width: 750px;
-          max-width: 40vw;
+          max-width: 100%;
           margin-left: 36px;
         }
       }
@@ -92,7 +92,7 @@
     position: absolute;
     left: calc(100% + 24px);
     width: 100%;
-    max-width: 20vw;
+    max-width: 20%;
     a{
       font-size: inherit;
     }
@@ -189,8 +189,8 @@
     font-size: 30px;
     line-height: 1;
     width: 100%;
-    min-width: 20vw;
-    max-width: 25vw;
+    min-width: 20%;
+    max-width: 25%;
     position: relative;
     margin-right: 24px;
     &.about{
@@ -251,7 +251,7 @@
       }
     }
     .links {
-      max-width: 300px;
+      // max-width: 300px;
       font-size: 14px;
       line-height: 1.2;
       p{

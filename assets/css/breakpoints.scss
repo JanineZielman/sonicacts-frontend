@@ -108,7 +108,7 @@
 			.slider-item{
 				flex-direction: column;
 				align-items: flex-start;
-				max-width: calc(100vw - 500px) !important;
+				max-width: calc(100% - 500px) !important;
 				.show-more {
 					padding: 0;
 					margin: 0;
@@ -145,7 +145,7 @@
 	}
 	.contact .slick-slider {
 		.slick-slide {
-			max-width: calc(100vw - 500px) !important;
+			max-width: calc(100% - 500px) !important;
 		}
 	}
 	.article .wrapper{
@@ -450,17 +450,17 @@
 		.discover-container {
 			position: relative;
 			overflow-x: hidden;
-			width: 98vw;
+			width: 98%;
 			justify-content: center;
 
 			.infinite-scroll-component__outerdiv {
 				position: relative;
-				width: 98vw;
+				width: 98%;
 			}
 
 			.infinite-scroll-component {
 				position: relative;
-				// width: 98vw;
+				// width: 98%;
 			}
 
 			.discover-item {
@@ -489,7 +489,7 @@
 		.slick-slide {
 			.slider-item {
 				width: 94vw !important;
-				max-width: 94vw !important;
+				max-width: 94vw!important;
 
 				.show-more {
 					width: 94vw;
@@ -558,7 +558,7 @@
 	.container {
 		padding: 14px 3vw;
 		margin-left: 0;
-		width: 95vw;
+		width: 100%;
 	}
 	.article .text-block p{
 		padding-right: 0;
@@ -571,9 +571,9 @@
 		padding-left: 0;
 	}
 	.discover .discover-container{
-		width: 94vw;
+		width: 100%;
 		.infinite-scroll-component__outerdiv{
-			width: 94vw;
+			width: 100%;
 		}
 	}
 	.article .text-block.big p{
@@ -584,5 +584,18 @@
 	}
 	.content.padding{
 		padding-top: 10px;
+	}
+}
+
+
+@media only screen and (min-width: 900px) {
+	html{
+		zoom: 0.8;
+	}
+	.container{
+		min-height: 125vh;
+	}
+	.menu-modal, .full-iframe, .full-iframe div{
+		height: 125vh;
 	}
 }

@@ -48,8 +48,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   // position: absolute;
 }
 
@@ -267,10 +267,11 @@ a {
 .container {
   padding: 14px 1vw;
   min-height: 100vh;
-  width: 98vw;
+  width: 100%;
   position: relative;
   margin-left: 0;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 h1,
@@ -540,14 +541,16 @@ h2 {
   margin: -14px 0 0 0;
   padding: 0;
   height: 80px;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  box-sizing: border-box;
   .menu-wrapper {
     z-index: 888;
     background-color: #e6e6e6;
     position: fixed;
     top: 0;
-    width: 98vw;
+    width: calc(100% - 2vw);
     left: 1vw;
     display: flex;
     justify-content: space-between;
@@ -592,7 +595,7 @@ h2 {
   height: 100vh;
   top: 0;
   right: 0;
-  width: 100vw;
+  width: 100%;
   // max-width: 1400px;
   background-color: #e6e6e6;
   background: url(../noise-bg5-portal.png);
@@ -671,7 +674,7 @@ h2 {
 }
 
 .footer{
-  width: 98vw;
+  width: 98%;
   margin-top: 40px;
   padding: 14px 1vw;
   text-align: center;
@@ -742,7 +745,7 @@ h2 {
 
 .full-iframe{
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
@@ -752,7 +755,7 @@ h2 {
   div{
     padding: 0!important;
     position: fixed!important;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     top: 0;
     left: 0;
@@ -777,7 +780,7 @@ h2 {
   // display: none;
   
   height: 25px;
-  width: 100vw;
+  width: 100%;
   background-color: black;
   position: fixed;
   top: 0;
@@ -916,7 +919,7 @@ h2 {
 }
 .newsletter-subscribe{
   padding: 24px;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   background-color: white;
   left: 0;
