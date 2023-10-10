@@ -15,7 +15,7 @@ class MyDocument extends Document {
           <script async src="//npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"/>
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-7W61454VLF"
+            src="https://www.googletagmanager.com/gtag/js?id=G-230S6R5HLT"
           />
           <script
             dangerouslySetInnerHTML={{
@@ -23,7 +23,7 @@ class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', 'G-7W61454VLF', { 'anonymize_ip': true });
+                gtag('config', 'G-230S6R5HLT', { 'anonymize_ip': true });
               `,
             }}
           />
