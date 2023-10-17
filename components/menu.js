@@ -48,19 +48,20 @@ const Menu = ({ menus, page, global, first, festival }) => {
             </a>
             {global.attributes.festival_shown == true &&
               <div className="festival-menu">
-                <a href={global.attributes.festival_slug.replace('https://sonicacts.com', '')} className="menu-link festival-link">
-                  <>
+                {festival ?
+                  <a href={`/biennial/${festival.attributes.slug}`} className="menu-link festival-link">
+                    {festival.attributes.slug.replace('-', ' ')}
+                    <div className="festival-sub">
+                      <ReactMarkdown 
+                        children={festival.attributes.links} 
+                      />
+                    </div>
+                  </a>
+                :
+                  <a href={global.attributes.festival_slug.replace('https://sonicacts.com', '')} className="menu-link festival-link">
                     {global.attributes.festival_title}
-                    {festival &&
-                      <div className="festival-sub">
-                        <ReactMarkdown 
-                          children={festival.attributes.links} 
-                        />
-                      </div>
-                    }
-                  </>
-                </a>
-                
+                  </a>
+                }
               </div>
             }
             {menus.map((page, i) => {
