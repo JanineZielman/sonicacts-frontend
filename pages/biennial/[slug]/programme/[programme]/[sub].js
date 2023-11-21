@@ -126,15 +126,15 @@ const SubProgrammeItem = ({menus, page, global, relations, params, festival, sub
 export async function getServerSideProps({params, query}) {
   const preview = query.preview
   const pageRes = 
-    await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+    await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}&filters[biennials][slug][$ne]=biennial-2024${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
   const pageRel = 
-    await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programmes][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
+    await fetchAPI( `/programmes?filters[slug][$eq]=${params.sub}&filters[biennials][slug][$ne]=biennial-2024${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programmes][populate]=*&populate[locations][populate]=*&populate[sub_programmes][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[authors][populate]=*&populate[community_items][populate]=*`
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.sub}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[biennials][slug][$ne]=biennial-2024&filters[main_programmes][slug][$eq]=${params.sub}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
   
 

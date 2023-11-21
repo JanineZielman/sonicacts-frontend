@@ -96,7 +96,7 @@ const Search = ({ menus, global, items, search, numberOfPosts}) => {
     const newsItems = await fetchAPI(`/news-items?${query}&pagination[start]=${posts.news.length}&populate=*`);
     const agendaItems = await fetchAPI(`/agenda-items?${query}&pagination[start]=${posts.agenda.length}&populate=*`);
     const programmeItems = await fetchAPI(`/programmes?${query2}&pagination[start]=${posts.programme.length}&populate=*`);
-    const communityItems = await fetchAPI(`/community-items?filters[slug][$contains]=${search}&pagination[start]=${posts.community.length}&populate=*`);
+    const communityItems = await fetchAPI(`/community-items?filters[biennials][slug][$ne]=biennial-2024&filters[slug][$contains]=${search}&pagination[start]=${posts.community.length}&populate=*`);
 
     const newDiscover = await discoverItems.data;
     const newNews = await newsItems.data;
@@ -273,7 +273,7 @@ export async function getServerSideProps({params}) {
   const news = await fetchAPI(`/news-items?${query}&populate=*`);
   const agenda = await fetchAPI(`/agenda-items?${query}&populate=*`);
   const programme = await fetchAPI(`/programmes?${query2}&populate=*`);
-  const community = await fetchAPI(`/community-items?filters[slug][$contains]=${params.slug.replace(' ', '-')}&populate=*`);
+  const community = await fetchAPI(`/community-items?filters[biennials][slug][$ne]=biennial-2024&filters[slug][$contains]=${params.slug.replace(' ', '-')}&populate=*`);
 
 
   const discoverAmount = discover.meta.pagination.total;
