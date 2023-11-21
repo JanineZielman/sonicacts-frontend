@@ -40,7 +40,7 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts}) =
     });
 
 		const res = await fetchAPI(
-      `/community-items?${query}&pagination[start]=${posts.length}&populate=*`
+      `/community-items?filters[biennials][slug][$ne]=biennial-2024&${query}&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
 
@@ -127,7 +127,7 @@ export async function getServerSideProps({params}) {
     encodeValuesOnly: true,
   });
   
-  const community = await fetchAPI(`/community-items?${query}&populate=*`);
+  const community = await fetchAPI(`/community-items?filters[biennials][slug][$ne]=biennial-2024&${query}&populate=*`);
 
 
   const numberOfPosts = community.meta.pagination.total;  

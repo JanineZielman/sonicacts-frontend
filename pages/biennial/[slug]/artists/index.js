@@ -20,7 +20,7 @@ const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&pagination[start]=${posts.length}&populate=*`
+      `/community-items?filters[biennials][slug][$ne]=biennial-2024&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -86,10 +86,10 @@ export async function getServerSideProps({params}) {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&populate=*`);
+  const items = await fetchAPI(`/community-items?filters[biennials][slug][$ne]=biennial-2024&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
+    await fetchAPI( `/community-items?filters[biennials][slug][$ne]=biennial-2024&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;
