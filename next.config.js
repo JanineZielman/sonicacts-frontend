@@ -27,7 +27,10 @@ const nextConfig = {
       { source: "/biennial-2022", destination: "/biennial/biennial-2022", permanent: true },
       { source: "/biennial2022", destination: "/biennial/biennial-2022", permanent: true },
 
-      { source: "/discover/:path*", destination: "/archive/:path*", permanent: true }
+      { source: "/discover/:path*", destination: "/archive/:path*", permanent: true },
+
+      { source: "/cadaverexquisito", destination: "https://on.soundcloud.com/PRNZx", permanent: true }
+
     ]
   },
 }
