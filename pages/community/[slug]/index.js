@@ -15,11 +15,11 @@ const CommunityItem = ({menus, page, global, relations, discover, agenda }) => {
 export async function getServerSideProps({params, query}) {
   const preview = query.preview
   const pageRes = 
-    await fetchAPI( `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+    await fetchAPI( `/community-items?&filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
   const pageRel = 
-    await fetchAPI( `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/community-items?&filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
 
   const agendaRel = 

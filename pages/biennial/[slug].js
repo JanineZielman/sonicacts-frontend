@@ -73,7 +73,7 @@ const Festival = ({ menus, global, page, params, programmes, artists, news }) =>
 
 export async function getServerSideProps({ params }) {
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
+    await fetchAPI( `/community-items?&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
   );
 
 	const number = Math.floor(Math.random() * (totalItems.meta.pagination.total - 6));
@@ -84,7 +84,7 @@ export async function getServerSideProps({ params }) {
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
 		fetchAPI(`/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main][$eq]=true&sort[0]=order%3Adesc&sort[1]=start_date%3Aasc&pagination[limit]=${4}&populate=*`),
-		fetchAPI(`/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${number}&pagination[limit]=${6}&populate=*`),
+		fetchAPI(`/community-items?&filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${number}&pagination[limit]=${6}&populate=*`),
 		fetchAPI(`/news-items?filters[biennials][slug][$eq]=${params.slug}&sort[0]=date%3Adesc&pagination[limit]=${4}&populate=*`),
   ])
 
