@@ -107,15 +107,15 @@ const CommunityItem = ({params, page, global, relations, menus, programmes, fest
 export async function getServerSideProps({params, query}) {
   const preview = query.preview
   const pageRes = 
-    await fetchAPI( `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+    await fetchAPI( `/community-items?&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
   );
 
   const pageRel = 
-    await fetchAPI( `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/community-items?&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
   );
   
   const programmesRes = 
-    await fetchAPI( `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[programmes][populate]=*`
+    await fetchAPI( `/community-items?&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[programmes][populate]=*`
   );
 
   

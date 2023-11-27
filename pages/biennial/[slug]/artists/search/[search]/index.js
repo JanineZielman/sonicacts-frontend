@@ -45,7 +45,7 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, fe
     });
 
 		const res = await fetchAPI(
-      `/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&${query}&filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${posts.length}&populate=*`
+      `/community-items?&${query}&filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
 
@@ -135,7 +135,7 @@ export async function getServerSideProps({params}) {
     encodeValuesOnly: true,
   });
   
-  const community = await fetchAPI(`/community-items?filters[$or][0][biennials][slug][$ne]=biennial-2024&filters[$or][1][biennials][slug][$null]=true&${query}&filters[biennials][slug][$eq]=${params.slug}&populate=*`);
+  const community = await fetchAPI(`/community-items?&${query}&filters[biennials][slug][$eq]=${params.slug}&populate=*`);
 
 
   const numberOfPosts = community.meta.pagination.total;  
