@@ -132,6 +132,13 @@
     }
     &.big {
       width: 100%;
+      min-width: 500px;
+      div{
+        width: 100%;
+      }
+      img{
+        width: 100%;
+      }
     }
   }
   .text-block {
