@@ -25,10 +25,17 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
+  console.log(page)
+
   return (
     <Layout page={page} menus={menus} global={global}>
-      <div className="discover">
-        <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+      <div className="discover spatial-sound">
+        <div className="spatial-sound-intro">
+          <div className="image">
+            <Image image={page.attributes.logo.data.attributes}/>
+          </div>
+          <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+        </div>
         <div className="wrapper intro">
           <ReactMarkdown 
             children={page.attributes.introTextSmall} 
@@ -125,7 +132,7 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
 
 export async function getServerSideProps() {
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/spatial-sound-overview?populate[images][populate]=*"),
+    fetchAPI("/spatial-sound-overview?populate[images][populate]=*&populate[logo][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
