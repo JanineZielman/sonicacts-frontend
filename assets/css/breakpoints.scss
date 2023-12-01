@@ -191,6 +191,19 @@
 			width: 32%;
 		}
 	}
+	.spatial-sound{
+		.wrapper.intro{
+			width: 100%;
+		}
+	}
+	
+	.spatial-sound-intro{
+		display: flex;
+		width: 100%;
+		.wrapper.intro{
+			width: auto;
+		}
+	}
 }
 
 @media only screen and (max-width: 900px) {
@@ -516,6 +529,22 @@
 	}
 	.article .text-block.big p{
 		font-size: 48px;
+	}
+	
+	.spatial-sound-intro{
+		display: flex;
+		flex-direction: column;
+		.wrapper.intro{
+			width: auto;
+		}
+		h1{
+			margin-left: 0px;
+		}
+		img{
+			width: 300px;
+			height: auto;
+			margin-top: 48px!important;
+		}
 	}
 }
 

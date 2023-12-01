@@ -979,6 +979,7 @@ h2 {
 
 p img{
   height: 80px;
+  max-width: 100%;
   margin-right: 14px;
 }
 
@@ -993,5 +994,33 @@ p img{
     font-size: 14px;
     font-weight: 100;
     margin-bottom: 24px;
+  }
+}
+
+.spatial-sound{
+  .wrapper.intro{
+    width: 1100px;
+  }
+}
+
+.spatial-sound-intro{
+  display: flex;
+  width: 1100px;
+  .wrapper.intro{
+    width: auto;
+  }
+  h1{
+    margin-left: 36px;
+  }
+  .image{
+    width: 300px;
+    min-width: 300px;
+  }
+  img{
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+    object-position: top;
+    margin-top: 24px!important;
   }
 }
