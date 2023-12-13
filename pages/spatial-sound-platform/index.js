@@ -25,8 +25,6 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
 
-  console.log(page)
-
   return (
     <Layout page={page} menus={menus} global={global}>
       <div className="discover spatial-sound">
