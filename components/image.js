@@ -8,14 +8,18 @@ const Image = ({ image, layout, objectFit, sizes  }) => {
     return `${getStrapiMedia(image.formats?.large ? image.formats.large : image)}?w=${width}&q=${quality || 75}`
   }
 
+  let imgUrl = image.formats?.large ? image.formats.large : image;
+
   return (
+    <>
+    {imgUrl.url?.startsWith("/") &&
     <>
     {layout == 'fill' ?
       <NextImage
         loader={loader}
         layout={layout}
         objectFit={objectFit}
-        src={getStrapiMedia(image.formats?.large ? image.formats.large : image)}
+        src={getStrapiMedia(imgUrl)}
         alt={`Sonic Acts ${alternativeText}` || `Sonic Acts ${name}`}
         sizes={sizes}
         className="img"
@@ -27,11 +31,13 @@ const Image = ({ image, layout, objectFit, sizes  }) => {
         width={width || 300} 
         height={height || 300}
         objectFit={objectFit}
-        src={getStrapiMedia(image.formats?.large ? image.formats.large : image)}
+        src={getStrapiMedia(imgUrl)}
         alt={`Sonic Acts ${alternativeText}` || `Sonic Acts ${name}`}
         sizes={sizes}
         className="img"
       />
+    }
+    </>
     }
     </>
   )

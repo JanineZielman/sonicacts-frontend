@@ -44,8 +44,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
       backgroundColor: 'transparent',
     },
   };
-
-  console.log(about)
   
 
   return (
