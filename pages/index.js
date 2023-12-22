@@ -18,6 +18,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     speed: 700,
     slidesToScroll: 1,
     variableWidth: true,
+    adaptiveHeight: true,
     // autoplay: true,
     autoplaySpeed: 4000
   };

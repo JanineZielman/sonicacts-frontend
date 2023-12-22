@@ -95,10 +95,8 @@
 				font-size: 30px;
 			}
 			.image{
-				width: auto;
-				// max-width: 500px;
-				aspect-ratio: 4/3;
-				height: 40vh;
+				width: 60%;
+				height: 22vw;
 				margin-right: 14px;
 				margin-left: 2px;
 				div{
@@ -107,9 +105,8 @@
 				}
 			}
 			.text {
-				width: auto;
+				width: 40%;
 				min-width: 300px;
-				max-width: 400px;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
