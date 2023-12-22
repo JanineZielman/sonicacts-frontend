@@ -17,10 +17,21 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     infinite: true,
     speed: 700,
     slidesToScroll: 1,
-    variableWidth: true,
+    slidesToShow: 2,
+    variableWidth: false,
     adaptiveHeight: false,
     // autoplay: true,
-    autoplaySpeed: 4000
+    autoplaySpeed: 4000,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+          adaptiveHeight: true,
+        }
+      },
+    ]
   };
 
    const settings2 = {
@@ -29,9 +40,20 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     infinite: true,
     speed: 700,
     slidesToScroll: 1,
-    variableWidth: true,
+    slidesToShow: 3,
+    variableWidth: false,
+    adaptiveHeight: false,
     // autoplay: true,
-    autoplaySpeed: 4000
+    autoplaySpeed: 4000,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true,
+        }
+      },
+    ]
   };
 
   const [show, setShow] = useState(false);
@@ -192,6 +214,9 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                             </a>       
                           )
                         })}
+                        {items[i]?.length < 2 &&
+                          <div></div>
+                        }
                       </Slider>
                     </div>
                     
@@ -205,7 +230,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 Shop
               </a>
               <LazyLoad height={300}>
-                <Slider {...settings}>
+                <Slider {...settings2}>
                   {homepage.attributes.shop_item.map((item, i) => {
                     return(
                       <a href={item.link} target="_blank" className="slider-item shop-slider-item">

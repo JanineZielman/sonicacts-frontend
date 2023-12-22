@@ -80,11 +80,10 @@
 	.slick-slide {
 		position: relative;
 		margin-right: 48px;
-		max-width: 50vw!important;
 		.slider-item {
 			position: relative;
 			width: 100%;
-			// max-width: calc(75vw - 400px)!important;
+			max-width: calc(75vw - 400px)!important;
 			// max-width: calc(75vw - 600px)!important;
 			display: flex!important;
 			h2 {
@@ -98,6 +97,7 @@
 			.image{
 				width: 60%;
 				height: 22vw;
+				max-height: 350px;
 				margin-right: 14px;
 				margin-left: 2px;
 				div{
