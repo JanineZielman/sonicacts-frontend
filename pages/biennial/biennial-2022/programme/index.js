@@ -170,7 +170,11 @@ const Programme = ({ menus, global, items, params, festival}) => {
   )
 }
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps() {
+
+  const params = {
+		slug: 'biennial-2022'
+	}
 
   // Run API calls in parallel
   const [festivalRes, itemRes, globalRes, menusRes] = await Promise.all([

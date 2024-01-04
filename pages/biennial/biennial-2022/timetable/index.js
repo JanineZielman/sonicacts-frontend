@@ -209,7 +209,11 @@ const Timetable = ({ menus, global, params, festival, timetable}) => {
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps() {
+  const params = {
+		slug: 'biennial-2022'
+	}
+
   // Run API calls in parallel
   const [festivalRes, globalRes, menusRes, timetableRes] = await Promise.all([
     fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
