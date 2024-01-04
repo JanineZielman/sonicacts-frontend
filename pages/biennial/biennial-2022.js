@@ -71,7 +71,12 @@ const Festival = ({ menus, global, page, params, programmes, artists, news }) =>
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps() {
+
+	const params = {
+		slug: 'biennial-2022'
+	}
+
 	const totalItems = 
     await fetchAPI( `/community-items?&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
   );

@@ -8,7 +8,7 @@ import Image from "../../../../components/image"
 const CommunityItem = ({params, page, global, relations, menus, programmes, festival}) => {
   const pageSlug = {
     attributes:
-      	{slug: `biennial/${params.slug}/artists`}
+      	{slug: `biennial/biennial-2022/artists`}
 	}
 
   page.attributes.slug = `community`
@@ -31,7 +31,7 @@ const CommunityItem = ({params, page, global, relations, menus, programmes, fest
                 <div className={`discover-item ${tags}`}>
                   <LazyLoad height={600}>
                     <div className="item-wrapper">
-                      <a href={`/biennial/${params.slug}/programme/${item.attributes.slug}`} key={'discover'+i}>
+                      <a href={`/biennial/biennial-2022/programme/${item.attributes.slug}`} key={'discover'+i}>
                         <div className="image">
                           {item.attributes.cover_image?.data &&
                             <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
@@ -84,7 +84,7 @@ const CommunityItem = ({params, page, global, relations, menus, programmes, fest
                           <div className="tags">
                             {item.attributes.authors.data.map((author, i) => {
                               return(
-                                <a className="author" href={`/biennial/${params.slug}/artists/${author.attributes.slug}`}>
+                                <a className="author" href={`/biennial/biennial-2022/artists/${author.attributes.slug}`}>
                                   {author.attributes.name}
                                 </a>
                               )
@@ -105,6 +105,10 @@ const CommunityItem = ({params, page, global, relations, menus, programmes, fest
 }
 
 export async function getServerSideProps({params, query}) {
+  const params2 = {
+		slug: 'biennial-2022'
+	}
+
   const preview = query.preview
   const pageRes = 
     await fetchAPI( `/community-items?&filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
@@ -121,7 +125,7 @@ export async function getServerSideProps({params, query}) {
   
 
   const [festivalRes, menusRes, globalRes] = await Promise.all([
-    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params2.slug}&populate[prefooter][populate]=*`),
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
   ])

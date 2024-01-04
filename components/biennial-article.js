@@ -5,7 +5,11 @@ import Image from "./image"
 import LazyLoad from 'react-lazyload';
 import Collapsible from "./collapsible";
 
-const Article = ({page, relations, params}) => {
+const Article = ({page, relations}) => {
+	const params = {
+		slug: 'biennial-2022'
+	}
+
 	useEffect(() => {
     var text = document.getElementsByClassName('text-block');
 		for (let i = 0; i < text.length; i++) { 

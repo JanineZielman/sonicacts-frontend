@@ -1,67 +1,38 @@
 import React, {useEffect, useState} from "react"
 
-import Layout from "../../../../../../components/layout"
-import Image from "../../../../../../components/image"
-import { fetchAPI } from "../../../../../../lib/api"
-import InfiniteScroll from 'react-infinite-scroll-component';
 import ReactMarkdown from "react-markdown";
-import Search from "../../../../../../components/search"
+import Layout from "../../../../../components/layout"
+import Image from "../../../../../components/image"
+import { fetchAPI } from "../../../../../lib/api"
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Search from "../../../../../components/search"
 import LazyLoad from 'react-lazyload';
 
-const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, festival, params}) => {
+const Artists = ({ festival, menus, global, items, numberOfPosts, params }) => {
 
-  const [posts, setPosts] = useState(items);
-  const [hasMore, setHasMore] = useState(true);
-
-  const pageSlug = {
+	const page = {
     attributes:
       	{slug: `biennial/${params.slug}/artists`}
 	}
-
-
-  useEffect(() => {
-    setPosts(items);
-  }, [search]);
+  
+  const [posts, setPosts] = useState(items);
+  const [hasMore, setHasMore] = useState(true);
 
   const getMorePosts = async () => {
-    const qs = require('qs');
-    const query = qs.stringify({
-      filters: {
-        $or: [
-          {
-            slug: {
-              $containsi: search,
-            },
-          },
-          {
-            name: {
-              $containsi: search,
-            },
-          }
-        ],
-      },
-    }, {
-      encodeValuesOnly: true,
-    });
-
-		const res = await fetchAPI(
-      `/community-items?&${query}&filters[biennials][slug][$eq]=${params.slug}&pagination[start]=${posts.length}&populate=*`
+    const res = await fetchAPI(
+      `/community-items?&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
-
-		setPosts((posts) => [...posts, ...newPosts]);
-    
+    setPosts((posts) => [...posts, ...newPosts]);
   };
-  
 
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
   }, [posts]);
-
-
+  
   return (
-		<section className="festival-wrapper">
-      <Layout page={pageSlug} menus={menus} global={global}>
+    <section className="festival-wrapper">
+      <Layout page={page} menus={menus} global={global}>
         <div className="discover">
           <div className="wrapper intro">
             <ReactMarkdown 
@@ -107,51 +78,36 @@ const CommunitySearch = ({ menus, global, page, items, search, numberOfPosts, fe
   )
 }
 
-export async function getServerSideProps({params}) {
-  const [festivalRes, pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate=*`),
-		fetchAPI("/community", { populate: "*" }),
+export async function getServerSideProps() {
+  const params = {
+		slug: 'biennial-2022'
+	}
+  
+  // Run API calls in parallel
+  const [festivalRes, globalRes, menusRes] = await Promise.all([
+		fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate=*`),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const qs = require('qs');
-  const query = qs.stringify({
-    filters: {
-      $or: [
-        {
-          slug: {
-            $containsi: params.search,
-          },
-        },
-        {
-          name: {
-            $containsi: params.search,
-          },
-        }
-      ],
-    },
-  }, {
-    encodeValuesOnly: true,
-  });
-  
-  const community = await fetchAPI(`/community-items?&${query}&filters[biennials][slug][$eq]=${params.slug}&populate=*`);
+  const items = await fetchAPI(`/community-items?&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug&populate=*`);
 
+	const totalItems = 
+    await fetchAPI( `/community-items?&filters[biennials][slug][$eq]=${params.slug}&sort[0]=slug`
+  );
 
-  const numberOfPosts = community.meta.pagination.total;  
+  const numberOfPosts = totalItems.meta.pagination.total;
 
   return {
     props: {
-      festival: festivalRes.data[0],
-			page: pageRes.data,
-      search: params.search,
-      items: community.data,
+			festival: festivalRes.data[0],
+      items: items.data,
       numberOfPosts: +numberOfPosts,
       global: globalRes.data,
       menus: menusRes.data,
       params: params,
-    },
-  };
+    }
+  }
 }
 
-export default CommunitySearch
+export default Artists

@@ -11,7 +11,7 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
 
   const pageSlug = {
     attributes:
-      	{slug: `biennial/${params.slug}/programme`}
+      	{slug: `biennial/biennial-2022/programme`}
 	}
 
   const [dates, setDates] = useState([]);
@@ -238,6 +238,10 @@ const ProgrammeItem = ({menus, page, global, relations, params, sub, festival}) 
 
 
 export async function getServerSideProps({params, query}) {
+  const params2 = {
+		slug: 'biennial-2022'
+	}
+
   const preview = query.preview
   const pageRes = 
     await fetchAPI( `/programmes?filters[slug][$eq]=${params.programme}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
@@ -248,15 +252,15 @@ export async function getServerSideProps({params, query}) {
   );
 
   const subRes = 
-    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&pagination[limit]=${100}&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate[authors][populate]=*&populate=*`
+    await fetchAPI( `/programmes?filters[biennial][slug][$eq]=${params2.slug}&filters[main_programmes][slug][$eq]=${params.programme}&sort[0]=start_date%3Aasc${preview ? "&publicationState=preview" : '&publicationState=live'}&pagination[limit]=${100}&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate[authors][populate]=*&populate=*`
   );
   
 
   const [menusRes, globalRes, categoryRes, festivalRes] = await Promise.all([
     fetchAPI("/menus", { populate: "*" }),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-    fetchAPI(`/biennial-tags?filters[biennials][slug][$eq]=${params.slug}&populate=*`),
-    fetchAPI(`/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`),
+    fetchAPI(`/biennial-tags?filters[biennials][slug][$eq]=${params2.slug}&populate=*`),
+    fetchAPI(`/biennials?filters[slug][$eq]=${params2.slug}&populate[prefooter][populate]=*`),
   ])
 
   return {
