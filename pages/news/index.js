@@ -17,11 +17,11 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
     var res = '';
     if (check == true){
       res = await fetchAPI(
-        `/news-items?sort[0]=date%3Adesc&populate=*`
+        `/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`
       );
     } else{
        res = await fetchAPI(
-        `/news-items?sort[0]=date%3Aasc&populate=*`
+        `/news-items?sort[0]=date%3Aasc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`
       );
     }
     const newPosts = await res.data;
@@ -30,7 +30,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/news-items?sort[0]=date%3Adesc&pagination[start]=${posts.length}&populate=*`
+      `/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -138,7 +138,7 @@ export async function getServerSideProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&populate=*`);
+  const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`);
 
 	const totalItems = 
     await fetchAPI( `/news-items?sort[0]=date%3Adesc`
