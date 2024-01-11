@@ -340,7 +340,7 @@ export async function getServerSideProps() {
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
-    fetchAPI("/news-items?sort[0]=date%3Adesc&populate=*"),
+    fetchAPI("/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*"),
     fetchAPI(`/agenda-items?filters[date][$gte]=${currentDate}&sort[0]=date&sort[1]=slug:ASC&populate=*`),
     fetchAPI("/discover-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/community-items?&sort[0]=id%3Adesc&pagination[pageSize]=6&populate=*`),
