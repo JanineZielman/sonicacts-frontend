@@ -7,16 +7,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import LazyLoad from 'react-lazyload';
 import Moment from 'moment';
 
-const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
+const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts, archiveItems}) => {
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
+  console.log(archiveItems)
   
   const getMorePosts = async () => {
     const res1 = await fetchAPI(
-      `/spatial-sound-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
+      `/spatial-sound-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&publicationState=preview&filters[$or][1][hide][$eq]=false&pagination[start]=${posts.length}&populate=*`
     );
-    var res = res1.data
+    var res = res1.data + archiveItems
     const newPosts = await res;
     setPosts((posts) => [...posts, ...newPosts]);
   };
@@ -130,26 +131,35 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts}) => {
 
 export async function getServerSideProps() {
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/spatial-sound-overview?populate[images][populate]=*&populate[logo][populate]=*"),
+    fetchAPI("/spatial-sound-overview?populate[images][populate]=*&populate[logo][populate]=*&populate[archive_items][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/spatial-sound-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&populate=*`);
+  const archiveItems = pageRes.data.attributes.archive_items
+
+  const items = await fetchAPI(`/spatial-sound-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false&publicationState=preview&populate=*`);
+
+  var mergedItems = items.data.concat(archiveItems.data)
+
+  mergedItems.sort(function(a,b){
+    return new Date(b.attributes.date) - new Date(a.attributes.date);
+  });
 
 	const totalItems = 
-    await fetchAPI( `/spatial-sound-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
+    await fetchAPI( `/spatial-sound-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&publicationState=preview&filters[$or][1][hide][$eq]=false`
   );
 
-  const numberOfPosts = totalItems.meta.pagination.total
+  const numberOfPosts = totalItems.meta.pagination.total + archiveItems.length
 
   return {
     props: {
-      items: items.data,
+      items: mergedItems,
       numberOfPosts: +numberOfPosts,
       page: pageRes.data,
       global: globalRes.data,
       menus: menusRes.data,
+      archiveItems: archiveItems.data
     },
   };
 }
