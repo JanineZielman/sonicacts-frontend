@@ -52,7 +52,7 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts, archi
             )
           })}
         </div>
-        {/* {posts.length > 0 &&
+        {posts.length > 0 &&
           <div className="discover-container">
             <InfiniteScroll
               dataLength={posts.length}
@@ -123,7 +123,7 @@ const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts, archi
                 })}
             </InfiniteScroll>
           </div>
-        } */}
+        }
       </div>
     </Layout>
   )
