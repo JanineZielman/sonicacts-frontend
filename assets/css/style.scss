@@ -790,6 +790,7 @@ h2 {
   user-select: none;
   gap: var(--gap);
   background-color: black;
+  z-index: 9;
 }
 
 .marquee__content {
@@ -799,7 +800,7 @@ h2 {
   gap: var(--gap);
   min-width: 100%;
   animation: scroll 20s linear infinite;
-  transform: translateX(calc(100% + var(--gap)));
+  // transform: translateX(calc(100% + var(--gap)));
   animation-fill-mode: forwards;
   a{
     color: white;
@@ -810,17 +811,7 @@ h2 {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .marquee {
-    height: 24px;
-  }
-  .marquee__content {
-    a{
-      font-size: 12px;
-      line-height: 24px;
-    }
-  }
-}
+
 
 .marquee .marquee__content:last-child {
   position: absolute;
@@ -847,6 +838,35 @@ h2 {
   }
   to {
     transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .marquee {
+    height: 25px;
+  }
+  .marquee__content {
+    a{
+      font-size: 12px;
+      line-height: 24px;
+    }
+  }
+  @keyframes scroll-abs {
+    from {
+      transform: translateX(calc(150% + var(--gap)));
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-150% - var(--gap)));
+    }
   }
 }
 
