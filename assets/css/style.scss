@@ -779,72 +779,76 @@ h2 {
 
 
 .marquee {
-  height: 30px;
-  overflow: hidden;
+  --gap: 1rem;
+  // position: relative;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: black;
-  color: white;
-  font-size: 16px;
-  font-weight: 100;
-  z-index: 9;
-  a {
+  height: 30px;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+  background-color: black;
+}
+
+.marquee__content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  animation: scroll 20s linear infinite;
+  transform: translateX(calc(100% + var(--gap)));
+  animation-fill-mode: forwards;
+  a{
     color: white;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    margin: 0;
+    background-color: black;
+    font-size: 16px;
+    font-weight: 100;
     line-height: 30px;
-    text-align: center;
-    -moz-transform: translateX(0%);
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-    -moz-animation: scroll-left 15s linear infinite;
-    -webkit-animation: scroll-left 15s linear infinite;
-    animation: scroll-left 15s linear infinite;
   }
 }
 
-@keyframes scroll-left {
-  0% {
-      -moz-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%);
-      display: block;
+@media only screen and (max-width: 600px) {
+  .marquee {
+    height: 24px;
   }
-  50% {
-    -moz-transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-    display: block;
-  }
-  51% {
-    -moz-transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-    display: none;
-  }
-  52% {
-    -moz-transform: translateX(80%);
-    -webkit-transform: translateX(80%);
-    transform: translateX(80%);
-    display: none;
-  }
-  53% {
-    -moz-transform: translateX(80%);
-    -webkit-transform: translateX(80%);
-    transform: translateX(80%);
-    display: block;
-  }
-  100% {
-      -moz-transform: translateX(0%);
-      -webkit-transform: translateX(0%);
-      transform: translateX(0%);
-      display: block;
+  .marquee__content {
+    a{
+      font-size: 12px;
+      line-height: 24px;
+    }
   }
 }
 
+.marquee .marquee__content:last-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.marquee .marquee__content:last-child {
+  animation-name: scroll-abs;
+}
+
+@keyframes scroll-abs {
+  from {
+    transform: translateX(calc(100% + var(--gap)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
 
 .radio{
   // display: none;

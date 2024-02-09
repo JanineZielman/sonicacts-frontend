@@ -55,12 +55,14 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
         }
       </>
     </section>
-    <div className="marquee-wrapper">
-        <div class="marquee">
-          <a href={global.attributes.scrolling_markee_link} target="_blank">
-            {global.attributes.scrolling_markee}
-          </a>
-        </div>
+    <div class="marquee">
+      <div class="marquee__content">
+        <a href={global.attributes.scrolling_markee_link} target="_blank">{global.attributes.scrolling_markee}</a>
+      </div>
+
+      <div aria-hidden="true" class="marquee__content">
+        <a href={global.attributes.scrolling_markee_link} target="_blank">{global.attributes.scrolling_markee}</a>
+      </div>
     </div>
     <footer className="footer">
       {festival && festival.attributes.prefooter ?
