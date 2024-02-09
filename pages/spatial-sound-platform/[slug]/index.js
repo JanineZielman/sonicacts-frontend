@@ -75,13 +75,20 @@ const SpatialItem = ({menus, page, global, relations, items}) => {
 export async function getServerSideProps({params, query}) {
   const preview = query.preview
   const pageRes = 
-    await fetchAPI( `/spatial-sound-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+    await fetchAPI( `/spatial-sound-items?filters[slug][$eq]=${params.slug}&publicationState=preview&populate[content][populate]=*`
   );
 
+  const archiveRes = 
+  await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate[content][populate]=*`
+);
 
   const pageRel = 
-    await fetchAPI( `/spatial-sound-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+    await fetchAPI( `/spatial-sound-items?filters[slug][$eq]=${params.slug}&publicationState=preview&populate=*`
   );
+
+  const archiveRel = 
+  await fetchAPI( `/discover-items?filters[slug][$eq]=${params.slug}${preview ? "&publicationState=preview" : '&publicationState=live'}&populate=*`
+);
 
 
   const itemsRel = await fetchAPI(`/spatial-sound-items?sort[0]=date%3Adesc&filters[category][slug][$eq]=${params.slug}&populate=*`);
@@ -95,9 +102,9 @@ export async function getServerSideProps({params, query}) {
   return {
     props: { 
       menus: menusRes.data, 
-      page: pageRes.data[0] ? pageRes.data[0] : agendaRes.data[0], 
+      page: pageRes.data[0] ? pageRes.data[0] : archiveRes.data[0], 
       global: globalRes.data, 
-      relations: pageRel.data[0] ? pageRel.data[0] : agendaRel.data[0],
+      relations: pageRel.data[0] ? pageRel.data[0] : archiveRel.data[0], 
       items: itemsRel.data
     },
   };
