@@ -94,6 +94,13 @@ export async function getServerSideProps() {
           },
         }
       ],
+      $or: [
+        {
+          end_date: {
+            $gte: currentDate,
+          },
+        }
+      ],
       kind: {
         $ne: 'opencall',
       },
@@ -137,6 +144,13 @@ export async function getServerSideProps() {
       $or: [
         {
           start_date: {
+            $gte: currentDate,
+          },
+        }
+      ],
+      $or: [
+        {
+          end_date: {
             $gte: currentDate,
           },
         }
