@@ -427,10 +427,12 @@
 		margin-top: 0;
 	}
 
-	.article .text-block.small p {
+	.article .text-block.small p, .article .text-block.small ul {
 		padding-left: 24px;
 		font-size: 18px;
 	}
+
+	
 
 	.article .sidebar {
 		margin: 0;
@@ -595,6 +597,10 @@
 	}
 	.article .text-block.small p{
 		padding-left: 5px;
+	}
+	.article .text-block.small ul{
+		padding-left: 0;
+		font-size: 18px;
 	}
 	.article .image.medium{
 		max-width: 100%;
