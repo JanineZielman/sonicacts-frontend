@@ -17,17 +17,22 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     infinite: true,
     speed: 700,
     slidesToScroll: 1,
-    slidesToShow: 2,
-    variableWidth: false,
-    adaptiveHeight: false,
-    // autoplay: true,
+    slidesToShow: 1,
+    variableWidth: true,
+    adaptiveHeight: true,
     autoplaySpeed: 4000,
     responsive: [
       {
         breakpoint: 1100,
         settings: {
           slidesToShow: 1,
-          variableWidth: true,
+          adaptiveHeight: false,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
           adaptiveHeight: true,
         }
       },
@@ -43,7 +48,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     slidesToShow: 3,
     variableWidth: false,
     adaptiveHeight: false,
-    // autoplay: true,
     autoplaySpeed: 4000,
     responsive: [
       {
@@ -51,6 +55,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
         settings: {
           slidesToShow: 1,
           variableWidth: true,
+          adaptiveHeight: true,
         }
       },
     ]
