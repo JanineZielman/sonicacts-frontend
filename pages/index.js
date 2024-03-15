@@ -4,7 +4,6 @@ import Moment from 'moment';
 import Layout from "../components/layout"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
-import LazyLoad from 'react-lazyload';
 import NewsletterSubscribe from "../components/NewsletterSubscribe";
 import React, {useState} from "react";
 import Modal from 'react-modal';
@@ -234,7 +233,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
               <a href="https://shop.sonicacts.com/" target="_blank" className="show-more-link">
                 Shop
               </a>
-              <LazyLoad height={300}>
+   
                 <Slider {...settings2}>
                   {homepage.attributes.shop_item.map((item, i) => {
                     return(
@@ -261,14 +260,14 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                     )
                   })}
                 </Slider>
-              </LazyLoad>
+
             </div>
             {menus.slice(3,4).map((page, i) => {
               return (
                 <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                   <div>
                     <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
-                    <LazyLoad height={300}>
+      
                       <Slider {...settings2}>
                         {items[3].slice(0, 6).map((item, i) => {
                           return(
@@ -303,7 +302,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                           )
                         })}
                       </Slider>
-                    </LazyLoad>
+ 
                   </div>
                 </div>
               )
@@ -311,7 +310,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
             <div className="collapsible contact">
               <div>
                 <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
-                <LazyLoad height={300}>
+
                     <div className='contact-wrapper'>
                       <div className="contact-item adres">
                         <h5>
@@ -324,7 +323,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                         </p>
                       </div>
                     </div>
-                </LazyLoad>
+ 
               </div>
             </div>
           </div>
