@@ -218,9 +218,9 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                             </a>       
                           )
                         })}
-                        {items[i]?.length < 2 &&
+                        {/* {items[i]?.length < 2 &&
                           <div></div>
-                        }
+                        } */}
                       </Slider>
                     </div>
                     
