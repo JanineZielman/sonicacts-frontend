@@ -218,9 +218,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                             </a>       
                           )
                         })}
-                        {/* {items[i]?.length < 2 &&
-                          <div></div>
-                        } */}
                       </Slider>
                     </div>
                     
@@ -340,7 +337,7 @@ export async function getServerSideProps() {
   
   // Run API calls in parallel
   const [homepageRes, globalRes, socialRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
-    fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate=*"),
+    fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate[archive_items][populate]=*&populate[news_items][populate]=*&populate=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus", { populate: "*" }),
@@ -358,9 +355,9 @@ export async function getServerSideProps() {
       socials: socialRes.data.attributes.socials,
       menus: menusRes.data,
       items: {
-        0: newsRes.data,
+        0: homepageRes.data.attributes.news_items.data,
         1: agendaRes.data,
-        2: discoverRes.data,
+        2: homepageRes.data.attributes.archive_items.data,
         3: communityRes.data,
       },
       about: aboutRes.data,
