@@ -27,6 +27,7 @@ class MyDocument extends Document {
               `,
             }}
           />
+          <script defer data-domain="sonicacts.com" src="https://plausible.io/js/script.js"></script>
         </Head>
         <body>
           <Main />
