@@ -45,9 +45,13 @@ const Nav = ({ menus, global, page, festival }) => {
           {page?.attributes?.slug == 'search' ?
             <></>
           : 
-            <a href={'/' + page?.attributes?.slug}>
-              {last?.replace('-', ' ').replace('-', ' ')}
-            </a>
+            <>
+              {page.attributes.slug != 'spatial-sound-platform' &&
+                <a href={'/' + page?.attributes?.slug}>
+                  {last?.replace('-', ' ').replace('-', ' ')}
+                </a>
+              }
+            </>
           }
           {festival?.attributes?.highlight &&
             <div className="marquee-highlight">
