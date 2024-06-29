@@ -10,8 +10,6 @@ import Moment from 'moment';
 const SpatialSoundPlatform = ({ menus, global, page, items, numberOfPosts, archiveItems}) => {
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
-
-  console.log(archiveItems)
   
   const getMorePosts = async () => {
     const res1 = await fetchAPI(
