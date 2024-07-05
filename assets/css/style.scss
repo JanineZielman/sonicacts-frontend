@@ -1100,7 +1100,11 @@ p img{
     width: 1100px;
     h6{
       font-weight: 300;
+      margin: 0;
     }
+  }
+  p img{
+    height: auto;
   }
 }
 

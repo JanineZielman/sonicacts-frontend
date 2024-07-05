@@ -32,68 +32,67 @@ const SpatialSoundPlatform = ({ menus, global, page, archiveItems}) => {
           })}
         </div>
         {archiveItems.length > 0 &&
-          <div className="discover-container">
-            {archiveItems.map((item, i) => {
-              return (
-                <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
-                  <LazyLoad height={600}>
-                    <div className="item-wrapper">
-                      <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                        <div className="image">
-                          {item.attributes.cover_image?.data &&
-                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                          }
-                        </div>
-                        {item.attributes.category?.data && 
-                          <div className="category">
-                            <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              {item.attributes.category?.data.attributes.title}
-                            </a>
-                            {item.attributes.authors?.data.map((author, i) =>{
-                              return(
-                                <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
-                                  {author.attributes.name}
-                                </a>
-                              )
-                            })}
+          <div className="discover">
+            <div className="discover-container  programme-container">
+              {archiveItems.map((item, i) => {
+                return (
+                  <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
+                    <LazyLoad height={600}>
+                      <div className="item-wrapper">
+                        <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                          <div className="image">
+                            {item.attributes.cover_image?.data &&
+                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                            }
                           </div>
-                        }
-                        <div className="title-wrapper main-title-wrapper">
-                          {item.attributes.hide_names == false &&
-                            <div className="authors">
-                              {item.attributes?.community_items?.data &&
-                                item.attributes.community_items.data.map((author, i) => {
-                                  return( 
-                                    <div className="author">{author.attributes.name}</div>
-                                  )
-                                })
-                              }
+                          {item.attributes.category?.data && 
+                            <div className="category">
+                              <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                                {item.attributes.category?.data.attributes.title}
+                              </a>
+                              {item.attributes.authors?.data.map((author, i) =>{
+                                return(
+                                  <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                                    {author.attributes.name}
+                                  </a>
+                                )
+                              })}
                             </div>
                           }
-                          <div className="title">{item.attributes.title}</div>
-                        </div>                  
-                        <div className="tags">
-                          {item.attributes.tags?.data && 
-                            <>
-                            {item.attributes.tags.data.map((tag, i) => {
-                              return(
-                              <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                {tag.attributes.slug}
-                              </a>
-                              )
-                            })}
-                            </>
-                          }
-                          {item.attributes.date &&
-                            <span>{Moment(item.attributes.date).format('y')}</span>
-                          }
-                        </div>
-                      </a>
-                    </div>
-                  </LazyLoad>
-                </div>
-              )
-            })}
+                          <div className="title-wrapper main-title-wrapper">
+                            {item.attributes.hide_names == false &&
+                              <div className="authors">
+                                {item.attributes?.community_items?.data &&
+                                  item.attributes.community_items.data.map((author, i) => {
+                                    return( 
+                                      <div className="author">{author.attributes.name}</div>
+                                    )
+                                  })
+                                }
+                              </div>
+                            }
+                            <div className="title">{item.attributes.title}</div>
+                          </div>                  
+                          <div className="tags">
+                            {item.attributes.tags?.data && 
+                              <>
+                              {item.attributes.tags.data.map((tag, i) => {
+                                return(
+                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
+                                  {tag.attributes.slug}
+                                </a>
+                                )
+                              })}
+                              </>
+                            }
+                          </div>
+                        </a>
+                      </div>
+                    </LazyLoad>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         }
       </div>
