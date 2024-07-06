@@ -10,7 +10,7 @@ const TouchedBySound = ({ menus, global, page, archiveItems}) => {
   
   return (
     <Layout page={page} menus={menus} global={global}>
-      <div className="discover spatial-sound">
+      <div className="discover spatial-sound touched-by-sound">
         <div className="spatial-sound-intro">
           <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
         </div>
