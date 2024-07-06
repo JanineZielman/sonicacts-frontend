@@ -6,7 +6,7 @@ import { fetchAPI } from "../lib/api"
 import LazyLoad from 'react-lazyload';
 import Moment from 'moment';
 
-const SpatialSoundPlatform = ({ menus, global, page, archiveItems}) => {
+const TouchedBySound = ({ menus, global, page, archiveItems}) => {
   
   return (
     <Layout page={page} menus={menus} global={global}>
@@ -122,4 +122,4 @@ export async function getServerSideProps({query}) {
   };
 }
 
-export default SpatialSoundPlatform
+export default TouchedBySound
