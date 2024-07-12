@@ -19,6 +19,7 @@ const TouchedBySound = ({ menus, global, page, archiveItems}) => {
             children={page.attributes.introTextSmall} 
           />
         </div>
+        <br/>
         <div className="images-grid">
           {page.attributes.images?.data.map((item, i) => {
             return(

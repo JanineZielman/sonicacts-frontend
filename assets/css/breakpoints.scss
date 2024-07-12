@@ -207,6 +207,20 @@
 			width: auto;
 		}
 	}
+	.touched-by-sound{
+		.discover .discover-container{
+			width: 100%;
+			.discover-item{
+				width: 100%;
+				.item-wrapper{
+					padding-right: 0vw;
+				}
+				&:nth-child(2n) .item-wrapper{
+					padding-right: 0;
+				}
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 900px) {

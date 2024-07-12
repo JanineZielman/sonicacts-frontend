@@ -1109,6 +1109,15 @@ p img{
   p img{
     height: auto;
   }
+  .discover .discover-container .discover-item{
+    width: 25%;
+    .item-wrapper{
+      padding-right: 1vw;
+    }
+    &:nth-child(4n) .item-wrapper{
+      padding-right: 0;
+    }
+  }
 }
 
 .spatial-sound-intro{
