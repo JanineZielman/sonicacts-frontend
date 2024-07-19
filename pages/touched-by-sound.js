@@ -1,14 +1,22 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import ReactMarkdown from "react-markdown";
 import Layout from "../components/layout"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
 import LazyLoad from 'react-lazyload';
-import Moment from 'moment';
+import Head from "next/head";
 
 const TouchedBySound = ({ menus, global, page, archiveItems}) => {
+  console.log(page)
   
   return (
+    <>
+    <Head>
+      <meta name="description" content={page.attributes.content?.[0]?.text_block} />
+      <meta property="og:description" content={page.attributes.content?.[0]?.text_block} />
+      <meta name="image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
+      <meta property="og:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
+    </Head>
     <Layout page={page} menus={menus} global={global}>
       <div className="discover spatial-sound touched-by-sound">
         <div className="spatial-sound-intro">
@@ -98,6 +106,7 @@ const TouchedBySound = ({ menus, global, page, archiveItems}) => {
         }
       </div>
     </Layout>
+    </>
   )
 }
 
