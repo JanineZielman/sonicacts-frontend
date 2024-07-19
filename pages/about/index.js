@@ -8,7 +8,7 @@ const About = ({ menus, global, page }) => {
   console.log(page.attributes.content[0].text_block)
   return (
     <>
-      <Head>
+    <Head>
       <meta name="description" content={page.attributes.content?.[0]?.text_block} />
       <meta property="og:description" content={page.attributes.content?.[0]?.text_block} />
       <meta name="image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
