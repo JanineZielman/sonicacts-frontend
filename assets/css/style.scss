@@ -613,12 +613,14 @@ h2 {
   .menu-links {
     font-size: 30px;
     margin-left: calc(100% - 300px);
+    word-break: break-word;
     a {
       display: block;
       width: 100%;
       color: #000;
       text-transform: capitalize;
       padding: 10px 14px;
+      word-break: break-word;
       font-weight: 500;
       transition: all 0.1s;
       font-size: 30px;
@@ -633,7 +635,7 @@ h2 {
       margin-bottom: 14px;
     }
     .menu-link {
-      margin-left: 20px;
+      margin-left: 14px;
     }
     .festival-link{
       margin-top: 36px;
