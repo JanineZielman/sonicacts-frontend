@@ -57,7 +57,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                 <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
                    <LazyLoad height={600}>
                     <div className="item-wrapper">
-                      <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
+                      <a target={`${item.attributes.link_to_external_page ? '_blank': ''}`} href={item.attributes.link_to_external_page ? `${item.attributes.link_to_external_page}` : `/${page?.attributes.slug}/${item.attributes.slug}`} key={'discover'+i}>
                         <div className="image">
                           {item.attributes.cover_image?.data &&
                             <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
