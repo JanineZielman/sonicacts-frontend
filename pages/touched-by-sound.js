@@ -19,14 +19,39 @@ const TouchedBySound = ({ menus, global, page, archiveItems}) => {
     </Head>
     <Layout page={page} menus={menus} global={global}>
       <div className="discover spatial-sound touched-by-sound">
-        <div className="spatial-sound-intro">
-          <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
-        </div>
-        <div className="wrapper intro">
-          <ReactMarkdown 
-            children={page.attributes.introTextSmall} 
-          />
-        </div>
+        <section className="article">
+          <div className="content">
+            <div className="wrapper">
+              <div className="spatial-sound-intro">
+                <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+              </div>
+              <div className="wrapper intro">
+                <ReactMarkdown 
+                  children={page.attributes.introTextSmall} 
+                />
+              </div>
+            </div>
+            <div className="sidebar">
+            {page?.attributes?.community_items?.data[0] &&
+							<div>
+								<span>Community</span>
+								<div className="max-length" id="maxLength">
+									{page?.attributes?.community_items.data.map((item, i) => {
+										return (
+											<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
+												{item.attributes.name}
+											</a>
+										)
+									})}
+								</div>
+								{page?.attributes?.community_items?.data.length > 20 &&
+									<div className="show-all-button" onClick={toggleShow} id="show-button"></div>
+								}
+							</div>
+						}
+            </div>
+          </div>
+        </section>
         <br/>
         <div className="images-grid">
           {page.attributes.images?.data.map((item, i) => {
@@ -114,7 +139,7 @@ export async function getServerSideProps({query}) {
   const preview = query.preview
 
   const [pageRes, globalRes, menusRes] = await Promise.all([
-    fetchAPI("/touched-by-sound?populate[images][populate]=*&populate[logo][populate]=*&populate[archive_items][populate]=*"),
+    fetchAPI("/touched-by-sound?populate[images][populate]=*&populate[logo][populate]=*&populate[archive_items][populate]=*&populate[community_items][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
   ])
