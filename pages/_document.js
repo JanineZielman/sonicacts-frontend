@@ -28,12 +28,10 @@ class MyDocument extends Document {
             }}
           />
           <script defer data-domain="sonicacts.com" src="https://plausible.io/js/script.js"></script>
-          <link rel="stylesheet" type="text/css" href="//cdn.curator.io/5.0/css/curator.css"/>
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script type="text/javascript" src="//cdn.curator.io/5.0/js/curator.js"></script>
         </body>
       </Html>
     )

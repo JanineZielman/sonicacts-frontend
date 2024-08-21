@@ -1,41 +1,52 @@
 import React, {useEffect, useState} from "react"
 import Layout from "../../../components/layout"
 import { fetchAPI } from "../../../lib/api"
+import Head from "next/head"
+
 
 const DiscoverFiltered = ({ menus, global, page, categories}) => {
   let filter = "media"
 
 
   useEffect(() => {
-    setTimeout(() => {
-      
-      var loader=new function(){this.rC=-1,this.r=[],this.add=function(t){this.r.push(t)},this.addTag=function(t,e){var i=document.getElementsByTagName("head")[0],s=t.indexOf(".js")>0?"script":"link",n=document.createElement(s);i.appendChild(n),n.onload=e,n.charset="UTF-8","script"===s?(n.type="text/javascript",n.src=t):"link"===s&&(n.rel="stylesheet",n.href=t)},this.loadNext=function(){if(this.rC++,this.rC>=this.r.length)this.done();else{var t=this.r[this.rC];this.addTag(t,this.loadNext.bind(this))}},this.done=function(){this.onResourcesLoaded(window.Curator)},this.load=function(t){this.onResourcesLoaded=t,this.loadNext()}};
+    // Function to load the Curator script dynamically
+    const loadCuratorScript = () => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = "https://cdn.curator.io/5.0/curator.embed.js";
+        script.type = "text/javascript";
+        script.async = true;
+        script.onload = resolve; // Resolve the promise when the script is loaded
+        script.onerror = reject; // Reject if there's an error loading the script
+        document.body.appendChild(script);
+      });
+    };
 
-      // Config
-      var config = {"post":{"template":"post-grid","imageHeight":"100%","minWidth":250,"showTitles":true,"showShare":true,"showComments":false,"showLikes":false,"autoPlayVideos":false,"clickAction":"open-popup","clickReadMoreAction":"open-popup","maxLines":0},"widget":{"animate":false,"continuousScroll":false,"continuousScrollOffset":50,"rows":2,"template":"widget-grid","showLoadMore":true,"loadMoreRows":1,"verticalSpacing":0,"horizontalSpacing":0,"autoLoadNew":false,"lazyLoadType":"whole_widget","gridMobile":false},"responsive":{"480":{"widget":{"loadMoreRows":4}},"768":{"widget":{"loadMoreRows":2}}},"lang":"en","container":"#curator-feed-default-feed-layout","debug":0,"hidePoweredBy":false,"embedSource":"","forceHttps":false,"feed":{"id":"5e5a781d-0dba-4966-823a-29c0591ac51e","apiEndpoint":"https:\/\/api.curator.io","postsPerPage":12,"params":{},"limit":25},"popup":{"template":"popup","templateWrapper":"popup-wrapper","autoPlayVideos":false,"deepLink":false},"filter":{"template":"filter","showNetworks":false,"showSources":false,"showAll":false,"default":"all","limitPosts":false,"limitPostNumber":0,"period":""},"type":"Grid","theme":"sydney"};
-      var colours = {"widgetBgColor":"transparent","bgColor":"#ffffff","borderColor":"#cccccc","iconColor":"#222222","textColor":"#222222","linkColor":"#999999","dateColor":"#000000","footerColor":"#ffffff","tabIndexColor":"#cccccc"};
-      var styles = {};
-  
-      // Bootstrap
-      function loaderCallback () {
-          window.Curator?.loadWidget(config, colours, styles);
-      }
-  
-      // Run Loader
-      loader.add('//cdn.curator.io/3.1/css/curator.csss');
-      loader.add('https://cdn.curator.io/published-css/5e5a781d-0dba-4966-823a-29c0591ac51e.css');
-  
-      loader.add('//cdn.curator.io/3.1/js/curator.js');
-  
-      
-  
-      loader.load(loaderCallback);
-    }, 1000);
+    // Load the Curator script and then initialize the widget
+    loadCuratorScript()
+      .then(() => {
+        // Wait for the script to load, then initialize the Curator widget
+        setTimeout(() => {    
+          var widget = new Curator.Widgets.Grid({
+            debug: true, // While you're testing
+            container: '#curator-feed-default-feed-layout',
+            feed: {
+              id: '5e5a781d-0dba-4966-823a-29c0591ac51e' // Correct placement of feedId
+            }
+          });
+        }, 1000);
+      })
+      .catch(error => {
+        console.error("Failed to load the Curator script:", error);
+      });
 
-  })
+  }, []);
 
   return (
     <Layout page={page} menus={menus} global={global}>
+      <Head>
+        <link rel="stylesheet" type="text/css" href="https://cdn.curator.io/5.0/curator.embed.css"/>
+      </Head>
       <div className="discover">
         <div className="filter">
           <div><span>Filter by category</span></div>
@@ -55,7 +66,6 @@ const DiscoverFiltered = ({ menus, global, page, categories}) => {
           </div>
         </div>
       </div>
-      
     </Layout>
   )
 }
