@@ -281,3 +281,9 @@
     letter-spacing: 1.2px;
   }
 }
+
+.crt-feed .crt-grid-post{
+  &:nth-child(2){
+    display: none;
+  }
+}
