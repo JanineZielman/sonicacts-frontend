@@ -55,12 +55,12 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
         }
       </>
     </section>
-    <div class="marquee">
-      <div class="marquee__content">
+    <div className="marquee">
+      <div className="marquee__content">
         <a href={global.attributes.scrolling_markee_link} target="_blank">{global.attributes.scrolling_markee}</a>
       </div>
 
-      <div aria-hidden="true" class="marquee__content">
+      <div aria-hidden="true" className="marquee__content">
         <a href={global.attributes.scrolling_markee_link} target="_blank">{global.attributes.scrolling_markee}</a>
       </div>
     </div>

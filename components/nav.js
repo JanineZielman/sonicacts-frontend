@@ -55,7 +55,7 @@ const Nav = ({ menus, global, page, festival }) => {
           }
           {festival?.attributes?.highlight &&
             <div className="marquee-highlight">
-              <div class="marquee__inner" aria-hidden="true">
+              <div className="marquee__inner" aria-hidden="true">
                 <ReactMarkdown 
                   children={festival?.attributes?.highlight} 
                 />
