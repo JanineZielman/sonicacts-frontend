@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import Layout from "../../../components/layout"
 import { fetchAPI } from "../../../lib/api"
-import CuratorWidget from "../../../components/curatorWidget"
+import CuratorWidget from "../../../components/CuratorWidget"
 
 
 const DiscoverFiltered = ({ menus, global, page, categories}) => {
