@@ -22,7 +22,11 @@ const Page = ({menus, page, global}) => {
             }
         });
       } else {
-        setLoading(false);
+        if (page.attributes.external_link.length > 0){
+          window.location.href = page.attributes.external_link
+        } else {
+          setLoading(false);
+        }
       }
     }, 100);
   }, []);
