@@ -48,6 +48,10 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
         <meta property="og:description" content={items[0].attributes.title} />
         <meta name="image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url } />
         <meta property="og:image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url } />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={items[0].attributes.title} />
+        <meta name="twitter:description" content={items[0].attributes.title} />
+        <meta name="twitter:image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url} />
       </Head>
       <Layout page={page} menus={menus} global={global}>
         <div className="discover">

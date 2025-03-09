@@ -21,6 +21,7 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
   return(
     <>
     <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <title>{global?.attributes?.title} | {slugName}</title>
       <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
       <meta name="description" content={page.attributes?.introTextBig ? page.attributes?.introTextBig : page.attributes?.title ? page.attributes?.title : page.attributes?.name ? page.attributes?.name : global.attributes?.description} />
@@ -29,6 +30,11 @@ const Layout = ({ children, menus, page, global, relations, festival}) => {
       <meta property="og:description" content={page.attributes?.introTextBig ? page.attributes?.introTextBig : page.attributes?.title ? page.attributes?.title : page.attributes?.name ? page.attributes?.name : global.attributes?.description} />
       <meta name="image" content={relations?.attributes?.cover_image.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
       <meta property="og:image" content={relations?.attributes?.cover_image?.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={`${global?.attributes?.title} | ${slugName}`} />
+      <meta name="twitter:description" content={page.attributes?.introTextBig ? page.attributes?.introTextBig : page.attributes?.title ? page.attributes?.title : page.attributes?.name ? page.attributes?.name : global.attributes?.description} />
+      <meta name="twitter:image" content={relations?.attributes?.cover_image?.data ? 'https://cms.sonicacts.com' + relations.attributes.cover_image.data.attributes.url : 'https://cms.sonicacts.com' + global.attributes.image.data.attributes.url} />
     </Head>
     <section className={`container ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <>

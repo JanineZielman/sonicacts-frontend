@@ -26,6 +26,10 @@ const nextConfig = {
 
       { source: "/biennial-2022", destination: "/biennial/biennial-2022", permanent: true },
       { source: "/biennial2022", destination: "/biennial/biennial-2022", permanent: true },
+      { source: "/biennial", destination: "/archive/filter/Festival", permanent: true },
+
+      { source: "/undefined", destination: "/404", permanent: true },
+      { source: "/undefined/:path*", destination: "/404", permanent: true },
 
       { source: "/discover/:path*", destination: "/archive/:path*", permanent: true },
 

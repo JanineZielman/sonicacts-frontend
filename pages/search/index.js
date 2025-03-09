@@ -1,12 +1,18 @@
 import Layout from "../../components/layout"
 import { fetchAPI } from "../../lib/api"
+import SearchBar from "../../components/search"
 
 
 const Search = ({ menus, global}) => {
-	const page = 'search'
+  const page = {
+    attributes:
+      	{slug: `/search`}
+	}
   return (
 	  <Layout page={page} menus={menus} global={global}>
-      
+      <div className="search-page">
+        <SearchBar params=""/>
+      </div>
     </Layout>
   )
 }

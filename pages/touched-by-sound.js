@@ -16,6 +16,11 @@ const TouchedBySound = ({ menus, global, page, archiveItems}) => {
       <meta property="og:description" content={page.attributes.content?.[0]?.text_block} />
       <meta name="image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
       <meta property="og:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={global?.attributes?.title || slugName} />
+      <meta name="twitter:description" content={page.attributes.content?.[0]?.text_block} />
+      <meta name="twitter:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url} />
     </Head>
     <Layout page={page} menus={menus} global={global}>
       <div className="discover spatial-sound touched-by-sound">

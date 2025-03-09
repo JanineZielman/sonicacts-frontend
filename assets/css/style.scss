@@ -1150,3 +1150,22 @@ p img{
     margin-top: 24px!important;
   }
 }
+
+.search-page{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .note{
+    margin-top: -80px;
+  }
+  .search-bar{
+    width: 100%;
+    input{
+      width: 100%;
+      text-align: center;
+      font-size: 48px;
+    }
+  }
+}
