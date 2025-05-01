@@ -70,23 +70,23 @@
 	.article .wrapper.about{
 		width: 100%;
 	}
-	.community .slick-slider .slick-slide{
-		.slider-item {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			.image{
-				width: 100px;
-				height: 100px;
-			}
-			.text{
-				max-width: calc(100% - 130px);
-				width: auto;
-				min-width: 100px;
-				overflow: hidden;
-			}
-		}
-	}
+	// .community .slick-slider .slick-slide{
+	// 	.slider-item {
+	// 		display: flex;
+	// 		flex-direction: row;
+	// 		justify-content: center;
+	// 		.image{
+	// 			width: 100px;
+	// 			height: 100px;
+	// 		}
+	// 		.text{
+	// 			max-width: calc(100% - 130px);
+	// 			width: auto;
+	// 			min-width: 100px;
+	// 			overflow: hidden;
+	// 		}
+	// 	}
+	// }
 	.discover a span{
 		font-size: 36px;
 	}
@@ -420,15 +420,39 @@
 		display: flex;
 		width: 100%;
 		justify-content: center;
+		span, h3{
+			padding-left: 0;
+			display: block;
+		}
+		.text-highlight{
+			margin-left: 24px;
+		}
+		.highlight-image{
+			justify-content: center;
+			display: flex;
+			margin-bottom: 14px;
+			// display: none;
+		}
+		.socials{
+			display: flex;
+		}
 		.highlight-image div{
 			margin: 0!important;
+			width: 100px;
+			height: 100px;
+			aspect-ratio: 1/1;
+			img{
+				width: 50%;
+				aspect-ratio: 1/1;
+			}
 		}
 		.socials{
 			margin-left: 0;
 			margin-bottom: 24px;
 		}
 		a{
-			width: 360px;
+			display: flex;
+			align-items: center;
 		}
 	}
 
@@ -539,9 +563,9 @@
 			}
 		}
 	}
-	.community .slick-slider .slick-slide {
-		width: 94vw !important;
-	}
+	// .community .slick-slider .slick-slide {
+	// 	width: 94vw !important;
+	// }
 
 	.contact .slick-slider {
 		.slick-slide {
@@ -646,6 +670,51 @@
 	}
 	.article .image.big{
 		min-width: 100%;
+	}
+
+	.columns .intro-text {
+		width: 100%;
+	}
+
+
+	.home-menu{
+		.shop 	.home-collapsible-project{
+			.slick-list{
+				margin: 0;
+			}
+		}
+		.community .home-collapsible-project{
+			.slick-list{
+				margin: 0;
+				height: auto;
+			}
+			.slick-slider .slick-slide {
+				.slider-item{
+					width: 100%!important;
+					height: auto;
+				}
+			}
+		}
+		.home-collapsible-project{
+			.slick-list {
+				margin: 0 -14px;
+		}
+			.slick-slider .slick-slide {
+				margin: 0 14px;
+				.slider-item{
+					width: 100%;
+					margin-bottom: 24px;
+					.image{
+						margin-left: 0;
+						margin-right: 0;
+					}
+					h2{
+						font-size: 26px;
+						line-height: 1.2;
+					}
+				}
+			}
+		}
 	}
 }
 

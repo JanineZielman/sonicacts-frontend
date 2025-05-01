@@ -1169,3 +1169,141 @@ p img{
     }
   }
 }
+
+
+.home-menu{
+  .home-collapsible-project{
+    .slick-slider{
+      position: relative;
+    }
+    .slick-slider .slick-slide {
+      .slider-item {
+        flex-direction: column;
+        .image, img.img, .text{
+          width: 100%;
+        }
+        .image{
+          width: 100%;
+          object-fit: cover;
+          margin-right: 0;
+          img{
+            aspect-ratio: 16/9;
+          }
+        }
+        .text span{
+          display: block;
+        }
+      }
+    }
+  }
+  .shop .home-collapsible-project{
+    .slick-slider .slick-slide {
+      .slider-item{
+        width: 23%;
+        .image{
+          width: 100%;
+          height: auto;
+          div{
+            width: 100%;
+            height: 100%;
+          }
+          img{
+            aspect-ratio: auto;  
+          }
+        }
+      }
+    }
+  }
+  .community .home-collapsible-project{
+    .slick-slider{
+      height: auto;
+    }
+    .slick-slider .slick-slide {
+      .slider-item{
+        width: 15%;
+        .text{
+          height: auto;
+        }
+        .image{
+          width: 100%;
+          height: 100%;
+          aspect-ratio: 1/1;  
+          margin-bottom: 10px;
+          div{
+            width: 100%;
+            height: 100%;
+          }
+          img{
+            aspect-ratio: 1/1;  
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// .home-menu{
+
+// .home-collapsible-project{
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+//   margin-top: 24px;
+//   margin-bottom: 24px;
+//   .slider-item{
+//     width: 32%;
+//     .text {
+//       span{
+//         display: block;
+//       }
+//     }
+//     .image{
+//       width: 100%;
+//       object-fit: cover;
+//       margin-right: 0;
+//       img{
+//         aspect-ratio: 16/9;
+//       }
+//     }
+//   }
+// }
+
+// .shop .home-collapsible-project{
+//   .slider-item{
+//     width: 23%;
+//     .image{
+//       width: 100%;
+//       height: auto;
+//       div{
+//         width: 100%;
+//         height: 100%;
+//       }
+//       img{
+//         aspect-ratio: auto;  
+//       }
+//     }
+//   }
+// }
+
+// .community .home-collapsible-project{
+//   .slider-item{
+//     width: 15%;
+//     .image{
+//       width: 100%;
+//       height: auto;
+//       margin-bottom: 10px;
+//       div{
+//         width: 100%;
+//         height: 100%;
+//       }
+//       img{
+//         aspect-ratio: 1/1;  
+//         border-radius: 50%;
+//       }
+//     }
+//   }
+// }
+
+// }

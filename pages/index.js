@@ -4,21 +4,19 @@ import Moment from 'moment';
 import Layout from "../components/layout"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
-import NewsletterSubscribe from "../components/NewsletterSubscribe";
-import React, {useState} from "react";
-import Modal from 'react-modal';
+import React from "react";
 
 
 const Home = ({ homepage, menus, global, socials, items, about}) => {
+
   const settings = {
     dots: false,
     arrows: true,
     infinite: true,
     speed: 700,
     slidesToScroll: 1,
-    slidesToShow: 1,
-    variableWidth: true,
-    adaptiveHeight: true,
+    slidesToShow: 3,
+    // adaptiveHeight: true,
     autoplaySpeed: 4000,
     responsive: [
       {
@@ -44,7 +42,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     infinite: true,
     speed: 700,
     slidesToScroll: 1,
-    slidesToShow: 3,
+    slidesToShow: 4,
     variableWidth: false,
     adaptiveHeight: false,
     autoplaySpeed: 4000,
@@ -60,30 +58,30 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     ]
   };
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const modalStyles = {
-    overlay: {
-      backgroundColor: 'transparent',
-    },
+  const settings3 = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    speed: 700,
+    slidesToScroll: 1,
+    slidesToShow: 6,
+    variableWidth: false,
+    adaptiveHeight: false,
+    autoplaySpeed: 4000,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 2,
+          variableWidth: true,
+          adaptiveHeight: true,
+        }
+      },
+    ]
   };
-  
 
   return (
     <Layout page={homepage} menus={menus} global={global}>
-
-      <Modal  isOpen={show} onHide={handleClose} className={`mail-modal`} ariaHideApp={false} closeTimeoutMS={500} style={modalStyles}>
-        <div onClick={handleClose} className="close">
-          <svg width="36" height="34" viewBox="0 0 36 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 0.698933 -0.715187 0.698933 1.5 2)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
-            <line x1="1" y1="-1" x2="44.6296" y2="-1" transform="matrix(0.715187 -0.698933 0.715187 0.698933 1.5 34)" stroke="black" strokeWidth="2" strokeLinecap="square"/>
-          </svg>
-        </div>
-        <NewsletterSubscribe/>
-      </Modal>
       <div className="columns">
         <div className="wrapper-medium">
           <div className="image logo">
@@ -114,111 +112,123 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                   <Image image={homepage.attributes.highlight_image.data?.attributes}/>
                 </div>
               }
-              <span>{homepage.attributes.highlight_subtitle}</span>
-              <h3>{homepage.attributes.highlight_text}</h3>
+              <div className="text-highlight">
+                <span>{homepage.attributes.highlight_subtitle}</span>
+                <h3>{homepage.attributes.highlight_text}</h3>
+              </div>
             </a>
-            <div className="newsletter">
-              <div onClick={handleShow}><h3>Newsletter</h3></div>
-            </div>
-            <div className='socials'>
-              {socials.map((item, i) => {
-                return(
-                  <a href={item.url} target="_blank" className='social'>
-                    <Image image={item.icon?.data.attributes}/>
-                  </a>
-                )
-              })}
+            <div className="news-socials-wrapper">
+              <div className="newsletter">
+                <a target="_blank" href="https://stats.sender.net/forms/ejRvGl/view"><h3>Newsletter</h3></a>
+              </div>
+              <div className='socials'>
+                {socials.map((item, i) => {
+                  return(
+                    <a href={item.url} target="_blank" className='social'>
+                      <Image image={item.icon?.data.attributes}/>
+                    </a>
+                  )
+                })}
+              </div>
             </div>
           </div>
           <div className="home-menu">
             {menus.slice(0, 3).map((page, i) => {
+              const itemCount = items[i].length;
+              const customSettings = {
+                ...settings,
+                slidesToShow: Math.min(itemCount, 3), // max 3, less if fewer items
+              };
+            
               return (
                 <>
                 {items[i].length > 0 &&
                   <div key={'home'+i} className={`collapsible ${page.attributes.slug}`}>
                     <div>
                       <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
-                      <Slider {...settings}>
-                        {items[i].slice(0, 5).map((item, i) => {
-                          return(
-                            <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
-                              {item.attributes.cover_image?.data &&
-                                <div className="image">
-                                  <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
-                                </div>
-                              }
-                              <div className="text">
-                                <div>
-                                  {item.attributes.category?.data &&
-                                    <span className="category">{item.attributes.category.data.attributes.title}</span>
-                                  }
-                                  {item.attributes.date && page.attributes.slug != 'discover' &&
-                                    <>
-                                      {item.attributes.dates?.[0] ?
-                                        <span>
-                                          {item.attributes.dates.map((date, i) => {
-                                            return(
-                                              <span className={`date ${i}`} key={`dates-${i}`}>
-                                                {date.single_date &&
-                                                  <>
-                                                  {i == 0 && Moment(item.attributes.date).format('D MMM y')}
-                                                  , {Moment(date.single_date).format('D MMM y')}
-                                                  </>
-                                                }
-                                                {date.end_date &&
-                                                  <>
-                                                    {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
-                                                      <>
-                                                        {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
-                                                          <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                      <div className="home-collapsible-project">
+                        <Slider {...customSettings}>
+                          {items[i].slice(0, 6).map((item, i) => {
+                            return(
+                              <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item" draggable="false">
+                                {item.attributes.cover_image?.data &&
+                                  <div className="image">
+                                    <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                                  </div>
+                                }
+                                <div className="text">
+                                  <div>
+                                    {item.attributes.category?.data &&
+                                      <span className="category">{item.attributes.category.data.attributes.title}</span>
+                                    }
+                                    {item.attributes.date && page.attributes.slug != 'discover' &&
+                                      <>
+                                        {item.attributes.dates?.[0] ?
+                                          <span>
+                                            {item.attributes.dates.map((date, i) => {
+                                              return(
+                                                <span className={`date ${i}`} key={`dates-${i}`}>
+                                                  {date.single_date &&
+                                                    <>
+                                                    {i == 0 && Moment(item.attributes.date).format('D MMM y')}
+                                                    , {Moment(date.single_date).format('D MMM y')}
+                                                    </>
+                                                  }
+                                                  {date.end_date &&
+                                                    <>
+                                                      {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+                                                        <>
+                                                          {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+                                                            <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                          :
+                                                            <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                                          }
+                                                        </>
                                                         :
-                                                          <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                        }
-                                                      </>
-                                                      :
-                                                      <>
-                                                        {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
-                                                      </>
-                                                    }
-                                                  </>
-                                                }
-                                              </span>
-                                            )
-                                          })}
+                                                        <>
+                                                          {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
+                                                        </>
+                                                      }
+                                                    </>
+                                                  }
+                                                </span>
+                                              )
+                                            })}
+                                          </span>
+                                        : 
+                                        <span>
+                                          {Moment(item.attributes.date).format('D MMM y')}
                                         </span>
-                                      : 
-                                      <span>
-                                        {Moment(item.attributes.date).format('D MMM y')}
-                                      </span>
-                                      }
-                                    </>
+                                        }
+                                      </>
+                                    }
+                                    {item.attributes.hide_names == false &&
+                                      <h2 className="authors index-authors">
+                                        {item.attributes?.community_items?.data &&
+                                          item.attributes.community_items.data.map((author, i) => {
+                                            return( 
+                                              <div className="author">{author.attributes.name}</div>
+                                            )
+                                          })
+                                        }
+                                      </h2>
+                                    }
+                                    {item.attributes.title &&
+                                      <h2>{item.attributes.title}</h2>
+                                    }
+                                  </div>
+                                  {item.attributes.name &&
+                                  <h2>{item.attributes.name}</h2>
                                   }
-                                  {item.attributes.hide_names == false &&
-                                    <h2 className="authors index-authors">
-                                      {item.attributes?.community_items?.data &&
-                                        item.attributes.community_items.data.map((author, i) => {
-                                          return( 
-                                            <div className="author">{author.attributes.name}</div>
-                                          )
-                                        })
-                                      }
-                                    </h2>
-                                  }
-                                  {item.attributes.title &&
-                                    <h2>{item.attributes.title}</h2>
+                                  {item.attributes.job_description &&
+                                    <span> {item.attributes.job_description}</span>
                                   }
                                 </div>
-                                {item.attributes.name &&
-                                <h2>{item.attributes.name}</h2>
-                                }
-                                {item.attributes.job_description &&
-                                  <span> {item.attributes.job_description}</span>
-                                }
-                              </div>
-                            </a>       
-                          )
-                        })}
-                      </Slider>
+                              </a>       
+                            )
+                          })}
+                        </Slider>
+                      </div>
                     </div>
                     
                   </div>
@@ -231,7 +241,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 Shop
               </a>
    
-                <Slider {...settings2}>
+                <div className="home-collapsible-project">
+                  <Slider {...settings2}>
                   {homepage.attributes.shop_item.map((item, i) => {
                     return(
                       <a href={item.link} target="_blank" className="slider-item shop-slider-item">
@@ -256,7 +267,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                       </a>       
                     )
                   })}
-                </Slider>
+                  </Slider>
+                </div>
 
             </div>
             {menus.slice(3,4).map((page, i) => {
@@ -265,40 +277,42 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                   <div>
                     <a href={'/' + page.attributes.slug} className="show-more-link">{page.attributes.slug}</a>
       
-                      <Slider {...settings2}>
-                        {items[3].slice(0, 6).map((item, i) => {
-                          return(
-                            <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item community-slider-item">
-                              {item.attributes.cover_image?.data &&
-                                <div className="image">
-                                  <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
-                                </div>
-                              }
-                              <div className="text">
-                                <div>
-                                  {item.attributes.category?.data &&
-                                    <div className="category">{item.attributes.category.data.attributes.title}</div>
-                                  }
-                                  {item.attributes.date &&
-                                    <span>
-                                      {Moment(item.attributes.date).format('D MMM y')}
-                                    </span>
-                                  }
-                                  {item.attributes.title &&
-                                    <h2>{item.attributes.title}</h2>
-                                  }
-                                </div>
-                                {item.attributes.name &&
-                                <h2>{item.attributes.name}</h2>
+                      <div className="home-collapsible-project">
+                        <Slider {...settings3}>
+                          {items[3].slice(0, 6).map((item, i) => {
+                            return(
+                              <a href={'/' + page.attributes.slug + '/'+ item.attributes.slug} className="slider-item community-slider-item">
+                                {item.attributes.cover_image?.data &&
+                                  <div className="image">
+                                    <Image image={item.attributes.cover_image?.data?.attributes} objectFit='cover'/>
+                                  </div>
                                 }
-                                {item.attributes.job_description &&
-                                  <span> {item.attributes.job_description}</span>
-                                }
-                              </div>
-                            </a>       
-                          )
-                        })}
-                      </Slider>
+                                <div className="text">
+                                  <div>
+                                    {item.attributes.category?.data &&
+                                      <div className="category">{item.attributes.category.data.attributes.title}</div>
+                                    }
+                                    {item.attributes.date &&
+                                      <span>
+                                        {Moment(item.attributes.date).format('D MMM y')}
+                                      </span>
+                                    }
+                                    {item.attributes.title &&
+                                      <h2>{item.attributes.title}</h2>
+                                    }
+                                  </div>
+                                  {item.attributes.name &&
+                                  <h2>{item.attributes.name}</h2>
+                                  }
+                                  {item.attributes.job_description &&
+                                    <span> {item.attributes.job_description}</span>
+                                  }
+                                </div>
+                              </a>       
+                            )
+                          })}
+                        </Slider>
+                      </div>
  
                   </div>
                 </div>
@@ -309,11 +323,11 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                 <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
 
                     <div className='contact-wrapper'>
-                      <div className="contact-item adres">
+                      {/* <div className="contact-item adres">
                         <h5>
                           {about.attributes.content[0].text_block}
                         </h5>
-                      </div>
+                      </div> */}
                       <div className="contact-item">
                         <p>
                           <ReactMarkdown children={about.attributes.content[1].text_block}/>
