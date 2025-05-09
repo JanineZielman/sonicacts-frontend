@@ -83,7 +83,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
   return (
     <Layout page={homepage} menus={menus} global={global}>
       <div className="columns">
-        <div className="wrapper-medium">
+        <div className="wrapper-intro">
           <div className="image logo">
             <div className="s1">
               <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
