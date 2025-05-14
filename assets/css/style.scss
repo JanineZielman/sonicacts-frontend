@@ -378,6 +378,29 @@ h2 {
   }
 }
 
+.wrapper-intro{
+  display: flex;
+  align-items: end;
+  .logo{
+    height: 180px;
+    .glitch{
+      font-size: 100px;
+    }
+    .s2{
+      top: 120px;
+    }
+  }
+  .intro-text {
+    width: 100%;
+    max-width: 800px;
+    padding-bottom: 16px;
+    h1{
+      font-weight: 500;
+      line-height: 1.1;
+    }
+  }
+}
+
 .wrapper {
   width: 900px;
   &.intro{
@@ -1173,8 +1196,12 @@ p img{
 
 .home-menu{
   .home-collapsible-project{
+    width: calc(100% + 48px);
     .slick-slider{
       position: relative;
+    }
+    .slick-next{
+      right: 48px;
     }
     .slick-slider .slick-slide {
       .slider-item {
