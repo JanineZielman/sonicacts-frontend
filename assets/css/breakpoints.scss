@@ -33,11 +33,6 @@
 	}
 }
 
-@media only screen and (max-width: 1200px) {
-	.top-search{
-		display: none;
-	}
-}
 
 @media only screen and (max-width: 1100px) {
 	.wrapper, .columns .wrapper-medium, .columns .wrapper-large{
@@ -235,8 +230,16 @@
 		font-size: 36px;
 	}
 
+	.top-search{
+		display: none;
+	}
+
 	.biennial-article{
 		margin-top: 36px;
+	}
+
+	.wrapper-intro{
+		flex-direction: column;
 	}
 
 	.menu {
@@ -384,8 +387,12 @@
 
 
 	.image.logo {
-		height: 170px;
-		width: 80%;
+		height: 180px;
+		width: 95vw;
+		margin-right: 0;
+		.s2{
+			top: 100px;
+		}
 	}
 
 	.home-menu {
