@@ -350,14 +350,12 @@ export async function getServerSideProps() {
 
   
   // Run API calls in parallel
-  const [homepageRes, globalRes, socialRes, menusRes, newsRes, agendaRes, discoverRes, communityRes, aboutRes] = await Promise.all([
+  const [homepageRes, globalRes, socialRes, menusRes, agendaRes, communityRes, aboutRes] = await Promise.all([
     fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate[archive_items][populate]=*&populate[news_items][populate]=*&populate=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
-    fetchAPI("/menus", { populate: "*" }),
-    fetchAPI("/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*"),
+    fetchAPI("/menus?sort[0]=order%3Aasc", { populate: "*" }),
     fetchAPI(`/agenda-items?filters[$or][0][date][$gte]=${currentDate}&filters[$or][1][end_date][$gte]=${currentDate}&sort[0]=date&sort[1]=slug:ASC&populate=*`),
-    fetchAPI("/discover-items?sort[0]=date%3Adesc&populate=*"),
     fetchAPI(`/community-items?&sort[0]=id%3Adesc&pagination[pageSize]=6&populate=*`),
     fetchAPI("/about?populate[content][populate]=*", { populate: "*" }),
   ])
@@ -369,8 +367,8 @@ export async function getServerSideProps() {
       socials: socialRes.data.attributes.socials,
       menus: menusRes.data,
       items: {
-        0: homepageRes.data.attributes.news_items.data,
-        1: agendaRes.data,
+        0: agendaRes.data,
+        1: homepageRes.data.attributes.news_items.data,
         2: homepageRes.data.attributes.archive_items.data,
         3: communityRes.data,
       },
