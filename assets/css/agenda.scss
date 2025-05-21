@@ -46,9 +46,10 @@
 		}
 		.image{
 			width: 50%;
-			height: 30vw;
+			height: auto;
 			position: relative;
 			overflow: hidden;
+			aspect-ratio: 16/9;
 		}
 	}
 	.timeline-item {

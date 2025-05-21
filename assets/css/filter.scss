@@ -216,7 +216,8 @@
       }
       .image {
         width: 100%;
-        height: 25vw;
+        height: auto;
+        aspect-ratio: 16/9;
         position: relative;
         margin-bottom: 7px;
         mask-image: url('../noise-bg-2.png');
