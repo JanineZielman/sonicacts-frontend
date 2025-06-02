@@ -220,6 +220,13 @@
 			}
 		}
 	}
+	.festival-home, .festival-wrapper{
+		zoom: 1;
+		.container{
+			height: 100%;
+			overflow-y: visible;
+		}
+	}
 }
 
 @media only screen and (max-width: 900px) {

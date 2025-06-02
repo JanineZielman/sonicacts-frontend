@@ -80,58 +80,60 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     ]
   };
 
+  console.log(homepage.attributes)
+
   return (
     <Layout page={homepage} menus={menus} global={global}>
+      <div className="new-home">
+      <div className="highlight highlight-home">
+        <div className="image logo">
+          <div className="s1">
+            <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
+            <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
+            <span  data-text="n" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
+            <span  data-text="i" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
+            <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+          </div>
+          <div className="s2">
+            <span  data-text="A" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
+            <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
+            <span  data-text="t" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
+            <span  data-text="s" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
+          </div>
+        </div>
+        <div className="highlighted-items">
+          {homepage.attributes.highlight_items.map((item,i) => {
+            return(
+              <a href={item.url} target="_blank" className="highlight-wrapper">
+                {item.image.data &&
+                  <div className='highlight-image'>
+                    <Image image={item.image.data?.attributes}/>
+                  </div>
+                }
+              </a>
+            )
+          })}
+        </div>
+        <div className="news-socials-wrapper">
+          <div className='socials'>
+            {socials.map((item, i) => {
+              return(
+                <a href={item.url} target="_blank" className='social'>
+                  <Image image={item.icon?.data.attributes}/>
+                </a>
+              )
+            })}
+          </div>
+        </div>
+      </div>
       <div className="columns">
         <div className="wrapper-intro">
-          <div className="image logo">
-            <div className="s1">
-              <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
-              <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
-              <span  data-text="n" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
-              <span  data-text="i" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
-              <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-            </div>
-            <div className="s2">
-              <span  data-text="A" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
-              <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-              <span  data-text="t" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
-              <span  data-text="s" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
-            </div>
-          </div>
           <div className="intro-text">
             <h1>{homepage.attributes.IntroText}</h1>
           </div>
         </div>
 
         <div className="wrapper-large">
-          <div className="highlight">
-            <a href={homepage.attributes.highlight_url} target="_blank">
-              {homepage.attributes.highlight_image.data &&
-                <div className='highlight-image'>
-                  <Image image={homepage.attributes.highlight_image.data?.attributes}/>
-                </div>
-              }
-              <div className="text-highlight">
-                <span>{homepage.attributes.highlight_subtitle}</span>
-                <h3>{homepage.attributes.highlight_text}</h3>
-              </div>
-            </a>
-            <div className="news-socials-wrapper">
-              <div className="newsletter">
-                <a target="_blank" href="https://stats.sender.net/forms/ejRvGl/view"><h3>Newsletter</h3></a>
-              </div>
-              <div className='socials'>
-                {socials.map((item, i) => {
-                  return(
-                    <a href={item.url} target="_blank" className='social'>
-                      <Image image={item.icon?.data.attributes}/>
-                    </a>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
           <div className="home-menu">
             {menus.slice(0, 3).map((page, i) => {
               const itemCount = items[i].length;
@@ -340,6 +342,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
           </div>
         </div>
       </div>
+      </div>
     </Layout>
   )
 }
@@ -351,7 +354,7 @@ export async function getServerSideProps() {
   
   // Run API calls in parallel
   const [homepageRes, globalRes, socialRes, menusRes, agendaRes, communityRes, aboutRes] = await Promise.all([
-    fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_image][populate]=*&populate[archive_items][populate]=*&populate[news_items][populate]=*&populate=*"),
+    fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_items][populate]=*&populate[archive_items][populate]=*&populate[news_items][populate]=*&populate=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus?sort[0]=order%3Aasc", { populate: "*" }),
