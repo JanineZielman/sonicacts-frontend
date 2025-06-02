@@ -1355,11 +1355,11 @@ p img{
       height: auto;
       max-height: 30vh;
       margin: 1vh auto 0px auto!important;
-      mask-image: url('../noise5.png');
-      mask-size: cover;
-      mask-repeat: no-repeat;
-      mask-position: top;
-      transition: all 0.4s ease;
+      // mask-image: url('../noise5.png');
+      // mask-size: cover;
+      // mask-repeat: no-repeat;
+      // mask-position: top;
+      // transition: all 0.4s ease;
       display: block!important;
       object-fit: contain;
       img{
@@ -1367,9 +1367,9 @@ p img{
         width: 100%;
         height: 100%;
       }
-      &:hover{
-        mask-image: url('../white.png');
-      }
+      // &:hover{
+      //   mask-image: url('../white.png');
+      // }
     }
   }
   a {
