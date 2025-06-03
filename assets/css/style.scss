@@ -1318,23 +1318,26 @@ p img{
 }
 
 .new-home .highlight{
+  background-color: yellow;
+  position: fixed;
+  box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.highlight{
   padding-right: 24px;
   width: 250px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: yellow;
   margin-left: -1vw;
   // padding-top: 250px;
   padding-left: 10px;
   top: 0;
   margin-right: 3vw;
-  position: fixed;
   z-index: 3;
   height: 100%;
-  box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
-  -moz-box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
   .newsletter{
     margin-top: 20px;
     margin-bottom: 10px;
