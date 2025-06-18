@@ -1325,7 +1325,14 @@ p img{
   -moz-box-shadow: 1px 1px 16px -6px rgba(0,0,0,0.75);
   flex-direction: column;
   justify-content: space-between;
+  .highlighted-items{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
 }
+
 
 .highlight{
   padding-right: 24px;

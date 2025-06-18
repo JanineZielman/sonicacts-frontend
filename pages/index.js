@@ -86,7 +86,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
     <Layout page={homepage} menus={menus} global={global}>
       <div className="new-home">
       <div className="highlight highlight-home">
-        <div className="image logo">
+        <a className="image logo" href="/">
           <div className="s1">
             <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
             <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
@@ -100,7 +100,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
             <span  data-text="t" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
             <span  data-text="s" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
           </div>
-        </div>
+        </a>
         <div className="highlighted-items">
           {homepage.attributes.highlight_items.map((item,i) => {
             return(
