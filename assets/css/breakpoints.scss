@@ -248,6 +248,10 @@
 		flex-direction: row;
 	}
 
+	.home-menu .collapsible.archive .slider-item .text span, .feshome-menu .collapsible.archive .slider-item .text span{
+		font-size: 18px;
+	}
+
 	.menu {
 		height: 60px;
 		margin-left: -10px;
@@ -381,7 +385,7 @@
 
 @media only screen and (max-width: 900px) {
 	body {
-		font-size: 21px;
+		font-size: 18px;
 	}
 
 	h1, h2 {
@@ -552,7 +556,7 @@
 	}
 
 	p {
-		font-size: 21px;
+		font-size: 18px;
 	}
 
 	.slick-slider {
@@ -584,6 +588,9 @@
 			}
 		}
 	}
+	.contact .contact-wrapper .contact-item p{
+		font-size: 20px;
+	}
 	.article .text-block.big p{
 		font-size: 48px;
 	}
@@ -606,15 +613,15 @@
 	.new-home{
 		flex-direction: column;
 		h1{
-			font-size: 28px;
+			font-size: 24px;
 		}
 		.image.logo{
-			height: 140px;
+			height: 100px;
 			.glitch{
-				font-size: 70px;
+				font-size: 50px;
 			}
 			.s2{
-				top: 90px;
+				top: 70px;
 			}
 		}
 	}
@@ -689,7 +696,7 @@
 			flex-wrap: wrap;
 			.logo{
 				img{
-					height: 35px;
+					height: 25px!important;
 				}
 			}
 		}
@@ -759,7 +766,7 @@
 						margin-right: 0;
 					}
 					h2{
-						font-size: 26px;
+						font-size: 24px;
 						line-height: 1.2;
 					}
 				}
