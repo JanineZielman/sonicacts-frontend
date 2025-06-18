@@ -51,8 +51,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
         breakpoint: 1100,
         settings: {
           slidesToShow: 1,
-          variableWidth: true,
-          adaptiveHeight: true,
+          variableWidth: false,
+          adaptiveHeight: false,
         }
       },
     ]
@@ -73,14 +73,12 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
         breakpoint: 1100,
         settings: {
           slidesToShow: 2,
-          variableWidth: true,
-          adaptiveHeight: true,
+          variableWidth: false,
+          adaptiveHeight: false,
         }
       },
     ]
   };
-
-  console.log(homepage.attributes)
 
   return (
     <Layout page={homepage} menus={menus} global={global}>
