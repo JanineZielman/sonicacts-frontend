@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 
-import Layout from "../../../components/layout"
+import Layout from "../../../components/new-layout"
 import Moment from 'moment';
 import Image from "../../../components/image"
 import { fetchAPI } from "../../../lib/api"

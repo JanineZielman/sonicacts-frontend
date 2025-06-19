@@ -1,13 +1,13 @@
 import Slider from "react-slick";
 import ReactMarkdown from "react-markdown";
 import Moment from 'moment';
-import Layout from "../components/layout"
+import Layout from "../components/new-layout"
 import Image from "../components/image"
 import { fetchAPI } from "../lib/api"
 import React from "react";
 
 
-const Home = ({ homepage, menus, global, socials, items, about}) => {
+const Home = ({ homepage, menus, global, items, about}) => {
 
   const settings = {
     dots: false,
@@ -81,49 +81,8 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
   };
 
   return (
-    <Layout page={homepage} menus={menus} global={global}>
-      <div className="new-home">
-      <div className="highlight highlight-home">
-        <a className="image logo" href="/">
-          <div className="s1">
-            <span  data-text="S" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>S</span>
-            <span  data-text="o" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>o</span>
-            <span  data-text="n" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>n</span>
-            <span  data-text="i" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>i</span>
-            <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-          </div>
-          <div className="s2">
-            <span  data-text="A" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>A</span>
-            <span  data-text="c" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>c</span>
-            <span  data-text="t" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>t</span>
-            <span  data-text="s" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
-          </div>
-        </a>
-        <div className="highlighted-items">
-          {homepage.attributes.highlight_items.map((item,i) => {
-            return(
-              <a href={item.url} target="_blank" className="highlight-wrapper">
-                {item.image.data &&
-                  <div className='highlight-image'>
-                    <Image image={item.image.data?.attributes}/>
-                  </div>
-                }
-              </a>
-            )
-          })}
-        </div>
-        <div className="news-socials-wrapper">
-          <div className='socials'>
-            {socials.map((item, i) => {
-              return(
-                <a href={item.url} target="_blank" className='social'>
-                  <Image image={item.icon?.data.attributes}/>
-                </a>
-              )
-            })}
-          </div>
-        </div>
-      </div>
+    <Layout page={homepage} menus={menus} global={global} homepage={homepage}>
+
       <div className="columns">
         <div className="wrapper-intro">
           <div className="intro-text">
@@ -158,50 +117,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                                 }
                                 <div className="text">
                                   <div>
-                                    {item.attributes.category?.data &&
-                                      <span className="category">{item.attributes.category.data.attributes.title}</span>
-                                    }
-                                    {item.attributes.date && page.attributes.slug != 'discover' &&
-                                      <>
-                                        {item.attributes.dates?.[0] ?
-                                          <span>
-                                            {item.attributes.dates.map((date, i) => {
-                                              return(
-                                                <span className={`date ${i}`} key={`dates-${i}`}>
-                                                  {date.single_date &&
-                                                    <>
-                                                    {i == 0 && Moment(item.attributes.date).format('D MMM y')}
-                                                    , {Moment(date.single_date).format('D MMM y')}
-                                                    </>
-                                                  }
-                                                  {date.end_date &&
-                                                    <>
-                                                      {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
-                                                        <>
-                                                          {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
-                                                            <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                          :
-                                                            <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                          }
-                                                        </>
-                                                        :
-                                                        <>
-                                                          {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
-                                                        </>
-                                                      }
-                                                    </>
-                                                  }
-                                                </span>
-                                              )
-                                            })}
-                                          </span>
-                                        : 
-                                        <span>
-                                          {Moment(item.attributes.date).format('D MMM y')}
-                                        </span>
-                                        }
-                                      </>
-                                    }
                                     {item.attributes.hide_names == false &&
                                       <h2 className="authors index-authors">
                                         {item.attributes?.community_items?.data &&
@@ -258,9 +173,6 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
                             }
                             {item.title &&
                               <h2>{item.title}</h2>
-                            }
-                            {item.info &&
-                              <div className="tags">{item.info}</div>
                             }
                           </div>
                         </div>
@@ -340,7 +252,7 @@ const Home = ({ homepage, menus, global, socials, items, about}) => {
           </div>
         </div>
       </div>
-      </div>
+   
     </Layout>
   )
 }
@@ -351,9 +263,8 @@ export async function getServerSideProps() {
 
   
   // Run API calls in parallel
-  const [homepageRes, globalRes, socialRes, menusRes, agendaRes, communityRes, aboutRes] = await Promise.all([
+  const [homepageRes, globalRes, menusRes, agendaRes, communityRes, aboutRes] = await Promise.all([
     fetchAPI("/homepage?populate[shop_item][populate]=*&populate[highlight_items][populate]=*&populate[archive_items][populate]=*&populate[news_items][populate]=*&populate=*"),
-    fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"),
     fetchAPI("/menus?sort[0]=order%3Aasc", { populate: "*" }),
     fetchAPI(`/agenda-items?filters[$or][0][date][$gte]=${currentDate}&filters[$or][1][end_date][$gte]=${currentDate}&sort[0]=date&sort[1]=slug:ASC&populate=*`),
@@ -365,7 +276,6 @@ export async function getServerSideProps() {
     props: {
       homepage: homepageRes.data,
       global: globalRes.data,
-      socials: socialRes.data.attributes.socials,
       menus: menusRes.data,
       items: {
         0: agendaRes.data,

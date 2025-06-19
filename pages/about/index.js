@@ -1,5 +1,5 @@
 import React from "react"
-import Layout from "../../components/layout"
+import Layout from "../../components/new-layout"
 import Article from "../../components/article"
 import { fetchAPI } from "../../lib/api"
 import Head from "next/head"

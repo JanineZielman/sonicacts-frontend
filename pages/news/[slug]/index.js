@@ -1,5 +1,5 @@
 import { fetchAPI } from "../../../lib/api"
-import Layout from "../../../components/layout"
+import Layout from "../../../components/new-layout"
 import Article from "../../../components/article"
 
 const NewsItem = ({menus, page, global, relations}) => {
@@ -32,7 +32,7 @@ export async function getServerSideProps({params, query}) {
       menus: menusRes.data, 
       page: pageRes.data[0], 
       global: globalRes.data, 
-      relations: pageRel.data[0] 
+      relations: pageRel.data[0],
     },
   };
 }

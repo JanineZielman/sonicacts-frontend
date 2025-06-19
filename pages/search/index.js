@@ -1,4 +1,4 @@
-import Layout from "../../components/layout"
+import Layout from "../../components/new-layout"
 import { fetchAPI } from "../../lib/api"
 import SearchBar from "../../components/search"
 

@@ -1,7 +1,6 @@
 import { fetchAPI } from "../../../lib/api"
-import Layout from "../../../components/layout"
+import Layout from "../../../components/new-layout"
 import Article from "../../../components/article"
-import LazyLoad from 'react-lazyload';
 import Moment from 'moment';
 import Image from "../../../components/image"
 

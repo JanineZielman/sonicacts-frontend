@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 
 import Moment from 'moment';
-import Layout from "../../components/layout"
+import Layout from "../../components/new-layout"
 import Image from "../../components/image"
 import { fetchAPI } from "../../lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -56,7 +56,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
       <Layout page={page} menus={menus} global={global}>
         <div className="discover">
           <a href={page.attributes.slug+'/'+items[0].attributes.slug}>
-            <div className="highlight">
+            <div className="news-highlight">
               <div className="image">
                 <Image image={items[0].attributes.cover_image?.data?.attributes}/>
               </div>
@@ -148,7 +148,7 @@ export async function getServerSideProps() {
   const [pageRes, globalRes, menusRes] = await Promise.all([
     fetchAPI("/news-index", { populate: "*" }),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
-    fetchAPI("/menus", { populate: "*" }),
+    fetchAPI("/menus", { populate: "*" })
   ])
 
   const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`);

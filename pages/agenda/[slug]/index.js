@@ -1,5 +1,5 @@
 import { fetchAPI } from "../../../lib/api"
-import Layout from "../../../components/layout"
+import Layout from "../../../components/new-layout"
 import Article from "../../../components/article"
 
 const AgendaItem = ({menus, page, global, relations}) => {
