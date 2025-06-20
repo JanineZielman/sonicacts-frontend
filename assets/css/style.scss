@@ -908,6 +908,12 @@ h2 {
 }
 
 
+.page-title{
+  height: calc(100% - 220px);
+  border-top: 1px solid black;
+  padding-top: 5px;
+}
+
 // images grid
 
 .images-grid{

@@ -1,4 +1,3 @@
-import Nav from "./nav"
 import Menu from "./menu"
 import Search from "./search"
 import Head from 'next/head'
@@ -18,7 +17,12 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
     }, 100);
   }, []);
 
-  console.log(global)
+  if (page?.attributes?.slug){
+    const slug = page?.attributes?.slug;
+    var last = slug.substring(slug.lastIndexOf("/") + 1, slug.length);
+    var first = slug.substring(slug.indexOf("/"), 0);
+  }
+
   
   return(
     <>
@@ -66,7 +70,7 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
                   <span  data-text="s" className="glitch" style={{'--delay': (Math.floor(Math.random() * 10) * 0.8) + 's' }}>s</span>
                 </div>
               </a>
-              {homepage &&
+              {homepage ?
                 <div className="highlighted-items">
                   {homepage.attributes.highlight_items.map((item,i) => {
                     return(
@@ -80,6 +84,22 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
                     )
                   })}
                 </div>
+                :
+                <>
+                {page?.attributes?.slug == 'search' ?
+                    <></>
+                  : 
+                    <>
+                      {/* {page.attributes.slug != 'spatial-sound-platform' && */}
+                        <div className="page-title">
+                          <a href={'/' + page?.attributes?.slug}>
+                            {last?.replace('-', ' ').replace('-', ' ')}
+                          </a>
+                        </div>
+                      {/* } */}
+                    </>
+                  }
+                </>
               }
               <div className="news-socials-wrapper">
                 <div className='socials'>

@@ -201,6 +201,9 @@
 			padding-bottom: 14px;
 	}
 
+	.page-title{
+		margin-top: 14px;
+	}
 
 	.new-home{
 		margin-left: 0;
@@ -226,7 +229,8 @@
 	}
 
 	.wrapper-intro{
-		flex-direction: column;
+		flex-direction: column; 
+		margin-top: 24px;
 	}
 
 	.new-home .highlight .highlighted-items{
@@ -571,7 +575,6 @@
 		z-index: 0;
 		margin-top: -20px;
 		margin-right: 0;
-		margin-bottom: 24px;
 		padding: 0 14px 10px 14px;
 		.logo{
 			position: relative;
