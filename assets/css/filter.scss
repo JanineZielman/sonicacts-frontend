@@ -117,23 +117,15 @@
     .infinite-scroll-component{
       width: 100%;
       display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
     }
     .discover-item {
-      width: 33.33%;
+      width: 31%;
       position: relative;
       margin-bottom: 48px;
       height: 100%;
-      &:nth-child(3n+1){
-        .item-wrapper {
-          padding-right: 2vw;
-        }
-      }
-      &:nth-child(3n+2) {
-        .item-wrapper {
-          padding-right: 2vw;
-        }
-      }
+     
       .when {
         display: inline-block;
         font-weight: 200;

@@ -973,16 +973,16 @@ p img{
     .image-item{
       width: 33%;
       margin-right: 0;
-      padding-right: 2vw;
+      margin-right: 2vw;
     }
   }
   .discover .discover-container .discover-item{
     width: 33%;
     .item-wrapper{
-      padding-right: 2vw;
+      margin-right: 2vw;
     }
     &:nth-child(4n) .item-wrapper{
-      padding-right: 0;
+      margin-right: 0;
     }
   }
 }
