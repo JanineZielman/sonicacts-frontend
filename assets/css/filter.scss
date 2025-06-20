@@ -126,12 +126,12 @@
       height: 100%;
       &:nth-child(3n+1){
         .item-wrapper {
-          padding-right: 1vw;
+          padding-right: 2vw;
         }
       }
       &:nth-child(3n+2) {
         .item-wrapper {
-          padding-right: 1vw;
+          padding-right: 2vw;
         }
       }
       .when {
@@ -221,14 +221,19 @@
         aspect-ratio: 16/9;
         position: relative;
         margin-bottom: 7px;
-        mask-image: url('../noise-bg-2.png');
-        mask-size: cover;
-        mask-repeat: no-repeat;
-        mask-position: top;
+        // mask-image: url('../noise-bg-2.png');
+        // mask-size: cover;
+        // mask-repeat: no-repeat;
+        // mask-position: top;
         transition: all 0.4s ease;
+        img{
+          transition: all 0.4s ease;
+        }
         &:hover{
-          mask-image: url('../white.png');
-
+          // mask-image: url('../white.png');
+          img{
+            transform: scale(1.1);
+          }
         }
       }
       &.artist-item{
