@@ -55,37 +55,6 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
       </Head>
       <Layout page={page} menus={menus} global={global}>
         <div className="discover">
-          <a href={page.attributes.slug+'/'+items[0].attributes.slug}>
-            <div className="news-highlight">
-              <div className="image">
-                <Image image={items[0].attributes.cover_image?.data?.attributes}/>
-              </div>
-              <div className="text">
-                <div className="date">
-                  {page.attributes.date ?
-                    <>{Moment(items[0].attributes.date).format('D MMM y')}</>
-                  : <>{Moment(items[0].attributes.publishedAt).format('D MMM y')}</>
-                  }
-                </div>
-                
-                <div className="title">
-                  {items[0].attributes.title}
-                </div>
-                
-                {items[0].attributes.tags?.data && 
-                  <div className="tags">
-                    {items[0].attributes.tags.data.map((tag, i) => {
-                      return(
-                      <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                        {tag.attributes.slug}
-                      </a>
-                      )
-                    })}
-                  </div>
-                }
-              </div>
-            </div>
-          </a>
           <div className="filter">
             <div><span>Sort By</span></div>
             <div onClick={ascPosts} className={`sort ${check}`}><img className="arrow" src="/arrow.svg"/></div>
@@ -100,7 +69,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
               {posts.slice(1).map((item, i) => {
                 return (
                   <div className="discover-item">
-                    <LazyLoad height={600}>
+                    <LazyLoad height={300}>
                       <div className="item-wrapper">
                         <a href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
                           <div className="image">
