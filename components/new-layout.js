@@ -45,8 +45,8 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
     <section className={`container ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <>
         <Menu menus={menus} page={page} global={global}/>
-        <div className="top-search">
-          <Search params={''}/>
+        <div className="top-search-icon">
+          <a href="/search"><img src="/search.png"/></a>
         </div>
         {loading ?
           <div className="loader"></div>

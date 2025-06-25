@@ -50,7 +50,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
       {
         breakpoint: 1100,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           variableWidth: false,
           adaptiveHeight: false,
         }
