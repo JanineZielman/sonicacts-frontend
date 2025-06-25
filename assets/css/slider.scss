@@ -6,7 +6,7 @@
 		letter-spacing: 1.2px;
 	}
 	.slick-next{
-		right: 0;
+		right: -14px;
 		&:before{
 			right: 0;
 			position: absolute;
@@ -14,7 +14,7 @@
 		}
 	}
 	.slick-prev {
-		left: 0;
+		left: -14px;
 		&:before {
 			left: 0;
 			position: absolute;
@@ -23,9 +23,10 @@
 		}
 	}
 	.slick-next, .slick-prev{
-		z-index: 9;
-		width: 30px;
+		// z-index: 9;
+		width: 50px;
 		height: 100%;
+		background-color: #e6e6e6;
 		&:before{
 			font-family: "SuisseIntl";
 			color: black;
@@ -33,12 +34,13 @@
 			transition: all 0.4s ease;
 			font-size: 30px;
 			content: " ";
-			width: 30px;
+			width: 50px;
 			height: 30px;
 			// background-color: red;
 			background-image: url('/arrow.svg');
 			background-position: center center;
 			background-repeat: no-repeat;
+			background-size: 60%;
 		}
 		&:hover {
 			&:before {

@@ -50,7 +50,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
       {
         breakpoint: 1100,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           variableWidth: false,
           adaptiveHeight: false,
         }
@@ -83,7 +83,7 @@ const Home = ({ homepage, menus, global, items, about}) => {
   return (
     <Layout page={homepage} menus={menus} global={global} homepage={homepage}>
 
-      <div className="columns">
+      <div className="columns homepage">
         <div className="wrapper-intro">
           <div className="intro-text">
             <h1>{homepage.attributes.IntroText}</h1>

@@ -1038,12 +1038,9 @@ p img{
 
 .home-menu{
   .home-collapsible-project{
-    width: calc(100% + 48px);
+    width: 100%;
     .slick-slider{
       position: relative;
-    }
-    .slick-next{
-      right: 48px;
     }
     .slick-slider .slick-slide {
       .slider-item {
