@@ -75,7 +75,9 @@ const Agenda = ({ menus, global, page, items, opencalls, programs }) => {
 
 export async function getServerSideProps() {
   const qs = require('qs');
-  const currentDate = new Date(Date.now()).toISOString().split('T')[0].replace('///g', '-')
+  // const currentDate = new Date(Date.now()).toISOString().split('T')[0].replace('///g', '-')
+  const currentDate = new Date('2025-02-15').toISOString().split('T')[0].replace(/\/\//g, '-');
+
 
   // Run API calls in parallel
   const [pageRes, globalRes, menusRes] = await Promise.all([

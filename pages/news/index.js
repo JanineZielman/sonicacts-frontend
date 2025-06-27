@@ -13,6 +13,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
   const [hasMore, setHasMore] = useState(true);
   const [check, setCheck] = useState(false);
 
+
   const ascPosts = async () => {
     setCheck(prevCheck => !prevCheck);
     var res = '';
@@ -39,6 +40,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
 
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
+    console.log(posts)
   }, [posts]);
 
   return (
@@ -66,7 +68,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
               hasMore={hasMore}
               loader={<h4>Loading...</h4>}
             >
-              {posts.slice(1).map((item, i) => {
+              {posts.map((item, i) => {
                 return (
                   <div className="discover-item">
                     <LazyLoad height={300}>
