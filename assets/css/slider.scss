@@ -62,11 +62,11 @@
 	.slick-slide {
 		position: relative;
 		margin-right: 48px;
-		max-width: 60vw;
+		max-width: 45%;
 		.slider-item {
 			position: relative;
 			width: 100%;
-			max-width: calc(75vw )!important;
+			// max-width: calc(75vw )!important;
 			// max-width: calc(75vw - 600px)!important;
 			display: flex!important;
 			h2 {
