@@ -278,9 +278,9 @@ export async function getServerSideProps() {
       global: globalRes.data,
       menus: menusRes.data,
       items: {
-        0: agendaRes.data,
-        1: homepageRes.data.attributes.news_items.data,
-        2: homepageRes.data.attributes.archive_items.data,
+        0: homepageRes.data.attributes.news_items.data,
+        1: homepageRes.data.attributes.archive_items.data,
+        2: agendaRes.data,
         3: communityRes.data,
       },
       about: aboutRes.data,
