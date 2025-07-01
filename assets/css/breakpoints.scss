@@ -313,10 +313,6 @@
 		flex-direction: column;
 		overflow: hidden;
 	
-		.image {
-			height: 60vw;
-		}
-	
 		.image,
 		.info {
 			width: 100%;
@@ -513,9 +509,6 @@
 
 			.discover-item {
 				width: 100%;
-				.image {
-					height: 60vw;
-				}
 			}
 		}
 	}
