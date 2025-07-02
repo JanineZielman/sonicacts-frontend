@@ -237,12 +237,12 @@ const Article = ({page, relations, discover, agenda}) => {
 										</div>
 										</>
 									}
-									{page.attributes.deadline &&
+									{/* {page.attributes.deadline &&
 										<>
 										<span>Deadline</span>
 										<div>{Moment(page.attributes.deadline).format('D MMM y')}</div>
 										</>
-									}
+									} */}
 							</>
 						}
 

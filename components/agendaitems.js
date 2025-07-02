@@ -9,35 +9,8 @@ const Agendaitems = ({ page, items }) => {
   return (
 		<>
 			{items.map((item, i) => {
-				const current = [];
-				current[i] = Moment(items[i].attributes.date).format('M');
-				const next = [];
-				next[i] = Moment(items[i+ 1]?.attributes.date).format('M');
-				const previous = [];
-				previous[i] = Moment(items[i-1]?.attributes.date).format('M');
-				const difference = [];
-				difference[i] = next[i] - current[i];
-				const differencePrev = [];
-				differencePrev[i] = current[i] - previous[i];
-				const number = [];
-				for (let j = 0; j < difference[i] - 1; j++) { 
-					number[j] += 1
-				}
-				const d = [];
-				d[i] = number;
 
 				return (
-					<>
-					{items[i].attributes.date && 
-						differencePrev[i] != 0
-						&&
-						<div className="timeline-item">
-							<div className="line"></div>
-								{Moment(items[i].attributes.date).format('MMMM')}
-							<div className="line"></div>
-						</div>
-
-					}
 					<div className="agenda-item">
 						<LazyLoad height={600}>
 							{/* <a href={`/${page?.attributes.slug}/${item.attributes.slug}`} key={'agenda'+i}> */}
@@ -50,13 +23,7 @@ const Agendaitems = ({ page, items }) => {
 								<div className="info">
 									<div className="info-wrapper">
 										<div>
-											{item.attributes.category?.data && 
-												<div className="category">
-													<a href={'/search/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-														{item.attributes.category?.data?.attributes.title}
-													</a>
-												</div>
-											}
+								
 											{item.attributes.date &&
 												<>
 													{item.attributes.dates?.[0] ?
@@ -99,6 +66,13 @@ const Agendaitems = ({ page, items }) => {
 												</>
 											}
 											<h3>{item.attributes.title}</h3>
+											{item.attributes.category?.data && 
+												<div className="category">
+													<a href={'/search/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+														{item.attributes.category?.data?.attributes.title}
+													</a>
+												</div>
+											}
 											{item.attributes.tags?.data && 
 												<div className="tags">
 													{item.attributes.tags.data.map((tag, i) => {
@@ -116,7 +90,6 @@ const Agendaitems = ({ page, items }) => {
 							</a>
 						</LazyLoad>
 					</div>
-					</>
 				)
 			})}
 		</>

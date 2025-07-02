@@ -52,20 +52,10 @@ const Agenda = ({ menus, global, page, items, opencalls, programs }) => {
         </div>
         <div className="agenda-container">
           {opencalls[0] &&
-            <>
-              <div className="seperator">
-                <h2>Open Call</h2>
-              </div>
-              <OpenCalls page={page} opencalls={opencalls}/>
-            </>
+            <OpenCalls page={page} opencalls={opencalls}/>
           }
           {mergedItems[0] &&
-            <>
-              <div className="seperator">
-                <h2>Upcoming</h2>
-              </div>
-              <AgendaItems page={page} items={mergedItems}/>
-            </>
+            <AgendaItems page={page} items={mergedItems}/>
           }
         </div>
       </div>
