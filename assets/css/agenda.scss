@@ -19,6 +19,9 @@
 		a{
 			display: flex;
 		}
+		&:hover .info .info-wrapper h3{
+			font-weight: 200;
+		}
 		.info{
 			width: 50%;
 			.info-wrapper{
