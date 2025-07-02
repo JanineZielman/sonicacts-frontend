@@ -1,7 +1,7 @@
 import Menu from "./menu"
 import Search from "./search"
 import Head from 'next/head'
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useRef, useState } from "react";
 import Image from "./image"
 import ReactMarkdown from "react-markdown";
 
@@ -22,6 +22,29 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
     var last = slug.substring(slug.lastIndexOf("/") + 1, slug.length);
     var first = slug.substring(slug.indexOf("/"), 0);
   }
+
+  const [showSearch, setShowSearch] = useState(false);
+  const searchRef = useRef(null); // For detecting outside clicks
+  const inputRef = useRef(null);  // For focusing the input
+
+  const toggleSearch = () => setShowSearch(true);
+  const closeSearch = () => setShowSearch(false);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        closeSearch();
+      }
+    }
+    if (showSearch) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSearch]);
 
   
   return(
@@ -45,8 +68,17 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
     <section className={`container ${festival?.attributes?.radio ? 'topbanner' : ''}`}>
       <>
         <Menu menus={menus} page={page} global={global}/>
-        <div className="top-search-icon">
-          <a href="/search"><img src="/search.png"/></a>
+        <div className="top-search-icon" ref={searchRef}>
+          {showSearch ? (
+            <Search inputRef={inputRef} params="" />
+          ) : (
+            <img 
+              src="/search.png" 
+              alt="Search" 
+              onClick={toggleSearch} 
+              style={{ cursor: 'pointer' }} 
+            />
+          )}
         </div>
         {loading ?
           <div className="loader"></div>
