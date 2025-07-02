@@ -179,6 +179,8 @@
 			width: 100%;
 			.discover-item{
 				width: 100%;
+				flex: none;
+				max-width: 100%;
 				.item-wrapper{
 					padding-right: 0vw;
 				}
@@ -488,6 +490,8 @@
 
 	.discover .discover-container .discover-item.community a {
 		width: 100%;
+		flex: none;
+		max-width: 100%;
 	}
 
 	.discover {
@@ -509,6 +513,8 @@
 
 			.discover-item {
 				width: 100%;
+				flex: none;
+				max-width: 100%;
 			}
 		}
 	}

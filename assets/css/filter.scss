@@ -111,17 +111,21 @@
     margin-top: 14px;
     flex-wrap: wrap;
     width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
     .infinite-scroll-component__outerdiv{
       width: 100%;
     }
     .infinite-scroll-component{
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
       flex-wrap: wrap;
+      gap: 2%;
     }
     .discover-item {
-      width: 31%;
+      flex: 1 1 calc(33.333% - 2%);
+      max-width: calc(33.333% - 2%);
       position: relative;
       margin-bottom: 48px;
       height: 100%;
@@ -155,6 +159,7 @@
         }
       }
       .title-wrapper {
+        margin-bottom: 5px;
         .authors{
           line-height: 1.1;
           overflow: hidden;
