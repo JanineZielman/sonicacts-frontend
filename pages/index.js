@@ -233,6 +233,25 @@ const Home = ({ homepage, menus, global, items, about }) => {
                 </div>
               );
             })}
+            <div className="collapsible contact">
+              <div>
+                <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
+
+                    <div className='contact-wrapper'>
+                      {/* <div className="contact-item adres">
+                        <h5>
+                          {about.attributes.content[0].text_block}
+                        </h5>
+                      </div> */}
+                      <div className="contact-item">
+                        <p>
+                          <ReactMarkdown children={about.attributes.content[1].text_block}/>
+                        </p>
+                      </div>
+                    </div>
+ 
+              </div>
+            </div>
           </div>
         </div>
       </div>

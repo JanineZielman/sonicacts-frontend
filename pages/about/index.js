@@ -19,7 +19,6 @@ const About = ({ menus, global, page }) => {
       <meta name="twitter:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url} />
     </Head>
     <Layout page={page} menus={menus} global={global}>
-     
       <div className="about-page">
         <Article page={page}/>
       </div>

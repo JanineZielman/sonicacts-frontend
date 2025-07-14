@@ -98,7 +98,6 @@ const Opencalls = ({ page, opencalls }) => {
 					</div>
 				)
 			})}
-			<hr></hr>
 		</>
   )
 }

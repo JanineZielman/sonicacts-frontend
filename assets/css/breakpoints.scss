@@ -264,10 +264,11 @@
 	}
 
 	.new-home .highlight .highlighted-items{
-		max-width: 60%;
+		max-width: 65%;
 		flex-direction: row;
 		.highlight-image{
 			padding-bottom: 0;
+			padding-top: 14px;
 		}
 	}
 
@@ -418,16 +419,6 @@
 		}
 		.socials{
 			display: flex;
-		}
-		.highlight-image div{
-			margin: 0!important;
-			width: 100px;
-			height: 100px;
-			aspect-ratio: 1/1;
-			img{
-				width: 50%;
-				aspect-ratio: 1/1;
-			}
 		}
 		.socials{
 			margin-left: 0;
@@ -621,9 +612,6 @@
 		}
 		.highlight-image{
 			padding-bottom: 14px;
-			div{
-				width: 80%;
-			}
 		}
 	}
 	.highlighted-items{

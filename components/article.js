@@ -128,17 +128,18 @@ const Article = ({page, relations, discover, agenda}) => {
 						</>
 					</div>
 					<div className={`sidebar ${page.attributes.slug}`}>
-
-					{page.attributes.images?.data.map((item, i) => {
-            return(
-              <div className="image-item-sidebar">
-                <Image image={item.attributes}/>
-                <span className="caption">
-                  {item.attributes.caption}
-                </span>
-              </div>
-            )
-          })}
+					{/* {page.attributes.slug != 'about' &&
+						page.attributes.images?.data.map((item, i) => {
+							return(
+								<div className="image-item-sidebar">
+									<Image image={item.attributes}/>
+									<span className="caption">
+										{item.attributes.caption}
+									</span>
+								</div>
+							)
+						})} */}
+						
 
 						{page.attributes.slug == 'news' &&
 							<>

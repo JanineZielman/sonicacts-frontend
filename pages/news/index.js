@@ -58,7 +58,6 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
       <Layout page={page} menus={menus} global={global}>
         <div className="discover">
           <div className="filter">
-            <div><span>Sort By</span></div>
             <div onClick={ascPosts} className={`sort ${check}`}><img className="arrow" src="/arrow.svg"/></div>
           </div>
           <div className="discover-container">

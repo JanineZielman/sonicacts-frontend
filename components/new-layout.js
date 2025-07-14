@@ -105,11 +105,12 @@ const Layout = ({ children, menus, page, global, relations, festival, homepage})
               {homepage ?
                 <div className="highlighted-items">
                   {homepage.attributes.highlight_items.map((item,i) => {
+                    console.log(item)
                     return(
                       <a href={item.url} target="_blank" className="highlight-wrapper">
                         {item.image.data &&
                           <div className='highlight-image'>
-                            <Image image={item.image.data?.attributes}/>
+                            <img src={`https://cms.sonicacts.com${item.image.data?.attributes.url}`}/>
                           </div>
                         }
                       </a>
