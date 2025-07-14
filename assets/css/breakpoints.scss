@@ -277,8 +277,18 @@
 		}
 	}
 
-	.home-menu .collapsible.archive .slider-item .text span{
+	.home-menu .collapsible.archive .slider-item .text span, 
+	.discover .discover-container .discover-item .title, 	
+	.discover .date, .main-title-wrapper .authors .author, .discover .discover-container .discover-item.community a,
+	.discover .discover-container .discover-item.community a .info div{
 		font-size: 18px;
+	}
+
+	.article .sidebar {
+		font-size: 18px;
+		a{
+			font-size: 18px;
+		}
 	}
 
 	.menu {
@@ -558,7 +568,7 @@
 	}
 
 	.agenda-container .timeline-item{
-		font-size: 24px;
+		font-size: 18px;
 		line-height: 2;
 	}
 
@@ -639,6 +649,11 @@
 	}
 	.slick-slider .slick-slide{
 		// margin: 0 24px 0 0;
+	}
+
+	.search-title{
+		margin-top: 14px;
+		margin-bottom: 14px;
 	}
 	
 }
