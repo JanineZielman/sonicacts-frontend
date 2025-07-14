@@ -931,11 +931,14 @@ div.wrapper.intro{
   text-transform: capitalize;
 }
 
-a img{
+.slider-item, .discover-item{
   transition: all 0.4s ease;
-  filter: saturate(1);
+  transform: translateY(10px);
+  margin-bottom: 24px;
   &:hover{
-    filter: saturate(2);
+    position: absolute;
+    transform: translateY(0px);
+    
   }
 }
 

@@ -656,12 +656,8 @@
 		margin-bottom: 14px;
 	}
 
-	a img{
-		transition: all 0.4s ease;
-		filter: saturate(1);
-		&:hover{
-			filter: saturate(1);
-		}
+	.discover .discover-container .discover-item{
+		margin-bottom: 24px;
 	}
 	
 }
