@@ -931,6 +931,13 @@ div.wrapper.intro{
   text-transform: capitalize;
 }
 
+a img{
+  transition: all 0.4s ease;
+  &:hover{
+    filter: grayscale(1);
+  }
+}
+
 // images grid
 
 .images-grid{
