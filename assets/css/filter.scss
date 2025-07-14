@@ -99,13 +99,14 @@
   }
   .category {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     font-size: 14px;
     line-height: 1.2;
     // justify-content: space-between;
     a {
       font-size: 14px;
       font-weight: 100;
+      line-height: 1.2;
     }
   }
   .discover-container {

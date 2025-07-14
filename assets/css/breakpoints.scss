@@ -197,6 +197,11 @@
 		font-size: 24px;
 	}
 
+	div.wrapper.intro{
+		margin-top: 0;
+		border: none;
+	}
+
 	.page-title{
 		margin-top: 14px;
 	}
@@ -444,13 +449,13 @@
 	}
 
 	.article .content {
-		flex-direction: column-reverse;
+		flex-direction: column;
 		margin-top: 0;
 	}
 
 	.article .text-block.small p, .article .text-block.small ul {
 		padding-left: 24px;
-		font-size: 18px;
+		font-size: 16px;
 	}
 
 	
@@ -520,7 +525,7 @@
 	}
 
 	p {
-		font-size: 18px;
+		font-size: 16px;
 	}
 
 	.slick-slider {
@@ -558,7 +563,7 @@
 	}
 
 	.contact .contact-wrapper .contact-item p{
-		font-size: 18px;
+		font-size: 16px;
 	}
 	.article .text-block.big p{
 		font-size: 32px;
@@ -692,7 +697,7 @@
 		}
 	}
 	.article .text-block.big p{
-		font-size: 24px;
+		font-size: 21px;
 	}
 	.collapsible.about{
 		font-size: 30px;

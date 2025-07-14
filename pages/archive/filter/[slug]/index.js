@@ -74,20 +74,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                             <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
                           }
                         </div>
-                        {item.attributes.category?.data && 
-                          <div className="category">
-                            <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                              {item.attributes.category?.data.attributes.title}
-                            </a>
-                            {item.attributes.authors?.data.map((author, i) =>{
-                              return(
-                                <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
-                                  {author.attributes.name}
-                                </a>
-                              )
-                            })}
-                          </div>
-                        }
+      
                         <div className="title-wrapper main-title-wrapper">
                           {item.attributes.hide_names == false &&
                             <div className="authors">
@@ -102,11 +89,25 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                           }
                           <div className="title">{item.attributes.title}</div>
                         </div>
+                        {item.attributes.category?.data && 
+                          <div className="category">
+                            <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                              {item.attributes.category?.data.attributes.title}
+                            </a>
+                            {item.attributes.authors?.data.map((author, i) =>{
+                              return(
+                                <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                                  {author.attributes.name}
+                                </a>
+                              )
+                            })}
+                          </div>
+                        }
                         {/* <div className="title">
                           {item.attributes.title}
                         </div> */}
           
-                        <div className="tags">
+                        {/* <div className="tags">
                           {item.attributes.tags?.data && 
                             <>
                               {item.attributes.tags.data.map((tag, i) => {
@@ -121,7 +122,7 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
                           {item.attributes.date &&
                             <span>{Moment(item.attributes.date).format('y')}</span>
                           }
-                        </div>
+                        </div> */}
                       </a>
                     </div>
                   </LazyLoad>
