@@ -933,9 +933,9 @@ div.wrapper.intro{
 
 a img{
   transition: all 0.4s ease;
-  filter: saturate(0.3);
+  filter: saturate(1);
   &:hover{
-    filter: saturate(1);
+    filter: saturate(2);
   }
 }
 
