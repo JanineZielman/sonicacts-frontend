@@ -206,7 +206,8 @@ const Article = ({page, relations, discover, agenda}) => {
 													})}
 												</div>
 												:
-												Moment(relations?.attributes?.date).format('D MMM y')
+												<></>
+												// Moment(relations?.attributes?.date).format('D MMM y')
 											}
 										</>
 									}
