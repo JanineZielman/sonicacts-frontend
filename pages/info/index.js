@@ -4,7 +4,7 @@ import Article from "../../components/article"
 import { fetchAPI } from "../../lib/api"
 import Head from "next/head"
 
-const Info = ({ menus, global, page }) => {
+const Info = ({ menus, global, page, homepage }) => {
   return (
     <>
     <Head>
@@ -19,6 +19,11 @@ const Info = ({ menus, global, page }) => {
     </Head>
     <Layout page={page} menus={menus} global={global}>
       <div className="about-page">
+        <div className="wrapper-intro">
+          <div className="intro-text">
+            <h1>{homepage.attributes.IntroText}</h1>
+          </div>
+        </div>
         <Article page={page}/>
       </div>
     </Layout>
@@ -28,10 +33,11 @@ const Info = ({ menus, global, page }) => {
 
 export async function getServerSideProps() {
   // Run API calls in parallel
-  const [pageRes, globalRes, menusRes] = await Promise.all([
+  const [pageRes, globalRes, menusRes, homepageRes] = await Promise.all([
     fetchAPI("/info?populate[content][populate]=*&populate[images][populate]=*"),
     fetchAPI("/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*", { populate: "*" }),
     fetchAPI("/menus", { populate: "*" }),
+    fetchAPI("/homepage", { populate: "*" }),
   ])
 
   return {
@@ -39,6 +45,7 @@ export async function getServerSideProps() {
       page: pageRes.data,
       global: globalRes.data,
       menus: menusRes.data,
+      homepage: homepageRes.data
     },
   }
 }

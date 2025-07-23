@@ -665,6 +665,10 @@
 	.discover .discover-container .discover-item{
 		margin-bottom: 24px;
 	}
+
+	.archive-block.image .columns{
+		flex-direction: column-reverse;
+	}
 	
 }
 
@@ -776,5 +780,12 @@
 				}
 			}
 		}
+	}
+	.filter-links {
+		display: none;
+	}
+
+	.filter-dropdown {
+		display: block;
 	}
 }

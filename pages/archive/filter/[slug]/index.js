@@ -45,17 +45,48 @@ const DiscoverFiltered = ({ menus, global, page, items, categories, numberOfPost
         </p>
         <div className="filter">
           <div><span>Filter by category</span></div>
-						<a key={'category-all'} href={`/archive`}>All</a>
-						{categories?.map((category, i) => {
-							return (
-								<a key={'category'+i} href={`/archive/filter/${category?.attributes.slug}`}
-									className={category?.attributes.slug == filter && 'active'}
-								>
-									{category?.attributes.title}
-								</a>
-							)
-						})}
+
+          {/* Desktop Filter Links */}
+          <div className="filter-links">
+            <a
+              key={'category-all'}
+              href={`/archive`}
+              className={filter == null ? 'active' : ''}
+            >
+              All
+            </a>
+            {categories?.map((category, i) => (
+              <a
+                key={'category' + i}
+                href={`/archive/filter/${category?.attributes.slug}`}
+                className={category?.attributes.slug === filter ? 'active' : ''}
+              >
+                {category?.attributes.title}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Dropdown */}
+          <div className="filter-dropdown">
+            <select
+              onChange={(e) => {
+                if (e.target.value) window.location.href = e.target.value;
+              }}
+              value={filter ? `/archive/filter/${filter}` : `/archive`}
+            >
+              <option value={`/archive`}>All</option>
+              {categories?.map((category, i) => (
+                <option
+                  key={'category-option-' + i}
+                  value={`/archive/filter/${category?.attributes.slug}`}
+                >
+                  {category?.attributes.title}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+
         <div className="discover-container">
           <InfiniteScroll
             dataLength={posts.length}

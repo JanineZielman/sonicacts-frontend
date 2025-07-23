@@ -283,7 +283,7 @@ hr{
 }
 
 div.wrapper.intro{
-  border-top: 1px solid black;
+  // border-top: 1px solid black;
   margin-top: 80px;
   width: 100%;
   p{
@@ -1212,4 +1212,19 @@ p img{
 
 .article .community-block .image{
   padding: 0;
+}
+
+.about-page .wrapper-intro{
+  border-bottom: 1px solid black;
+}
+
+.filter-dropdown {
+  display: none;
+  margin-top: 5px!important;
+  select {
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 24px;
+    border: none;
+  }
 }
