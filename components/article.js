@@ -164,7 +164,7 @@ const Article = ({page, relations, discover, agenda}) => {
 							<span>Last updated on {Moment(page.attributes.updatedAt).format('D MMM y')}</span>
 						}
 					
-						{page.attributes.slug != 'news' && page.attributes.slug != 'community' && page.attributes.slug != 'about' &&
+						{page.attributes.slug != 'news' && page.attributes.slug != 'community' && page.attributes.slug != 'about' && page.attributes.slug != 'info' &&
 							<>	
 									{relations?.attributes?.hide_date ?
 										<></>
@@ -206,8 +206,7 @@ const Article = ({page, relations, discover, agenda}) => {
 													})}
 												</div>
 												:
-												<></>
-												// Moment(relations?.attributes?.date).format('D MMM y')
+												Moment(relations?.attributes?.date).format('D MMM y')
 											}
 										</>
 									}
