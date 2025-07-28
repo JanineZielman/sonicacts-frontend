@@ -292,37 +292,41 @@ const Article = ({page, relations, discover, agenda}) => {
 									/>
 									</>
 								}
-								{(relations.attributes.discover_items.data[0] || discover?.[0] || agenda?.[0]) &&
+								{(relations.attributes.discover_items.data[0] || discover?.[0] || agenda?.[0]) && (
 									<>
-									<span>Related</span>
-									<div className="max-length" id="maxLength2">
-										{discover?.[0] &&
-											discover.map((item, i) => {
-												return(
-													<a className="margin" key={`rel1-link${i}`} href={`/archive/${item.attributes.slug}`}><img className="arrow" src="/arrow.svg"/> {item.attributes.title}</a>
-												)
-											})
-										}
-										{agenda?.[0] &&
-											agenda.map((item, i) => {
-												return(
-													<a className="margin" key={`rel2-link${i}`} href={`/agenda/${item.attributes.slug}`}><img className="arrow" src="/arrow.svg"/> {item.attributes.title}</a>
-												)
-											})
-										}
-										{relations?.attributes?.discover_items?.data.map((item, i ) => {
-											return(
-												<a className="margin" key={`dis-link${i}`} href={'/archive/'+item.attributes.slug}>
-													<img className="arrow" src="/arrow.svg"/> {item.attributes.title}
-												</a>
-											)
-										})}
-									</div>
-									{(discover?.length + agenda?.length + relations?.attributes?.discover_items?.data.length) > 20 &&
-										<div className="show-all-button" onClick={toggleShow2} id="show-button2"></div>
-									}
+										<span>Related</span>
+										<div className="max-length" id="maxLength2">
+											{(() => {
+												const seenSlugs = new Set();
+												const renderItem = (item, basePath, keyPrefix, index) => {
+													const slug = item?.attributes?.slug;
+													const title = item?.attributes?.title;
+													if (!slug || seenSlugs.has(slug)) return null;
+													seenSlugs.add(slug);
+													return (
+														<a className="margin" key={`${keyPrefix}-${index}`} href={`/${basePath}/${slug}`}>
+															<img className="arrow" src="/arrow.svg" /> {title}
+														</a>
+													);
+												};
+
+												return (
+													<>
+														{discover?.map((item, i) => renderItem(item, "archive", "rel1-link", i))}
+														{agenda?.map((item, i) => renderItem(item, "agenda", "rel2-link", i))}
+														{relations?.attributes?.discover_items?.data?.map((item, i) =>
+															renderItem(item, "archive", "dis-link", i)
+														)}
+													</>
+												);
+											})()}
+										</div>
+										{(discover?.length + agenda?.length + relations?.attributes?.discover_items?.data.length) > 20 && (
+											<div className="show-all-button" onClick={toggleShow2} id="show-button2"></div>
+										)}
 									</>
-								}
+								)}
+
 							</div>
 						}
 						
