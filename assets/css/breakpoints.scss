@@ -361,6 +361,12 @@
 
 	.article .wrapper.community .community-block {
 		width: 100%;
+		&.image:nth-child(1){
+			width: auto;
+		}
+		&.text:nth-child(2){
+			width: 100%;
+		}
 		.text-block.big{
 			margin-left: 0;
 			width: 100%;

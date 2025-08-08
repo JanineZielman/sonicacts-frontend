@@ -48,13 +48,17 @@
         }
       }
       .community-block {
-        width: auto;
+        &.image:nth-child(1){
+          width: 220px;
+        }
+        &.text:nth-child(2){
+          width: calc(100% - 300px);
+        }
         &.embed{
           width: 100%;
         }
         display: inline-block;
         .text-block.big{
-          width: 700px;
           max-width: 100%;
           margin-left: 48px;
         }
