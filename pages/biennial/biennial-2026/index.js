@@ -23,7 +23,7 @@ const Festival = ({ news }) => {
         <meta name="twitter:image" content="https://2026.sonicacts.com/assets/og-image/250923-SAB-2026-19by9-1.jpg" />
       </Head>
       <section className="biennial-2026">
-        <h1>Sonic Acts Biennial 2026</h1>
+        <h1><a href="https://2026.sonicacts.com">Sonic Acts Biennial 2026</a></h1>
         <h2 className="visually-hidden">Melted for love</h2>
         <p className="visually-hidden">05 Feb–29 Mar 2026 Biennial</p>
 
