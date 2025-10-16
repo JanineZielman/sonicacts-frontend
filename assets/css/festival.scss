@@ -1335,3 +1335,31 @@
 		overflow-y: visible;
 	}
 }
+
+
+
+.biennial-2026{
+	background-color: #babadf;
+	color: #7a3800;
+	padding: 24px;
+	min-height: 100vh;
+	h1{
+		font-size: 70px;
+		line-height: 1;
+	}
+	a{
+		color: #7a3800;
+	}
+	.news-preview{
+		display: flex;
+		flex-wrap: wrap;
+		
+		.image-text{
+			width: 30vw;
+			margin: 1vw 1vw 0 0;
+			@media only screen and (max-width: 600px) {
+				width: 100%;
+			}
+		}
+	}
+}
