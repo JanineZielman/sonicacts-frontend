@@ -30,7 +30,7 @@ const nextConfig = {
 
       { source: "/biennial-2026", destination: "https://2026.sonicacts.com/", permanent: true },
       { source: "/biennial2026", destination: "https://2026.sonicacts.com/", permanent: true },
-      { source: "biennial/biennial-2026", destination: "https://2026.sonicacts.com/", permanent: true },
+      { source: "/biennial/biennial-2026", destination: "https://2026.sonicacts.com/", permanent: true },
 
       { source: "/undefined", destination: "/404", permanent: true },
       { source: "/undefined/:path*", destination: "/404", permanent: true },
