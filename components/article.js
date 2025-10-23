@@ -23,6 +23,8 @@ const Article = ({page, relations, discover, agenda}) => {
 		}
   }, []);
 
+	console.log(page.attributes.links)
+
   function toggleShow() {
 		var element = document.getElementById("maxLength");
 		var button = document.getElementById("show-button");
@@ -284,12 +286,24 @@ const Article = ({page, relations, discover, agenda}) => {
 
 						{ (page.attributes.links || relations?.attributes?.discover_items) &&
 							<div className="links">
-								{page.attributes.links &&
+								{page.attributes.links  &&
+									page.attributes.slug != 'community' ?
+										<>
+										<span>Links</span>
+										<ReactMarkdown 
+											children={page.attributes.links} 
+										/>
+										</>
+									:
 									<>
-									<span>Links</span>
-									<ReactMarkdown 
-										children={page.attributes.links} 
-									/>
+									{page.attributes.links.length > 0 &&<span>Links</span>}
+									{page.attributes.links.map((item, i) => {
+										return(
+											<a key={`externallink${i}`} target="_blank" href={item.slug}>
+												{item.title}
+											</a>
+										)
+									})}
 									</>
 								}
 								{(relations.attributes.discover_items.data[0] || discover?.[0] || agenda?.[0]) && (
