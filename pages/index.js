@@ -319,7 +319,7 @@ export async function getServerSideProps() {
         `/agenda-items?filters[$or][0][date][$gte]=${currentDate}&filters[$or][1][end_date][$gte]=${currentDate}&sort[0]=date&sort[1]=slug:ASC&populate=*`
       ),
       fetchAPI(
-        `/community-items?filters[biennials][slug][$ne]=biennial-2026&sort[0]=id%3Adesc&pagination[pageSize]=6&populate=*`
+        `/community-items?sort[0]=id%3Adesc&pagination[pageSize]=6&populate=*`
       ),
       fetchAPI("/about?populate[content][populate]=*", { populate: "*" }),
     ]);

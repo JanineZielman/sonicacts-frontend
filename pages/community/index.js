@@ -15,7 +15,7 @@ const Community = ({ menus, global, page, items, numberOfPosts }) => {
 
   const getMorePosts = async () => {
     const res = await fetchAPI(
-      `/community-items?filters[biennials][slug][$ne]=biennial-2026&sort[0]=name&pagination[start]=${posts.length}&populate=*`
+      `/community-items?sort[0]=name&pagination[start]=${posts.length}&populate=*`
     );
     const newPosts = await res.data;
     setPosts((posts) => [...posts, ...newPosts]);
@@ -78,10 +78,10 @@ export async function getServerSideProps() {
     fetchAPI("/menus", { populate: "*" }),
   ])
 
-  const items = await fetchAPI(`/community-items?filters[biennials][slug][$ne]=biennial-2026&sort[0]=name&populate=*`);
+  const items = await fetchAPI(`/community-items?sort[0]=name&populate=*`);
 
 	const totalItems = 
-    await fetchAPI( `/community-items?filters[biennials][slug][$ne]=biennial-2026&sort[0]=name`
+    await fetchAPI( `/community-items?sort[0]=name`
   );
 
   const numberOfPosts = totalItems.meta.pagination.total;
