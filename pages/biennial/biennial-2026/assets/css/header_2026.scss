@@ -1,0 +1,196 @@
+#main-header {
+    position: fixed;
+    bottom: 1rem;
+
+    z-index: 50000;
+    text-align: center;
+
+    width: auto;
+
+    right: 1rem;
+
+    transform-origin: right bottom;
+    transition: transform 0.3s ease;
+
+    body.menu-small & {
+        transform: scale(0.3);
+    }
+
+    body.menu-expanded & {
+        transform: scale(1);
+    }
+
+    body.slug-biennial & {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    @include mobile {
+        top: calc(100dvh - 12rem);
+        bottom: auto;
+        width: 59vw;
+        left: (100vw - 65vw);
+
+        right: auto;
+        height: 10rem;
+
+        body.slug-biennial & {
+            transform: translateX(-50%);
+            top: calc(100dvh - 10rem);
+            transform: scale(1) translateX(-50%);
+            right: auto;
+            left: 50%;
+
+            .minimal-nav__overlay {
+                display: none;
+            }
+
+            .minimal-nav {
+                gap: 0.1rem;
+            }
+
+            ul {
+                gap: 0.2rem;
+                font-size: 1rem;
+
+                li {
+                    a {
+                        opacity: 1;
+                        color: var(--color-brown);
+                    }
+                }
+            }
+        }
+
+        .minimal-nav {
+            position: relative;
+        }
+
+        .minimal-nav__overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 9999;
+            border: 2px solid transparent;
+            pointer-events: auto;
+            background: transparent;
+            touch-action: manipulation;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        body.slug-biennial .minimal-nav__overlay {
+            display: none;
+        }
+
+        .minimal-nav__overlay--active {
+            transform: scale(1.2);
+            pointer-events: none;
+        }
+
+        // Mobile behaviour: keep small until menu is expanded
+        transform-origin: right bottom;
+        transform: scale(0.3);
+        transition: all 0.3s ease;
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        .minimal-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transform-origin: right bottom;
+        }
+
+        ul {
+            gap: 0;
+
+            li {
+                a {
+                    opacity: 0;
+                }
+            }
+        }
+
+        body.menu-expanded & {
+            transform: scale(1);
+            top: calc(100dvh - 9rem);
+
+            .minimal-nav {
+                gap: 0.1rem;
+            }
+
+            ul {
+                gap: 0.2rem;
+                font-size: 1rem;
+
+                li {
+                    a {
+                        opacity: 1;
+                        color: var(--color-brown);
+                    }
+                }
+            }
+        }
+
+        &.click--active {
+            transform: scale(1);
+
+            .minimal-nav {
+                gap: 0.1rem;
+            }
+
+            ul {
+                gap: 0.2rem;
+                font-size: 1rem;
+
+                li {
+                    a {
+                        opacity: 1;
+                        color: var(--color-brown);
+                    }
+                }
+            }
+        }
+    }
+
+    font-size: 1.5rem;
+    letter-spacing: -0.00rem;
+
+    a:link,
+    a:visited {
+        text-decoration: none;
+        cursor: pointer;
+        //display: inline-block;
+        color: var(--color-brown);
+        transition: 0.2s all ease;
+    }
+
+    ul {
+        margin: 0 0 0.2rem 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 0.2rem;
+
+        li {
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            background: var(--color-pink);
+            padding: 0.2rem 0.3rem 0.1rem 0.3rem;
+            border-radius: 0.2rem;
+            transition: background 0.3s ease;
+
+            @include headline-h3;
+
+            &:hover {
+                background: var(--color-blue);
+
+            }
+        }
+    }
+}

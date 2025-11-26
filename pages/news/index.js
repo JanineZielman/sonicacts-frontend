@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 
 import Moment from 'moment';
 import Layout from "../../components/new-layout"
@@ -17,12 +17,12 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
   const ascPosts = async () => {
     setCheck(prevCheck => !prevCheck);
     var res = '';
-    if (check == true){
+    if (check == true) {
       res = await fetchAPI(
         `/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`
       );
-    } else{
-       res = await fetchAPI(
+    } else {
+      res = await fetchAPI(
         `/news-items?sort[0]=date%3Aasc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`
       );
     }
@@ -40,7 +40,6 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
 
   useEffect(() => {
     setHasMore(numberOfPosts > posts.length ? true : false);
-    console.log(posts)
   }, [posts]);
 
   return (
@@ -48,8 +47,8 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
       <Head>
         <meta name="description" content={items[0].attributes.title} />
         <meta property="og:description" content={items[0].attributes.title} />
-        <meta name="image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url } />
-        <meta property="og:image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url } />
+        <meta name="image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url} />
+        <meta property="og:image" content={'https://cms.sonicacts.com' + items[0].attributes.cover_image?.data?.attributes.url} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={items[0].attributes.title} />
         <meta name="twitter:description" content={items[0].attributes.title} />
@@ -58,7 +57,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
       <Layout page={page} menus={menus} global={global}>
         <div className="discover">
           <div className="filter">
-            <div onClick={ascPosts} className={`sort ${check}`}><img className="arrow" src="/arrow.svg"/></div>
+            <div onClick={ascPosts} className={`sort ${check}`}><img className="arrow" src="/arrow.svg" /></div>
           </div>
           <div className="discover-container">
             <InfiniteScroll
@@ -72,10 +71,10 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
                   <div className="discover-item">
                     <LazyLoad height={300}>
                       <div className="item-wrapper">
-                        <a href={page.attributes.slug+'/'+item.attributes.slug} key={'link'+i}>
+                        <a href={page.attributes.slug + '/' + item.attributes.slug} key={'link' + i}>
                           <div className="image">
                             {item.attributes.cover_image?.data?.attributes &&
-                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover' />
                             }
                           </div>
                           <div className="date">
@@ -87,13 +86,13 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
                           <div className="title">
                             {item.attributes.title}
                           </div>
-                          {item.attributes.tags?.data && 
+                          {item.attributes.tags?.data &&
                             <div className="tags">
                               {item.attributes.tags.data.map((tag, i) => {
-                                return(
-                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  {tag.attributes.slug}
-                                </a>
+                                return (
+                                  <a href={'/search/' + tag.attributes.slug} key={'search' + i}>
+                                    {tag.attributes.slug}
+                                  </a>
                                 )
                               })}
                             </div>
@@ -107,7 +106,7 @@ const News = ({ menus, global, page, items, numberOfPosts }) => {
             </InfiniteScroll>
           </div>
         </div>
-        
+
       </Layout>
     </>
   )
@@ -123,9 +122,9 @@ export async function getServerSideProps() {
 
   const items = await fetchAPI(`/news-items?sort[0]=date%3Adesc&filters[$or][0][hide_on_portal][$null]=true&filters[$or][1][hide_on_portal][$ne]=true&populate=*`);
 
-	const totalItems = 
-    await fetchAPI( `/news-items?sort[0]=date%3Adesc`
-  );
+  const totalItems =
+    await fetchAPI(`/news-items?sort[0]=date%3Adesc`
+    );
 
   const numberOfPosts = totalItems.meta.pagination.total;
 

@@ -1,0 +1,234 @@
+@import './mixins';
+
+@mixin mono {
+  font-family: 'BSTBazaineMono', monospace;
+  font-size: 0.7rem;
+  color: var(--color-brown);
+  text-transform: uppercase;
+}
+
+@mixin font-bazaine {
+  font-family: 'BSTBazaineMono', monospace;
+}
+
+@mixin mono-s {
+  font-family: 'BSTBazaineMono', monospace;
+  font-size: 0.7rem;
+  color: var(--color-brown);
+
+  @include mobile {
+    font-size: 1rem;
+  }
+}
+
+@mixin headline-h2 {
+  font-family: 'BSTBazaineMono', monospace;
+  font-size: 12rem;
+
+  @include mobile {
+    font-size: 4.5rem !important;
+  }
+
+  line-height: 0.9;
+
+  word-spacing: -0.25em;
+  letter-spacing: -0.12em;
+
+  text-transform: uppercase;
+  text-wrap: balance;
+
+  color: var(--color-pink);
+
+  -webkit-text-stroke-color: var(--color-brown);
+  text-stroke-color: var(--color-brown);
+  -webkit-text-stroke-width: 1px;
+  text-stroke-width: 1px;
+}
+
+@mixin headline-h2-5 {
+  font-family: 'BSTBazaineMono', monospace;
+  font-size: 3rem;
+  line-height: 1.12;
+  word-spacing: -0.25em;
+  letter-spacing: -0.12rem;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@mixin headline-h3 {
+  font-family: 'BSTBazaineMono', monospace;
+  font-size: 2rem;
+  line-height: 1.15;
+  word-spacing: -0.25em;
+  letter-spacing: -0.1rem;
+  text-wrap: balance;
+}
+
+@mixin headline-h4 {
+  font-family: 'BSTBazaineMono', monospace;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  word-spacing: -0.25em;
+  text-wrap: balance;
+  letter-spacing: -0.08rem;
+}
+
+@mixin running {
+  font-family: 'JLLimpet', serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+@mixin running-small {
+  font-family: 'JLLimpet', serif;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+@mixin black-label {
+  font-size: 0.8rem;
+
+  @include mobile {
+    font-size: 1rem;
+  }
+}
+
+@mixin label {
+  font-size: 0.6rem;
+  text-align: right;
+}
+
+@font-face {
+  font-family: 'BSTBazaineMono';
+  src: local('BSTBazaineMono-Light'),
+    url('/biennial/biennial-2026/assets/fonts/BSTBazaineMono-Light.woff2') format('woff2');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JLLimpet';
+  src: local('JLLimpet Granite Medium'), local('JLLimpetGranite-Medium'),
+    url('/biennial/biennial-2026/assets/fonts/JLLimpetGranite-Medium.woff2') format('woff2');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JLLimpet';
+  src: local('JLLimpet Intertidal Medium'), local('JLLimpetIntertidal-Medium'),
+    url('/biennial/biennial-2026/assets/fonts/JLLimpetIntertidal-Medium.woff2') format('woff2');
+  font-style: italic;
+  font-display: swap;
+}
+
+html {
+  @include mobile {
+    font-size: 3.26vw;
+    line-height: 1.1;
+  }
+
+  @include desktop {
+    font-size: 1.2vw;
+    line-height: 1.1;
+  }
+}
+
+
+body {
+  font-family: 'BSTBazaineMono', 'Courier', monospace;
+
+  font-size: 1.4rem;
+  line-height: 1.14;
+  letter-spacing: 0.00rem;
+
+  color: var(--color-brown);
+
+  font-variation-settings: 'wght' 400, 'ital' 0;
+}
+
+.no-feature {
+  font-feature-settings: "ss01";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: normal;
+  font-size: 0.84rem;
+  line-height: 1.1;
+}
+
+
+a {
+  color: var(--color-brown);
+  text-decoration: underline;
+  text-decoration-color: var(--color-pink);
+
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2rem;
+
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-variation-settings: 'wght' 400, 'wdth' 104;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+
+strong {
+  font-weight: normal;
+  color: inherit;
+}
+
+p,
+li {
+  margin: 0;
+  @include running;
+
+  @include mobile {
+    font-size: 1.4rem;
+  }
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+p+p {
+  margin: 0 0 1rem;
+}
+
+ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+
+
+h4 {
+  font-size: 1rem;
+  font-variation-settings: 'wght' 500, 'wdth' 104;
+}
+
+h5 {
+  font-size: 1rem;
+  font-variation-settings: 'wght' 500, 'wdth' 104;
+}
+
+strong {
+  font-variation-settings: 'wght' 500, 'wdth' 104;
+}
+
+em {
+  font-variation-settings: 'wght' 400, 'ital' 1;
+}

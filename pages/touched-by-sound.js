@@ -6,141 +6,140 @@ import { fetchAPI } from "../lib/api"
 import LazyLoad from 'react-lazyload';
 import Head from "next/head";
 
-const TouchedBySound = ({ menus, global, page, archiveItems}) => {
-  console.log(page)
-  
+const TouchedBySound = ({ menus, global, page, archiveItems }) => {
+
   return (
     <>
-    <Head>
-      <meta name="description" content={page.attributes.content?.[0]?.text_block} />
-      <meta property="og:description" content={page.attributes.content?.[0]?.text_block} />
-      <meta name="image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
-      <meta property="og:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url } />
+      <Head>
+        <meta name="description" content={page.attributes.content?.[0]?.text_block} />
+        <meta property="og:description" content={page.attributes.content?.[0]?.text_block} />
+        <meta name="image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url} />
+        <meta property="og:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url} />
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={global?.attributes?.title || slugName} />
-      <meta name="twitter:description" content={page.attributes.content?.[0]?.text_block} />
-      <meta name="twitter:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url} />
-    </Head>
-    <Layout page={page} menus={menus} global={global}>
-      <div className="discover spatial-sound touched-by-sound">
-        <section className="article">
-          <div className="content">
-            <div className="wrapper">
-              <div className="spatial-sound-intro">
-                <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={global?.attributes?.title || slugName} />
+        <meta name="twitter:description" content={page.attributes.content?.[0]?.text_block} />
+        <meta name="twitter:image" content={'https://cms.sonicacts.com' + page?.attributes?.images?.data[0].attributes.url} />
+      </Head>
+      <Layout page={page} menus={menus} global={global}>
+        <div className="discover spatial-sound touched-by-sound">
+          <section className="article">
+            <div className="content">
+              <div className="wrapper">
+                <div className="spatial-sound-intro">
+                  <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
+                </div>
+                <div className="wrapper intro">
+                  <ReactMarkdown
+                    children={page.attributes.introTextSmall}
+                  />
+                </div>
               </div>
-              <div className="wrapper intro">
-                <ReactMarkdown 
-                  children={page.attributes.introTextSmall} 
-                />
+              <div className="sidebar">
+                {page?.attributes?.community_items?.data[0] &&
+                  <div>
+                    <span>Community</span>
+                    <div className="max-length" id="maxLength">
+                      {page?.attributes?.community_items.data.map((item, i) => {
+                        return (
+                          <a href={'/community/' + item.attributes.slug} key={`com-link${i}`}>
+                            {item.attributes.name}
+                          </a>
+                        )
+                      })}
+                    </div>
+                    {page?.attributes?.community_items?.data.length > 20 &&
+                      <div className="show-all-button" onClick={toggleShow} id="show-button"></div>
+                    }
+                  </div>
+                }
               </div>
             </div>
-            <div className="sidebar">
-            {page?.attributes?.community_items?.data[0] &&
-							<div>
-								<span>Community</span>
-								<div className="max-length" id="maxLength">
-									{page?.attributes?.community_items.data.map((item, i) => {
-										return (
-											<a href={'/community/'+item.attributes.slug} key={`com-link${i}`}>
-												{item.attributes.name}
-											</a>
-										)
-									})}
-								</div>
-								{page?.attributes?.community_items?.data.length > 20 &&
-									<div className="show-all-button" onClick={toggleShow} id="show-button"></div>
-								}
-							</div>
-						}
-            </div>
+          </section>
+          <br />
+          <div className="images-grid">
+            {page.attributes.images?.data.map((item, i) => {
+              return (
+                <div className="image-item">
+                  <Image image={item.attributes} />
+                  <span className="caption">
+                    {item.attributes.caption}
+                  </span>
+                </div>
+              )
+            })}
           </div>
-        </section>
-        <br/>
-        <div className="images-grid">
-          {page.attributes.images?.data.map((item, i) => {
-            return(
-              <div className="image-item">
-                <Image image={item.attributes}/>
-                <span className="caption">
-                  {item.attributes.caption}
-                </span>
-              </div>
-            )
-          })}
-        </div>
-        {archiveItems.length > 0 &&
-          <div className="discover">
-            <div className="discover-container  programme-container">
-              {archiveItems.map((item, i) => {
-                return (
-                  <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
-                    <LazyLoad height={600}>
-                      <div className="item-wrapper">
-                        <a href={'/'+page?.attributes.slug+'/'+item.attributes.slug} key={'discover'+i}>
-                          <div className="image">
-                            {item.attributes.cover_image?.data &&
-                              <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
-                            }
-                          </div>
-                          {item.attributes.category?.data && 
-                            <div className="category">
-                              <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
-                                {item.attributes.category?.data.attributes.title}
-                              </a>
-                              {item.attributes.authors?.data.map((author, i) =>{
-                                return(
-                                  <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
-                                    {author.attributes.name}
-                                  </a>
-                                )
-                              })}
+          {archiveItems.length > 0 &&
+            <div className="discover">
+              <div className="discover-container  programme-container">
+                {archiveItems.map((item, i) => {
+                  return (
+                    <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
+                      <LazyLoad height={600}>
+                        <div className="item-wrapper">
+                          <a href={'/' + page?.attributes.slug + '/' + item.attributes.slug} key={'discover' + i}>
+                            <div className="image">
+                              {item.attributes.cover_image?.data &&
+                                <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover' />
+                              }
                             </div>
-                          }
-                          <div className="title-wrapper main-title-wrapper">
-                            {item.attributes.hide_names == false &&
-                              <div className="authors">
-                                {item.attributes?.community_items?.data &&
-                                  item.attributes.community_items.data.map((author, i) => {
-                                    return( 
-                                      <div className="author">{author.attributes.name}</div>
-                                    )
-                                  })
-                                }
+                            {item.attributes.category?.data &&
+                              <div className="category">
+                                <a href={'/' + page?.attributes.slug + '/filter/' + item.attributes.category?.data?.attributes.slug} key={'discover' + i}>
+                                  {item.attributes.category?.data.attributes.title}
+                                </a>
+                                {item.attributes.authors?.data.map((author, i) => {
+                                  return (
+                                    <a className="author by-line" href={'/community/' + author.attributes.slug} key={'discover' + i}>
+                                      {author.attributes.name}
+                                    </a>
+                                  )
+                                })}
                               </div>
                             }
-                            <div className="title">{item.attributes.title}</div>
-                          </div>                  
-                          <div className="tags">
-                            {item.attributes.tags?.data && 
-                              <>
-                              {item.attributes.tags.data.map((tag, i) => {
-                                return(
-                                <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                  {tag.attributes.slug}
-                                </a>
-                                )
-                              })}
-                              </>
-                            }
-                          </div>
-                        </a>
-                      </div>
-                    </LazyLoad>
-                  </div>
-                )
-              })}
+                            <div className="title-wrapper main-title-wrapper">
+                              {item.attributes.hide_names == false &&
+                                <div className="authors">
+                                  {item.attributes?.community_items?.data &&
+                                    item.attributes.community_items.data.map((author, i) => {
+                                      return (
+                                        <div className="author">{author.attributes.name}</div>
+                                      )
+                                    })
+                                  }
+                                </div>
+                              }
+                              <div className="title">{item.attributes.title}</div>
+                            </div>
+                            <div className="tags">
+                              {item.attributes.tags?.data &&
+                                <>
+                                  {item.attributes.tags.data.map((tag, i) => {
+                                    return (
+                                      <a href={'/search/' + tag.attributes.slug} key={'search' + i}>
+                                        {tag.attributes.slug}
+                                      </a>
+                                    )
+                                  })}
+                                </>
+                              }
+                            </div>
+                          </a>
+                        </div>
+                      </LazyLoad>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        }
-      </div>
-    </Layout>
+          }
+        </div>
+      </Layout>
     </>
   )
 }
 
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
   const preview = query.preview
 
   const [pageRes, globalRes, menusRes] = await Promise.all([

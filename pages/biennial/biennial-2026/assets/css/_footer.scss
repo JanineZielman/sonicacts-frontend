@@ -1,0 +1,110 @@
+.prefooter {
+    padding-top: 4rem;
+
+    p {
+        text-align: center;
+    }
+
+    .logos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 2rem;
+    
+        .logo {
+            @include desktop {
+                width: calc(100% / 12);
+            }
+
+            @include mobile {
+                width: calc(100% / 6);
+            }
+            
+            padding: 0.5rem;
+            
+            img {
+                width: 100%;                
+                height: 2.5rem;
+                object-fit: contain;
+    
+                filter: grayscale(100%);
+                mix-blend-mode: multiply;
+
+                height: auto !important;
+                width: auto !important;
+
+                margin: 0 !important;
+            }
+
+            &#logo-id-2573 {
+                min-width: 12rem;
+                margin-top: -2rem;
+            }
+
+            &#logo-id-2576 {
+                max-width: 5rem;
+            }
+
+            &#logo-id-2575 {
+                min-width: 10rem;
+            }
+
+        }
+    }
+}
+
+#colophon-menu {
+    @include grid;
+    padding: 3rem 0 6rem 0;
+    position: relative;
+    z-index: 100;
+        
+    .colophon-item {
+        @include col-2;
+
+        @include mobile {
+            @include col-3;
+        }
+
+        @include mono-s;
+        text-align: center;
+    }
+}
+
+#colophon-content {
+    position: fixed;
+    z-index: 1000;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 2rem;
+
+    background-color: transparent;
+    box-shadow: none;
+
+    width: 28rem;
+
+    display: none;
+
+
+    p {
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+
+
+.closer-target {
+    .closer {
+        position: absolute;
+        right: 1rem;
+        top: 0.7rem;
+        cursor: pointer;
+    }
+}

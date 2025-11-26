@@ -1,70 +1,99 @@
 import App from "next/app"
 import Head from "next/head"
-import "../assets/css/style.scss"
-import "../assets/css/article.scss"
-import "../assets/css/filter.scss"
-import "../assets/css/agenda.scss"
-import "../assets/css/search.scss"
-import "../assets/css/slider.scss"
-import "../assets/css/festival.scss"
-import "../assets/css/animation.scss"
-import "../assets/css/timetable.scss"
-import "../assets/css/error.scss"
-import "../assets/css/breakpoints.scss"
-import "../assets/css/festival-breakpoints.scss"
+import { useRouter } from "next/router"
 import { createContext } from "react"
+import React, { useEffect, useState } from "react"
+
 import { fetchAPI } from "../lib/api"
 import { getStrapiMedia } from "../lib/media"
-import React, {useEffect, useState} from "react"
 
-// Store Strapi Global object in context
 export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
+  const router = useRouter()
   const { global } = pageProps
-  const [loading, setLoading] = useState(true);
+
+  const [loading, setLoading] = useState(true)
+
+  // detect biennial route
+  const isBiennial2026 = router.pathname.startsWith("/biennial/biennial-2026")
+
+  // Dynamically load CSS based on route
+  if (typeof window !== "undefined") {
+    const old = document.querySelectorAll("style[data-dynamic], link[data-dynamic]")
+    old.forEach((el) => el.remove())
+  }
+
+  if (!isBiennial2026) {
+    // PORTAL STYLES
+    require("../assets/css/style.scss")
+    require("../assets/css/article.scss")
+    require("../assets/css/filter.scss")
+    require("../assets/css/agenda.scss")
+    require("../assets/css/search.scss")
+    require("../assets/css/slider.scss")
+    require("../assets/css/festival.scss")
+    require("../assets/css/animation.scss")
+    require("../assets/css/timetable.scss")
+    require("../assets/css/error.scss")
+    require("../assets/css/breakpoints.scss")
+    require("../assets/css/festival-breakpoints.scss")
+  }
+
+  if (isBiennial2026) {
+    // BIENNIAL STYLES
+    require("./biennial/biennial-2026/assets/css/style.scss")
+    require("./biennial/biennial-2026/assets/css/breakpoints.scss")
+    require("./biennial/biennial-2026/assets/css/error.scss")
+  }
 
   useEffect(() => {
-    setTimeout(function() {
-       setLoading(false)
-    }, 100);
-  }, []);
-  
+    setTimeout(() => setLoading(false), 100)
+  }, [])
+
   return (
     <>
       <Head>
-        <link 
+        {/* Global favicon */}
+        <link
           rel="shortcut icon"
-          href={getStrapiMedia(global.attributes.favicon?.data?.attributes)}
+          href={getStrapiMedia(global?.attributes?.favicon?.data?.attributes)}
         />
-        <link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-      </Head>
-      <GlobalContext.Provider value={global.attributes}>
-        {/* {loading ?
-          <div className="loader"></div>
-          :
+
+        {/* Slick ONLY for portal */}
+        {!isBiennial2026 && (
           <>
-            <div className={`loader ${loading}`}></div>
-            <Component {...pageProps} />
+            <link
+              data-dynamic
+              rel="stylesheet"
+              type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+            />
+            <link
+              data-dynamic
+              rel="stylesheet"
+              type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+            />
           </>
-        } */}
+        )}
+      </Head>
+
+      <GlobalContext.Provider value={global?.attributes || {}}>
+        {/* Optional loader re-enabled if you want */}
+        {/* {loading ? <div className="loader"/> : <Component {...pageProps} />} */}
         <Component {...pageProps} />
-        
       </GlobalContext.Provider>
     </>
   )
 }
 
-
 MyApp.getInitialProps = async (ctx) => {
-  // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(ctx)
-  // // Fetch global site settings from Strapi
-  const globalRes = await fetchAPI("/global", { populate: "*"})
-  // Pass the data to our page via props
+
+  const globalRes = await fetchAPI("/global", { populate: "*" })
+
   return { ...appProps, pageProps: { global: globalRes.data } }
-  // return { ...appProps }
 }
 
 export default MyApp
