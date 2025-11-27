@@ -18,7 +18,7 @@ const About = ({ global, page }) => {
       metaTitle: "Sonic Acts Biennial 2026 - About",
       metaDescription,
       shareImage: {
-        url: "https://2026.sonicacts.com/assets/og-image/250923-SAB-2026-19by9-1.jpg",
+        url: "https://sonicacts.com/biennial/biennial-2026/assets/og-image/250923-SAB-2026-19by9-1.jpg",
       },
     }
 
