@@ -1,26 +1,19 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 const RemovePortalStyles = () => {
-  const router = useRouter();
-
   useEffect(() => {
-    // Wait until the component is mounted and router is ready
-    if (!router?.pathname) return;
+    // Only run on client
+    if (typeof window === "undefined") return;
 
-    const isBiennial2026 = router.pathname.startsWith("/biennial/biennial-2026");
+    const isBiennial2026 = window.location.pathname.startsWith("/biennial/biennial-2026");
     if (!isBiennial2026) return;
 
-    // Small delay to ensure all <style> tags are rendered
-    const timer = setTimeout(() => {
-      const styles = Array.from(document.head.querySelectorAll("style"))
-        .filter(style => !Array.from(style.attributes).some(attr => attr.name.startsWith("data-")));
+    // Remove all <style> tags without data attributes
+    const styles = Array.from(document.head.querySelectorAll("style"))
+      .filter(style => !Array.from(style.attributes).some(attr => attr.name.startsWith("data-")));
 
-      styles.forEach(style => style.remove());
-    }, 50); // 50ms delay is usually enough
-
-    return () => clearTimeout(timer);
-  }, [router]);
+    styles.forEach(style => style.remove());
+  }, []);
 
   return null;
 };
