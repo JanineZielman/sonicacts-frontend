@@ -17,6 +17,7 @@ import { fetchAPI } from "../lib/api"
 import { getStrapiMedia } from "../lib/media"
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router";
+import RemovePortalStyles from "../components/RemovePortalStyles";
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
@@ -60,6 +61,7 @@ const MyApp = ({ Component, pageProps }) => {
             <Component {...pageProps} />
           </>
         } */}
+        <RemovePortalStyles />
         <Component {...pageProps} />
 
       </GlobalContext.Provider>
