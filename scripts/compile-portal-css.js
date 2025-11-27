@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Compile all Portal SCSS into a single public/portal.css
- * and remove @font-face declarations.
- */
+
+* Compile all Portal SCSS into a single public/portal.css
+* and remove @font-face declarations.
+* Files are compiled in a specific explicit order.
+  */
 
 const fs = require("fs");
 const path = require("path");
@@ -15,14 +17,27 @@ const OUTPUT_CSS_FILE = path.join(__dirname, "../public/portal.css");
 // Ensure output directory exists
 fs.mkdirSync(path.dirname(OUTPUT_CSS_FILE), { recursive: true });
 
-// Read all SCSS files
-const scssFiles = fs.readdirSync(PORTAL_SCSS_DIR)
-  .filter((f) => f.endsWith(".scss"))
-  .map((f) => path.join(PORTAL_SCSS_DIR, f));
+// Explicit SCSS compilation order
+const scssOrder = [
+  "style.scss",
+  "article.scss",
+  "filter.scss",
+  "agenda.scss",
+  "search.scss",
+  "slider.scss",
+  "festival.scss",
+  "animation.scss",
+  "timetable.scss",
+  "error.scss",
+  "breakpoints.scss",
+  "festival-breakpoints.scss"
+];
 
-// Concatenate all SCSS into one big string
+const scssFiles = scssOrder.map(f => path.join(PORTAL_SCSS_DIR, f));
+
+// Concatenate all SCSS into one string
 const concatenatedScss = scssFiles
-  .map((file) => fs.readFileSync(file, "utf8"))
+  .map(file => fs.readFileSync(file, "utf8"))
   .join("\n");
 
 try {
