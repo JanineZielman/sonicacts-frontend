@@ -52,7 +52,6 @@ const NewsItem = ({ global, festival, page, relations, programmeLoc }) => {
   return (
     <>
       <Head>
-        <link rel="canonical" href={url} />
         <meta property="og:url" content={url} />
         <meta property="og:site_name" content="Sonic Acts" />
       </Head>

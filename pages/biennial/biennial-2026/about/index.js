@@ -25,8 +25,6 @@ const About = ({ global, page }) => {
   return (
     <>
       <Head>
-        <link rel="canonical" href="https://2026.sonicacts.com/about" />
-        <meta property="og:url" content="https://2026.sonicacts.com/about" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1920" />
         <meta property="og:image:height" content="1080" />
