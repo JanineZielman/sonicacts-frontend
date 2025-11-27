@@ -26,7 +26,10 @@ const nextConfig = {
 
       { source: "/biennial-2022", destination: "/biennial/biennial-2022", permanent: true },
       { source: "/biennial2022", destination: "/biennial/biennial-2022", permanent: true },
-      { source: "/biennial", destination: "/archive/filter/Festival", permanent: true },
+
+      { source: "/biennial", destination: "/biennial/biennial-2026", permanent: true },
+      { source: "/agenda/sonic-acts-biennial-2026", destination: "/biennial/biennial-2026", permanent: true },
+
 
       // { source: "/biennial-2026", destination: "https://2026.sonicacts.com/", permanent: true },
       // { source: "/biennial2026", destination: "https://2026.sonicacts.com/", permanent: true },
