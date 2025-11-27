@@ -1,0 +1,11 @@
+// pages/biennial/biennial-2026/assets/css/biennial.scss
+
+// Load variables and mixins first
+@use 'variables';
+@use 'mixins';
+
+// Then import other partials in order
+@import 'style';
+@import 'breakpoints';
+@import 'error';
+// add other SCSS partials as needed

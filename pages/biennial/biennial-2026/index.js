@@ -6,6 +6,7 @@ import NewsSection from "/components/biennial/frontpage/NewsSection"
 import Head from "next/head"
 import ReactMarkdown from "react-markdown"
 
+
 const Festival = ({ global, festival, initialSlug = null }) => {
   const seoText = (
     <section className="seo-summary" aria-hidden="true">

@@ -5,7 +5,8 @@
   "scripts": {
     "develop": "next dev",
     "dev": "export NODE_OPTIONS=--openssl-legacy-provider && node server.js",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && next build",
+    "build-biennial-css": "node scripts/compile-biennial-css.js",
+    "build": "npm run build-biennial-css && export NODE_OPTIONS=--openssl-legacy-provider && next build",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && NODE_ENV=production node server.js",
     "deploy": "next build && next export",
     "lint": "next lint",
