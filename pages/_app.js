@@ -43,23 +43,6 @@ const MyApp = ({ Component, pageProps }) => {
         <link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 
-        {!isBiennial2026 && (
-          <>
-            <link rel="stylesheet" href="/assets/css/style.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/article.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/filter.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/agenda.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/search.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/slider.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/festival.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/animation.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/timetable.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/error.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/breakpoints.css" data-dynamic />
-            <link rel="stylesheet" href="/assets/css/festival-breakpoints.css" data-dynamic />
-          </>
-        )}
-
         {isBiennial2026 && (
           <link
             rel="stylesheet"
