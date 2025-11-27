@@ -67,12 +67,17 @@ const MyApp = ({ Component, pageProps }) => {
             />
           </>
           :
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="/biennial.css"
-          />
-
+          <>
+            <link
+              rel="canonical"
+              href={`https://sonicacts.com${router.asPath}`}
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="/biennial.css"
+            />
+          </>
         }
       </Head>
 
