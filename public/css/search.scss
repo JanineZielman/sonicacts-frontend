@@ -1,0 +1,158 @@
+.search-title{
+	width: 100%;
+	border-bottom: 1px solid black;
+	span{
+		font-size: 14px;
+		font-weight: 100;
+	}
+	h2{
+		font-weight: 500;
+		text-transform: capitalize;
+		line-height: 1;
+	}
+}
+
+.tags {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 1;
+	a, span{
+		font-size: 14px!important;
+		font-weight: 100;
+		line-height: 1;
+	}
+}
+
+.search-container{
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 14px;
+	.search-item{
+		width: 28vw;
+		margin-bottom: 24px;
+		&:nth-child(3n+1) {
+			.item-wrapper {
+				margin-right: 2vw;
+			}
+		}
+		
+		&:nth-child(3n+2) {
+			.item-wrapper {
+				margin-right: 2vw;
+			}
+		}
+		.item-wrapper a{
+			display: flex;
+			text-decoration: none;
+			color: black;
+		}
+		.content-wrapper{
+			padding: 0 20px;
+			width: calc(100% - 120px);
+			.category, .date, .tags{
+				font-size: 14px;
+				font-weight: 100;
+			}
+		}
+	}
+	.image{
+		width: 80px;
+		height: 80px;
+		position: relative;
+		overflow: hidden;
+		border-radius: 50%;
+		.circle{
+			background-color: grey;
+			width: 80px;
+			height: 80px;
+		}
+	}
+}
+
+.search-bar{
+	input{
+		border: none;
+		font-size: 24px;
+		color: black;
+		background-color: transparent;
+		&::placeholder{
+			color: black;
+			opacity: 1;
+		}
+	}
+}
+
+.top-search{
+	display: flex;
+	justify-content: flex-end;
+	.note{
+		margin-top: 27px;
+		width: 200px;
+		margin-right: 200px;
+		margin-left: auto;
+	}
+	.search-bar{
+		width: 200px;
+		margin-right: 200px;
+		margin-left: auto;
+		margin-top: -7px;
+		margin-bottom: 15px;
+		z-index: 8;
+	}
+}
+
+.top-search-icon{
+	position: fixed;
+	right: 85px;
+	top: 10px;
+	display: flex;
+	animation: test 1s 1 forwards;
+	img{
+		width: 34px;
+		height: auto;
+	}
+	.search-wrapper{
+		margin-left: -20px;
+		animation: fade 1s 1 forwards;
+		.note{
+			margin-top: 30px;
+		}
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.top-search-icon{
+		display: none;
+	}
+}
+
+@keyframes fade {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.menu-links{
+	margin-bottom: 24px;
+}
+
+.menu-search .search-bar {
+	margin-left: calc(100% - 250px);
+}
+
+.menu-modal .note{
+	margin-left: calc(100% - 250px);
+}
+
+.note{
+	font-size: 12px;
+	font-weight: 100;
+	position: absolute;
+	margin-top: -8px;
+}
+
+.search-fixed{
+	margin-top: 14px;
+	position: fixed;
+	right: 0;
+}

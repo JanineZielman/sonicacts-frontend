@@ -1,0 +1,399 @@
+@media only screen and (max-width: 1100px) {
+	.discover .discover-container.sub-programme-container {
+		.day-programme {
+			.loc-item{
+				margin-top: -50px;
+			}
+			.discover-item {
+				margin-top: 24px;
+				padding-top: 10px;
+			}
+		}
+		.discover-item {
+			width: 33%;
+			margin-top: 5px;
+			padding-top: 5px;
+			.image{
+				height: 20vw;
+			}
+		}
+	}
+	.festival-wrapper .text-block.small {
+		width: 94vw;
+		p{
+			padding-right: 0;
+			padding-left: 3vw !important;
+		}
+	}
+	.festival-wrapper {
+		.menu{
+			.menu-wrapper{
+				.breadcrumbs{
+					flex-direction: column;
+				}
+			}
+		}
+	}
+	.tickets{
+		margin-top: 64px;
+		.tickets-container{
+			.ticket{
+				width: 45vw;
+			}
+		}
+		.info-wrapper{
+			flex-direction: column;
+			.ticket-info {
+				width: 95%;
+			}
+		}
+	}
+	.festival-home {
+
+		.links {
+			p{
+				 margin: 10px 0 10px 0;
+			}
+			a {
+				margin: 10px 10px 0px 0;
+				font-size: 18px;
+				line-height: 2.4;
+			}
+		}
+
+		.festival-hero {
+			.wrapper {
+				border-bottom: 2px solid black;
+
+				&:after {
+					width: 36px;
+					height: 36px;
+					right: 3vw;
+					top: 55%;
+				}
+			}
+
+			h1 {
+				font-size: 48px;
+				letter-spacing: 4px;
+			}
+
+			.date {
+				font-size: 30px;
+			}
+
+			.locations {
+				font-size: 18px;
+				flex-direction: column;
+					.location{
+						margin-bottom: 5px;
+						&:after{
+							display: none;
+					}
+				}
+			}
+		}
+	}
+
+	.festival-home {
+
+		.festival-hero-bg {
+			height: 100vh;
+
+			div {
+				font-size: 18vw;
+			}
+		}
+	}
+	.festival {
+		.content-wrapper {
+			top: 650px;
+		}
+
+		.text-block.small {
+			width: 94vw;
+
+			p {
+				padding-right: 0;
+				padding-left: 3vw!important;
+			}
+		}
+
+		.article .image.small {
+			max-width: 100%;
+		}
+
+		.article h1{
+			font-size: 30px;
+		}
+
+		.Collapsible {
+			.text-block {
+				max-width: 100%;
+			}
+		}
+
+		.menu {
+			.menu-wrapper {
+				.breadcrumbs {
+					margin-top: 0px;
+					top: 550px;
+					a{
+						font-size: 64px;
+					}
+					.logo-small .glitch {
+						font-size: 64px;
+					}
+				}
+			}
+		}
+
+		.festival-hero-bg {
+			.title{
+				top: 600px;
+			}
+			div{
+				font-size: 20vh;
+			}
+		}
+
+		.festival-hero {
+
+
+			.info {
+				padding: 0;
+
+				h1 {
+					margin-top: 10px;
+					font-size: 14vw;
+					padding: 5px 12px;
+					overflow:hidden;
+					word-wrap: break-word;
+				}
+
+				.date {
+					font-size: 36px;
+					padding: 0px 12px;
+				}
+
+				.locations-wrapper {
+					font-size: 36px;
+					.title-text {
+						padding-left: 12px;
+					}
+				}
+
+				.locations {
+					flex-wrap: wrap;
+					font-size: 24px;
+				}
+			}
+		}
+		.intro-text {
+			width: 95%;
+			position: absolute;
+			z-index: 99;
+			flex-direction: column-reverse;
+			div {
+				&:first-child {
+					width: 100%;
+				}
+
+				&:last-child {
+					width: 100%;
+				}
+			}
+		}
+	}
+	.festival-wrapper .intro-text {
+		width: 95%;
+		z-index: 99;
+		flex-direction: column-reverse;
+
+		div {
+			&:first-child {
+				width: 100%;
+			}
+
+			&:last-child {
+				width: 100%;
+			}
+		}
+	}
+	.festival-home, .festival-wrapper{
+		// zoom: 1;
+		.container{
+			height: 100%;
+			overflow-y: visible;
+		}
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.discover .discover-container.sub-programme-container {
+		.day-programme {
+			.loc-item {
+				margin-top: -40px;
+			}
+
+			.discover-item {
+				margin-top: 24px;
+				padding-top: 10px;
+			}
+		}
+	}
+	.festival-home .festival-hero .wrapper:after{
+		top: auto;
+		bottom: 0%;
+		right: 5%;
+		margin-bottom: -10px;
+	}
+	.festival-home .landing-page.festival-hero {
+		.preview {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.wrapper .info .image-text {
+			p {
+				text-transform: none;
+				font-family: "SuisseIntl";
+				font-size: 21px;
+				margin: 5px 0 5px 0;
+				width: 40vw;
+				line-height: 1;
+			}
+		}
+
+		.image {
+			height: 45vw;
+			width: 45vw;
+			margin-top: 2vw;
+			margin-right: 2vw;
+
+			div {
+				width: 100%;
+				height: 100%;
+
+				img {
+					z-index: 0;
+				}
+			}
+		}
+
+		.wrapper .info .artists-preview {
+			.image {
+				height: 45vw;
+				width: 45vw;
+			}
+			.image-text p{
+				width: 45vw;
+			}
+		}
+		.info .news-preview, .info .programme-preview  {
+			.image {
+				height: 60vw;
+				width: 94vw;
+			}
+
+			.image-text p {
+				width: 90vw;
+			}
+		}
+	}
+	.festival-home {
+		.festival-hero-bg{
+			height: 300vh;
+			div{
+				font-size: 40vw;
+				.layer1,
+					.layer2,
+					.layer3 {
+						width: 55vw;
+						padding: 5vw 20vw;
+				
+						span:first-child {
+							margin-left: 23vw;
+						}
+					}
+			}
+		}
+	}
+	
+	.festival {
+		.menu{
+			.menu-wrapper {
+				.breadcrumbs {
+					margin-top: 0px;
+					top: 0;
+					a {
+						font-size: 36px;
+					}
+				
+					.logo-small .glitch {
+						font-size: 36px;
+					}
+				}
+			}
+		}
+		.intro-text {
+			top: 60px;
+		}
+		.content-wrapper{
+			top: 600px;
+		}
+		.festival-hero{
+			.bg{
+					background-image: url('../noise-fes2.png');
+					background-position: top left;
+					background-size: cover;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.discover .discover-container.sub-programme-container {
+		justify-content: flex-start;
+		.discover-item {
+			width: 50%;
+
+			.image {
+				height: 30vw;
+			}
+		}
+	}
+	.tickets{
+		margin-top: 40px;
+		.tickets-container{
+			.ticket{
+				width: 100%;
+				height: 150px;
+			}
+		}
+	}
+	.menu-modal{
+		height: 100vh;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.prefooter {
+		display: none;
+	}
+	.article.visit .content .wrapper p{
+		padding: 0;
+	}
+	.article{
+		width: 98%;
+		// margin-top: 36px;
+	}
+	.festival-home .marquee-highlight, .marquee-highlight {
+		display: none;
+	}
+	.radio .radio-wrapper {
+		font-size: 14px;
+		p{
+			font-size: 14px;
+		}
+	}
+}
