@@ -41,6 +41,8 @@ const Visit = ({ global, festival, locations }) => {
   const [markersReady, setMarkersReady] = useState(false)
   const mapRef = useRef(null)
   const markerRefs = useRef([])
+
+  console.log(festival)
   const shareImage =
     festival?.attributes?.visit_share_image?.data?.attributes?.url
       ? { url: festival.attributes.visit_share_image.data.attributes.url }
@@ -49,7 +51,7 @@ const Visit = ({ global, festival, locations }) => {
         : undefined
   const pageSeo =
     festival?.attributes?.visit_seo || {
-      metaTitle: "Visit",
+      metaTitle: "Visit – Biennial 2026",
       metaDescription:
         "Plan your visit to Sonic Acts Biennial 2026 with venue details, maps, and accessibility info.",
       shareImage,
@@ -607,7 +609,7 @@ export async function getServerSideProps() {
   // Run API calls in parallel
   const [festivalRes, globalRes, locationsRes] = await Promise.all([
     fetchAPI(
-      `/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[visit][populate]=*`
+      `/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[visit][populate]=*&populate[cover_image][populate]=*`
     ),
     fetchAPI(
       "/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*",

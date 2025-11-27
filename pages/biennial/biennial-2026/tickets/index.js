@@ -25,7 +25,7 @@ const Tickets = ({ global, tickets, festival, params }) => {
       : undefined
   const pageSeo =
     festival?.attributes?.tickets_seo || {
-      metaTitle: "Tickets",
+      metaTitle: "Tickets – Biennial 2026",
       metaDescription:
         "Secure tickets for Sonic Acts Biennial 2026 events and performances.",
       shareImage,
@@ -231,7 +231,7 @@ export async function getServerSideProps() {
   // Run API calls in parallel
   const [festivalRes, ticketsRes, globalRes] = await Promise.all([
     fetchAPI(
-      `/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`
+      `/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[cover_image][populate]=*`
     ),
     fetchAPI(
       `/biennials?filters[slug][$eq]=${params.slug}&populate[tickets][populate]=*`

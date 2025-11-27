@@ -12,13 +12,15 @@ import Moment from "moment"
 const Programme = ({ global, festival, programme }) => {
   const aquarelleContainerRef = useRef(null)
   const programmeAttributes = programme?.attributes || {}
+  const shareImage =
+    festival?.attributes?.cover_image?.data?.attributes?.url
+      ? { url: festival.attributes.cover_image.data.attributes.url }
+      : undefined
   const pageSeo = programmeAttributes?.seo || {
     metaTitle: "Programme",
     metaDescription:
       "Browse the Sonic Acts Biennial 2026 programme, spanning performances, installations, and talks.",
-    shareImage: programmeAttributes?.hero_image?.data?.attributes?.url
-      ? { url: programmeAttributes.hero_image.data.attributes.url }
-      : undefined,
+    shareImage
   }
 
   useEffect(() => {
@@ -297,7 +299,7 @@ export async function getServerSideProps() {
   // Run API calls in parallel
   const [festivalRes, programmePageRes, globalRes] = await Promise.all([
     fetchAPI(
-      `/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*`
+      `/biennials?filters[slug][$eq]=${params.slug}&populate[prefooter][populate]=*&populate[cover_image][populate]=*`
     ),
     fetchAPI(
       `/programme-pages?filters[slug][$eq]=${PROGRAMME_SLUG}&populate[programme_item][populate]=programme_item,programme_item.cover_image,programme_item.biennial_tags,programme_item.locations,programme_item.WhenWhere`
