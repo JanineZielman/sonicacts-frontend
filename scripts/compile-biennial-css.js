@@ -10,7 +10,7 @@ const sass = require("sass");
 
 const ENTRY_SCSS = path.join(
   __dirname,
-  "../pages/biennial/biennial-2026/assets/css/biennial.scss"
+  "../pages/biennial/biennial-2026/assets/scss/biennial.scss"
 );
 const OUTPUT_CSS_FILE = path.join(__dirname, "../public/biennial.css");
 
