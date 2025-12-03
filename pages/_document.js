@@ -58,6 +58,7 @@ export default class MyDocument extends Document {
         bodyClasses.add("slug-artists")
       }
 
+
       [
         pageProps?.page?.attributes?.slug,
         pageProps?.festival?.attributes?.slug,
