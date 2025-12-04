@@ -483,6 +483,7 @@ $grid-columns: 12;
 
       .img {
         object-fit: cover;
+        object-position: center;
         width: calc(100% + 1.5rem) !important;
         height: 100%;
         border-radius: 0.5rem;

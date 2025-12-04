@@ -114,7 +114,17 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/francois-bonnet</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/artists/flavia-dzodan</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/roc-jimenez-de-cisneros</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -125,6 +135,11 @@
     </url>
     <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/artists/pantea</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/kyveli-mavrokordopoulou</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -149,7 +164,17 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/olivia-block</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/artists/nina-garcia</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/tomoko-sauvage</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -169,47 +194,22 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/jules-negrier</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/michele_bokanowski</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/artists/bernard-parmegiani</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
     <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/artists/marcin-pietruszewski</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/cara-mayer</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/margarida-mendes</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/lukas-de-clerk</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/jim-o-rourke</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/benjamin-thigpen</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/eve-aboulkheir</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/aimee-theriot</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -284,6 +284,11 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/programme/sounds-of-skies-forests-of-instability</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/programme/workshops-2026</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
@@ -325,11 +330,6 @@
     </url>
     <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/programme/in-conversation-with-jeremy-deller</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/programme/sounds-of-skies-forests-of-instability</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>

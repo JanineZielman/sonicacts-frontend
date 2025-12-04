@@ -14,7 +14,7 @@ const ArtistCard = ({ item, lazy = false, sizes = "(max-width: 768px) 60vw, 320p
     <div className="item-wrapper">
       <a href={href}>
         <div className="image">
-          <div className="image-inner" style={{ position: "relative", width: "100%", height: "300px" }}>
+          <div className="image-inner" style={{ position: "relative", width: "100%", height: "110%" }}>
             {coverImage ? (
               <span className="next-image-fill-wrapper">
                 <img
