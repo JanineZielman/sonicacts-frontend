@@ -1197,6 +1197,7 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
 }
 .template-single-artist .discover.artists.single-artist-all .artist-item .image .img {
   object-fit: cover;
+  object-position: center;
   width: calc(100% + 1.5rem) !important;
   height: 100%;
   border-radius: 0.5rem;
@@ -4070,6 +4071,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 .template-artists .artist-item .image .img,
 .discover.artists .artist-item .image .img {
   object-fit: cover;
+  object-position: center;
   width: calc(100% + 1.5rem) !important;
   height: 100%;
   border-radius: 0.5rem;
