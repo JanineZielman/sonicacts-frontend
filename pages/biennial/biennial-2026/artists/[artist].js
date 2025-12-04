@@ -239,6 +239,7 @@ const CommunityItem = ({
                 <Image
                   image={leftColumnImageAttributes}
                   layout="responsive"
+                  fill
                   objectFit="cover"
                 />
               </div>
@@ -364,7 +365,7 @@ const CommunityItem = ({
                   return (
                     <div className={discoverItemClassName} key={programmeKey}>
                       <div className="item-wrapper">
-                        <a href={"/programme/" + slug}>
+                        <a href={"/biennial/biennial-2026/programme/" + slug}>
                           <div className="image">
                             <div className="image-inner">
                               {attributes?.cover_image?.data && (
