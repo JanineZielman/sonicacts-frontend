@@ -76,10 +76,11 @@ const Home = ({ homepage, menus, global, items, about }) => {
         <div className="wrapper-large">
           <div className="home-menu">
             {menus.map((page, i) => {
-              const slug = page.attributes.slug;
+              const slug = page.attributes.slug.replace('/', '');
+              const title = page.attributes.title
               const pageItems = items[slug] || [];
 
-              if (slug === "shop") {
+              if (title.includes("Shop")) {
                 return (
                   <div key={slug} className="collapsible shop">
                     <a
@@ -168,8 +169,8 @@ const Home = ({ homepage, menus, global, items, about }) => {
                           <a
                             href={`/${slug}/${item.attributes.slug}`}
                             className={`slider-item ${slug === "community"
-                                ? "community-slider-item"
-                                : ""
+                              ? "community-slider-item"
+                              : ""
                               }`}
                             draggable="false"
                             key={idx}
