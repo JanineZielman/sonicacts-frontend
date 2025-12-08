@@ -295,7 +295,7 @@ const Article = ({ page, relations, discover, agenda }) => {
 									:
 									<>
 										{page.attributes.links?.length > 0 && <span>Links</span>}
-										{page.attributes.links?.map((item, i) => {
+										{page.attributes.links && page.attributes.links.map((item, i) => {
 											return (
 												<a key={`externallink${i}`} target="_blank" href={item.slug}>
 													{item.title}
