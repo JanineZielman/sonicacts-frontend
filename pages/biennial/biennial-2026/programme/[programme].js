@@ -133,6 +133,76 @@ const ProgrammeItem = ({
     setSubItems(subData)
   }, [sub, page])
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log("Sub events for programme", params?.programme, subItems)
+      console.log("Raw sub prop", sub)
+      const linkedLocations =
+        relations?.attributes?.locations?.data?.map((loc) => ({
+          slug: loc?.attributes?.slug,
+          title: loc?.attributes?.title,
+        })) || []
+      const linkedArtworks =
+        relations?.attributes?.artworks?.data ||
+        relations?.attributes?.artwork_items?.data ||
+        []
+      console.log("Linked locations", linkedLocations)
+      console.log(
+        "Linked artworks",
+        linkedArtworks.map((item) => ({
+          id: item?.id,
+          slug: item?.attributes?.slug,
+          title: item?.attributes?.title,
+        }))
+      )
+    }
+  }, [params?.programme, subItems, sub, relations])
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return
+    }
+    if (params?.programme !== "exhibition-2026") {
+      return
+    }
+
+    const parentLocations =
+      relations?.attributes?.locations?.data
+        ?.map((loc) => loc?.attributes?.slug)
+        .filter(Boolean) || []
+
+    if (!parentLocations.length) {
+      console.log(
+        "[programme] exhibition-2026 has no linked locations to compare against"
+      )
+      return
+    }
+
+    const subList = Array.isArray(subItems) ? subItems : []
+    const matchingSubs = subList.filter((item) => {
+      const locSlugs =
+        item?.attributes?.locations?.data
+          ?.map((loc) => loc?.attributes?.slug)
+          .filter(Boolean) || []
+      return locSlugs.some((slug) => parentLocations.includes(slug))
+    })
+
+    console.log("[programme] exhibition-2026 location matches", {
+      parentLocations,
+      matchedCount: matchingSubs.length,
+      totalSubCount: subList.length,
+      matched: matchingSubs.map((item) => ({
+        id: item?.id,
+        slug: item?.attributes?.slug,
+        title: item?.attributes?.title,
+        locations:
+          item?.attributes?.locations?.data
+            ?.map((loc) => loc?.attributes?.slug)
+            .filter(Boolean) || [],
+      })),
+    })
+  }, [params?.programme, relations, subItems])
+
   const sortedCommunityItems = useMemo(() => {
     return [...communityItems].sort((a, b) => {
       const slugA = a?.attributes?.slug?.toLowerCase() || ""
@@ -207,17 +277,26 @@ const ProgrammeItem = ({
     return Number.isNaN(fallbackDate.getTime()) ? null : fallbackDate
   }
 
-  const customWhenWhere =
-    typeof page?.attributes?.custom_when_where === "string"
-      ? page.attributes.custom_when_where.trim()
-      : ""
+  const customWhenWhere = (() => {
+    const candidates = [
+      page?.attributes?.custom_when_where,
+      relationsAttributes?.custom_when_where,
+      ...(Array.isArray(relationsAttributes?.WhenWhere)
+        ? relationsAttributes.WhenWhere.map((entry) => entry?.custom_when_where)
+        : []),
+    ]
+
+    const first = candidates.find(
+      (val) => typeof val === "string" && val.trim().length > 0
+    )
+
+    return typeof first === "string" ? first.trim() : ""
+  })()
   const shouldRespectHiddenWhen =
     page?.attributes?.hide_when_where === true && !customWhenWhere
+  const hasCustomWhenWhere = Boolean(customWhenWhere)
 
   const primaryWhenWhereSummary = (() => {
-    if (customWhenWhere) {
-      return { customMarkdown: customWhenWhere }
-    }
     if (shouldRespectHiddenWhen) {
       return null
     }
@@ -307,7 +386,9 @@ const ProgrammeItem = ({
   const hasArtists = sortedCommunityItems.length > 0
   const hasSubEvents = Boolean(subItems?.length)
   const shouldShowPrimaryWhenWhere =
-    Boolean(primaryWhenWhereSummary) || Boolean(primaryLocationLabel)
+    Boolean(primaryWhenWhereSummary) ||
+    Boolean(primaryLocationLabel) ||
+    hasCustomWhenWhere
   const fallbackTitle =
     relationsAttributes?.title || page?.attributes?.title || "Programme"
   const fallbackDescription =
@@ -432,17 +513,7 @@ const ProgrammeItem = ({
               key="primary-when-where"
             >
               <div className="item-wrapper item-wrapper--text-only">
-                {primaryWhenWhereSummary?.customMarkdown ? (
-                  <>
-                    <ReactMarkdown
-                      className="custom-when-where"
-                      children={primaryWhenWhereSummary.customMarkdown}
-                    />
-                    {primaryLocationLabel && (
-                      <div className="locations">{primaryLocationLabel}</div>
-                    )}
-                  </>
-                ) : (
+                {(primaryWhenWhereSummary || hasCustomWhenWhere) && (
                   <div className="when-where-details">
                     {primaryWhenWhereSummary?.rangeLabel && (
                       <div className="when">
@@ -456,6 +527,12 @@ const ProgrammeItem = ({
                     )}
                     {primaryLocationLabel && (
                       <div className="locations">{primaryLocationLabel}</div>
+                    )}
+                    {hasCustomWhenWhere && (
+                      <ReactMarkdown
+                        className="custom-when-where"
+                        children={customWhenWhere}
+                      />
                     )}
                   </div>
                 )}
@@ -812,7 +889,6 @@ const ProgrammeItem = ({
                                 <div className="item-wrapper">
                                   <a
                                     href={`/biennial/biennial-2026/artists/${item.attributes.slug}`}
-                                    prefetch
                                   >
                                     {hasCoverImage && (
                                       <div className="image">
@@ -1026,18 +1102,27 @@ export async function getServerSideProps({ params, query }) {
   }
 
   const preview = query.preview
+  const publicationState = preview ? "preview" : "live"
+  const publicationParam = `&publicationState=${publicationState}`
   const pageRes = await fetchAPI(
-    `/programme-items?filters[slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${preview ? "&publicationState=preview" : "&publicationState=live"}&populate[content][populate]=*`
+    `/programme-items?filters[slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${publicationParam}&populate[content][populate]=*`
   )
 
   const pageRel = await fetchAPI(
-    `/programme-items?filters[slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${preview ? "&publicationState=preview" : "&publicationState=live"
-    }&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[community_items][populate]=*`
+    `/programme-items?filters[slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${publicationParam}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[community_items][populate]=*`
   )
 
   const subRes = await fetchAPI(
-    `/programme-items?filters[main_programme_items][slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug
+    `/programme-items?filters[main_programme_items][slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${publicationParam
     }&pagination[limit]=${100}&populate[biennial][populate]=*&populate[main_programme_items][populate]=*&populate[WhenWhere][populate]=*&populate[locations][populate]=*&populate[cover_image][populate]=*&populate[biennial_tags][populate]=*&populate=*`
+  )
+  console.log(
+    "[programme] sub-programme fetch",
+    params.programme,
+    "count",
+    subRes?.data?.length,
+    "slugs",
+    (subRes?.data || []).map((item) => item?.attributes?.slug)
   )
 
   const [globalRes, categoryRes, festivalRes, programmePageRes] =
@@ -1047,13 +1132,13 @@ export async function getServerSideProps({ params, query }) {
         { populate: "*" }
       ),
       fetchAPI(
-        `/biennial-tags?filters[biennials][slug][$eq]=${biennial.slug}&populate=*`
+        `/biennial-tags?filters[biennials][slug][$eq]=${biennial.slug}${publicationParam}&populate=*`
       ),
       fetchAPI(
-        `/biennials?filters[slug][$eq]=${biennial.slug}&populate[prefooter][populate]=*`
+        `/biennials?filters[slug][$eq]=${biennial.slug}${publicationParam}&populate[prefooter][populate]=*`
       ),
       fetchAPI(
-        `/programme-pages?filters[slug][$eq]=${PROGRAMME_SLUG}&populate[location_item][populate]=*&populate[programme_item][populate]=programme_item,programme_item.cover_image,programme_item.biennial_tags,programme_item.locations,programme_item.WhenWhere`
+        `/programme-pages?filters[slug][$eq]=${PROGRAMME_SLUG}${publicationParam}&populate[location_item][populate]=*&populate[programme_item][populate]=programme_item,programme_item.cover_image,programme_item.biennial_tags,programme_item.locations,programme_item.WhenWhere`
       ),
     ])
 
@@ -1061,6 +1146,26 @@ export async function getServerSideProps({ params, query }) {
   const relations = pageRel?.data?.[0] || null
   const programmePage = programmePageRes?.data?.[0] || null
   const festivalData = festivalRes?.data?.[0] || null
+
+  console.log(
+    "[programme] locations/artworks",
+    params.programme,
+    {
+      locations: (relations?.attributes?.locations?.data || []).map((loc) => ({
+        slug: loc?.attributes?.slug,
+        title: loc?.attributes?.title,
+      })),
+      artworks: (
+        relations?.attributes?.artworks?.data ||
+        relations?.attributes?.artwork_items?.data ||
+        []
+      ).map((item) => ({
+        id: item?.id,
+        slug: item?.attributes?.slug,
+        title: item?.attributes?.title,
+      })),
+    }
+  )
 
   if (!page || !relations) {
     return {

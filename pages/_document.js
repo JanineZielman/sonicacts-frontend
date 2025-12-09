@@ -23,12 +23,11 @@ export default class MyDocument extends Document {
         segmentClasses.push(`slug-${slugify(dynamicSlug)}`)
       }
 
-      // const bodyClasses = new Set(
-      //   segmentClasses.length ? segmentClasses : ["slug-home"]
-      // )
+      const bodyClasses = new Set(
+        segmentClasses.length ? segmentClasses : ["slug-home"]
+      )
 
       // Add "slug-home" only for /biennial/biennial-2026
-      const bodyClasses = new Set()
       if (pathName === "/biennial/biennial-2026") {
         bodyClasses.add("slug-home")
       }
@@ -210,10 +209,11 @@ export default class MyDocument extends Document {
 
                 <ul>
                   <li><a href="/biennial/biennial-2026/programme">Programme</a></li>
-                  <li><a href="/biennial/biennial-2026/tickets">Tickets</a></li>
+                  <li><a href="/biennial/biennial-2026/timetable">Timetable</a></li>
                 </ul>
 
                 <ul>
+                  <li><a href="/biennial/biennial-2026/tickets">Tickets</a></li>
                   <li><a href="/biennial/biennial-2026/about">Information</a></li>
                 </ul>
               </section>
