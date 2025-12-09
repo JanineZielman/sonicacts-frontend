@@ -314,9 +314,9 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                                 : "timetable-sidebar__day--disabled",
                               day.eventCount > 0
                                 ? `timetable-sidebar__day--events-${Math.min(
-                                    day.eventCount,
-                                    4
-                                  )}`
+                                  day.eventCount,
+                                  4
+                                )}`
                                 : null,
                             ]
                               .filter(Boolean)
@@ -338,69 +338,18 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                 ))}
               </aside>
               <div className="timetable">
-              {renderDates.map((day, i) => {
-                let number = 0
-                let end = 24
-                let list = []
-                let list2 = []
-                let timeWidth = 24
-                const EXTRA_HOURS = 2
+                {renderDates.map((day, i) => {
+                  let number = 0
+                  let end = 24
+                  let list = []
+                  let list2 = []
+                  let timeWidth = 24
+                  const EXTRA_HOURS = 2
 
-                programmes.forEach((programme) => {
-                  const items = programme.attributes.WhenWhere.filter((when) => {
-                    const normalized = normalizeDate(when.date)
-                    if (!normalized) {
-                      return false
-                    }
-                    return (
-                      Moment(normalized).format("DD MM") ===
-                      Moment(day).format("DD MM")
-                    )
-                  })
-                  if (items[0]?.start_time) {
-                    list.push(items[0].start_time.slice(0, 2))
-                  }
-                  if (items[0]?.end_time) {
-                    if (Number(items[0].end_time.slice(0, 2)) < 7) {
-                      list2.push(24 + Number(items[0].end_time.slice(0, 2)))
-                    } else {
-                      list2.push(items[0].end_time.slice(0, 2))
-                    }
-                  }
-                })
-                if (list.sort()[0]) {
-                  number = list.sort()[0] - 7
-                }
-                if (list2.sort()[0]) {
-                  const lastHour = Number(list2.sort().reverse()[0])
-                  end = Math.min(
-                    times.length,
-                    lastHour - 6 + EXTRA_HOURS
-                  )
-                  timeWidth =
-                    lastHour - Number(list.sort()[0]) + EXTRA_HOURS
-                }
-
-                const dayKey = `${Moment(day).format("YYYY-MM-DD")}-${i}`
-
-                const locationsForDay = locRes.filter((loc) => {
-                  const programmesForLoc = loc.attributes.programme_items.data
-                  if (!Array.isArray(programmesForLoc) || programmesForLoc.length === 0) {
-                    return false
-                  }
-
-                  return programmesForLoc.some((prog) => {
-                    const fullProgItem = programmes.filter(
-                      (fullProg) => fullProg.attributes.slug == prog.attributes.slug
-                    )[0]
-                    if (!fullProgItem) return false
-
-                    return fullProgItem.attributes.WhenWhere.some((when) => {
+                  programmes.forEach((programme) => {
+                    const items = programme.attributes.WhenWhere.filter((when) => {
                       const normalized = normalizeDate(when.date)
-                      if (!normalized) return false
-                      if (
-                        loc.attributes.title !== when.location.data?.attributes.title
-                      ) {
+                      if (!normalized) {
                         return false
                       }
                       return (
@@ -408,192 +357,243 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                         Moment(day).format("DD MM")
                       )
                     })
+                    if (items[0]?.start_time) {
+                      list.push(items[0].start_time.slice(0, 2))
+                    }
+                    if (items[0]?.end_time) {
+                      if (Number(items[0].end_time.slice(0, 2)) < 7) {
+                        list2.push(24 + Number(items[0].end_time.slice(0, 2)))
+                      } else {
+                        list2.push(items[0].end_time.slice(0, 2))
+                      }
+                    }
                   })
-                })
+                  if (list.sort()[0]) {
+                    number = list.sort()[0] - 7
+                  }
+                  if (list2.sort()[0]) {
+                    const lastHour = Number(list2.sort().reverse()[0])
+                    end = Math.min(
+                      times.length,
+                      lastHour - 6 + EXTRA_HOURS
+                    )
+                    timeWidth =
+                      lastHour - Number(list.sort()[0]) + EXTRA_HOURS
+                  }
 
-                return (
-                  <div
-                    className="timetable-locations-outer-wrapper"
-                    key={dayKey}
-                  >
+                  const dayKey = `${Moment(day).format("YYYY-MM-DD")}-${i}`
+
+                  const locationsForDay = locRes.filter((loc) => {
+                    const programmesForLoc = loc.attributes.programme_items.data
+                    if (!Array.isArray(programmesForLoc) || programmesForLoc.length === 0) {
+                      return false
+                    }
+
+                    return programmesForLoc.some((prog) => {
+                      const fullProgItem = programmes.filter(
+                        (fullProg) => fullProg.attributes.slug == prog.attributes.slug
+                      )[0]
+                      if (!fullProgItem) return false
+
+                      return fullProgItem.attributes.WhenWhere.some((when) => {
+                        const normalized = normalizeDate(when.date)
+                        if (!normalized) return false
+                        if (
+                          loc.attributes.title !== when.location.data?.attributes.title
+                        ) {
+                          return false
+                        }
+                        return (
+                          Moment(normalized).format("DD MM") ===
+                          Moment(day).format("DD MM")
+                        )
+                      })
+                    })
+                  })
+
+                  return (
                     <div
-                      className="timetable-locations"
-                      id={`${Moment(day).format("ddd-D-MMM")}`}
+                      className="timetable-locations-outer-wrapper"
+                      key={dayKey}
                     >
                       <div
-                        className="day timetable-wrapper"
-                        style={{ "--time-width": timeWidth * 12 + 12 + "rem" }}
+                        className="timetable-locations"
+                        id={`${Moment(day).format("ddd-D-MMM")}`}
                       >
-                        <div className="timetable-day__left">
-                          <h1 className="date">
-                            {Moment(day).format("ddd D MMM")}
-                          </h1>
-                          <div className="location-list">
-                            {locationsForDay.map((loc, j) => (
-                              <div
-                                className={`location ${loc.attributes.sub ? "sub" : ""}`}
-                                key={loc.id || `location-${j}`}
-                              >
-                                <p className="loc-text">{loc.attributes.title}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="timetable-day__right">
-                          <div className="timetable-day__canvas">
                         <div
-                          key={`times${i}`}
-                          className="timetable-times"
+                          className="day timetable-wrapper"
                           style={{ "--time-width": timeWidth * 12 + 12 + "rem" }}
                         >
-                          {times.slice(number, end).map((time, i) => {
-                            return (
-                              <div key={`time${i}`} className="time-block">
-                                <div className="time">{time}</div>
-                              </div>
-                            )
-                              })}
-                            </div>
-                            {locationsForDay.map((loc, j) => {
-                              const programmesForLoc = loc.attributes.programme_items.data
-                              return (
+                          <div className="timetable-day__left">
+                            <h1 className="date">
+                              {Moment(day).format("ddd D MMM")}
+                            </h1>
+                            <div className="location-list">
+                              {locationsForDay.map((loc, j) => (
                                 <div
-                                  className={`timetable-row ${loc.attributes.slug}`}
+                                  className={`location ${loc.attributes.sub ? "sub" : ""}`}
                                   key={loc.id || `location-${j}`}
                                 >
-                                  {programmesForLoc.map((prog, k) => {
-                                    const fullProgItem = programmes.filter(
-                                      (fullProg) =>
-                                        fullProg.attributes.slug == prog.attributes.slug
-                                    )[0]
-                                    const items = fullProgItem.attributes.WhenWhere.filter(
-                                      (when) => {
-                                        const normalized = normalizeDate(when.date)
-                                        if (!normalized) {
-                                          return false
+                                  <p className="loc-text">{loc.attributes.title}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="timetable-day__right">
+                            <div className="timetable-day__canvas">
+                              <div
+                                key={`times${i}`}
+                                className="timetable-times"
+                                style={{ "--time-width": timeWidth * 12 + 12 + "rem" }}
+                              >
+                                {times.slice(number, end).map((time, i) => {
+                                  return (
+                                    <div key={`time${i}`} className="time-block">
+                                      <div className="time">{time}</div>
+                                    </div>
+                                  )
+                                })}
+                              </div>
+                              {locationsForDay.map((loc, j) => {
+                                const programmesForLoc = loc.attributes.programme_items.data
+                                return (
+                                  <div
+                                    className={`timetable-row ${loc.attributes.slug}`}
+                                    key={loc.id || `location-${j}`}
+                                  >
+                                    {programmesForLoc.map((prog, k) => {
+                                      const fullProgItem = programmes.filter(
+                                        (fullProg) =>
+                                          fullProg.attributes.slug == prog.attributes.slug
+                                      )[0]
+                                      const items = fullProgItem.attributes.WhenWhere.filter(
+                                        (when) => {
+                                          const normalized = normalizeDate(when.date)
+                                          if (!normalized) {
+                                            return false
+                                          }
+                                          return (
+                                            Moment(normalized).format("DD MM") ===
+                                            Moment(day).format("DD MM")
+                                          )
                                         }
-                                        return (
-                                          Moment(normalized).format("DD MM") ===
-                                          Moment(day).format("DD MM")
-                                        )
-                                      }
-                                    )
-                                    return (
-                                      <React.Fragment
-                                        key={
-                                          prog.id ||
-                                          `${loc.id || loc.attributes.slug}-programme-${k}`
-                                        }
-                                      >
-                                        {items?.map((item, l) => {
-                                          const parseTime = (value) => {
-                                            if (!value || typeof value !== "string") return null
-                                            const [hoursStr, minutesStr = "0"] = value.split(":")
-                                            const hoursNum = Number(hoursStr)
-                                            const minutesNum = Number(minutesStr)
+                                      )
+                                      return (
+                                        <React.Fragment
+                                          key={
+                                            prog.id ||
+                                            `${loc.id || loc.attributes.slug}-programme-${k}`
+                                          }
+                                        >
+                                          {items?.map((item, l) => {
+                                            const parseTime = (value) => {
+                                              if (!value || typeof value !== "string") return null
+                                              const [hoursStr, minutesStr = "0"] = value.split(":")
+                                              const hoursNum = Number(hoursStr)
+                                              const minutesNum = Number(minutesStr)
+                                              if (
+                                                Number.isNaN(hoursNum) ||
+                                                Number.isNaN(minutesNum)
+                                              ) {
+                                                return null
+                                              }
+                                              return hoursNum + minutesNum / 60
+                                            }
+
+                                            const startTime = parseTime(item.start_time)
+                                            const endTimeRaw = parseTime(item.end_time)
+                                            const hasTimes =
+                                              Number.isFinite(startTime) &&
+                                              Number.isFinite(endTimeRaw)
+                                            const endTime =
+                                              hasTimes && endTimeRaw <= 6
+                                                ? endTimeRaw + 24
+                                                : endTimeRaw
+                                            const blockWidthHours = hasTimes
+                                              ? Math.max(endTime - startTime, 1)
+                                              : 1
+                                            const offsetHours = hasTimes
+                                              ? startTime - 7 - number
+                                              : 0
                                             if (
-                                              Number.isNaN(hoursNum) ||
-                                              Number.isNaN(minutesNum)
+                                              loc.attributes.title !==
+                                              item.location.data?.attributes.title
                                             ) {
                                               return null
                                             }
-                                            return hoursNum + minutesNum / 60
-                                          }
-
-                                          const startTime = parseTime(item.start_time)
-                                          const endTimeRaw = parseTime(item.end_time)
-                                          const hasTimes =
-                                            Number.isFinite(startTime) &&
-                                            Number.isFinite(endTimeRaw)
-                                          const endTime =
-                                            hasTimes && endTimeRaw <= 6
-                                              ? endTimeRaw + 24
-                                              : endTimeRaw
-                                          const blockWidthHours = hasTimes
-                                            ? Math.max(endTime - startTime, 1)
-                                            : 1
-                                          const offsetHours = hasTimes
-                                            ? startTime - 7 - number
-                                            : 0
-                                          if (
-                                            loc.attributes.title !==
-                                            item.location.data?.attributes.title
-                                          ) {
-                                            return null
-                                          }
-                                          return (
-                                            <div
-                                              key={`${prog.id || prog.attributes.slug}-programme-${l}`}
-                                              id="programme_wrapper"
-                                              className={`programme-wrapper`}
-                                            >
-                                              <a
-                                                href={`/biennial/${BIENNIAL_SLUG}/programme/${prog.attributes.slug}`}
-                                                className={[
-                                                  "programme",
-                                                  prog.attributes.hide_in_timetable ? "hide" : "",
-                                                  !hasTimes ? "programme--untimed" : null,
-                                                ]
-                                                  .filter(Boolean)
-                                                  .join(" ")}
-                                                style={{
-                                                  "--margin":
-                                                    offsetHours * 12 +
+                                            return (
+                                              <div
+                                                key={`${prog.id || prog.attributes.slug}-programme-${l}`}
+                                                id="programme_wrapper"
+                                                className={`programme-wrapper`}
+                                              >
+                                                <a
+                                                  href={`/biennial/${BIENNIAL_SLUG}/programme/${prog.attributes.slug}`}
+                                                  className={[
+                                                    "programme",
+                                                    prog.attributes.hide_in_timetable ? "hide" : "",
+                                                    !hasTimes ? "programme--untimed" : null,
+                                                  ]
+                                                    .filter(Boolean)
+                                                    .join(" ")}
+                                                  style={{
+                                                    "--margin":
+                                                      offsetHours * 12 +
                                                       PROGRAMME_MARGIN_OFFSET_REM +
                                                       "rem",
-                                                  "--width":
-                                                    blockWidthHours * 12 -
+                                                    "--width":
+                                                      blockWidthHours * 12 -
                                                       PROGRAMME_MARGIN_OFFSET_REM * 2 +
                                                       "rem",
-                                                }}
-                                              >
-                                                <div className="inner-programme">
-                                                  <div className="inner-wrapper">
-                                                    <div className="time">
-                                                      {hasTimes
-                                                        ? `${item.start_time}–${item.end_time}`
-                                                        : "–"}
-                                                    </div>
-                                                    <div className="title-artist-wrapper">
-                                                      <div className="title">
-                                                        {prog.attributes.title}
+                                                  }}
+                                                >
+                                                  <div className="inner-programme">
+                                                    <div className="inner-wrapper">
+                                                      <div className="time">
+                                                        {hasTimes
+                                                          ? `${item.start_time}–${item.end_time}`
+                                                          : "–"}
                                                       </div>
-                                                      {prog.attributes.hide_artists_in_timetable !==
-                                                        true && (
-                                                        <div className="artists">
-                                                          {fullProgItem.attributes.community_items.data.map(
-                                                            (com, k) => {
-                                                              return (
-                                                                <div
-                                                                  key={`${prog.id || prog.attributes.slug}-artist-${k}`}
-                                                                >
-                                                                  {com.attributes.name}
-                                                                </div>
-                                                              )
-                                                            }
-                                                          )}
+                                                      <div className="title-artist-wrapper">
+                                                        <div className="title">
+                                                          {prog.attributes.title}
                                                         </div>
-                                                      )}
+                                                        {prog.attributes.hide_artists_in_timetable !==
+                                                          true && (
+                                                            <div className="artists">
+                                                              {fullProgItem.attributes.community_items.data.map(
+                                                                (com, k) => {
+                                                                  return (
+                                                                    <div
+                                                                      key={`${prog.id || prog.attributes.slug}-artist-${k}`}
+                                                                    >
+                                                                      {com.attributes.name}
+                                                                    </div>
+                                                                  )
+                                                                }
+                                                              )}
+                                                            </div>
+                                                          )}
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </div>
-                                              </a>
-                                            </div>
-                                          )
-                                        })}
-                                      </React.Fragment>
-                                    )
-                                  })}
-                                </div>
-                              )
-                            })}
+                                                </a>
+                                              </div>
+                                            )
+                                          })}
+                                        </React.Fragment>
+                                      )
+                                    })}
+                                  </div>
+                                )
+                              })}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
               </div>
             </div>
           </Layout>
@@ -603,10 +603,14 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
   const params = {
     slug: BIENNIAL_SLUG,
   }
+
+  const preview = query.preview
+  const publicationState = preview ? "preview" : "live"
+  const publicationParam = `&publicationState=${publicationState}`
 
   const [festivalRes, globalRes, programmeRes, locRes] = await Promise.all([
     fetchAPI(
@@ -617,10 +621,10 @@ export async function getServerSideProps() {
       { populate: "*" }
     ),
     fetchAPI(
-      `/programme-items?filters[biennial][slug][$eq]=${params.slug}&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`
+      `/programme-items?filters[biennial][slug][$eq]=${params.slug}${publicationParam}&populate[WhenWhere][populate]=*&populate[WhenWhere][location][populate]=*&populate[community_items][populate]=*&pagination[limit]=${100}`
     ),
     fetchAPI(
-      `/locations?filters[biennial][slug][$eq]=${params.slug}&populate[programme_items][populate]=*&sort[0]=title:asc&pagination[limit]=${100}`
+      `/locations?filters[biennial][slug][$eq]=${params.slug}${publicationParam}&populate[programme_items][populate]=*&sort[0]=title:asc&pagination[limit]=${100}`
     ),
   ])
 
