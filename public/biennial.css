@@ -142,6 +142,10 @@ body.slug-biennial #main-header {
   right: 50%;
   transform: translateX(50%);
 }
+body.slug-biennial:not(.slug-home) #main-header {
+  right: 1rem;
+  transform: translateX(0);
+}
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #main-header {
     top: calc(100dvh - 12rem);
@@ -4971,7 +4975,6 @@ body.slug-timetable .timetable-layout .timetable-sidebar {
 body.slug-timetable .timetable-layout .timetable-sidebar__month:not(:last-child) {
   padding-bottom: 1.25rem;
   margin-bottom: 1.25rem;
-  border-bottom: 1px dashed var(--color-brown);
 }
 body.slug-timetable .timetable-layout .timetable-sidebar__header {
   font-family: "BSTBazaineMono", monospace;
@@ -4979,10 +4982,9 @@ body.slug-timetable .timetable-layout .timetable-sidebar__header {
   letter-spacing: -0.06rem;
   font-size: 1.3rem;
   color: var(--color-brown);
-  display: inline-block;
+  display: block;
+  text-align: center;
   padding: 0.25rem 0.35rem;
-  border-radius: 0.5rem;
-  background: var(--color-pink);
   margin-bottom: 0.75rem;
 }
 body.slug-timetable .timetable-layout .timetable-sidebar__weekdays {
@@ -5188,7 +5190,6 @@ body.slug-timetable .timetable .timetable-row .programme .inner-programme {
   padding: 0;
   height: auto;
   line-height: 0.8rem;
-  background-color: var(--color-pink);
 }
 body.slug-timetable .timetable .timetable-row .programme .inner-programme .inner-wrapper {
   width: 100%;
@@ -5201,7 +5202,7 @@ body.slug-timetable .timetable .timetable-row .programme .inner-programme .title
   line-height: 0.8rem;
   border-top-right-radius: 0.25rem;
   overflow: hidden;
-  background-color: inherit !important;
+  background-color: var(--color-pink);
 }
 body.slug-timetable .timetable .timetable-row .programme .inner-programme .time {
   font-size: 0.7rem;
@@ -7175,3 +7176,5 @@ body.slug-artist .title-wrapper h1.page-title {
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px;
 }
+
+/*# sourceMappingURL=biennial.css.map */

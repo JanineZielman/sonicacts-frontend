@@ -4649,7 +4649,6 @@ body.slug-timetable {
       &:not(:last-child) {
         padding-bottom: 1.25rem;
         margin-bottom: 1.25rem;
-        border-bottom: 1px dashed var(--color-brown);
       }
     }
 
@@ -4659,10 +4658,9 @@ body.slug-timetable {
       letter-spacing: -0.06rem;
       font-size: 1.3rem;
       color: var(--color-brown);
-      display: inline-block;
+      display: block;
+      text-align: center;
       padding: 0.25rem 0.35rem;
-      border-radius: 0.5rem;
-      background: var(--color-pink);
       margin-bottom: 0.75rem;
     }
 
@@ -4894,7 +4892,6 @@ body.slug-timetable {
           padding: 0;
           height: auto;
           line-height: 0.8rem;
-          background-color: var(--color-pink);
 
           .inner-wrapper {
             width: 100%;
@@ -4908,7 +4905,7 @@ body.slug-timetable {
             line-height: 0.8rem;
             border-top-right-radius: 0.25rem;
             overflow: hidden;
-            background-color: inherit !important;
+            background-color: var(--color-pink);
           }
 
           .time {
