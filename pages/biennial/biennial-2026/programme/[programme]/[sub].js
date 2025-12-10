@@ -11,7 +11,7 @@ export async function getServerSideProps({ params, query }) {
     slug: BIENNIAL_SLUG,
   }
 
-  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
+  const preview = query.preview
   const pageRes = await fetchAPI(
     `/programme-items?filters[slug][$eq]=${params.sub}&filters[biennial][slug][$eq]=${biennial.slug}${preview ? "&publicationState=preview" : "&publicationState=live"}&populate[content][populate]=*`
   )

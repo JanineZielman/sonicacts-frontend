@@ -25,11 +25,6 @@
         transform: translateX(50%);
     }
 
-    body.slug-biennial:not(.slug-home) & {
-        right: 1rem;
-        transform: translateX(0);
-    }
-
     @include mobile {
         top: calc(100dvh - 12rem);
         bottom: auto;
