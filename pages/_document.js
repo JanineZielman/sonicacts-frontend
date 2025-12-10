@@ -23,11 +23,12 @@ export default class MyDocument extends Document {
         segmentClasses.push(`slug-${slugify(dynamicSlug)}`)
       }
 
-      const bodyClasses = new Set(
-        segmentClasses.length ? segmentClasses : ["slug-home"]
-      )
+      // const bodyClasses = new Set(
+      //   segmentClasses.length ? segmentClasses : ["slug-home"]
+      // )
 
       // Add "slug-home" only for /biennial/biennial-2026
+      const bodyClasses = new Set()
       if (pathName === "/biennial/biennial-2026") {
         bodyClasses.add("slug-home")
       }
@@ -85,23 +86,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
-            rel="icon"
-            type="image/png"
-            href="/biennial/biennial-2026/assets/favicon/favicon-96x96.png"
-          />
-          <link
-            rel="icon"
-            type="image/svg+xml"
-            href="/biennial/biennial-2026/assets/favicon/favicon.svg"
-          />
-          <link rel="shortcut icon" href="/biennial/biennial-2026/assets/favicon/favicon.ico" />
-
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/biennial/biennial-2026/assets/favicon/apple-touch-icon.png"
-          />
           {/* ---------------------------------------------------------------
              PORTAL HEAD (default)
              --------------------------------------------------------------- */}
@@ -152,7 +136,23 @@ export default class MyDocument extends Document {
             <>
               <script defer src="/biennial/biennial-2026/assets/js/vanilla-tilt.js" />
 
+              <link
+                rel="icon"
+                type="image/png"
+                href="/biennial/biennial-2026/assets/favicon/favicon-96x96.png"
+              />
+              <link
+                rel="icon"
+                type="image/svg+xml"
+                href="/biennial/biennial-2026/assets/favicon/favicon.svg"
+              />
+              <link rel="shortcut icon" href="/biennial/biennial-2026/assets/favicon/favicon.ico" />
 
+              <link
+                rel="apple-touch-icon"
+                sizes="180x180"
+                href="/biennial/biennial-2026/assets/favicon/apple-touch-icon.png"
+              />
               <link rel="manifest" href="/biennial/biennial-2026/assets/favicon/site.webmanifest" />
 
               <link
@@ -210,11 +210,10 @@ export default class MyDocument extends Document {
 
                 <ul>
                   <li><a href="/biennial/biennial-2026/programme">Programme</a></li>
-                  <li><a href="/biennial/biennial-2026/timetable">Timetable</a></li>
+                  <li><a href="/biennial/biennial-2026/tickets">Tickets</a></li>
                 </ul>
 
                 <ul>
-                  <li><a href="/biennial/biennial-2026/tickets">Tickets</a></li>
                   <li><a href="/biennial/biennial-2026/about">Information</a></li>
                 </ul>
               </section>

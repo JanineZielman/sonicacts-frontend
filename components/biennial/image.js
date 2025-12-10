@@ -74,11 +74,11 @@ const Image = ({ image, fill, layout, objectFit, sizes, priority }) => {
         style={{
           position: "relative",
           display: "block",
-      width: "100%",
-      height: "100%",
-    }}
-  >
-        <img className="img" src={'https://cms.sonicacts.com' + image.url} />
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <img class="img" src={'https://cms.sonicacts.com' + image.url} />
       </span>
     )
   }
