@@ -142,6 +142,10 @@ body.slug-biennial #main-header {
   right: 50%;
   transform: translateX(50%);
 }
+body.slug-biennial:not(.slug-home) #main-header {
+  right: 1rem;
+  transform: translateX(0);
+}
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #main-header {
     top: calc(100dvh - 12rem);
@@ -1124,7 +1128,7 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
   background-color: var(--artist-card-bg-color, transparent);
   color: var(--artist-card-text-color, inherit);
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .template-single-artist .discover.artists.single-artist-all .artist-item {
@@ -1924,6 +1928,9 @@ body {
   display: flex;
   flex-direction: column;
   color: var(--color-pink);
+}
+body.slug-timetable #social-homelink {
+  display: none;
 }
 #social-homelink a {
   color: var(--color-pink);
@@ -3989,7 +3996,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
   background-color: var(--artist-card-bg-color, transparent);
   color: var(--artist-card-text-color, inherit);
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .template-artists .artist-item,
@@ -4883,10 +4890,40 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 }
 
 body.slug-timetable {
-  background-color: #6c4b34;
+  --timetable-location-width: 12.25rem;
+  --timetable-row-height: 3.5rem;
+  background-color: var(--color-brown);
+}
+body.slug-timetable .global-frontpage-visuals {
+  display: none !important;
+}
+body.slug-timetable .minimal-nav-container {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  transform-origin: right bottom;
+}
+body.slug-timetable .minimal-nav__overlay {
+  display: none;
+}
+body.slug-timetable .social-channel {
+  display: none;
+}
+body.slug-timetable #main-header {
+  right: 1rem;
+  bottom: 1rem;
+  top: auto;
+  transform: scale(1);
 }
 body.slug-timetable .page-title {
-  color: inherit;
+  color: var(--color-pink);
+  position: static;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  display: block;
+  margin: 0 0 1rem 0;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .main-container {
@@ -4895,22 +4932,207 @@ body.slug-timetable .page-title {
 }
 body.slug-timetable .title-wrapper {
   margin-top: 0;
+  position: static;
+}
+body.slug-timetable .timetable-layout {
+  align-items: start;
+  margin-bottom: 3rem;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-timetable .timetable-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "content" "sidebar";
+    gap: 1.25rem;
+    padding-right: 0;
+  }
+}
+body.slug-timetable .timetable-layout .timetable-sidebar {
+  grid-area: sidebar;
+  --calendar-surface: color-mix(in srgb, var(--color-sand) 80%, white 20%);
+  --calendar-ink: var(--color-brown);
+  --calendar-highlight: var(--color-pink);
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 18rem;
+  max-height: calc(100vh - 2rem);
+  align-self: start;
+  background: var(--calendar-surface);
+  border: 1px solid var(--calendar-ink);
+  border-radius: 1rem;
+  padding: 1rem 1rem 1.25rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  z-index: 50;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-timetable .timetable-layout .timetable-sidebar {
+    position: relative;
+    top: 0;
+    right: auto;
+    width: 100%;
+    max-height: none;
+    padding-right: 1rem;
+  }
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__month:not(:last-child) {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__header {
+  font-family: "BSTBazaineMono", monospace;
+  text-transform: uppercase;
+  letter-spacing: -0.06rem;
+  font-size: 1.3rem;
+  color: var(--color-brown);
+  display: block;
+  text-align: center;
+  padding: 0.25rem 0.35rem;
+  margin-bottom: 0.75rem;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(1.8rem, 1fr));
+  gap: 0.35rem;
+  text-align: center;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: var(--color-brown);
+  margin-bottom: 0.4rem;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(1.8rem, 1fr));
+  gap: 0.35rem;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  border: 1px solid var(--color-brown);
+  background: color-mix(in srgb, var(--color-sand) 85%, white 15%);
+  color: var(--color-brown);
+  font-family: "BSTBazaineMono", monospace;
+  font-size: 0.8rem;
+  letter-spacing: -0.04rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  padding: 0;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day::after {
+  content: "";
+  position: absolute;
+  bottom: 0.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--color-brown);
+  opacity: 0;
+  transition: width 0.2s ease, opacity 0.2s ease;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--blank {
+  opacity: 0;
+  pointer-events: none;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--disabled {
+  opacity: 1;
+  background: transparent;
+  pointer-events: none;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--adjacent {
+  opacity: 0.3;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--clickable {
+  cursor: pointer;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--clickable:hover, body.slug-timetable .timetable-layout .timetable-sidebar__day--clickable:focus-visible {
+  background: var(--calendar-highlight);
+  color: var(--calendar-ink);
+  outline: none;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--events-1::after {
+  opacity: 1;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--events-2::after {
+  opacity: 1;
+  box-shadow: -0.3rem 0 0 var(--color-brown), 0.3rem 0 0 var(--color-brown);
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--events-3::after {
+  opacity: 1;
+  box-shadow: -0.35rem 0 0 var(--color-brown), 0 0 0 var(--color-brown), 0.35rem 0 0 var(--color-brown);
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--events-4::after {
+  opacity: 1;
+  width: 50%;
+  height: 0.18rem;
+  box-shadow: none;
+}
+body.slug-timetable .timetable {
+  grid-area: content;
+}
+body.slug-timetable .timetable .timetable-wrapper {
+  display: grid;
+  grid-template-columns: var(--timetable-location-width) minmax(0, 1fr);
+  width: 100%;
+  align-items: stretch;
+}
+body.slug-timetable .timetable .timetable-day__left {
+  display: flex;
+  flex-direction: column;
+}
+body.slug-timetable .timetable .timetable-day__right {
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  display: flex;
+  scrollbar-color: var(--color-pink) var(--color-brown);
+  scrollbar-width: thin;
+}
+body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar {
+  width: 0.6rem;
+}
+body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-track {
+  background: var(--color-brown);
+}
+body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-thumb {
+  background: var(--color-pink);
+  border-radius: 0.4rem;
+}
+body.slug-timetable .timetable .timetable-day__right:hover {
+  scrollbar-width: auto;
+}
+body.slug-timetable .timetable .timetable-day__right:hover::-webkit-scrollbar {
+  width: 0.8rem;
+}
+body.slug-timetable .timetable .timetable-day__canvas {
+  position: relative;
+  width: var(--time-width);
+  min-width: var(--time-width);
+  flex: 1;
 }
 body.slug-timetable .timetable .date {
   padding: 0.5rem 0 0 0.5rem;
-  background-color: black;
-  width: 10.8rem;
-  color: white !important;
+  background-color: var(--color-grey);
+  width: var(--timetable-location-width);
+  color: var(--color-brown) !important;
   height: 3rem;
   font-family: "BSTBazaineMono", monospace;
   font-variation-settings: "wght" 200;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   z-index: 10;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
 body.slug-timetable .timetable .date:hover {
-  color: white !important;
+  color: var(--color-brown) !important;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .date {
@@ -4919,9 +5141,11 @@ body.slug-timetable .timetable .date:hover {
   }
 }
 body.slug-timetable .timetable .timetable-times {
+  grid-column: 2;
   display: flex;
   z-index: 0;
-  margin-left: 10.8rem;
+  margin-left: 0;
+  width: var(--time-width);
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .timetable-times {
@@ -4930,20 +5154,46 @@ body.slug-timetable .timetable .timetable-times {
 }
 body.slug-timetable .timetable .timetable-times .time-block {
   padding-left: 0;
-  background-color: inherit;
+  background-color: var(--color-white);
   top: 1.35rem;
   position: relative;
 }
 body.slug-timetable .timetable .timetable-times .time-block .time {
   padding: 0.3rem 0.5rem;
   height: 1.65rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--color-brown);
   font-size: 0.7rem;
-  background-color: black;
-  color: white;
+  background-color: var(--color-grey);
+  color: var(--color-brown);
 }
-body.slug-timetable .timetable .timetable-row .location {
-  background-color: inherit;
+body.slug-timetable .timetable .timetable-row {
+  position: relative;
+  align-items: start;
+  min-height: var(--timetable-row-height);
+  top: 3rem;
+}
+body.slug-timetable .timetable .timetable-row .timetable-row__overflow-arrow {
+  position: absolute;
+  display: block !important;
+  left: 63vw;
+  top: 0.25rem !important;
+  z-index: 999;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  border: 1px solid var(--color-brown);
+  background: var(--color-pink);
+  color: var(--color-brown);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "BSTBazaineMono";
+}
+body.slug-timetable .timetable .timetable-row .timetable-row__overflow-arrow:hover {
+  filter: brightness(0.95);
 }
 body.slug-timetable .timetable .timetable-row .programme {
   background-color: transparent;
@@ -4951,7 +5201,8 @@ body.slug-timetable .timetable .timetable-row .programme {
   top: 0.4rem;
   border-radius: 0.2rem;
   overflow: hidden;
-  left: calc(var(--margin) + 0.2rem);
+  position: absolute;
+  inset-inline-start: calc(var(--margin) + 0.2rem);
   width: calc(var(--width) - 0.4rem);
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -4979,13 +5230,13 @@ body.slug-timetable .timetable .timetable-row .programme .inner-programme .title
   line-height: 0.8rem;
   border-top-right-radius: 0.25rem;
   overflow: hidden;
-  background-color: inherit !important;
+  background-color: var(--color-pink);
 }
 body.slug-timetable .timetable .timetable-row .programme .inner-programme .time {
   font-size: 0.7rem;
   display: inline-flex;
-  background-color: black;
-  color: white;
+  background-color: var(--color-grey);
+  color: var(--color-brown);
   margin-left: 0;
   padding: 0 0.2rem;
   border-top-right-radius: 0.25rem;
@@ -5020,15 +5271,6 @@ body.slug-timetable .timetable .timetable-row .programme .inner-programme .artis
   margin-left: 0;
   white-space: nowrap;
 }
-body.slug-timetable .timetable .timetable-row.w139 .location, body.slug-timetable .timetable .timetable-row.sub-W139 .location, body.slug-timetable .timetable .timetable-row.muziekgebouw .location, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .location, body.slug-timetable .timetable .timetable-row.rijksakademie .location, body.slug-timetable .timetable .timetable-row.zone-2-source .location, body.slug-timetable .timetable .timetable-row.ot301 .location, body.slug-timetable .timetable .timetable-row.online .location, body.slug-timetable .timetable .timetable-row.online-anywhere .location, body.slug-timetable .timetable .timetable-row.oude-kerk .location, body.slug-timetable .timetable .timetable-row.paradiso .location, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .location, body.slug-timetable .timetable .timetable-row.sub-stedelijk .location, body.slug-timetable .timetable .timetable-row.looiersgracht60 .location, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .location, body.slug-timetable .timetable .timetable-row.jacuzzi .location, body.slug-timetable .timetable .timetable-row.bimhuis .location, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .location, body.slug-timetable .timetable .timetable-row.eye .location, body.slug-timetable .timetable .timetable-row.garage-noord .location, body.slug-timetable .timetable .timetable-row.het-hem .location, body.slug-timetable .timetable .timetable-row.sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .location, body.slug-timetable .timetable .timetable-row.het-hem-2 .location {
-  background-color: inherit;
-}
-body.slug-timetable .timetable .timetable-row.w139 .programme:hover, body.slug-timetable .timetable .timetable-row.sub-W139 .programme:hover, body.slug-timetable .timetable .timetable-row.muziekgebouw .programme:hover, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .programme:hover, body.slug-timetable .timetable .timetable-row.rijksakademie .programme:hover, body.slug-timetable .timetable .timetable-row.zone-2-source .programme:hover, body.slug-timetable .timetable .timetable-row.ot301 .programme:hover, body.slug-timetable .timetable .timetable-row.online .programme:hover, body.slug-timetable .timetable .timetable-row.online-anywhere .programme:hover, body.slug-timetable .timetable .timetable-row.oude-kerk .programme:hover, body.slug-timetable .timetable .timetable-row.paradiso .programme:hover, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .programme:hover, body.slug-timetable .timetable .timetable-row.sub-stedelijk .programme:hover, body.slug-timetable .timetable .timetable-row.looiersgracht60 .programme:hover, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .programme:hover, body.slug-timetable .timetable .timetable-row.jacuzzi .programme:hover, body.slug-timetable .timetable .timetable-row.bimhuis .programme:hover, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .programme:hover, body.slug-timetable .timetable .timetable-row.eye .programme:hover, body.slug-timetable .timetable .timetable-row.garage-noord .programme:hover, body.slug-timetable .timetable .timetable-row.het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .programme:hover, body.slug-timetable .timetable .timetable-row.het-hem-2 .programme:hover {
-  background-color: transparent !important;
-}
-body.slug-timetable .timetable .timetable-row.w139 .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-W139 .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.muziekgebouw .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-muziekgebouw .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.rijksakademie .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.zone-2-source .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.ot301 .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.online .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.online-anywhere .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.oude-kerk .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.paradiso .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.stedelijk-amsterdam .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-stedelijk .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.looiersgracht60 .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-looiersgracht60 .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.jacuzzi .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.bimhuis .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-BIMHUIS .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.eye .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.garage-noord .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.het-hem .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-het-hem .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-het-hem .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-sub-het-hem .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.sub-sub-sub-sub-het-hem .programme .inner-programme .title-artist-wrapper, body.slug-timetable .timetable .timetable-row.het-hem-2 .programme .inner-programme .title-artist-wrapper {
-  background-color: inherit !important;
-}
 body.slug-timetable .timetable .timetable-locations-outer-wrapper {
   position: relative;
   margin-bottom: 4rem;
@@ -5048,6 +5290,7 @@ body.slug-timetable .timetable .timetable-locations-outer-wrapper::before {
 body.slug-timetable .timetable .timetable-locations {
   padding-bottom: 0;
   padding-top: 0;
+  padding-left: 0;
 }
 body.slug-timetable .timetable .timetable-locations::before {
   content: " ";
@@ -5058,32 +5301,12 @@ body.slug-timetable .timetable .timetable-locations::before {
   height: calc(100% - 1.4rem);
   z-index: -1;
 }
-body.slug-timetable .timetable .timetable-locations:hover {
-  margin-bottom: -0.6rem;
-}
-body.slug-timetable .timetable .timetable-locations:hover::-webkit-scrollbar {
-  height: 1rem;
-}
-body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar {
-  height: 0.4rem;
-  border: 1px solid #000;
-  background-color: black;
-  cursor: pointer;
-}
-body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 1rem;
-  border: 2px solid transparent;
-  height: calc(0.5rem - 2px);
-  cursor: pointer;
-}
-body.slug-timetable .timetable .timetable-locations::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 0.5rem;
-}
 body.slug-timetable .timetable .timetable-locations .location {
-  width: 10.8rem;
-  border-top: 0 solid black;
+  width: var(--timetable-location-width);
+  border-top: 0 solid var(--color-brown);
+  background-color: var(--color-grey);
+  border-top: 1px solid var(--color-brown);
+  max-height: var(--timetable-row-height);
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .timetable-locations .location {
@@ -5091,11 +5314,11 @@ body.slug-timetable .timetable .timetable-locations .location {
   }
 }
 body.slug-timetable .timetable .timetable-locations .location p {
-  border-top: 0 solid black;
-  border-bottom: 0 solid black;
-  border-right: 0 solid black;
+  border-top: 0 solid var(--color-brown);
+  border-bottom: 0 solid var(--color-brown);
+  border-right: 0 solid var(--color-brown);
   margin-bottom: -1px;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   padding: 1.5rem 0 1.5rem 0.5rem;
   word-break: break-word;
 }
@@ -5191,7 +5414,6 @@ html {
 .timetable {
   height: auto;
   overflow-y: hidden;
-  zoom: 90%;
   position: relative;
 }
 .timetable .hide {
@@ -5224,9 +5446,6 @@ html {
 .timetable .timetable-locations {
   padding-top: 7rem;
   overflow-x: scroll;
-  /* width */
-  /* Track */
-  /* Handle */
   overflow-y: hidden;
   padding-bottom: 2rem;
 }
@@ -5237,18 +5456,6 @@ html {
   width: var(--width);
   position: relative;
 }
-.timetable .timetable-locations::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
-}
-.timetable .timetable-locations::-webkit-scrollbar-track {
-  background: transparent;
-  border: 1px solid black;
-}
-.timetable .timetable-locations::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 25px;
-}
 .timetable .timetable-locations .location {
   height: 100%;
   border-top: 1px solid black;
@@ -5257,7 +5464,6 @@ html {
   left: 0;
   width: 10rem;
   background-color: #b4c8c8;
-  display: none;
   vertical-align: middle;
   word-break: break-all;
 }
@@ -5289,9 +5495,6 @@ html {
   position: relative;
   display: flex;
 }
-.timetable .timetable-row:nth-child(2) {
-  margin-top: 5rem;
-}
 .timetable .timetable-row .programme {
   display: inline-block;
   vertical-align: middle;
@@ -5308,6 +5511,14 @@ html {
 .timetable .timetable-row .programme:hover {
   background-color: #000 !important;
   color: white;
+}
+.timetable .timetable-row .programme.programme--untimed {
+  background-color: var(--color-pink);
+  color: var(--color-brown);
+}
+.timetable .timetable-row .programme.programme--untimed .inner-programme .time {
+  background: transparent;
+  color: inherit;
 }
 .timetable .timetable-row .programme .inner-programme {
   padding: 10px;
@@ -5597,6 +5808,9 @@ body.slug-news #sonic-acts #acts path {
   fill: var(--color-brown);
 }
 body.slug-programme #sonic-acts #acts path {
+  fill: var(--color-blue);
+}
+body.slug-timetable #sonic-acts #acts path {
   fill: var(--color-blue);
 }
 body.slug-artist #sonic-acts #acts path {
@@ -6770,7 +6984,7 @@ body.slug-programme .event-layout__grid .event-aside .discover-item {
 }
 body.slug-programme .event-layout__grid .event-aside .discover.artists {
   background-color: transparent;
-  padding: 0 1rem;
+  padding: 0 1rem 3rem 1rem;
   position: sticky;
   top: 0;
 }
@@ -6833,13 +7047,7 @@ body.slug-programme .event-layout__grid .event-aside .items-wrapper .artist-item
 }
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
   body.slug-programme .event-layout__grid .event-aside .items-wrapper.two-artists .artist-item {
-    width: 55%;
-  }
-  body.slug-programme .event-layout__grid .event-aside .items-wrapper.two-artists .artist-item:nth-child(1) {
-    margin-left: 5rem;
-  }
-  body.slug-programme .event-layout__grid .event-aside .items-wrapper.two-artists .artist-item:nth-child(2) {
-    margin-left: -5rem;
+    width: 45%;
   }
 }
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
@@ -6996,3 +7204,5 @@ body.slug-artist .title-wrapper h1.page-title {
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px;
 }
+
+/*# sourceMappingURL=biennial.css.map */

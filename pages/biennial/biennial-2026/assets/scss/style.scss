@@ -401,7 +401,7 @@ $grid-columns: 12;
     background-color: var(--artist-card-bg-color, transparent);
     color: var(--artist-card-text-color, inherit);
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
 
     @include mobile {
       width: calc(50% - 1rem);
@@ -2011,6 +2011,10 @@ body {
   flex-direction: column;
 
   color: var(--color-pink);
+
+  body.slug-timetable & {
+    display: none;
+  }
 
   a {
     color: var(--color-pink);
@@ -4548,10 +4552,47 @@ body.slug-programmeprogrammesub {
 }
 
 body.slug-timetable {
-  background-color: #6c4b34;
+  --timetable-location-width: 12.25rem;
+  --timetable-row-height: 3.5rem;
+
+  background-color: var(--color-brown);
+
+  .global-frontpage-visuals {
+    display: none !important;
+  }
+
+  .minimal-nav-container {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1000;
+    transform-origin: right bottom;
+  }
+
+  .minimal-nav__overlay {
+    display: none;
+  }
+
+  .social-channel {
+    display: none;
+  }
+
+  // Keep the header anchored bottom-right on timetable pages (override slug-biennial centering)
+  #main-header {
+    right: 1rem;
+    bottom: 1rem;
+    top: auto;
+    transform: scale(1);
+  }
 
   .page-title {
-    color: inherit;
+    color: var(--color-pink);
+    position: static;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    display: block;
+    margin: 0 0 1rem 0;
   }
 
   @include mobile {
@@ -4562,24 +4603,238 @@ body.slug-timetable {
 
   .title-wrapper {
     margin-top: 0;
+    position: static;
+  }
+
+  .timetable-layout {
+    align-items: start;
+    margin-bottom: 3rem;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "content"
+        "sidebar";
+      gap: 1.25rem;
+      padding-right: 0;
+    }
+
+    .timetable-sidebar {
+      grid-area: sidebar;
+      --calendar-surface: color-mix(in srgb, var(--color-sand) 80%, white 20%);
+      --calendar-ink: var(--color-brown);
+      --calendar-highlight: var(--color-pink);
+
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      width: 18rem;
+      max-height: calc(100vh - 2rem);
+      align-self: start;
+      background: var(--calendar-surface);
+      border: 1px solid var(--calendar-ink);
+      border-radius: 1rem;
+      padding: 1rem 1rem 1.25rem;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      z-index: 50;
+
+      @include mobile {
+        position: relative;
+        top: 0;
+        right: auto;
+        width: 100%;
+        max-height: none;
+        padding-right: 1rem;
+      }
+    }
+
+    .timetable-sidebar__month {
+      &:not(:last-child) {
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.25rem;
+      }
+    }
+
+    .timetable-sidebar__header {
+      @include font-bazaine;
+      text-transform: uppercase;
+      letter-spacing: -0.06rem;
+      font-size: 1.3rem;
+      color: var(--color-brown);
+      display: block;
+      text-align: center;
+      padding: 0.25rem 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .timetable-sidebar__weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(1.8rem, 1fr));
+      gap: 0.35rem;
+      text-align: center;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08rem;
+      color: var(--color-brown);
+      margin-bottom: 0.4rem;
+    }
+
+    .timetable-sidebar__days {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(1.8rem, 1fr));
+      gap: 0.35rem;
+    }
+
+    .timetable-sidebar__day {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1;
+      border-radius: 100%;
+      border: 1px solid var(--color-brown);
+      background: color-mix(in srgb, var(--color-sand) 85%, white 15%);
+      color: var(--color-brown);
+      font-family: "BSTBazaineMono", monospace;
+      font-size: 0.8rem;
+      letter-spacing: -0.04rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      padding: 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 999px;
+        background: var(--color-brown);
+        opacity: 0;
+        transition: width 0.2s ease, opacity 0.2s ease;
+      }
+
+      &--blank {
+        opacity: 0;
+        pointer-events: none;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      &--disabled {
+        opacity: 1;
+        //border-style: dashed;
+        background: transparent;
+        pointer-events: none;
+      }
+
+      &--adjacent {
+        opacity: 0.3;
+      }
+
+      &--clickable {
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+          background: var(--calendar-highlight);
+          color: var(--calendar-ink);
+          outline: none;
+        }
+      }
+
+      &--events-1::after {
+        opacity: 1;
+      }
+
+      &--events-2::after {
+        opacity: 1;
+        box-shadow: -0.3rem 0 0 var(--color-brown), 0.3rem 0 0 var(--color-brown);
+      }
+
+      &--events-3::after {
+        opacity: 1;
+        box-shadow: -0.35rem 0 0 var(--color-brown), 0 0 0 var(--color-brown), 0.35rem 0 0 var(--color-brown);
+      }
+
+      &--events-4::after {
+        opacity: 1;
+        width: 50%;
+        height: 0.18rem;
+        box-shadow: none;
+      }
+    }
   }
 
   .timetable {
+    grid-area: content;
+    .timetable-wrapper {
+      display: grid;
+      grid-template-columns: var(--timetable-location-width) minmax(0, 1fr);
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .timetable-day__left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timetable-day__right {
+      overflow-x: auto;
+      overflow-y: hidden;
+      position: relative;
+      display: flex;
+      scrollbar-color: var(--color-pink) var(--color-brown);
+      scrollbar-width: thin;
+
+      &::-webkit-scrollbar {
+        width: 0.6rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: var(--color-brown);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--color-pink);
+        border-radius: 0.4rem;
+      }
+
+      &:hover {
+        scrollbar-width: auto;
+
+        &::-webkit-scrollbar {
+          width: 0.8rem;
+        }
+      }
+    }
+
+    .timetable-day__canvas {
+      position: relative;
+      width: var(--time-width);
+      min-width: var(--time-width);
+      flex: 1;
+    }
+
     .date {
       padding: 0.5rem 0 0 0.5rem;
-      background-color: black;
-      width: 10.8rem;
-      color: white !important;
+      background-color: var(--color-grey);
+      width: var(--timetable-location-width);
+      color: var(--color-brown) !important;
       height: 3rem;
       @include font-bazaine;
       font-variation-settings: "wght" 200;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       z-index: 10;
       border-top-left-radius: 0.25rem;
       border-top-right-radius: 0.25rem;
 
       &:hover {
-        color: white !important;
+        color: var(--color-brown) !important;
       }
 
       @include mobile {
@@ -4589,9 +4844,11 @@ body.slug-timetable {
     }
 
     .timetable-times {
+      grid-column: 2;
       display: flex;
       z-index: 0;
-      margin-left: 10.8rem;
+      margin-left: 0;
+      width: var(--time-width);
 
       @include mobile {
         margin-left: 7.2rem;
@@ -4599,24 +4856,54 @@ body.slug-timetable {
 
       .time-block {
         padding-left: 0;
-        background-color: inherit;
+        background-color: var(--color-white);
         top: 1.35rem;
         position: relative;
 
         .time {
           padding: 0.3rem 0.5rem;
           height: 1.65rem;
-          border-bottom: 1px solid black;
+          border-bottom: 1px solid var(--color-brown);
           font-size: 0.7rem;
-          background-color: black;
-          color: white;
+          background-color: var(--color-grey);
+          color: var(--color-brown);
         }
       }
     }
 
     .timetable-row {
-      .location {
-        background-color: inherit;
+      position: relative;
+      align-items: start;
+      min-height: var(--timetable-row-height);
+      top: 3rem;
+
+      .timetable-row__overflow-arrow {
+        position: absolute;
+        display: block !important;
+        left: 63vw;
+        top: 0.25rem !important;
+        z-index: 999;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 100%;
+
+        border: 1px solid var(--color-brown);
+        background: var(--color-pink);
+        color: var(--color-brown);
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+        
+        font-size: 1.2rem;
+        font-weight: 700;
+        font-family: 'BSTBazaineMono';
+
+        &:hover {
+          filter: brightness(0.95);
+        }
       }
 
       .programme {
@@ -4625,7 +4912,8 @@ body.slug-timetable {
         top: 0.4rem;
         border-radius: 0.2rem;
         overflow: hidden;
-        left: calc(var(--margin) + 0.2rem);
+        position: absolute;
+        inset-inline-start: calc(var(--margin) + 0.2rem);
         width: calc(var(--width) - 0.4rem);
 
         @include mobile {
@@ -4654,14 +4942,14 @@ body.slug-timetable {
             line-height: 0.8rem;
             border-top-right-radius: 0.25rem;
             overflow: hidden;
-            background-color: inherit !important;
+            background-color: var(--color-pink);
           }
 
           .time {
             font-size: 0.7rem;
             display: inline-flex;
-            background-color: black;
-            color: white;
+            background-color: var(--color-grey);
+            color: var(--color-brown);
             margin-left: 0;
             padding: 0 0.2rem;
             border-top-right-radius: 0.25rem;
@@ -4702,48 +4990,7 @@ body.slug-timetable {
         }
       }
 
-      &.w139,
-      &.sub-W139,
-      &.muziekgebouw,
-      &.sub-muziekgebouw,
-      &.rijksakademie,
-      &.zone-2-source,
-      &.ot301,
-      &.online,
-      &.online-anywhere,
-      &.oude-kerk,
-      &.paradiso,
-      &.stedelijk-amsterdam,
-      &.sub-stedelijk,
-      &.looiersgracht60,
-      &.sub-looiersgracht60,
-      &.jacuzzi,
-      &.bimhuis,
-      &.sub-BIMHUIS,
-      &.eye,
-      &.garage-noord,
-      &.het-hem,
-      &.sub-het-hem,
-      &.sub-sub-het-hem,
-      &.sub-sub-sub-het-hem,
-      &.sub-sub-sub-sub-het-hem,
-      &.het-hem-2 {
-        .location {
-          background-color: inherit;
-        }
-
-        .programme {
-          &:hover {
-            background-color: transparent !important;
-          }
-
-          .inner-programme {
-            .title-artist-wrapper {
-              background-color: inherit !important;
-            }
-          }
-        }
-      }
+     
     }
 
     .timetable-locations-outer-wrapper {
@@ -4767,6 +5014,7 @@ body.slug-timetable {
     .timetable-locations {
       padding-bottom: 0;
       padding-top: 0;
+      padding-left: 0;
 
       &::before {
         content: " ";
@@ -4778,48 +5026,23 @@ body.slug-timetable {
         z-index: -1;
       }
 
-      &:hover {
-        margin-bottom: -0.6rem;
-
-        &::-webkit-scrollbar {
-          height: 1rem;
-        }
-      }
-
-      &::-webkit-scrollbar {
-        height: 0.4rem;
-        border: 1px solid #000;
-        background-color: black;
-        cursor: pointer;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: black;
-        border-radius: 1rem;
-        border: 2px solid transparent;
-        height: calc(0.5rem - 2px);
-        cursor: pointer;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 0.5rem;
-      }
-
       .location {
-        width: 10.8rem;
-        border-top: 0 solid black;
+        width: var(--timetable-location-width);
+        border-top: 0 solid var(--color-brown);
+        background-color: var(--color-grey);
+        border-top: 1px solid var(--color-brown);
+        max-height: var(--timetable-row-height);
 
         @include mobile {
           width: 7.2rem;
         }
 
         p {
-          border-top: 0 solid black;
-          border-bottom: 0 solid black;
-          border-right: 0 solid black;
+          border-top: 0 solid var(--color-brown);
+          border-bottom: 0 solid var(--color-brown);
+          border-right: 0 solid var(--color-brown);
           margin-bottom: -1px;
-          font-size: 0.7rem;
+          font-size: 0.9rem;
           padding: 1.5rem 0 1.5rem 0.5rem;
           word-break: break-word;
         }
@@ -4932,7 +5155,7 @@ html {
 .timetable {
   height: auto;
   overflow-y: hidden;
-  zoom: 90%;
+  //zoom: 90%;
   position: relative;
 
   .hide {
@@ -4970,8 +5193,8 @@ html {
     }
   }
 
-  .timetable-locations {
-    padding-top: 7rem;
+    .timetable-locations {
+      padding-top: 7rem;
 
     &:first-child {
       padding-top: 0;
@@ -4983,39 +5206,20 @@ html {
     }
 
     overflow-x: scroll;
-
-    /* width */
-    &::-webkit-scrollbar {
-      width: 1rem;
-      height: 1rem;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      border: 1px solid black;
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-      background: black;
-      border-radius: 25px;
-    }
-
     overflow-y: hidden;
+
     padding-bottom: 2rem;
 
-    .location {
-      height: 100%;
-      border-top: 1px solid black;
-      position: sticky;
-      z-index: 5;
-      left: 0;
-      width: 10rem;
-      background-color: #b4c8c8;
-      display: none;
-      vertical-align: middle;
-      word-break: break-all;
+      .location {
+        height: 100%;
+        border-top: 1px solid black;
+        position: sticky;
+        z-index: 5;
+        left: 0;
+        width: 10rem;
+        background-color: #b4c8c8;
+        vertical-align: middle;
+        word-break: break-all;
 
       &.sub {
         border-top: none;
@@ -5052,10 +5256,6 @@ html {
     position: relative;
     display: flex;
 
-    &:nth-child(2) {
-      margin-top: 5rem;
-    }
-
     .programme {
       display: inline-block;
       vertical-align: middle;
@@ -5069,15 +5269,27 @@ html {
       transition: all 0.4s ease-in-out;
       top: 0;
 
-      &:hover {
-        background-color: #000 !important;
-        color: white;
-      }
+        &:hover {
+          background-color: #000 !important;
+          color: white;
+        }
 
-      .inner-programme {
-        padding: 10px;
-        box-sizing: border-box;
-        font-size: 0.8rem;
+        &.programme--untimed {
+          background-color: var(--color-pink);
+          color: var(--color-brown);
+
+          .inner-programme {
+            .time {
+              background: transparent;
+              color: inherit;
+            }
+          }
+        }
+
+        .inner-programme {
+          padding: 10px;
+          box-sizing: border-box;
+          font-size: 0.8rem;
         width: 100%;
         position: relative;
         display: flex;
@@ -5400,6 +5612,10 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
       }
 
       body.slug-programme & {
+        fill: var(--color-blue);
+      }
+
+      body.slug-timetable & {
         fill: var(--color-blue);
       }
     }
@@ -6685,7 +6901,7 @@ body.slug-programme {
 
       .discover.artists {
         background-color: transparent;
-        padding: 0 1rem;
+        padding: 0 1rem 3rem 1rem;
 
         @include mobile {
           padding: 0;
@@ -6766,14 +6982,14 @@ body.slug-programme {
         &.two-artists {
           .artist-item {
             @include desktop() {
-              width: 55%;
+              width: 45%;
 
               &:nth-child(1) {
-                margin-left: 5rem;
+                //margin-left: 5rem;
               }
 
               &:nth-child(2) {
-                margin-left: -5rem;
+                //margin-left: 5rem;
               }
             }
           }
