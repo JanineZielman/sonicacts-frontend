@@ -514,19 +514,19 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                           <button
                             key={`${month.key}-${day.key}`}
                             type="button"
-                          className={[
-                            "timetable-sidebar__day",
-                            day.clickable
-                              ? "timetable-sidebar__day--clickable"
-                              : "timetable-sidebar__day--disabled",
-                            day.type === "adjacent"
-                              ? "timetable-sidebar__day--adjacent"
-                              : null,
-                            day.eventCount > 0
-                              ? `timetable-sidebar__day--events-${Math.min(
-                                day.eventCount,
-                                4
-                              )}`
+                            className={[
+                              "timetable-sidebar__day",
+                              day.clickable
+                                ? "timetable-sidebar__day--clickable"
+                                : "timetable-sidebar__day--disabled",
+                              day.type === "adjacent"
+                                ? "timetable-sidebar__day--adjacent"
+                                : null,
+                              day.eventCount > 0
+                                ? `timetable-sidebar__day--events-${Math.min(
+                                  day.eventCount,
+                                  4
+                                )}`
                                 : null,
                             ]
                               .filter(Boolean)
@@ -849,17 +849,8 @@ export async function getServerSideProps({ query }) {
     slug: BIENNIAL_SLUG,
   }
 
-  const isPreviewFlag = (val) => {
-    if (typeof val === "boolean") return val
-    if (typeof val === "string") {
-      const norm = val.trim().toLowerCase()
-      return norm === "true" || norm === "1" || norm === "yes" || norm === "on"
-    }
-    return false
-  }
 
-  const preview =
-    isPreviewFlag(query?.preview) || isPreviewFlag(process.env.NEXT_PUBLIC_PREVIEW)
+  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
   const publicationState = preview ? "preview" : "live"
   const publicationParam = `&publicationState=${publicationState}`
 

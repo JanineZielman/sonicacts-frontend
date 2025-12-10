@@ -442,13 +442,12 @@ const CommunityItem = ({
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, query }) {
   const biennial = {
     slug: BIENNIAL_SLUG,
   }
 
-  const preview =
-    String(process.env.NEXT_PUBLIC_PREVIEW || "").toLowerCase() === "true"
+  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
   const pageRes = await fetchAPI(
     `/community-items?filters[slug][$eq]=${params.artist}${preview ? "&publicationState=preview" : "&publicationState=live"}&populate[content][populate]=*&populate[links]=*`
   )

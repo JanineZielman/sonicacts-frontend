@@ -78,15 +78,14 @@ const NewsItem = ({ global, festival, page, relations, programmeLoc }) => {
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, query }) {
   const slug = params?.slug
 
   if (!slug) {
     return { notFound: true }
   }
 
-  const preview =
-    String(process.env.NEXT_PUBLIC_PREVIEW || "").toLowerCase() === "true"
+  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
   const publicationState = preview
     ? "&publicationState=preview"
     : "&publicationState=live"
