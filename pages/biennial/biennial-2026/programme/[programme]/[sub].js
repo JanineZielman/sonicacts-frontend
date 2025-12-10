@@ -6,12 +6,13 @@ const SubProgrammeItem = (props) => {
   return <ProgrammeItem {...props} />
 }
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ params }) {
   const biennial = {
     slug: BIENNIAL_SLUG,
   }
 
-  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
+  const preview =
+    String(process.env.NEXT_PUBLIC_PREVIEW || "").toLowerCase() === "true"
   const pageRes = await fetchAPI(
     `/programme-items?filters[slug][$eq]=${params.sub}&filters[biennial][slug][$eq]=${biennial.slug}${preview ? "&publicationState=preview" : "&publicationState=live"}&populate[content][populate]=*`
   )

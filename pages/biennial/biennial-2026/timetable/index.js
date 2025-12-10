@@ -69,6 +69,17 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
   const LOCATION_WIDTH_REM = 13.5 // keep in sync with --timetable-location-width in SCSS
   const PROGRAMME_MARGIN_OFFSET_REM = 0.5 // small nudge so blocks sit just inside the timeline
 
+  const parseTime = (value) => {
+    if (!value || typeof value !== "string") return null
+    const [hoursStr, minutesStr = "0"] = value.split(":")
+    const hoursNum = Number(hoursStr)
+    const minutesNum = Number(minutesStr)
+    if (Number.isNaN(hoursNum) || Number.isNaN(minutesNum)) {
+      return null
+    }
+    return hoursNum + minutesNum / 60
+  }
+
   const times = [
     "07:00",
     "08:00",
@@ -96,7 +107,7 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
     "06:00",
   ]
 
-  // Track event dates to render a side calendar of active days
+  // Track event dates (including untimed) to render a side calendar of active days
   const eventDateCounts = useMemo(() => {
     const counts = {}
     programmes.forEach((programme) => {
@@ -115,17 +126,17 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
     return counts
   }, [programmes])
 
+  const sortedEventKeys = useMemo(() => Object.keys(eventDateCounts).sort(), [eventDateCounts])
+
   const firstEventDate = useMemo(() => {
-    const keys = Object.keys(eventDateCounts).sort()
-    if (keys.length === 0) return dates[0]
-    return new Date(keys[0])
-  }, [eventDateCounts, dates])
+    if (sortedEventKeys.length === 0) return dates[0]
+    return new Date(sortedEventKeys[0])
+  }, [sortedEventKeys, dates])
 
   const lastEventDate = useMemo(() => {
-    const keys = Object.keys(eventDateCounts).sort()
-    if (keys.length === 0) return dates[dates.length - 1]
-    return new Date(keys[keys.length - 1])
-  }, [eventDateCounts, dates])
+    if (sortedEventKeys.length === 0) return dates[dates.length - 1]
+    return new Date(sortedEventKeys[sortedEventKeys.length - 1])
+  }, [sortedEventKeys, dates])
 
   const calendarMonths = useMemo(() => {
     if (!firstEventDate || !lastEventDate) {
@@ -157,8 +168,23 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
       const firstDayOffset = (new Date(year, month, 1).getDay() + 6) % 7 // Monday = 0
 
       const dayCells = []
-      for (let j = 0; j < firstDayOffset; j += 1) {
-        dayCells.push({ type: "blank" })
+      const prevMonth = new Date(year, month, 0)
+      const prevDays = prevMonth.getDate()
+
+      for (let j = firstDayOffset; j > 0; j -= 1) {
+        const dayNum = prevDays - j + 1
+        const dateObj = new Date(year, month, 1 - j)
+        const dateKey = Moment(dateObj).format("YYYY-MM-DD")
+        const dayId = Moment(dateObj).format("ddd-D-MMM")
+        const count = eventDateCounts[dateKey] || 0
+        dayCells.push({
+          type: "adjacent",
+          day: dayNum,
+          id: dayId,
+          key: dateKey,
+          eventCount: count,
+          clickable: count > 0,
+        })
       }
       for (let d = 1; d <= daysInMonth; d += 1) {
         const dateObj = new Date(year, month, d)
@@ -175,6 +201,44 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
         })
       }
 
+      const remainder = dayCells.length % 7
+      if (remainder > 0) {
+        const daysToAdd = 7 - remainder
+        for (let n = 1; n <= daysToAdd; n += 1) {
+          const dateObj = new Date(year, month + 1, n)
+          const dateKey = Moment(dateObj).format("YYYY-MM-DD")
+          const dayId = Moment(dateObj).format("ddd-D-MMM")
+          const count = eventDateCounts[dateKey] || 0
+          dayCells.push({
+            type: "adjacent",
+            day: n,
+            id: dayId,
+            key: dateKey,
+            eventCount: count,
+            clickable: count > 0,
+          })
+        }
+      }
+
+      const activeDaysThisMonth = Array.from(
+        { length: daysInMonth },
+        (_, idx) => idx + 1
+      ).filter((d) => {
+        const dateObj = new Date(year, month, d)
+        const dateKey = Moment(dateObj).format("YYYY-MM-DD")
+        return (eventDateCounts[dateKey] || 0) > 0
+      })
+
+      const isSkippableJanuary =
+        month === 0 &&
+        activeDaysThisMonth.length > 0 &&
+        activeDaysThisMonth.every((d) => d >= 26)
+
+      if (isSkippableJanuary) {
+        cursor = new Date(year, month + 1, 1)
+        continue
+      }
+
       months.push({
         key: `${year}-${month + 1}`,
         label: Moment(cursor).format("MMMM YYYY"),
@@ -188,8 +252,11 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
   }, [eventDateCounts, firstEventDate, lastEventDate])
 
   const renderDates = useMemo(() => {
+    if (!firstEventDate || !lastEventDate || sortedEventKeys.length === 0) {
+      return []
+    }
     return getDates(firstEventDate, lastEventDate)
-  }, [firstEventDate, lastEventDate])
+  }, [firstEventDate, lastEventDate, sortedEventKeys])
 
   const handleDayClick = (day) => {
     if (!day?.id) return
@@ -257,6 +324,146 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
     }
   })
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return undefined
+    }
+
+    const ROW_ARROW_CLASS = "timetable-row__overflow-arrow"
+    const ARROW_SELECTOR = `.${ROW_ARROW_CLASS}`
+    const RIGHT_CONTAINER_SELECTOR = ".timetable-day__right"
+    const PROGRAMME_SELECTOR = ".programme"
+
+    const ensureArrow = (row) => {
+      let arrow = row.querySelector(ARROW_SELECTOR)
+      let created = false
+      if (!arrow) {
+        arrow = document.createElement("button")
+        arrow.type = "button"
+        arrow.className = ROW_ARROW_CLASS
+        arrow.setAttribute("aria-label", "Scroll to later events")
+        arrow.innerText = "→"
+        arrow.style.transition = "opacity 0.25s ease"
+        row.appendChild(arrow)
+        created = true
+      }
+      return { arrow, created }
+    }
+
+    const updateArrows = () => {
+      const rightContainers = Array.from(
+        document.querySelectorAll(RIGHT_CONTAINER_SELECTOR)
+      )
+
+      rightContainers.forEach((container) => {
+        const containerRect = container.getBoundingClientRect()
+        const rows = Array.from(container.querySelectorAll(".timetable-row"))
+
+        rows.forEach((row) => {
+          const programmes = Array.from(row.querySelectorAll(PROGRAMME_SELECTOR))
+          if (!programmes.length) {
+            const existing = row.querySelector(ARROW_SELECTOR)
+            if (existing) {
+              existing.style.opacity = "0"
+              existing.style.pointerEvents = "none"
+            }
+            return
+          }
+
+          const { arrow, created } = ensureArrow(row)
+          arrow.style.display = "flex"
+          const arrowRect = arrow.getBoundingClientRect()
+          const thresholdLeft =
+            (arrowRect && Number.isFinite(arrowRect.left)
+              ? arrowRect.left
+              : window.innerWidth * 0.8) + 8
+
+          const nextHidden = programmes.find((prog) => {
+            const timeEl = prog.querySelector(".time") || prog
+            const rect = timeEl.getBoundingClientRect()
+            console.log("[timetable] arrow vs item", {
+              row: row.className,
+              arrowLeft: thresholdLeft,
+              itemLeft: rect.left,
+              delta: rect.left - thresholdLeft,
+            })
+            return rect.left > thresholdLeft
+          })
+
+          if (!nextHidden) {
+            arrow.style.opacity = "0"
+            arrow.style.pointerEvents = "none"
+            return
+          }
+
+          if (created) {
+            console.log(
+              "[timetable] adding arrow: items beyond arrow threshold",
+              row.className
+            )
+          }
+          arrow.style.opacity = "1"
+          arrow.style.pointerEvents = "auto"
+          const rowRect = row.getBoundingClientRect()
+          arrow.style.top = `${rowRect.top + window.scrollY + 8}px`
+          arrow.onclick = () => {
+            const timeEl = nextHidden.querySelector(".time") || nextHidden
+            const nextRect = timeEl.getBoundingClientRect()
+            const delta = nextRect.left - containerRect.left
+            const targetLeft = Math.max(container.scrollLeft + delta - 16, 0)
+            container.scrollTo({
+              left: targetLeft,
+              behavior: "smooth",
+            })
+          }
+        })
+      })
+    }
+
+    updateArrows()
+    window.requestAnimationFrame(updateArrows)
+    const delayed = window.setTimeout(updateArrows, 250)
+    const delayedLong = window.setTimeout(updateArrows, 2500)
+
+    const timetableRoot =
+      document.querySelector(".timetable-day__right") ||
+      document.querySelector(".timetable")
+    let mutationTimeout
+    const mutationObserver =
+      timetableRoot &&
+      new MutationObserver(() => {
+        window.clearTimeout(mutationTimeout)
+        mutationTimeout = window.setTimeout(updateArrows, 50)
+      })
+    if (mutationObserver && timetableRoot) {
+      mutationObserver.observe(timetableRoot, {
+        childList: true,
+        subtree: true,
+      })
+    }
+
+    const rightContainers = Array.from(
+      document.querySelectorAll(RIGHT_CONTAINER_SELECTOR)
+    )
+    rightContainers.forEach((container) =>
+      container.addEventListener("scroll", updateArrows, { passive: true })
+    )
+    window.addEventListener("resize", updateArrows)
+
+    return () => {
+      window.clearTimeout(delayed)
+      window.clearTimeout(delayedLong)
+      if (mutationObserver) {
+        mutationObserver.disconnect()
+      }
+      window.clearTimeout(mutationTimeout)
+      rightContainers.forEach((container) =>
+        container.removeEventListener("scroll", updateArrows)
+      )
+      window.removeEventListener("resize", updateArrows)
+    }
+  }, [programmes, locRes])
+
   return (
     <>
       <div className="timetable"></div>
@@ -307,16 +514,19 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                           <button
                             key={`${month.key}-${day.key}`}
                             type="button"
-                            className={[
-                              "timetable-sidebar__day",
-                              day.clickable
-                                ? "timetable-sidebar__day--clickable"
-                                : "timetable-sidebar__day--disabled",
-                              day.eventCount > 0
-                                ? `timetable-sidebar__day--events-${Math.min(
-                                  day.eventCount,
-                                  4
-                                )}`
+                          className={[
+                            "timetable-sidebar__day",
+                            day.clickable
+                              ? "timetable-sidebar__day--clickable"
+                              : "timetable-sidebar__day--disabled",
+                            day.type === "adjacent"
+                              ? "timetable-sidebar__day--adjacent"
+                              : null,
+                            day.eventCount > 0
+                              ? `timetable-sidebar__day--events-${Math.min(
+                                day.eventCount,
+                                4
+                              )}`
                                 : null,
                             ]
                               .filter(Boolean)
@@ -399,10 +609,15 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                         const normalized = normalizeDate(when.date)
                         if (!normalized) return false
                         if (
-                          loc.attributes.title !== when.location.data?.attributes.title
+                          loc.attributes.title !== when.location.data?.attributes?.title
                         ) {
                           return false
                         }
+                        const startTime = parseTime(when.start_time)
+                        const endTime = parseTime(when.end_time)
+                        const hasTimes =
+                          Number.isFinite(startTime) && Number.isFinite(endTime)
+                        if (!hasTimes) return false
                         return (
                           Moment(normalized).format("DD MM") ===
                           Moment(day).format("DD MM")
@@ -410,6 +625,10 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                       })
                     })
                   })
+
+                  if (locationsForDay.length === 0) {
+                    return null
+                  }
 
                   return (
                     <div
@@ -456,12 +675,40 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                               </div>
                               {locationsForDay.map((loc, j) => {
                                 const programmesForLoc = loc.attributes.programme_items.data
+                                const timedProgrammes = programmesForLoc.filter((prog) => {
+                                  const fullProgItem = programmes.find(
+                                    (fullProg) => fullProg.attributes.slug == prog.attributes.slug
+                                  )
+                                  if (!fullProgItem) return false
+                                  return fullProgItem.attributes.WhenWhere.some((when) => {
+                                    const normalized = normalizeDate(when.date)
+                                    if (!normalized) return false
+                                    const startTime = parseTime(when.start_time)
+                                    const endTime = parseTime(when.end_time)
+                                    const hasTimes =
+                                      Number.isFinite(startTime) && Number.isFinite(endTime)
+                                    if (!hasTimes) return false
+                                    if (
+                                      loc.attributes.title !==
+                                      when.location.data?.attributes?.title
+                                    ) {
+                                      return false
+                                    }
+                                    return (
+                                      Moment(normalized).format("DD MM") ===
+                                      Moment(day).format("DD MM")
+                                    )
+                                  })
+                                })
+                                if (!timedProgrammes.length) {
+                                  return null
+                                }
                                 return (
                                   <div
                                     className={`timetable-row ${loc.attributes.slug}`}
                                     key={loc.id || `location-${j}`}
                                   >
-                                    {programmesForLoc.map((prog, k) => {
+                                    {timedProgrammes.map((prog, k) => {
                                       const fullProgItem = programmes.filter(
                                         (fullProg) =>
                                           fullProg.attributes.slug == prog.attributes.slug
@@ -470,6 +717,14 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                                         (when) => {
                                           const normalized = normalizeDate(when.date)
                                           if (!normalized) {
+                                            return false
+                                          }
+                                          const startTimeCheck = parseTime(when.start_time)
+                                          const endTimeCheck = parseTime(when.end_time)
+                                          const hasTimesCheck =
+                                            Number.isFinite(startTimeCheck) &&
+                                            Number.isFinite(endTimeCheck)
+                                          if (!hasTimesCheck) {
                                             return false
                                           }
                                           return (
@@ -486,20 +741,6 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                                           }
                                         >
                                           {items?.map((item, l) => {
-                                            const parseTime = (value) => {
-                                              if (!value || typeof value !== "string") return null
-                                              const [hoursStr, minutesStr = "0"] = value.split(":")
-                                              const hoursNum = Number(hoursStr)
-                                              const minutesNum = Number(minutesStr)
-                                              if (
-                                                Number.isNaN(hoursNum) ||
-                                                Number.isNaN(minutesNum)
-                                              ) {
-                                                return null
-                                              }
-                                              return hoursNum + minutesNum / 60
-                                            }
-
                                             const startTime = parseTime(item.start_time)
                                             const endTimeRaw = parseTime(item.end_time)
                                             const hasTimes =
@@ -517,7 +758,7 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                                               : 0
                                             if (
                                               loc.attributes.title !==
-                                              item.location.data?.attributes.title
+                                              item.location.data?.attributes?.title
                                             ) {
                                               return null
                                             }
@@ -608,7 +849,17 @@ export async function getServerSideProps({ query }) {
     slug: BIENNIAL_SLUG,
   }
 
-  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
+  const isPreviewFlag = (val) => {
+    if (typeof val === "boolean") return val
+    if (typeof val === "string") {
+      const norm = val.trim().toLowerCase()
+      return norm === "true" || norm === "1" || norm === "yes" || norm === "on"
+    }
+    return false
+  }
+
+  const preview =
+    isPreviewFlag(query?.preview) || isPreviewFlag(process.env.NEXT_PUBLIC_PREVIEW)
   const publicationState = preview ? "preview" : "live"
   const publicationParam = `&publicationState=${publicationState}`
 

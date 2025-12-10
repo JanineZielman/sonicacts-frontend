@@ -1128,7 +1128,7 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
   background-color: var(--artist-card-bg-color, transparent);
   color: var(--artist-card-text-color, inherit);
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .template-single-artist .discover.artists.single-artist-all .artist-item {
@@ -3996,7 +3996,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
   background-color: var(--artist-card-bg-color, transparent);
   color: var(--artist-card-text-color, inherit);
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .template-artists .artist-item,
@@ -4894,6 +4894,9 @@ body.slug-timetable {
   --timetable-row-height: 3.5rem;
   background-color: var(--color-brown);
 }
+body.slug-timetable .global-frontpage-visuals {
+  display: none !important;
+}
 body.slug-timetable .minimal-nav-container {
   position: fixed;
   right: 1rem;
@@ -5040,10 +5043,12 @@ body.slug-timetable .timetable-layout .timetable-sidebar__day--blank {
   box-shadow: none;
 }
 body.slug-timetable .timetable-layout .timetable-sidebar__day--disabled {
-  opacity: 0.3;
-  border-style: dashed;
+  opacity: 1;
   background: transparent;
   pointer-events: none;
+}
+body.slug-timetable .timetable-layout .timetable-sidebar__day--adjacent {
+  opacity: 0.3;
 }
 body.slug-timetable .timetable-layout .timetable-sidebar__day--clickable {
   cursor: pointer;
@@ -5166,6 +5171,29 @@ body.slug-timetable .timetable .timetable-row {
   align-items: start;
   min-height: var(--timetable-row-height);
   top: 3rem;
+}
+body.slug-timetable .timetable .timetable-row .timetable-row__overflow-arrow {
+  position: absolute;
+  display: block !important;
+  left: 63vw;
+  top: 0.25rem !important;
+  z-index: 999;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  border: 1px solid var(--color-brown);
+  background: var(--color-pink);
+  color: var(--color-brown);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "BSTBazaineMono";
+}
+body.slug-timetable .timetable .timetable-row .timetable-row__overflow-arrow:hover {
+  filter: brightness(0.95);
 }
 body.slug-timetable .timetable .timetable-row .programme {
   background-color: transparent;
@@ -6956,7 +6984,7 @@ body.slug-programme .event-layout__grid .event-aside .discover-item {
 }
 body.slug-programme .event-layout__grid .event-aside .discover.artists {
   background-color: transparent;
-  padding: 0 1rem;
+  padding: 0 1rem 3rem 1rem;
   position: sticky;
   top: 0;
 }

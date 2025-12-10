@@ -54,6 +54,14 @@ const ProgrammeItem = ({
       Array.isArray(relationsAttributes.community_items.data)
       ? relationsAttributes.community_items.data
       : []
+  const artworkItems =
+    (Array.isArray(relationsAttributes?.artworks?.data)
+      ? relationsAttributes.artworks.data
+      : null) ||
+    (Array.isArray(relationsAttributes?.artwork_items?.data)
+      ? relationsAttributes.artwork_items.data
+      : null) ||
+    []
   const rawProgrammeEntries = Array.isArray(
     programmePage?.attributes?.programme_item
   )
@@ -146,15 +154,60 @@ const ProgrammeItem = ({
         relations?.attributes?.artworks?.data ||
         relations?.attributes?.artwork_items?.data ||
         []
+      const linkedPeople = relations?.attributes?.community_items?.data || []
+      const normalizedPeople = linkedPeople.map((person) => {
+        const attrs = person?.attributes || {}
+        return {
+          id: person?.id,
+          slug: attrs.slug,
+          name: attrs.name,
+          hasAttributes: Boolean(person?.attributes),
+          attributeKeys: Object.keys(attrs || {}),
+          coverImage: Boolean(attrs?.cover_image?.data),
+          artworksCount: attrs?.artworks?.data?.length || 0,
+          locationsCount: attrs?.locations?.data?.length || 0,
+        }
+      })
       console.log("Linked locations", linkedLocations)
-      console.log(
-        "Linked artworks",
-        linkedArtworks.map((item) => ({
-          id: item?.id,
-          slug: item?.attributes?.slug,
-          title: item?.attributes?.title,
-        }))
-      )
+      console.log("[programme] linked artworks (full detail)", {
+        count: linkedArtworks.length,
+        artworks: linkedArtworks.map((item) => {
+          const attrs = item?.attributes || {}
+          const artists =
+            attrs.community_items?.data
+              ?.map((artist) => ({
+                id: artist?.id,
+                slug: artist?.attributes?.slug,
+                name: artist?.attributes?.name,
+              }))
+              .filter(Boolean) || []
+          const locations =
+            attrs.locations?.data
+              ?.map((loc) => ({
+                id: loc?.id,
+                slug: loc?.attributes?.slug,
+                title: loc?.attributes?.title,
+              }))
+              .filter(Boolean) || []
+          const whenWhere =
+            Array.isArray(attrs.WhenWhere) && attrs.WhenWhere.length
+              ? attrs.WhenWhere
+              : []
+          return {
+            id: item?.id,
+            slug: attrs.slug,
+            title: attrs.title,
+            artists,
+            locations,
+            whenWhere,
+            rawAttributes: attrs,
+          }
+        }),
+      })
+      console.log("[programme] people (community_items)", {
+        count: linkedPeople.length,
+        people: normalizedPeople,
+      })
     }
   }, [params?.programme, subItems, sub, relations])
 
@@ -500,6 +553,44 @@ const ProgrammeItem = ({
   }
 
   const ticketsBlockElement = renderTicketsBlock()
+  const resolveArtistsForSubProgrammeItem = (item) => {
+    const directArtists = Array.isArray(
+      item?.attributes?.community_items?.data
+    )
+      ? item.attributes.community_items.data
+      : []
+    if (directArtists.length) {
+      return directArtists
+    }
+
+    const subSlug = item?.attributes?.slug?.toLowerCase()
+    const subTitle = item?.attributes?.title?.trim().toLowerCase()
+
+    const matchingArtwork = artworkItems.find((artwork) => {
+      const artworkAttrs = artwork?.attributes || {}
+      const artworkSlug = artworkAttrs.slug?.toLowerCase()
+      const artworkTitle = artworkAttrs.title?.trim().toLowerCase()
+      return (
+        (subSlug && artworkSlug && subSlug === artworkSlug) ||
+        (subTitle && artworkTitle && subTitle === artworkTitle)
+      )
+    })
+
+    const fallbackArtists = Array.isArray(
+      matchingArtwork?.attributes?.community_items?.data
+    )
+      ? matchingArtwork.attributes.community_items.data
+      : []
+
+    return fallbackArtists
+  }
+
+  const formatArtistsLabel = (artistItems) =>
+    (artistItems || [])
+      .map((artist) => artist?.attributes?.name?.trim())
+      .filter(Boolean)
+      .filter((name, index, self) => self.indexOf(name) === index)
+      .join(", ")
   const whenWhereAsideBlock = shouldShowPrimaryWhenWhere ? (
     <div className="discover sub primary-when-where">
       <div className="subtitle">
@@ -557,6 +648,200 @@ const ProgrammeItem = ({
     ticketsBlockElement ||
     sortedCommunityItems.length
   )
+
+  const subProgrammesBlock = subItems?.length > 0 ? (
+    <div className="discover sub">
+      <div className="subtitle">
+        {relationsAttributes?.sub_programmes_title && (
+          <h1>{relationsAttributes.sub_programmes_title}</h1>
+        )}
+      </div>
+      <div className="discover-container programme-container sub-programme-container">
+        <div className="day-programme">
+          <div className="discover-container programme-container sub-programme-container">
+            {subItems.map((item, i) => {
+              const subProgrammeKey =
+                item.id ||
+                item.attributes?.slug ||
+                `sub-programme-${i}`
+              const dates = item.attributes.WhenWhere?.sort(
+                (a, b) =>
+                  new Date(a.date).getTime() -
+                  new Date(b.date).getTime()
+              )
+              const start_date = new Date(
+                dates?.[0]?.date.split("/").reverse().join("/")
+              )
+              const end_date = new Date(
+                dates?.[dates?.length - 1]?.date
+                  .split("/")
+                  .reverse()
+                  .join("/")
+              )
+              const hasCoverImage = Boolean(
+                item.attributes.cover_image?.data
+              )
+              const artistItems = resolveArtistsForSubProgrammeItem(item)
+              const artistLabel = formatArtistsLabel(artistItems)
+              const hasValidDates =
+                !Number.isNaN(start_date?.getTime?.()) &&
+                !Number.isNaN(end_date?.getTime?.())
+              let dateLabel = null
+              if (hasValidDates && dates?.length > 0) {
+                if (
+                  Moment(start_date).format("MMM") ===
+                  Moment(end_date).format("MMM") &&
+                  dates.length > 1
+                ) {
+                  dateLabel = `${Moment(start_date).format(
+                    "D"
+                  )}–${Moment(end_date).format("D MMM")}`
+                } else if (dates.length > 1) {
+                  dateLabel = `${Moment(start_date).format(
+                    "D MMM"
+                  )}–${Moment(end_date).format("D MMM")}`
+                } else {
+                  dateLabel = Moment(start_date).format("D MMM")
+                }
+              }
+              return (
+                <div
+                  className="discover-item"
+                  key={subProgrammeKey}
+                >
+                  <div className="item-wrapper">
+                    <a href={`/biennial/biennial-2026/programme/${item.attributes.slug}`}>
+                      {hasCoverImage && (
+                        <div className="image">
+                          {item.attributes.WhenWhere?.[0] &&
+                            page?.attributes?.hide_when_where ===
+                            true && (
+                              <div className="info-overlay">
+                                <div className="date">
+                                  {Moment(start_date).format(
+                                    "MMM"
+                                  ) ===
+                                    Moment(end_date).format(
+                                      "MMM"
+                                    ) && dates.length > 1
+                                    ? `${Moment(start_date).format("D")}–${Moment(end_date).format("D MMM")}`
+                                    : `${Moment(start_date).format("D MMM")}–${Moment(end_date).format("D MMM")}`}
+                                </div>
+                                <div className="times">
+                                  <div className="time">
+                                    <span>
+                                      {
+                                        item.attributes.WhenWhere[0]
+                                          .start_time
+                                      }
+                                      {item.attributes.WhenWhere[0]
+                                        .end_time &&
+                                        `—${item.attributes.WhenWhere[0].end_time}`}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          <div className="image-inner">
+                            <Image
+                              image={
+                                item.attributes.cover_image?.data
+                                  ?.attributes
+                              }
+                              fill
+                              objectFit="cover"
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="category-title-wrapper">
+                        {dateLabel && (
+                          <div className="date-label">
+                            {dateLabel}
+                          </div>
+                        )}
+                        <div className="title">
+                          {item.attributes.title}
+                        </div>
+                        {artistLabel && (
+                          <div className="locations">
+                            {artistLabel}
+                          </div>
+                        )}
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : null
+
+  const artistsBlock = sortedCommunityItems.length > 0 ? (
+    <div className="discover artists">
+      <div className="subtitle">
+        <h1>Artists</h1>
+      </div>
+      <div className="discover-container programme-container sub-programme-container">
+        <div className="day-programme">
+          <div className="discover-container programme-container sub-programme-container">
+            <div
+              className={["items-wrapper", artistCountClass]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              {sortedCommunityItems.map((item, i) => {
+                const communityKey =
+                  item.id ||
+                  item.attributes?.slug ||
+                  `community-${i}`
+                const hasCoverImage = Boolean(
+                  item.attributes.cover_image?.data
+                )
+                return (
+                  <div
+                    className="discover-item artist-item"
+                    key={communityKey}
+                  >
+                    <div className="item-wrapper">
+                      <a
+                        href={`/biennial/biennial-2026/artists/${item.attributes.slug}`}
+                      >
+                        {hasCoverImage && (
+                          <div className="image">
+                            <div className="image-inner">
+                              <Image
+                                image={
+                                  item.attributes.cover_image?.data
+                                    ?.attributes
+                                }
+                                fill
+                                objectFit="cover"
+                              />
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="category-title-wrapper">
+                          <div className="title">
+                            {item.attributes.name}
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : null
 
   useEffect(() => {
     if (typeof document === "undefined") {
@@ -722,205 +1007,9 @@ const ProgrammeItem = ({
           {hasSidebarContent && (
             <aside className="event-aside">
               {whenWhereAsideBlock}
-              {subItems?.length > 0 && (
-                <div className="discover sub">
-                  <div className="subtitle">
-                    {relationsAttributes?.sub_programmes_title && (
-                      <h1>{relationsAttributes.sub_programmes_title}</h1>
-                    )}
-                  </div>
-                  <div className="discover-container programme-container sub-programme-container">
-                    <div className="day-programme">
-                      <div className="discover-container programme-container sub-programme-container">
-                        {subItems.map((item, i) => {
-                          const subProgrammeKey =
-                            item.id ||
-                            item.attributes?.slug ||
-                            `sub-programme-${i}`
-                          const dates = item.attributes.WhenWhere?.sort(
-                            (a, b) =>
-                              new Date(a.date).getTime() -
-                              new Date(b.date).getTime()
-                          )
-                          const start_date = new Date(
-                            dates?.[0]?.date.split("/").reverse().join("/")
-                          )
-                          const end_date = new Date(
-                            dates?.[dates?.length - 1]?.date
-                              .split("/")
-                              .reverse()
-                              .join("/")
-                          )
-                          const hasCoverImage = Boolean(
-                            item.attributes.cover_image?.data
-                          )
-                          const locationLabel = (
-                            item.attributes.locations?.data || []
-                          )
-                            .map((loc) => loc?.attributes?.title?.trim())
-                            .filter(Boolean)
-                            .join(", ")
-                          const hasValidDates =
-                            !Number.isNaN(start_date?.getTime?.()) &&
-                            !Number.isNaN(end_date?.getTime?.())
-                          let dateLabel = null
-                          if (hasValidDates && dates?.length > 0) {
-                            if (
-                              Moment(start_date).format("MMM") ===
-                              Moment(end_date).format("MMM") &&
-                              dates.length > 1
-                            ) {
-                              dateLabel = `${Moment(start_date).format(
-                                "D"
-                              )}–${Moment(end_date).format("D MMM")}`
-                            } else if (dates.length > 1) {
-                              dateLabel = `${Moment(start_date).format(
-                                "D MMM"
-                              )}–${Moment(end_date).format("D MMM")}`
-                            } else {
-                              dateLabel = Moment(start_date).format("D MMM")
-                            }
-                          }
-                          return (
-                            <div
-                              className="discover-item"
-                              key={subProgrammeKey}
-                            >
-                              <div className="item-wrapper">
-                                <a href={`/biennial/biennial-2026/programme/${item.attributes.slug}`}>
-                                  {hasCoverImage && (
-                                    <div className="image">
-                                      {item.attributes.WhenWhere?.[0] &&
-                                        page?.attributes?.hide_when_where ===
-                                        true && (
-                                          <div className="info-overlay">
-                                            <div className="date">
-                                              {Moment(start_date).format(
-                                                "MMM"
-                                              ) ===
-                                                Moment(end_date).format(
-                                                  "MMM"
-                                                ) && dates.length > 1
-                                                ? `${Moment(start_date).format("D")}–${Moment(end_date).format("D MMM")}`
-                                                : `${Moment(start_date).format("D MMM")}–${Moment(end_date).format("D MMM")}`}
-                                            </div>
-                                            <div className="times">
-                                              <div className="time">
-                                                <span>
-                                                  {
-                                                    item.attributes.WhenWhere[0]
-                                                      .start_time
-                                                  }
-                                                  {item.attributes.WhenWhere[0]
-                                                    .end_time &&
-                                                    `—${item.attributes.WhenWhere[0].end_time}`}
-                                                </span>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        )}
-                                      <div className="image-inner">
-                                        <Image
-                                          image={
-                                            item.attributes.cover_image?.data
-                                              ?.attributes
-                                          }
-                                          fill
-                                          objectFit="cover"
-                                        />
-                                      </div>
-                                    </div>
-                                  )}
-
-                                  <div className="category-title-wrapper">
-                                    {dateLabel && (
-                                      <div className="date-label">
-                                        {dateLabel}
-                                      </div>
-                                    )}
-                                    <div className="title">
-                                      {item.attributes.title}
-                                    </div>
-                                    {locationLabel && (
-                                      <div className="locations">
-                                        {locationLabel}
-                                      </div>
-                                    )}
-                                  </div>
-                                </a>
-                              </div>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
+              {artistsBlock}
+              {subProgrammesBlock}
               {ticketsBlockElement}
-
-              {sortedCommunityItems.length > 0 && (
-                <div className="discover artists">
-                  <div className="subtitle">
-                    <h1>Artists</h1>
-                  </div>
-                  <div className="discover-container programme-container sub-programme-container">
-                    <div className="day-programme">
-                      <div className="discover-container programme-container sub-programme-container">
-                        <div
-                          className={["items-wrapper", artistCountClass]
-                            .filter(Boolean)
-                            .join(" ")}
-                        >
-                          {sortedCommunityItems.map((item, i) => {
-                            const communityKey =
-                              item.id ||
-                              item.attributes?.slug ||
-                              `community-${i}`
-                            const hasCoverImage = Boolean(
-                              item.attributes.cover_image?.data
-                            )
-                            return (
-                              <div
-                                className="discover-item artist-item"
-                                key={communityKey}
-                              >
-                                <div className="item-wrapper">
-                                  <a
-                                    href={`/biennial/biennial-2026/artists/${item.attributes.slug}`}
-                                  >
-                                    {hasCoverImage && (
-                                      <div className="image">
-                                        <div className="image-inner">
-                                          <Image
-                                            image={
-                                              item.attributes.cover_image?.data
-                                                ?.attributes
-                                            }
-                                            fill
-                                            objectFit="cover"
-                                          />
-                                        </div>
-                                      </div>
-                                    )}
-
-                                    <div className="category-title-wrapper">
-                                      <div className="title">
-                                        {item.attributes.name}
-                                      </div>
-                                    </div>
-                                  </a>
-                                </div>
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </aside>
           )}
         </div>
@@ -1096,12 +1185,13 @@ const ProgrammeItem = ({
   )
 }
 
-export async function getServerSideProps({ params, query }) {
+export async function getServerSideProps({ params }) {
   const biennial = {
     slug: BIENNIAL_SLUG,
   }
 
-  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
+  const preview =
+    String(process.env.NEXT_PUBLIC_PREVIEW || "").toLowerCase() === "true"
   const publicationState = preview ? "preview" : "live"
   const publicationParam = `&publicationState=${publicationState}`
   const pageRes = await fetchAPI(
@@ -1109,7 +1199,7 @@ export async function getServerSideProps({ params, query }) {
   )
 
   const pageRel = await fetchAPI(
-    `/programme-items?filters[slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${publicationParam}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[community_items][populate]=*`
+    `/programme-items?filters[slug][$eq]=${params.programme}&filters[biennial][slug][$eq]=${biennial.slug}${publicationParam}&populate[content][populate]=*&populate[cover_image][populate]=*&populate[main_programme_items][populate]=*&populate[locations][populate]=*&populate[sub_programme_items][populate]=*&populate[biennial_tags][populate]=*&populate[WhenWhere][populate]=*&populate[community_items][populate]=*&populate[artworks][populate]=community_items,cover_image,locations,WhenWhere&populate[artwork_items][populate]=community_items,cover_image,locations,WhenWhere`
   )
 
   const subRes = await fetchAPI(

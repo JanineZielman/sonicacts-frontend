@@ -401,7 +401,7 @@ $grid-columns: 12;
     background-color: var(--artist-card-bg-color, transparent);
     color: var(--artist-card-text-color, inherit);
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
 
     @include mobile {
       width: calc(50% - 1rem);
@@ -4557,6 +4557,10 @@ body.slug-timetable {
 
   background-color: var(--color-brown);
 
+  .global-frontpage-visuals {
+    display: none !important;
+  }
+
   .minimal-nav-container {
     position: fixed;
     right: 1rem;
@@ -4721,10 +4725,14 @@ body.slug-timetable {
       }
 
       &--disabled {
-        opacity: 0.3;
-        border-style: dashed;
+        opacity: 1;
+        //border-style: dashed;
         background: transparent;
         pointer-events: none;
+      }
+
+      &--adjacent {
+        opacity: 0.3;
       }
 
       &--clickable {
@@ -4868,6 +4876,35 @@ body.slug-timetable {
       align-items: start;
       min-height: var(--timetable-row-height);
       top: 3rem;
+
+      .timetable-row__overflow-arrow {
+        position: absolute;
+        display: block !important;
+        left: 63vw;
+        top: 0.25rem !important;
+        z-index: 999;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 100%;
+
+        border: 1px solid var(--color-brown);
+        background: var(--color-pink);
+        color: var(--color-brown);
+
+        display: none;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+        
+        font-size: 1.2rem;
+        font-weight: 700;
+        font-family: 'BSTBazaineMono';
+
+        &:hover {
+          filter: brightness(0.95);
+        }
+      }
 
       .programme {
         background-color: transparent;
@@ -6864,7 +6901,7 @@ body.slug-programme {
 
       .discover.artists {
         background-color: transparent;
-        padding: 0 1rem;
+        padding: 0 1rem 3rem 1rem;
 
         @include mobile {
           padding: 0;
