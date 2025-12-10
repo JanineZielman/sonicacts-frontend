@@ -215,9 +215,9 @@ const ProgrammeItem = ({
     page?.attributes?.hide_when_where === true && !customWhenWhere
 
   const primaryWhenWhereSummary = (() => {
-    if (customWhenWhere) {
-      return { customMarkdown: customWhenWhere }
-    }
+    // if (customWhenWhere) {
+    //   return { customMarkdown: customWhenWhere }
+    // }
     if (shouldRespectHiddenWhen) {
       return null
     }
@@ -330,7 +330,7 @@ const ProgrammeItem = ({
   }
 
   const renderTicketsBlock = () => {
-    if (!ticketLink && !relationsAttributes.price) {
+    if (!ticketLink && !relationsAttributes.price || relationsAttributes.hide_tickets) {
       return null
     }
 

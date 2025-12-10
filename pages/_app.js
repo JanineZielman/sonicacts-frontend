@@ -44,10 +44,10 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <link
+        {/* <link
           rel="shortcut icon"
           href={getStrapiMedia(global?.attributes?.favicon?.data?.attributes)}
-        />
+        /> */}
         {!isBiennial2026 ?
           <>
             <link
