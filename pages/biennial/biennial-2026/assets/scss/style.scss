@@ -2269,9 +2269,9 @@ body {
     z-index: 2;
     pointer-events: none;
 
-    body.slug-programme & {
-      width: 40rem;
-      display: none;
+    body.slug-programme &,
+    body.slug-timetable & {      
+      display: none;      
     }
 
     @include mobile {
@@ -6808,6 +6808,12 @@ body.slug-programme {
     left: 0;
   }
 
+  .event-layout__subtitle {
+    padding: 0 1rem 1rem 1rem;
+    font-size: 0.8rem;
+    line-height: 1.1;
+  }
+
   .event-layout__grid {
     padding-bottom: 7rem;
 
@@ -6886,6 +6892,12 @@ body.slug-programme {
     .event-aside {
       @include desktop {
         width: 50%;
+      }
+
+      &.event-aside--artists-only .discover.artists,
+      &.event-aside--subs-only .discover.sub {
+        position: sticky;
+        top: 1rem;
       }
 
       .discover-item:nth-child(6n + 1) .item-wrapper {

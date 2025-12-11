@@ -2147,8 +2147,7 @@ body.slug-news .title-wrapper {
   z-index: 2;
   pointer-events: none;
 }
-body.slug-programme .title-wrapper::after {
-  width: 40rem;
+body.slug-programme .title-wrapper::after, body.slug-timetable .title-wrapper::after {
   display: none;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -6902,6 +6901,11 @@ body.slug-programme .title-wrapper h1.page-title {
   position: relative;
   left: 0;
 }
+body.slug-programme .event-layout__subtitle {
+  padding: 0 1rem 1rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
 body.slug-programme .event-layout__grid {
   padding-bottom: 7rem;
 }
@@ -6971,6 +6975,10 @@ body.slug-programme .event-layout__grid .programme-mobile-expander {
   body.slug-programme .event-layout__grid .event-aside {
     width: 50%;
   }
+}
+body.slug-programme .event-layout__grid .event-aside.event-aside--artists-only .discover.artists, body.slug-programme .event-layout__grid .event-aside.event-aside--subs-only .discover.sub {
+  position: sticky;
+  top: 1rem;
 }
 body.slug-programme .event-layout__grid .event-aside .discover-item:nth-child(6n+1) .item-wrapper {
   --programme-card-bg: var(--color-blue);

@@ -451,6 +451,8 @@ const ProgrammeItem = ({
       primaryLocationLabel ||
       (hasCustomWhenWhere && customWhenWhere)
   )
+  const pageSubtitle =
+    relationsAttributes?.subtitle?.trim() || page?.attributes?.subtitle?.trim()
   const fallbackTitle =
     relationsAttributes?.title || page?.attributes?.title || "Programme"
   const fallbackDescription =
@@ -849,6 +851,18 @@ const ProgrammeItem = ({
     </div>
   ) : null
 
+  const hasArtistsBlock = Boolean(artistsBlock)
+  const hasSubProgrammesBlock = Boolean(subProgrammesBlock)
+  const eventAsideClasses = [
+    "event-aside",
+    hasArtistsBlock && !hasSubProgrammesBlock
+      ? "event-aside--artists-only"
+      : null,
+    hasSubProgrammesBlock && !hasArtistsBlock
+      ? "event-aside--subs-only"
+      : null,
+  ].filter(Boolean)
+
   useEffect(() => {
     if (typeof document === "undefined") {
       return undefined
@@ -974,6 +988,11 @@ const ProgrammeItem = ({
               <h1 className="event-layout__title page-title">
                 {page.attributes.title}
               </h1>
+              {pageSubtitle && (
+                <div className="event-layout__subtitle">
+                  {pageSubtitle}
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -1011,7 +1030,7 @@ const ProgrammeItem = ({
             </button>
           )}
           {hasSidebarContent && (
-            <aside className="event-aside">
+            <aside className={eventAsideClasses.join(" ")}>
               {whenWhereAsideBlock}
               {ticketsBlockElement}
               {isExhibition2026 ? (
