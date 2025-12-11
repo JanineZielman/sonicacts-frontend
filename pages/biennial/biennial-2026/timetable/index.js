@@ -7,6 +7,8 @@ import ensureJquery from "/lib/biennial/ensureJquery"
 
 const Timetable = ({ global, festival, programmes, locRes }) => {
   const [loading, setLoading] = useState(true)
+  const DEFAULT_HOUR_WIDTH_REM = 10 // keep in sync with --timetable-hour-width in SCSS
+  const [hourWidthRem, setHourWidthRem] = useState(DEFAULT_HOUR_WIDTH_REM)
   const weekdaysShort = ["Mo", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
   const normalizeDate = (dateStr) => {
@@ -68,6 +70,18 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
   const dates = getDates(new Date("2024-02-02"), new Date("2024-03-24"))
   const LOCATION_WIDTH_REM = 13.5 // keep in sync with --timetable-location-width in SCSS
   const PROGRAMME_MARGIN_OFFSET_REM = 0.5 // small nudge so blocks sit just inside the timeline
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const rootStyles = getComputedStyle(document.documentElement)
+    const bodyStyles = getComputedStyle(document.body)
+    const rawWidth =
+      bodyStyles.getPropertyValue("--timetable-hour-width") ||
+      rootStyles.getPropertyValue("--timetable-hour-width")
+    const parsedWidth = parseFloat(rawWidth)
+    if (Number.isFinite(parsedWidth)) {
+      setHourWidthRem(parsedWidth)
+    }
+  }, [])
 
   const parseTime = (value) => {
     if (!value || typeof value !== "string") return null
@@ -641,7 +655,10 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                       >
                         <div
                           className="day timetable-wrapper"
-                          style={{ "--time-width": timeWidth * 12 + 12 + "rem" }}
+                          style={{
+                            "--time-width": timeWidth * hourWidthRem + hourWidthRem + "rem",
+                            minHeight: `calc(${locationsForDay.length} * var(--timetable-row-height) + var(--timetable-date-height))`,
+                          }}
                         >
                           <div className="timetable-day__left">
                             <h1 className="date">
@@ -663,7 +680,9 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                               <div
                                 key={`times${i}`}
                                 className="timetable-times"
-                                style={{ "--time-width": timeWidth * 12 + 12 + "rem" }}
+                                style={{
+                                  "--time-width": timeWidth * hourWidthRem + hourWidthRem + "rem",
+                                }}
                               >
                                 {times.slice(number, end).map((time, i) => {
                                   return (
@@ -778,14 +797,10 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                                                     .filter(Boolean)
                                                     .join(" ")}
                                                   style={{
-                                                    "--margin":
-                                                      offsetHours * 12 +
-                                                      PROGRAMME_MARGIN_OFFSET_REM +
-                                                      "rem",
-                                                    "--width":
-                                                      blockWidthHours * 12 -
-                                                      PROGRAMME_MARGIN_OFFSET_REM * 2 +
-                                                      "rem",
+                                                    "--margin": `calc(${offsetHours} * var(--timetable-hour-width, ${DEFAULT_HOUR_WIDTH_REM}rem) + ${PROGRAMME_MARGIN_OFFSET_REM}rem)`,
+                                                    "--width": `calc(${blockWidthHours} * var(--timetable-hour-width, ${DEFAULT_HOUR_WIDTH_REM}rem) - ${
+                                                      PROGRAMME_MARGIN_OFFSET_REM * 2
+                                                    }rem)`,
                                                   }}
                                                 >
                                                   <div className="inner-programme">

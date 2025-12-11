@@ -4890,8 +4890,10 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 }
 
 body.slug-timetable {
-  --timetable-location-width: 12.25rem;
-  --timetable-row-height: 3.5rem;
+  --timetable-location-width: 11rem;
+  --timetable-row-height: 4.5rem;
+  --timetable-date-height: 3rem;
+  --timetable-hour-width: 7.7rem;
   background-color: var(--color-brown);
 }
 body.slug-timetable .global-frontpage-visuals {
@@ -5123,10 +5125,11 @@ body.slug-timetable .timetable .date {
   background-color: var(--color-grey);
   width: var(--timetable-location-width);
   color: var(--color-brown) !important;
-  height: 3rem;
+  height: var(--timetable-date-height);
   font-family: "BSTBazaineMono", monospace;
   font-variation-settings: "wght" 200;
   font-size: 1.6rem;
+  word-spacing: -0.4em;
   z-index: 10;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
@@ -5247,7 +5250,7 @@ body.slug-timetable .timetable .timetable-row .programme .inner-programme .title
   display: inline-block;
   margin-left: 0;
   padding: 0.2rem 0.2rem 0 0.2rem;
-  font-size: 0.7rem !important;
+  font-size: 0.8rem !important;
   line-height: 0.8rem;
   max-height: 1.84rem;
   -webkit-line-clamp: 2;
@@ -5558,7 +5561,7 @@ html {
 }
 .timetable .timetable-times .time-block {
   display: inline-block;
-  width: 12rem;
+  width: var(--timetable-hour-width);
   border-left: 1px solid black;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
