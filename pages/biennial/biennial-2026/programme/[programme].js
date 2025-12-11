@@ -99,6 +99,26 @@ const ProgrammeItem = ({
   const [isMobileView, setIsMobileView] = useState(false)
   const [isContentCollapsed, setIsContentCollapsed] = useState(false)
   const aquarelleContainerRef = useRef(null)
+  const isExhibition2026 = page?.attributes?.slug === "exhibition-2026"
+  const getEarliestWhenWhereDate = (item) => {
+    const entries = Array.isArray(item?.attributes?.WhenWhere)
+      ? item.attributes.WhenWhere
+      : []
+    const parsedDates = entries
+      .map((when) => {
+        const rawDate = when?.date
+        if (!rawDate) return null
+        const normalizedDate = rawDate.includes("/")
+          ? rawDate.split("/").reverse().join("-")
+          : rawDate
+        const time = when?.start_time || "00:00"
+        const date = new Date(`${normalizedDate}T${time}`)
+        return Number.isNaN(date.getTime()) ? null : date
+      })
+      .filter(Boolean)
+      .sort((a, b) => a - b)
+    return parsedDates[0] || null
+  }
 
   useEffect(() => {
     const subData = Array.isArray(sub) ? [...sub] : []
@@ -108,35 +128,20 @@ const ProgrammeItem = ({
       return
     }
 
-    if (page?.attributes?.hide_when_where !== true) {
-      subData.sort((a, b) => {
-        const titleA = a?.attributes?.title?.toLowerCase() || ""
-        const titleB = b?.attributes?.title?.toLowerCase() || ""
-        if (titleA < titleB) {
-          return -1
-        }
-        if (titleA > titleB) {
-          return 1
-        }
-        return 0
-      })
-    } else {
-      subData.sort((a, b) => {
-        const whenWhereA = a?.attributes?.WhenWhere?.[0]
-        const whenWhereB = b?.attributes?.WhenWhere?.[0]
-        const date1 = whenWhereA
-          ? new Date(
-            `${whenWhereA.date?.split("/").reverse().join("-")}T${whenWhereA.start_time}Z`
-          )
-          : new Date(0)
-        const date2 = whenWhereB
-          ? new Date(
-            `${whenWhereB.date?.split("/").reverse().join("-")}T${whenWhereB.start_time}Z`
-          )
-          : new Date(0)
-        return date1 - date2
-      })
-    }
+    subData.sort((a, b) => {
+      const dateA = getEarliestWhenWhereDate(a)
+      const dateB = getEarliestWhenWhereDate(b)
+      if (dateA && dateB) {
+        return dateA - dateB
+      }
+      if (dateA) return -1
+      if (dateB) return 1
+      const titleA = a?.attributes?.title?.toLowerCase() || ""
+      const titleB = b?.attributes?.title?.toLowerCase() || ""
+      if (titleA < titleB) return -1
+      if (titleA > titleB) return 1
+      return 0
+    })
 
     setSubItems(subData)
   }, [sub, page])
@@ -438,10 +443,14 @@ const ProgrammeItem = ({
   const hasTickets = Boolean(ticketLink || relationsAttributes.price)
   const hasArtists = sortedCommunityItems.length > 0
   const hasSubEvents = Boolean(subItems?.length)
-  const shouldShowPrimaryWhenWhere =
-    Boolean(primaryWhenWhereSummary) ||
-    Boolean(primaryLocationLabel) ||
-    hasCustomWhenWhere
+  const hasWhenWhereContent = Boolean(
+    primaryWhenWhereSummary?.rangeLabel ||
+      primaryWhenWhereSummary?.timeLabel ||
+      primaryWhenWhereSummary?.doorsOpen ||
+      doorsOpenFallback ||
+      primaryLocationLabel ||
+      (hasCustomWhenWhere && customWhenWhere)
+  )
   const fallbackTitle =
     relationsAttributes?.title || page?.attributes?.title || "Programme"
   const fallbackDescription =
@@ -591,7 +600,7 @@ const ProgrammeItem = ({
       .filter(Boolean)
       .filter((name, index, self) => self.indexOf(name) === index)
       .join(", ")
-  const whenWhereAsideBlock = shouldShowPrimaryWhenWhere ? (
+  const whenWhereAsideBlock = hasWhenWhereContent ? (
     <div className="discover sub primary-when-where">
       <div className="subtitle">
         <h1>When &amp; Where</h1>
@@ -643,10 +652,7 @@ const ProgrammeItem = ({
     </div>
   ) : null
   const hasSidebarContent = Boolean(
-    shouldShowPrimaryWhenWhere ||
-    subItems?.length ||
-    ticketsBlockElement ||
-    sortedCommunityItems.length
+    hasWhenWhereContent || subItems?.length || ticketsBlockElement || sortedCommunityItems.length
   )
 
   const subProgrammesBlock = subItems?.length > 0 ? (
@@ -1007,9 +1013,18 @@ const ProgrammeItem = ({
           {hasSidebarContent && (
             <aside className="event-aside">
               {whenWhereAsideBlock}
-              {artistsBlock}
-              {subProgrammesBlock}
               {ticketsBlockElement}
+              {isExhibition2026 ? (
+                <>
+                  {subProgrammesBlock}
+                  {artistsBlock}
+                </>
+              ) : (
+                <>
+                  {artistsBlock}
+                  {subProgrammesBlock}
+                </>
+              )}
             </aside>
           )}
         </div>
