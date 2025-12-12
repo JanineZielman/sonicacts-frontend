@@ -6926,6 +6926,28 @@ body.slug-programme {
         overflow: hidden;
       }
 
+      .discover.parent-programmes {
+        background: transparent;
+
+        .day-programme {
+          .programme-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.1rem;
+            align-items: stretch;
+          }
+
+          .discover-item {
+            width: calc(50% - 1rem);
+            border-radius: 2rem;
+            display: flex;
+            height: auto;
+            min-height: 8rem;
+          }
+        }
+      }
+
       .discover.artists {
         background-color: transparent;
         padding: 0 1rem 3rem 1rem;
@@ -7051,7 +7073,8 @@ body.slug-programme {
         }
       }
 
-      .discover.sub {
+      .discover.sub,
+      .discover.parent-programmes {
         .day-programme {
           .programme-container {
             display: flex;

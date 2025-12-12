@@ -7001,6 +7001,23 @@ body.slug-programme .event-layout__grid .event-aside .discover-item:nth-child(6n
 body.slug-programme .event-layout__grid .event-aside .discover-item {
   overflow: hidden;
 }
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes {
+  background: transparent;
+}
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem;
+  align-items: stretch;
+}
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .discover-item {
+  width: calc(50% - 1rem);
+  border-radius: 2rem;
+  display: flex;
+  height: auto;
+  min-height: 8rem;
+}
 body.slug-programme .event-layout__grid .event-aside .discover.artists {
   background-color: transparent;
   padding: 0 1rem 3rem 1rem;
@@ -7085,59 +7102,71 @@ body.slug-programme .event-layout__grid .event-aside .items-wrapper .artist-item
     font-size: 0.9rem;
   }
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.1rem;
   align-items: stretch;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item {
   width: calc(50% - 1rem);
   border-radius: 2rem;
   display: flex;
   height: auto;
   min-height: 8rem;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item .item-wrapper {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item .item-wrapper,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item .item-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item .category-title-wrapper::before {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item .category-title-wrapper::before,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item .category-title-wrapper::before {
   display: none;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where {
   width: 80%;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details {
   display: flex;
   gap: 0rem;
   flex-direction: column;
   padding-top: 1rem;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .when span {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .when span,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .when span {
   text-align: center;
   display: block;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .time {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .time,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .time {
   text-align: center;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .locations {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .locations,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .when-where-details .locations {
   text-align: center;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .doors {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .doors,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .doors {
   text-align: center;
   padding-top: 0rem;
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .doors span {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .doors span,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .doors span {
   font-size: 1.4rem;
   letter-spacing: 0;
   color: var(--color-pink);
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: var(--color-brown);
 }
-body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .item-wrapper {
+body.slug-programme .event-layout__grid .event-aside .discover.sub .day-programme .programme-container .discover-item.discover-item--when-where .item-wrapper,
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container .discover-item.discover-item--when-where .item-wrapper {
   padding: 0.5rem;
   border-radius: 0.25rem;
   background-color: transparent;

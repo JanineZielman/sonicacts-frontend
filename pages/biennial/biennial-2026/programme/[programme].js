@@ -453,6 +453,11 @@ const ProgrammeItem = ({
   )
   const pageSubtitle =
     relationsAttributes?.subtitle?.trim() || page?.attributes?.subtitle?.trim()
+  const parentProgrammes =
+    Array.isArray(relationsAttributes?.main_programme_items?.data) &&
+    relationsAttributes.main_programme_items.data.length > 0
+      ? relationsAttributes.main_programme_items.data
+      : []
   const fallbackTitle =
     relationsAttributes?.title || page?.attributes?.title || "Programme"
   const fallbackDescription =
@@ -654,7 +659,11 @@ const ProgrammeItem = ({
     </div>
   ) : null
   const hasSidebarContent = Boolean(
-    hasWhenWhereContent || subItems?.length || ticketsBlockElement || sortedCommunityItems.length
+    hasWhenWhereContent ||
+      subItems?.length ||
+      ticketsBlockElement ||
+      sortedCommunityItems.length ||
+      parentProgrammes.length
   )
 
   const subProgrammesBlock = subItems?.length > 0 ? (
@@ -853,12 +862,78 @@ const ProgrammeItem = ({
 
   const hasArtistsBlock = Boolean(artistsBlock)
   const hasSubProgrammesBlock = Boolean(subProgrammesBlock)
+  const parentProgrammesBlock =
+    parentProgrammes.length > 0 ? (
+      <div className="discover parent-programmes">
+        <div className="subtitle">
+          <h1>Part of</h1>
+        </div>
+        <div className="discover-container programme-container parent-programme-container">
+          <div className="day-programme">
+            <div className="discover-container programme-container parent-programme-container">
+              {parentProgrammes.map((parent, idx) => {
+                const parentAttrs = parent?.attributes || {}
+                const parentSlug = parentAttrs.slug
+                const sortedDates = Array.isArray(parentAttrs?.WhenWhere)
+                  ? parentAttrs.WhenWhere.map((entry) => {
+                    return {
+                      ...entry,
+                      parsedDate: parseWhenWhereDate(entry?.date),
+                    }
+                  })
+                    .filter((entry) => entry.parsedDate instanceof Date)
+                    .sort((a, b) => a.parsedDate - b.parsedDate)
+                  : []
+                const startDate = sortedDates[0]?.parsedDate
+                const endDate = sortedDates[sortedDates.length - 1]?.parsedDate
+                let dateLabel = null
+                if (startDate && endDate) {
+                  if (
+                    sortedDates.length > 1 &&
+                    Moment(startDate).format("MMM") === Moment(endDate).format("MMM")
+                  ) {
+                    dateLabel = `${Moment(startDate).format("D")}–${Moment(endDate).format(
+                      "D MMM"
+                    )}`
+                  } else if (sortedDates.length > 1) {
+                    dateLabel = `${Moment(startDate).format("D MMM")}–${Moment(endDate).format(
+                      "D MMM"
+                    )}`
+                  } else {
+                    dateLabel = Moment(startDate).format("D MMM")
+                  }
+                } else if (startDate) {
+                  dateLabel = Moment(startDate).format("D MMM")
+                }
+                if (!parentSlug) {
+                  return null
+                }
+                return (
+                  <div className="discover-item" key={parent.id || parentSlug || idx}>
+                    <div className="item-wrapper">
+                      <a href={`/biennial/biennial-2026/programme/${parentSlug}`}>
+                        <div className="category-title-wrapper">
+                          {dateLabel && <div className="date-label">{dateLabel}</div>}
+                          {parentAttrs.title && (
+                            <div className="title">{parentAttrs.title}</div>
+                          )}
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : null
   const eventAsideClasses = [
     "event-aside",
-    hasArtistsBlock && !hasSubProgrammesBlock
+    hasArtistsBlock && !hasSubProgrammesBlock && !parentProgrammesBlock
       ? "event-aside--artists-only"
       : null,
-    hasSubProgrammesBlock && !hasArtistsBlock
+    hasSubProgrammesBlock && !hasArtistsBlock && !parentProgrammesBlock
       ? "event-aside--subs-only"
       : null,
   ].filter(Boolean)
@@ -1044,6 +1119,7 @@ const ProgrammeItem = ({
                   {subProgrammesBlock}
                 </>
               )}
+              {parentProgrammesBlock}
             </aside>
           )}
         </div>
