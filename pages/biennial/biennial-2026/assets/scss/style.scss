@@ -416,8 +416,8 @@ $grid-columns: 12;
     .title {
       text-align: center;
       width: calc(100% + 0.5rem);
-      font-size: 1.3rem;
-      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+      padding: 1rem 0.5rem;
       position: relative;
       display: block;
       margin: 0 auto;
@@ -7067,7 +7067,7 @@ body.slug-programme {
         &.four-artists {
           .artist-item {
             @include desktop() {
-              width: calc(25% - 1rem);
+              width: calc(25%);
             }
           }
         }
@@ -7075,7 +7075,7 @@ body.slug-programme {
         &.more-than-four-artists {
           .artist-item {
             @include desktop() {
-              width: calc(25% - 1rem);
+              width: calc(25%);
 
               .title {
                 font-size: 0.9rem;
