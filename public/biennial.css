@@ -4906,9 +4906,9 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 
 body.slug-timetable {
   --timetable-location-width: 11rem;
-  --timetable-row-height: 4.5rem;
+  --timetable-row-height: 5rem;
   --timetable-date-height: 3rem;
-  --timetable-hour-width: 7.7rem;
+  --timetable-hour-width: 6.7rem;
   background-color: var(--color-brown);
 }
 body.slug-timetable .global-frontpage-visuals {
@@ -5217,7 +5217,7 @@ body.slug-timetable .timetable .timetable-row .timetable-row__overflow-arrow:hov
 body.slug-timetable .timetable .timetable-row .programme {
   background-color: transparent;
   height: auto;
-  top: 0.4rem;
+  top: 0.6rem;
   border-radius: 0.2rem;
   overflow: hidden;
   position: absolute;
@@ -5253,6 +5253,7 @@ body.slug-timetable .timetable .timetable-row .programme .inner-programme .title
 }
 body.slug-timetable .timetable .timetable-row .programme .inner-programme .time {
   font-size: 0.7rem;
+  letter-spacing: -0.05em;
   display: inline-flex;
   background-color: var(--color-grey);
   color: var(--color-brown);
@@ -5339,7 +5340,7 @@ body.slug-timetable .timetable .timetable-locations .location p {
   border-right: 0 solid var(--color-brown);
   margin-bottom: -1px;
   font-size: 0.9rem;
-  padding: 1.5rem 0 1.5rem 0.5rem;
+  padding: 1.8rem 0 1.5rem 0.5rem;
   word-break: break-word;
 }
 body.slug-timetable .timetable .timetable-locations .location.sub p {

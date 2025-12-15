@@ -586,7 +586,7 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                   let list = []
                   let list2 = []
                   let timeWidth = 24
-                  const EXTRA_HOURS = 2
+                  const EXTRA_HOURS = 3
                   const MIN_VISIBLE_HOURS = 12
 
                   programmes.forEach((programme) => {
