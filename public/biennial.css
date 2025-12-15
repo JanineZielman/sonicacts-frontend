@@ -4661,7 +4661,7 @@ body.scrolled .article .sidebar {
 }
 
 .slug-tickets {
-  padding-top: 20rem;
+  padding-top: 10rem;
   position: relative;
 }
 .slug-tickets .tickets-aquarelle {
@@ -4708,7 +4708,8 @@ body.scrolled .article .sidebar {
 }
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
   .slug-tickets .tickets-container {
-    margin: 1rem;
+    width: 70%;
+    margin: 0 auto;
   }
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -4722,7 +4723,7 @@ body.scrolled .article .sidebar {
 }
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
   .slug-tickets .tickets-container .ticket {
-    width: calc(33.3% - 1rem);
+    width: calc(50% - 1rem);
   }
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -4769,8 +4770,8 @@ body.scrolled .article .sidebar {
   color: black;
   text-transform: uppercase;
   position: absolute;
-  right: 9rem;
-  bottom: 0.45rem;
+  left: 0.5rem;
+  bottom: 0.5rem;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .slug-tickets .tickets-container .ticket .ticket-content .ticket-heading a {
@@ -4782,8 +4783,8 @@ body.scrolled .article .sidebar {
 }
 .slug-tickets .tickets-container .ticket .ticket-content h4 {
   position: absolute;
-  left: 0.5rem;
-  bottom: 0.5rem;
+  right: 9rem;
+  bottom: 0.45rem;
   font-size: 0.75rem;
 }
 .slug-tickets .tickets-container .ticket .ticket-content .price {

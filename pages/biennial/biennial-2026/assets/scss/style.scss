@@ -4311,7 +4311,7 @@ body.scrolled .article .sidebar {
 }
 
 .slug-tickets {
-  padding-top: 20rem;
+  padding-top: 10rem;
   position: relative;
 
   .tickets-aquarelle {
@@ -4358,9 +4358,10 @@ body.scrolled .article .sidebar {
     align-content: center;
     min-height: calc(100vh - 30rem);
     gap: 1rem;
-
+    
     @include desktop {
-      margin: 1rem;
+      width: 70%;
+      margin: 0 auto;
     }
 
     @include mobile {
@@ -4374,7 +4375,7 @@ body.scrolled .article .sidebar {
       margin: 0;
 
       @include desktop {
-        width: calc(33.3% - 1rem);
+        width: calc(50% - 1rem);
       }
 
       @include mobile {
@@ -4422,10 +4423,8 @@ body.scrolled .article .sidebar {
             text-transform: uppercase;
             position: absolute;
 
-            right: 9rem;
-            bottom: 0.45rem;
-
-
+            left: 0.5rem;
+            bottom: 0.5rem;
 
             @include mobile {
               font-size: 0.8rem;
@@ -4439,8 +4438,8 @@ body.scrolled .article .sidebar {
 
         h4 {
           position: absolute;
-          left: 0.5rem;
-          bottom: 0.5rem;
+          right: 9rem;
+          bottom: 0.45rem;
 
           font-size: 0.75rem;
         }
