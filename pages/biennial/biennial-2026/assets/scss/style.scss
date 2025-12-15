@@ -4574,6 +4574,7 @@ body.slug-programmeprogrammesub {
 
 body.slug-timetable {
   --timetable-location-width: 11rem;
+  --timetable-location-width-mobile: 7.2rem;
   --timetable-row-height: 5rem;
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
@@ -4795,8 +4796,8 @@ body.slug-timetable {
   .timetable {
     grid-area: content;
     .timetable-wrapper {
-      display: grid;
-      grid-template-columns: var(--timetable-location-width) minmax(0, 1fr);
+      display: flex;
+      //grid-template-columns: var(--timetable-location-width) minmax(0, 1fr);
       width: 100%;
       align-items: stretch;
     }
@@ -4862,7 +4863,7 @@ body.slug-timetable {
       }
 
       @include mobile {
-        width: 7.2rem;
+        width: var(--timetable-location-width-mobile);
         font-size: 1rem;
       }
     }
@@ -4873,10 +4874,6 @@ body.slug-timetable {
       z-index: 0;
       margin-left: 0;
       width: var(--time-width);
-
-      @include mobile {
-        margin-left: 7.2rem;
-      }
 
       .time-block {
         padding-left: 0;
@@ -4940,10 +4937,6 @@ body.slug-timetable {
         position: absolute;
         inset-inline-start: calc(var(--margin) + 0.2rem);
         width: calc(var(--width) - 0.4rem);
-
-        @include mobile {
-          left: calc(var(--margin) - 3.6rem);
-        }
 
         &:hover {
           background-color: transparent !important;
@@ -5061,7 +5054,7 @@ body.slug-timetable {
         min-height: var(--timetable-row-height);
 
         @include mobile {
-          width: 7.2rem;
+          width: var(--timetable-location-width-mobile);
         }
 
         p {

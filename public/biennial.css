@@ -1141,7 +1141,7 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
 }
 .template-single-artist .discover.artists.single-artist-all .artist-item .title {
   text-align: center;
-  width: calc(100% + 0.5rem);
+  width: 100%;
   font-size: 1.1rem;
   padding: 1rem 0.5rem;
   position: relative;
@@ -4018,7 +4018,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 .template-artists .artist-item .title,
 .discover.artists .artist-item .title {
   text-align: center;
-  width: calc(100% + 0.5rem);
+  width: 100%;
   font-size: 1.1rem;
   padding: 1rem 0.5rem;
   position: relative;
@@ -4906,6 +4906,7 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 
 body.slug-timetable {
   --timetable-location-width: 11rem;
+  --timetable-location-width-mobile: 7.2rem;
   --timetable-row-height: 5rem;
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
@@ -5096,8 +5097,7 @@ body.slug-timetable .timetable {
   grid-area: content;
 }
 body.slug-timetable .timetable .timetable-wrapper {
-  display: grid;
-  grid-template-columns: var(--timetable-location-width) minmax(0, 1fr);
+  display: flex;
   width: 100%;
   align-items: stretch;
 }
@@ -5154,7 +5154,7 @@ body.slug-timetable .timetable .date:hover {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .date {
-    width: 7.2rem;
+    width: var(--timetable-location-width-mobile);
     font-size: 1rem;
   }
 }
@@ -5164,11 +5164,6 @@ body.slug-timetable .timetable .timetable-times {
   z-index: 0;
   margin-left: 0;
   width: var(--time-width);
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  body.slug-timetable .timetable .timetable-times {
-    margin-left: 7.2rem;
-  }
 }
 body.slug-timetable .timetable .timetable-times .time-block {
   padding-left: 0;
@@ -5223,11 +5218,6 @@ body.slug-timetable .timetable .timetable-row .programme {
   position: absolute;
   inset-inline-start: calc(var(--margin) + 0.2rem);
   width: calc(var(--width) - 0.4rem);
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  body.slug-timetable .timetable .timetable-row .programme {
-    left: calc(var(--margin) - 3.6rem);
-  }
 }
 body.slug-timetable .timetable .timetable-row .programme:hover {
   background-color: transparent !important;
@@ -5331,7 +5321,7 @@ body.slug-timetable .timetable .timetable-locations .location {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .timetable-locations .location {
-    width: 7.2rem;
+    width: var(--timetable-location-width-mobile);
   }
 }
 body.slug-timetable .timetable .timetable-locations .location p {
