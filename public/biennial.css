@@ -142,10 +142,6 @@ body.slug-biennial #main-header {
   right: 50%;
   transform: translateX(50%);
 }
-body.slug-biennial:not(.slug-home) #main-header {
-  right: 1rem;
-  transform: translateX(0);
-}
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #main-header {
     top: calc(100dvh - 12rem);
@@ -7360,5 +7356,3 @@ body.slug-artist .title-wrapper h1.page-title {
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px;
 }
-
-/*# sourceMappingURL=biennial.css.map */

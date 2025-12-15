@@ -823,9 +823,8 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                                                     .join(" ")}
                                                   style={{
                                                     "--margin": `calc(${offsetHours} * var(--timetable-hour-width, ${DEFAULT_HOUR_WIDTH_REM}rem) + ${PROGRAMME_MARGIN_OFFSET_REM}rem)`,
-                                                    "--width": `calc(${blockWidthHours} * var(--timetable-hour-width, ${DEFAULT_HOUR_WIDTH_REM}rem) - ${
-                                                      PROGRAMME_MARGIN_OFFSET_REM * 2
-                                                    }rem)`,
+                                                    "--width": `calc(${blockWidthHours} * var(--timetable-hour-width, ${DEFAULT_HOUR_WIDTH_REM}rem) - ${PROGRAMME_MARGIN_OFFSET_REM * 2
+                                                      }rem)`,
                                                   }}
                                                 >
                                                   <div className="inner-programme">

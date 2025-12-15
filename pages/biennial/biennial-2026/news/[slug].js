@@ -85,8 +85,7 @@ export async function getServerSideProps({ params, query }) {
     return { notFound: true }
   }
 
-  const preview = query.preview || process.env.NEXT_PUBLIC_PREVIEW
-  const publicationState = preview
+  const publicationState = query.preview
     ? "&publicationState=preview"
     : "&publicationState=live"
 
