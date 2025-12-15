@@ -335,6 +335,34 @@ const ProgrammeItem = ({
     return Number.isNaN(fallbackDate.getTime()) ? null : fallbackDate
   }
 
+  const formatWhenWhereRangeLabel = (entries) => {
+    const normalized = (Array.isArray(entries) ? entries : [])
+      .map((entry) => ({
+        ...entry,
+        parsedDate: parseWhenWhereDate(entry?.date),
+      }))
+      .filter((entry) => entry.parsedDate instanceof Date && !Number.isNaN(entry.parsedDate.getTime()))
+      .sort((a, b) => a.parsedDate - b.parsedDate)
+
+    if (!normalized.length) {
+      return null
+    }
+
+    const startDate = normalized[0].parsedDate
+    const endDate = normalized[normalized.length - 1].parsedDate
+    let rangeLabel = Moment(startDate).format("D MMM")
+
+    if (normalized.length > 1) {
+      if (Moment(startDate).format("MMM") === Moment(endDate).format("MMM")) {
+        rangeLabel = `${Moment(startDate).format("D")}–${Moment(endDate).format("D MMM")}`
+      } else {
+        rangeLabel = `${Moment(startDate).format("D MMM")}–${Moment(endDate).format("D MMM")}`
+      }
+    }
+
+    return { rangeLabel, startDate, endDate }
+  }
+
   const customWhenWhere = (() => {
     const candidates = [
       page?.attributes?.custom_when_where,
@@ -443,13 +471,24 @@ const ProgrammeItem = ({
   const hasTickets = Boolean(ticketLink || relationsAttributes.price)
   const hasArtists = sortedCommunityItems.length > 0
   const hasSubEvents = Boolean(subItems?.length)
+  const hasNonEmptyString = (val) => typeof val === "string" && val.trim().length > 0
+  const doorsLabel =
+    hasNonEmptyString(primaryWhenWhereSummary?.doorsOpen)
+      ? primaryWhenWhereSummary.doorsOpen
+      : hasNonEmptyString(doorsOpenFallback)
+        ? doorsOpenFallback
+        : ""
   const hasWhenWhereContent = Boolean(
     primaryWhenWhereSummary?.rangeLabel ||
       primaryWhenWhereSummary?.timeLabel ||
-      primaryWhenWhereSummary?.doorsOpen ||
-      doorsOpenFallback ||
-      primaryLocationLabel ||
-      (hasCustomWhenWhere && customWhenWhere)
+      hasNonEmptyString(primaryLocationLabel) ||
+      (hasCustomWhenWhere && hasNonEmptyString(customWhenWhere)) ||
+      hasNonEmptyString(doorsLabel)
+  )
+  const showWhenWhereDetails = Boolean(
+    primaryWhenWhereSummary ||
+      hasCustomWhenWhere ||
+      hasNonEmptyString(primaryLocationLabel)
   )
   const pageSubtitle =
     relationsAttributes?.subtitle?.trim() || page?.attributes?.subtitle?.trim()
@@ -620,7 +659,7 @@ const ProgrammeItem = ({
               key="primary-when-where"
             >
               <div className="item-wrapper item-wrapper--text-only">
-                {(primaryWhenWhereSummary || hasCustomWhenWhere) && (
+                {showWhenWhereDetails && (
                   <div className="when-where-details">
                     {primaryWhenWhereSummary?.rangeLabel && (
                       <div className="when">
@@ -643,11 +682,10 @@ const ProgrammeItem = ({
                     )}
                   </div>
                 )}
-                {(primaryWhenWhereSummary?.doorsOpen || doorsOpenFallback) && (
+                {hasNonEmptyString(doorsLabel) && (
                   <div className="doors">
                     <span>
-                      Doors open{" "}
-                      {primaryWhenWhereSummary?.doorsOpen || doorsOpenFallback}
+                      Doors open {doorsLabel}
                     </span>
                   </div>
                 )}
@@ -667,6 +705,11 @@ const ProgrammeItem = ({
   )
 
   const subProgrammesBlock = subItems?.length > 0 ? (
+    (() => {
+      const allHaveImages = subItems.every(
+        (item) => item?.attributes?.cover_image?.data
+      )
+      return (
     <div className="discover sub">
       <div className="subtitle">
         {relationsAttributes?.sub_programmes_title && (
@@ -681,46 +724,11 @@ const ProgrammeItem = ({
                 item.id ||
                 item.attributes?.slug ||
                 `sub-programme-${i}`
-              const dates = item.attributes.WhenWhere?.sort(
-                (a, b) =>
-                  new Date(a.date).getTime() -
-                  new Date(b.date).getTime()
-              )
-              const start_date = new Date(
-                dates?.[0]?.date.split("/").reverse().join("/")
-              )
-              const end_date = new Date(
-                dates?.[dates?.length - 1]?.date
-                  .split("/")
-                  .reverse()
-                  .join("/")
-              )
-              const hasCoverImage = Boolean(
-                item.attributes.cover_image?.data
-              )
+              const whenWhereRange = formatWhenWhereRangeLabel(item.attributes.WhenWhere)
+              const dateLabel = whenWhereRange?.rangeLabel || null
+              const hasCoverImage = Boolean(item.attributes.cover_image?.data)
               const artistItems = resolveArtistsForSubProgrammeItem(item)
               const artistLabel = formatArtistsLabel(artistItems)
-              const hasValidDates =
-                !Number.isNaN(start_date?.getTime?.()) &&
-                !Number.isNaN(end_date?.getTime?.())
-              let dateLabel = null
-              if (hasValidDates && dates?.length > 0) {
-                if (
-                  Moment(start_date).format("MMM") ===
-                  Moment(end_date).format("MMM") &&
-                  dates.length > 1
-                ) {
-                  dateLabel = `${Moment(start_date).format(
-                    "D"
-                  )}–${Moment(end_date).format("D MMM")}`
-                } else if (dates.length > 1) {
-                  dateLabel = `${Moment(start_date).format(
-                    "D MMM"
-                  )}–${Moment(end_date).format("D MMM")}`
-                } else {
-                  dateLabel = Moment(start_date).format("D MMM")
-                }
-              }
               return (
                 <div
                   className="discover-item"
@@ -728,7 +736,7 @@ const ProgrammeItem = ({
                 >
                   <div className="item-wrapper">
                     <a href={`/biennial/biennial-2026/programme/${item.attributes.slug}`}>
-                      {hasCoverImage && (
+                      {hasCoverImage && allHaveImages && (
                         <div className="image">
                           {item.attributes.WhenWhere?.[0] &&
                             page?.attributes?.hide_when_where ===
@@ -796,6 +804,8 @@ const ProgrammeItem = ({
         </div>
       </div>
     </div>
+      )
+    })()
   ) : null
 
   const artistsBlock = sortedCommunityItems.length > 0 ? (
@@ -864,69 +874,59 @@ const ProgrammeItem = ({
   const hasSubProgrammesBlock = Boolean(subProgrammesBlock)
   const parentProgrammesBlock =
     parentProgrammes.length > 0 ? (
-      <div className="discover parent-programmes">
-        <div className="subtitle">
-          <h1>Part of</h1>
-        </div>
-        <div className="discover-container programme-container parent-programme-container">
-          <div className="day-programme">
+      (() => {
+        const allParentsHaveImages = parentProgrammes.every(
+          (parent) => parent?.attributes?.cover_image?.data
+        )
+        return (
+          <div className="discover parent-programmes">
+            <div className="subtitle">
+              <h1>Part of</h1>
+            </div>
             <div className="discover-container programme-container parent-programme-container">
-              {parentProgrammes.map((parent, idx) => {
-                const parentAttrs = parent?.attributes || {}
-                const parentSlug = parentAttrs.slug
-                const sortedDates = Array.isArray(parentAttrs?.WhenWhere)
-                  ? parentAttrs.WhenWhere.map((entry) => {
-                    return {
-                      ...entry,
-                      parsedDate: parseWhenWhereDate(entry?.date),
+              <div className="day-programme">
+                <div className="discover-container programme-container parent-programme-container">
+                  {parentProgrammes.map((parent, idx) => {
+                    const parentAttrs = parent?.attributes || {}
+                    const parentSlug = parentAttrs.slug
+                const whenWhereRange = formatWhenWhereRangeLabel(parentAttrs?.WhenWhere)
+                const dateLabel = whenWhereRange?.rangeLabel || null
+                    if (!parentSlug) {
+                      return null
                     }
-                  })
-                    .filter((entry) => entry.parsedDate instanceof Date)
-                    .sort((a, b) => a.parsedDate - b.parsedDate)
-                  : []
-                const startDate = sortedDates[0]?.parsedDate
-                const endDate = sortedDates[sortedDates.length - 1]?.parsedDate
-                let dateLabel = null
-                if (startDate && endDate) {
-                  if (
-                    sortedDates.length > 1 &&
-                    Moment(startDate).format("MMM") === Moment(endDate).format("MMM")
-                  ) {
-                    dateLabel = `${Moment(startDate).format("D")}–${Moment(endDate).format(
-                      "D MMM"
-                    )}`
-                  } else if (sortedDates.length > 1) {
-                    dateLabel = `${Moment(startDate).format("D MMM")}–${Moment(endDate).format(
-                      "D MMM"
-                    )}`
-                  } else {
-                    dateLabel = Moment(startDate).format("D MMM")
-                  }
-                } else if (startDate) {
-                  dateLabel = Moment(startDate).format("D MMM")
-                }
-                if (!parentSlug) {
-                  return null
-                }
-                return (
-                  <div className="discover-item" key={parent.id || parentSlug || idx}>
-                    <div className="item-wrapper">
-                      <a href={`/biennial/biennial-2026/programme/${parentSlug}`}>
-                        <div className="category-title-wrapper">
-                          {dateLabel && <div className="date-label">{dateLabel}</div>}
-                          {parentAttrs.title && (
-                            <div className="title">{parentAttrs.title}</div>
-                          )}
+                    const hasCoverImage = Boolean(parentAttrs?.cover_image?.data)
+                    return (
+                      <div className="discover-item" key={parent.id || parentSlug || idx}>
+                        <div className="item-wrapper">
+                          <a href={`/biennial/biennial-2026/programme/${parentSlug}`}>
+                            {hasCoverImage && allParentsHaveImages && (
+                              <div className="image">
+                                <div className="image-inner">
+                                  <Image
+                                    image={parentAttrs.cover_image?.data?.attributes}
+                                    fill
+                                    objectFit="cover"
+                                  />
+                                </div>
+                              </div>
+                            )}
+                            <div className="category-title-wrapper">
+                              {dateLabel && <div className="date-label">{dateLabel}</div>}
+                              {parentAttrs.title && (
+                                <div className="title">{parentAttrs.title}</div>
+                              )}
+                            </div>
+                          </a>
                         </div>
-                      </a>
-                    </div>
-                  </div>
-                )
-              })}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )
+      })()
     ) : null
   const eventAsideClasses = [
     "event-aside",

@@ -4159,11 +4159,19 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 
 .biennial-article .sidenote {
   font-size: 0.8rem;
+
+  * {
+    font-size: 0.8rem;
+  }
+
+  &.medium {
+    font-size: 1rem;
+    * {
+      font-size: 1rem;
+    }
+  }
 }
 
-.biennial-article .sidenote * {
-  font-size: 0.8rem;
-}
 
 @include desktop {
 
@@ -4303,7 +4311,7 @@ body.scrolled .article .sidebar {
 }
 
 .slug-tickets {
-  padding-top: 8rem;
+  padding-top: 20rem;
   position: relative;
 
   .tickets-aquarelle {
@@ -4346,6 +4354,10 @@ body.scrolled .article .sidebar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    align-content: center;
+    min-height: calc(100vh - 30rem);
+    gap: 1rem;
 
     @include desktop {
       margin: 1rem;
@@ -4359,10 +4371,9 @@ body.scrolled .article .sidebar {
     .ticket {
 
       display: block;
-      margin-bottom: 1rem;
+      margin: 0;
 
       @include desktop {
-        margin-right: 1rem;
         width: calc(33.3% - 1rem);
       }
 
@@ -4890,6 +4901,7 @@ body.slug-timetable {
       align-items: start;
       min-height: var(--timetable-row-height);
       top: 3rem;
+      width: 100%;
 
       .timetable-row__overflow-arrow {
         position: absolute;
@@ -7094,6 +7106,8 @@ body.slug-programme {
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+                background-color: var(--programme-card-bg);
+                color: var(--programme-card-text);
               }
 
               .category-title-wrapper::before {
@@ -7108,20 +7122,32 @@ body.slug-programme {
                   gap: 0rem;
                   flex-direction: column;
                   padding-top: 1rem;
+                  color: var(--color-pink);
+                  -webkit-text-stroke-width: 0.5px;
+                  -webkit-text-stroke-color: var(--color-brown);
 
                   .when {
                     span {
                       text-align: center;
                       display: block;
+                      color: inherit;
+                      -webkit-text-stroke-width: inherit;
+                      -webkit-text-stroke-color: inherit;
                     }
                   }
 
                   .time {
                     text-align: center;
+                    color: inherit;
+                    -webkit-text-stroke-width: inherit;
+                    -webkit-text-stroke-color: inherit;
                   }
 
                   .locations {
                     text-align: center;
+                    color: inherit;
+                    -webkit-text-stroke-width: inherit;
+                    -webkit-text-stroke-color: inherit;
                   }
                 }
 
@@ -7138,11 +7164,86 @@ body.slug-programme {
                   }
                 }
 
+                .custom-when-where {
+                  text-align: center;
+                  padding-top: 0.5rem;
+                  font-size: 1.4rem;
+                  letter-spacing: 0;
+                  h1,
+                  h2,
+                  h3,
+                  h4,
+                  h5,
+                  h6,
+                  p {
+                    font-size: 1.4rem;
+                    letter-spacing: 0;
+                    color: var(--color-pink);
+                    -webkit-text-stroke-width: 0.5px;
+                    -webkit-text-stroke-color: var(--color-brown);
+                    margin: 0;
+                  }
+                }
+
                 .item-wrapper {
                   padding: 0.5rem;
                   border-radius: 0.25rem;
                   background-color: transparent;
                 }
+              }
+            }
+          }
+        }
+      }
+
+  .discover.parent-programmes {
+    .item-wrapper {
+      width: 100%;
+      a {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        flex-direction: column;
+
+        .image {
+          padding: 1rem 1rem 0 1rem;
+          .image-inner {
+            border-radius: 1rem;
+            overflow: hidden;
+          }
+        }
+
+        .category-title-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0.25rem;
+          padding: 1rem;
+
+          .date-label {
+            color: var(--color-brown);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 600;
+              }
+
+              .title {
+                font-size: 1rem;
+                line-height: 1.35;
+                letter-spacing: 0.01em;
+                font-variation-settings: "wght" 420;
+                color: var(--color-brown);
+                position: relative;
+                display: inline-block;
+                padding: 0;
+                margin-top: 0rem;
+                overflow: hidden;
+                text-align: center;
               }
             }
           }

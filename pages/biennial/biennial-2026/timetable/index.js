@@ -121,24 +121,42 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
     "06:00",
   ]
 
-  // Track event dates (including untimed) to render a side calendar of active days
+  // Track event dates only for timed + placed items (matches rendered timetable days)
   const eventDateCounts = useMemo(() => {
     const counts = {}
-    programmes.forEach((programme) => {
-      const whenWhere = Array.isArray(programme.attributes?.WhenWhere)
-        ? programme.attributes.WhenWhere
-        : []
-      whenWhere.forEach((entry) => {
-        const normalized = normalizeDate(entry?.date)
-        if (!normalized) {
-          return
-        }
-        const key = Moment(normalized).format("YYYY-MM-DD")
-        counts[key] = (counts[key] || 0) + 1
+    locRes.forEach((loc) => {
+      const programmesForLoc =
+        Array.isArray(loc?.attributes?.programme_items?.data) &&
+          loc.attributes.programme_items.data.length > 0
+          ? loc.attributes.programme_items.data
+          : []
+      programmesForLoc.forEach((progRef) => {
+        const fullProg = programmes.find(
+          (fullProgItem) => fullProgItem?.attributes?.slug === progRef?.attributes?.slug
+        )
+        if (!fullProg) return
+
+        const whenWhere = Array.isArray(fullProg.attributes?.WhenWhere)
+          ? fullProg.attributes.WhenWhere
+          : []
+
+        whenWhere.forEach((entry) => {
+          const normalized = normalizeDate(entry?.date)
+          if (!normalized) return
+          if (loc?.attributes?.title !== entry?.location?.data?.attributes?.title) return
+
+          const startTime = parseTime(entry?.start_time)
+          const endTime = parseTime(entry?.end_time)
+          const hasTimes = Number.isFinite(startTime) && Number.isFinite(endTime)
+          if (!hasTimes) return
+
+          const key = Moment(normalized).format("YYYY-MM-DD")
+          counts[key] = (counts[key] || 0) + 1
+        })
       })
     })
     return counts
-  }, [programmes])
+  }, [locRes, programmes])
 
   const sortedEventKeys = useMemo(() => Object.keys(eventDateCounts).sort(), [eventDateCounts])
 
@@ -569,6 +587,7 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                   let list2 = []
                   let timeWidth = 24
                   const EXTRA_HOURS = 2
+                  const MIN_VISIBLE_HOURS = 12
 
                   programmes.forEach((programme) => {
                     const items = programme.attributes.WhenWhere.filter((when) => {
@@ -603,6 +622,12 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                     )
                     timeWidth =
                       lastHour - Number(list.sort()[0]) + EXTRA_HOURS
+                  }
+
+                  // Ensure at least a minimum visible window even for sparse days
+                  if (timeWidth < MIN_VISIBLE_HOURS) {
+                    timeWidth = MIN_VISIBLE_HOURS
+                    end = Math.min(times.length, number + MIN_VISIBLE_HOURS)
                   }
 
                   const dayKey = `${Moment(day).format("YYYY-MM-DD")}-${i}`
