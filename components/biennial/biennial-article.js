@@ -60,16 +60,16 @@ const Article = ({
       return null
     }
 
-    if (hasCustomWhen) {
-      return (
-        <div className="when-wrapper">
-          <ReactMarkdown
-            className="when"
-            children={page.attributes.custom_when_where}
-          />
-        </div>
-      )
-    }
+    // if (hasCustomWhen) {
+    //   return (
+    //     <div className="when-wrapper">
+    //       <ReactMarkdown
+    //         className="when"
+    //         children={page.attributes.custom_when_where}
+    //       />
+    //     </div>
+    //   )
+    // }
 
     if (!Array.isArray(dates) || dates.length === 0) {
       return null

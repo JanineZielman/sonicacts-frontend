@@ -28,46 +28,6 @@ const MyApp = ({ Component, pageProps }) => {
 
   const isBiennial2026 = router.pathname.startsWith("/biennial/biennial-2026");
 
-  // Keep preview mode active across internal navigation when ?preview=true is present.
-  useEffect(() => {
-    if (!router.query?.preview) return;
-
-    const addPreviewParam = (anchor) => {
-      const rawHref = anchor.getAttribute("href");
-      if (
-        !rawHref ||
-        rawHref.startsWith("#") ||
-        rawHref.startsWith("mailto:") ||
-        rawHref.startsWith("tel:") ||
-        rawHref.startsWith("javascript:")
-      ) {
-        return;
-      }
-
-      const url = new URL(rawHref, window.location.origin);
-
-      if (url.origin !== window.location.origin || url.searchParams.has("preview")) return;
-
-      url.searchParams.set("preview", router.query.preview);
-      anchor.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
-    };
-
-    const updateAllAnchors = () => {
-      document.querySelectorAll("a[href]").forEach(addPreviewParam);
-    };
-
-    updateAllAnchors();
-    const clickHandler = (event) => {
-      const anchor = event.target.closest("a[href]");
-      if (anchor) addPreviewParam(anchor);
-    };
-    document.addEventListener("click", clickHandler, true);
-
-    return () => {
-      document.removeEventListener("click", clickHandler, true);
-    };
-  }, [router.asPath, router.query?.preview]);
-
   useEffect(() => {
     setTimeout(() => setLoading(false), 100);
 

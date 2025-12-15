@@ -2270,8 +2270,8 @@ body {
     pointer-events: none;
 
     body.slug-programme &,
-    body.slug-timetable & {      
-      display: none;      
+    body.slug-timetable & {
+      display: none;
     }
 
     @include mobile {
@@ -4166,6 +4166,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 
   &.medium {
     font-size: 1rem;
+
     * {
       font-size: 1rem;
     }
@@ -4358,7 +4359,7 @@ body.scrolled .article .sidebar {
     align-content: center;
     min-height: calc(100vh - 30rem);
     gap: 1rem;
-    
+
     @include desktop {
       width: 70%;
       margin: 0 auto;
@@ -4795,6 +4796,7 @@ body.slug-timetable {
 
   .timetable {
     grid-area: content;
+
     .timetable-wrapper {
       display: flex;
       //grid-template-columns: var(--timetable-location-width) minmax(0, 1fr);
@@ -4918,7 +4920,7 @@ body.slug-timetable {
         justify-content: center;
 
         cursor: pointer;
-        
+
         font-size: 1.2rem;
         font-weight: 700;
         font-family: 'BSTBazaineMono';
@@ -5009,7 +5011,7 @@ body.slug-timetable {
         }
       }
 
-     
+
     }
 
     .timetable-locations-outer-wrapper {
@@ -5213,8 +5215,8 @@ html {
     }
   }
 
-    .timetable-locations {
-      padding-top: 7rem;
+  .timetable-locations {
+    padding-top: 7rem;
 
     &:first-child {
       padding-top: 0;
@@ -5230,16 +5232,16 @@ html {
 
     padding-bottom: 2rem;
 
-      .location {
-        height: 100%;
-        border-top: 1px solid black;
-        position: sticky;
-        z-index: 5;
-        left: 0;
-        width: 10rem;
-        background-color: #b4c8c8;
-        vertical-align: middle;
-        word-break: break-all;
+    .location {
+      height: 100%;
+      border-top: 1px solid black;
+      position: sticky;
+      z-index: 5;
+      left: 0;
+      width: 10rem;
+      background-color: #b4c8c8;
+      vertical-align: middle;
+      word-break: break-all;
 
       &.sub {
         border-top: none;
@@ -5289,27 +5291,27 @@ html {
       transition: all 0.4s ease-in-out;
       top: 0;
 
-        &:hover {
-          background-color: #000 !important;
-          color: white;
-        }
+      &:hover {
+        background-color: #000 !important;
+        color: white;
+      }
 
-        &.programme--untimed {
-          background-color: var(--color-pink);
-          color: var(--color-brown);
-
-          .inner-programme {
-            .time {
-              background: transparent;
-              color: inherit;
-            }
-          }
-        }
+      &.programme--untimed {
+        background-color: var(--color-pink);
+        color: var(--color-brown);
 
         .inner-programme {
-          padding: 10px;
-          box-sizing: border-box;
-          font-size: 0.8rem;
+          .time {
+            background: transparent;
+            color: inherit;
+          }
+        }
+      }
+
+      .inner-programme {
+        padding: 10px;
+        box-sizing: border-box;
+        font-size: 0.8rem;
         width: 100%;
         position: relative;
         display: flex;
@@ -7162,6 +7164,7 @@ body.slug-programme {
                   padding-top: 0.5rem;
                   font-size: 1.4rem;
                   letter-spacing: 0;
+
                   h1,
                   h2,
                   h3,
@@ -7189,37 +7192,39 @@ body.slug-programme {
         }
       }
 
-  .discover.parent-programmes {
-    .item-wrapper {
-      width: 100%;
-      a {
-        display: flex;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        flex-direction: column;
+      .discover.parent-programmes {
+        .item-wrapper {
+          width: 100%;
 
-        .image {
-          padding: 1rem 1rem 0 1rem;
-          .image-inner {
-            border-radius: 1rem;
-            overflow: hidden;
-          }
-        }
+          a {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            flex-direction: column;
 
-        .category-title-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 0.25rem;
-          padding: 1rem;
+            .image {
+              padding: 1rem 1rem 0 1rem;
 
-          .date-label {
-            color: var(--color-brown);
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
+              .image-inner {
+                border-radius: 1rem;
+                overflow: hidden;
+              }
+            }
+
+            .category-title-wrapper {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 0.25rem;
+              padding: 1rem;
+
+              .date-label {
+                color: var(--color-brown);
+                font-size: 0.75rem;
+                letter-spacing: 0.08em;
                 text-transform: uppercase;
                 text-align: center;
                 font-weight: 600;
