@@ -58,7 +58,7 @@ h6 {
 a {
   color: var(--color-brown);
   text-decoration: underline;
-  text-decoration-color: var(--color-pink);
+  text-decoration-color: var(--color-grey);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2rem;
   cursor: pointer;
@@ -146,8 +146,8 @@ body.slug-biennial #main-header {
   #main-header {
     top: calc(100dvh - 12rem);
     bottom: auto;
-    width: 59vw;
-    left: 35vw;
+    width: 80vw;
+    left: 10vw;
     right: auto;
     height: 10rem;
     transform-origin: right bottom;
@@ -1137,9 +1137,9 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
 }
 .template-single-artist .discover.artists.single-artist-all .artist-item .title {
   text-align: center;
-  width: calc(100% + 0.5rem);
-  font-size: 1.3rem;
-  padding: 1rem 1.5rem;
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 1rem 0.5rem;
   position: relative;
   display: block;
   margin: 0 auto;
@@ -4011,9 +4011,9 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 .template-artists .artist-item .title,
 .discover.artists .artist-item .title {
   text-align: center;
-  width: calc(100% + 0.5rem);
-  font-size: 1.3rem;
-  padding: 1rem 1.5rem;
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 1rem 0.5rem;
   position: relative;
   display: block;
   margin: 0 auto;
@@ -4899,6 +4899,7 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 
 body.slug-timetable {
   --timetable-location-width: 11rem;
+  --timetable-location-width-mobile: 7.2rem;
   --timetable-row-height: 5rem;
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
@@ -4956,7 +4957,7 @@ body.slug-timetable .timetable .date:hover {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .date {
-    width: 7.2rem;
+    width: var(--timetable-location-width-mobile);
     font-size: 1rem;
   }
 }
@@ -4964,11 +4965,6 @@ body.slug-timetable .timetable .timetable-times {
   display: flex;
   z-index: 0;
   margin-left: 10.8rem;
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  body.slug-timetable .timetable .timetable-times {
-    margin-left: 7.2rem;
-  }
 }
 body.slug-timetable .timetable .timetable-times .time-block {
   padding-left: 0;
@@ -5022,11 +5018,6 @@ body.slug-timetable .timetable .timetable-row .programme {
   overflow: hidden;
   left: calc(var(--margin) + 0.2rem);
   width: calc(var(--width) - 0.4rem);
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  body.slug-timetable .timetable .timetable-row .programme {
-    left: calc(var(--margin) - 3.6rem);
-  }
 }
 body.slug-timetable .timetable .timetable-row .programme:hover {
   background-color: transparent !important;
@@ -5161,7 +5152,7 @@ body.slug-timetable .timetable .timetable-locations .location {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .timetable-locations .location {
-    width: 7.2rem;
+    width: var(--timetable-location-width-mobile);
   }
 }
 body.slug-timetable .timetable .timetable-locations .location p {
@@ -6947,12 +6938,12 @@ body.slug-programme .event-layout__grid .event-aside .items-wrapper .artist-item
 }
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
   body.slug-programme .event-layout__grid .event-aside .items-wrapper.four-artists .artist-item {
-    width: calc(25% - 1rem);
+    width: 25%;
   }
 }
 @media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
   body.slug-programme .event-layout__grid .event-aside .items-wrapper.more-than-four-artists .artist-item {
-    width: calc(25% - 1rem);
+    width: 25%;
   }
   body.slug-programme .event-layout__grid .event-aside .items-wrapper.more-than-four-artists .artist-item .title {
     font-size: 0.9rem;

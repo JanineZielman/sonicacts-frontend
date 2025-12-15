@@ -100,7 +100,14 @@ const ProgrammeItem = ({
   const [isMobileView, setIsMobileView] = useState(false)
   const [isContentCollapsed, setIsContentCollapsed] = useState(false)
   const aquarelleContainerRef = useRef(null)
-  const isExhibition2026 = page?.attributes?.slug === "exhibition-2026"
+  const pageSlug = page?.attributes?.slug || ""
+  const artistsFirstSlugs = new Set([
+    "exhibition-w139",
+    "exhibition-arti-et-amicitiae",
+    "rozenstraat-exhibition",
+    "framer-framed",
+  ])
+  const isArtistsFirst = artistsFirstSlugs.has(pageSlug)
   const getEarliestWhenWhereDate = (item) => {
     const entries = Array.isArray(item?.attributes?.WhenWhere)
       ? item.attributes.WhenWhere
@@ -730,6 +737,8 @@ const ProgrammeItem = ({
                   const hasCoverImage = Boolean(item.attributes.cover_image?.data)
                   const artistItems = resolveArtistsForSubProgrammeItem(item)
                   const artistLabel = formatArtistsLabel(artistItems)
+                  const showArtists =
+                    Array.isArray(artistItems) && artistItems.length > 0 && artistItems.length < 8
                   return (
                     <div
                       className="discover-item"
@@ -790,7 +799,7 @@ const ProgrammeItem = ({
                             <div className="title">
                               {item.attributes.title}
                             </div>
-                            {artistLabel && (
+                            {showArtists && artistLabel && (
                               <div className="locations">
                                 {artistLabel}
                               </div>
@@ -931,10 +940,10 @@ const ProgrammeItem = ({
     ) : null
   const eventAsideClasses = [
     "event-aside",
-    hasArtistsBlock && !hasSubProgrammesBlock && !parentProgrammesBlock
+    hasArtistsBlock && !hasSubProgrammesBlock && !parentProgrammesBlock && isArtistsFirst
       ? "event-aside--artists-only"
       : null,
-    hasSubProgrammesBlock && !hasArtistsBlock && !parentProgrammesBlock
+    hasSubProgrammesBlock && !hasArtistsBlock && !parentProgrammesBlock && !isArtistsFirst
       ? "event-aside--subs-only"
       : null,
   ].filter(Boolean)
@@ -1109,15 +1118,15 @@ const ProgrammeItem = ({
             <aside className={eventAsideClasses.join(" ")}>
               {whenWhereAsideBlock}
               {ticketsBlockElement}
-              {isExhibition2026 ? (
+              {isArtistsFirst ? (
                 <>
-                  {subProgrammesBlock}
                   {artistsBlock}
+                  {subProgrammesBlock}
                 </>
               ) : (
                 <>
-                  {artistsBlock}
                   {subProgrammesBlock}
+                  {artistsBlock}
                 </>
               )}
               {parentProgrammesBlock}
