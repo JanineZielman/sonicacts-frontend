@@ -2224,6 +2224,7 @@ body {
     width: 100%;
     left: 0;
     bottom: 4.5rem;
+    min-height: auto;
   }
 
   body.slug-artists & {
@@ -4667,9 +4668,11 @@ body.slug-timetable {
         position: relative;
         top: 0;
         right: auto;
-        width: 100%;
-        max-height: none;
+        width: calc(100% - 2rem);        
+        max-height: 20rem;
         padding-right: 1rem;
+        margin: 0 auto 2rem auto;
+        overflow: scroll;
       }
     }
 
@@ -5052,6 +5055,9 @@ body.slug-timetable {
         border-top: 1px solid var(--color-brown);
         max-height: var(--timetable-row-height);
         min-height: var(--timetable-row-height);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         @include mobile {
           width: var(--timetable-location-width-mobile);
@@ -5063,7 +5069,7 @@ body.slug-timetable {
           border-right: 0 solid var(--color-brown);
           margin-bottom: -1px;
           font-size: 0.9rem;
-          padding: 1.8rem 0 1.5rem 0.5rem;
+          padding: 0 0.5rem 0rem 0.5rem;
           word-break: break-word;
         }
 
@@ -5170,6 +5176,9 @@ html {
   }
 
   padding-bottom: 2rem;
+  @include mobile {
+    padding-bottom: 0;
+  }
 }
 
 .timetable {

@@ -151,7 +151,7 @@ body.slug-biennial:not(.slug-home) #main-header {
     top: calc(100dvh - 12rem);
     bottom: auto;
     width: 80vw;
-    left: 10vw;
+    left: 25vw;
     right: auto;
     height: 10rem;
     transform-origin: right bottom;
@@ -2105,6 +2105,7 @@ body.scrolled #social-homelink {
     width: 100%;
     left: 0;
     bottom: 4.5rem;
+    min-height: auto;
   }
 }
 body.slug-artists .title-wrapper {
@@ -4988,9 +4989,11 @@ body.slug-timetable .timetable-layout .timetable-sidebar {
     position: relative;
     top: 0;
     right: auto;
-    width: 100%;
-    max-height: none;
+    width: calc(100% - 2rem);
+    max-height: 20rem;
     padding-right: 1rem;
+    margin: 0 auto 2rem auto;
+    overflow: scroll;
   }
 }
 body.slug-timetable .timetable-layout .timetable-sidebar__month:not(:last-child) {
@@ -5318,6 +5321,9 @@ body.slug-timetable .timetable .timetable-locations .location {
   border-top: 1px solid var(--color-brown);
   max-height: var(--timetable-row-height);
   min-height: var(--timetable-row-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .timetable-locations .location {
@@ -5330,7 +5336,7 @@ body.slug-timetable .timetable .timetable-locations .location p {
   border-right: 0 solid var(--color-brown);
   margin-bottom: -1px;
   font-size: 0.9rem;
-  padding: 1.8rem 0 1.5rem 0.5rem;
+  padding: 0 0.5rem 0rem 0.5rem;
   word-break: break-word;
 }
 body.slug-timetable .timetable .timetable-locations .location.sub p {
@@ -5420,6 +5426,11 @@ html {
   margin: 0 0.2rem;
   border-radius: 1rem;
   padding: 0.1rem 0.5rem;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .timetable-links {
+    padding-bottom: 0;
+  }
 }
 
 .timetable {
