@@ -69,6 +69,16 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/news/biennial-2026-exhibition-programme</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/news/final-artists-announced</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/news/announcement-sonic-acts-biennial-2026</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
@@ -130,6 +140,11 @@
     </url>
     <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/artists/espen-sommer-eide</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/artists/emilija-skarnulyte</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -209,7 +224,12 @@
       <priority>0.8</priority>
     </url>
     <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/artists/marcin-pietruszewski</loc>
+      <loc>https://sonicacts.com/biennial/biennial-2026/programme/underpasses</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/programme/a-refusal-to-be-contained-a-refusal-to-die</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -225,11 +245,6 @@
     </url>
     <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/programme/spatial-sound-concerts-2026</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/programme/listening-room-2026</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
@@ -294,6 +309,11 @@
       <priority>0.8</priority>
     </url>
     <url>
+      <loc>https://sonicacts.com/biennial/biennial-2026/programme/exhibition-tours-and-openings-2026</loc>
+      <changefreq>weekly</changefreq>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/programme/club-nights-2026</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
@@ -325,16 +345,6 @@
     </url>
     <url>
       <loc>https://sonicacts.com/biennial/biennial-2026/programme/spatial-sound-course-2026</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/programme/in-conversation-with-jeremy-deller</loc>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    <url>
-      <loc>https://sonicacts.com/biennial/biennial-2026/programme/exhibition-tours-and-openings-2026</loc>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
     </url>
