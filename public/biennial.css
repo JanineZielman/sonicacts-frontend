@@ -1049,7 +1049,8 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
 .template-single-artist .single-artist-layout__related .single-artist-timing__date {
   font-weight: 600;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.85rem;
+  word-spacing: -0.2em;
 }
 .template-single-artist .single-artist-layout__related .single-artist-timing__time {
   font-size: 0.85rem;
