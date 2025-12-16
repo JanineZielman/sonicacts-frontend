@@ -7352,3 +7352,18 @@ body.slug-artist .title-wrapper h1.page-title {
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px
 }
+
+
+.mobile-only {
+  .primary-when-where {
+    .subtitle {
+      display: none;
+    }
+
+    .item-wrapper {
+      background-color: transparent !important;
+      text-align: center;
+    }
+  }
+
+}

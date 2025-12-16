@@ -9,6 +9,7 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
   const [loading, setLoading] = useState(true)
   const DEFAULT_HOUR_WIDTH_REM = 10 // keep in sync with --timetable-hour-width in SCSS
   const [hourWidthRem, setHourWidthRem] = useState(DEFAULT_HOUR_WIDTH_REM)
+  const [isMobileView, setIsMobileView] = useState(false)
   const weekdaysShort = ["Mo", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
   const normalizeDate = (dateStr) => {
@@ -81,6 +82,15 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
     if (Number.isFinite(parsedWidth)) {
       setHourWidthRem(parsedWidth)
     }
+    const checkMobile = () => {
+      setIsMobileView(
+        window.matchMedia("(max-width: 768px)").matches ||
+          window.matchMedia("(pointer: coarse)").matches
+      )
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
   const parseTime = (value) => {
@@ -586,7 +596,7 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
                   let list = []
                   let list2 = []
                   let timeWidth = 24
-                  const EXTRA_HOURS = 3
+                  const EXTRA_HOURS = isMobileView ? 0 : 3
                   const MIN_VISIBLE_HOURS = 12
 
                   programmes.forEach((programme) => {
