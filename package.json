@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "develop": "next dev",
-    "dev": "export NODE_OPTIONS=--openssl-legacy-provider && node server.js",
+    "dev": "sh -c \"npx sass --watch --source-map pages/biennial/biennial-2026/assets/scss/biennial.scss public/biennial.css & export NODE_OPTIONS=--openssl-legacy-provider && node server.js\"",
     "build-portal-css": "node scripts/compile-portal-css.js",
     "build-biennial-css": "node scripts/compile-biennial-css.js",
     "build-webp": "node scripts/generate-webp.js",

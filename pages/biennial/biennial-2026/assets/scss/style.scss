@@ -4603,14 +4603,6 @@ body.slug-timetable {
     display: none;
   }
 
-  // Keep the header anchored bottom-right on timetable pages (override slug-biennial centering)
-  #main-header {
-    right: 1rem;
-    bottom: 1rem;
-    top: auto;
-    transform: scale(1);
-  }
-
   .page-title {
     color: var(--color-pink);
     position: static;
@@ -5714,6 +5706,13 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
         max-height: 22vw !important;
         bottom: 1rem !important;
       }
+    }
+
+    #acts {
+      @include mobile {
+        left: 10rem !important;
+      }
+
     }
   }
 }

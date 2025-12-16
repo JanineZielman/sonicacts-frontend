@@ -132,48 +132,39 @@ em {
   font-size: 1.5rem;
   letter-spacing: 0rem;
 }
-body.menu-small #main-header {
-  transform: scale(0.3);
-}
-body.menu-expanded #main-header {
-  transform: scale(1);
-}
-body.slug-biennial #main-header {
-  right: 50%;
-  transform: translateX(50%);
-}
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #main-header {
+    width: 78vw;
     top: calc(100dvh - 12rem);
     bottom: auto;
-    width: 80vw;
-    left: 25vw;
     right: auto;
     height: 10rem;
     transform-origin: right bottom;
+    right: 1rem;
+    left: auto;
+    width: auto;
     transform: scale(0.3);
+    transform-origin: right bottom;
     transition: all 0.3s ease;
   }
-  body.slug-biennial #main-header {
-    transform: translateX(-50%);
-    top: calc(100dvh - 10rem);
-    transform: scale(1) translateX(-50%);
-    right: auto;
-    left: 50%;
+  body.menu-small #main-header {
+    right: 1rem;
+    left: auto;
+    width: auto;
+    transform: scale(0.3);
+    transform-origin: right bottom;
   }
-  body.slug-biennial #main-header .minimal-nav__overlay {
-    display: none;
+  body.menu-small #main-header .minimal-nav {
+    transform-origin: right bottom;
+    gap: 2rem;
   }
-  body.slug-biennial #main-header .minimal-nav {
-    gap: 0.1rem;
-  }
-  body.slug-biennial #main-header ul {
-    gap: 0.2rem;
-    font-size: 1rem;
-  }
-  body.slug-biennial #main-header ul li a {
+  body.menu-small #main-header ul li a {
     opacity: 1;
-    color: var(--color-brown);
+    color: var(--color-pink);
+  }
+  body.menu-expanded #main-header {
+    transform: scale(1);
+    left: 23vw;
   }
   #main-header .minimal-nav {
     position: relative;
@@ -189,12 +180,17 @@ body.slug-biennial #main-header {
     cursor: pointer;
     transition: transform 0.3s ease;
   }
-  #main-header body.slug-biennial .minimal-nav__overlay {
-    display: none;
-  }
   #main-header .minimal-nav__overlay--active {
     transform: scale(1.2);
     pointer-events: none;
+  }
+  #main-header .minimal-nav {
+    transform-origin: right bottom;
+    gap: 2rem;
+  }
+  #main-header ul li a {
+    opacity: 1;
+    color: var(--color-pink);
   }
   #main-header * {
     transition: all 0.3s ease;
@@ -202,14 +198,15 @@ body.slug-biennial #main-header {
   #main-header .minimal-nav {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.1rem;
     transform-origin: right bottom;
   }
   #main-header ul {
     gap: 0;
   }
   #main-header ul li a {
-    opacity: 0;
+    opacity: 1;
+    color: var(--color-brown);
   }
   body.menu-expanded #main-header {
     transform: scale(1);
@@ -225,6 +222,37 @@ body.slug-biennial #main-header {
   body.menu-expanded #main-header ul li a {
     opacity: 1;
     color: var(--color-brown);
+  }
+  body.slug-home #main-header {
+    transform: scale(1);
+    left: 11vw;
+    right: auto;
+    width: 78vw;
+  }
+  body.slug-home #main-header .minimal-nav__overlay {
+    display: none;
+  }
+  body.slug-home #main-header .minimal-nav {
+    gap: 0.1rem;
+  }
+  body.slug-home #main-header ul li a {
+    opacity: 1;
+    color: var(--color-brown);
+  }
+  body.slug-home.has-scrolled #main-header {
+    right: 1rem;
+    left: auto;
+    width: auto;
+    transform: scale(0.3);
+    transform-origin: right bottom;
+  }
+  body.slug-home.has-scrolled #main-header .minimal-nav {
+    transform-origin: right bottom;
+    gap: 2rem;
+  }
+  body.slug-home.has-scrolled #main-header ul li a {
+    opacity: 1;
+    color: var(--color-pink);
   }
   #main-header.click--active {
     transform: scale(1);
@@ -4925,12 +4953,6 @@ body.slug-timetable .minimal-nav__overlay {
 body.slug-timetable .social-channel {
   display: none;
 }
-body.slug-timetable #main-header {
-  right: 1rem;
-  bottom: 1rem;
-  top: auto;
-  transform: scale(1);
-}
 body.slug-timetable .page-title {
   color: var(--color-pink);
   position: static;
@@ -5886,6 +5908,11 @@ body.has-scrolled.slug-home #sonic-acts #acts {
     height: 22vw !important;
     max-height: 22vw !important;
     bottom: 1rem !important;
+  }
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.has-scrolled.slug-home #sonic-acts #acts {
+    left: 10rem !important;
   }
 }
 
@@ -7356,3 +7383,5 @@ body.slug-artist .title-wrapper h1.page-title {
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px;
 }
+
+/*# sourceMappingURL=biennial.css.map */
