@@ -6882,7 +6882,7 @@ body.slug-programme {
         align-items: center;
         width: 4rem;
         height: 4rem;
-        margin: -1rem auto 0;
+        margin: -2rem auto 1rem;
         border-radius: 999px;
         border: 2px solid var(--color-pink);
         background: transparent;
@@ -6943,6 +6943,12 @@ body.slug-programme {
 
       .discover.parent-programmes {
         background: transparent;
+        margin-top: 2rem;
+        .subtitle {
+          display: block;
+          text-align: center;
+          padding: 1rem 0 0.5rem 0;
+        }
 
         .day-programme {
           .programme-container {

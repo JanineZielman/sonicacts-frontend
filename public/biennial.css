@@ -6988,7 +6988,7 @@ body.slug-programme .event-layout__grid .programme-mobile-expander {
     align-items: center;
     width: 4rem;
     height: 4rem;
-    margin: -1rem auto 0;
+    margin: -2rem auto 1rem;
     border-radius: 999px;
     border: 2px solid var(--color-pink);
     background: transparent;
@@ -7038,6 +7038,12 @@ body.slug-programme .event-layout__grid .event-aside .discover-item {
 }
 body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes {
   background: transparent;
+  margin-top: 2rem;
+}
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .subtitle {
+  display: block;
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
 }
 body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container {
   display: flex;
