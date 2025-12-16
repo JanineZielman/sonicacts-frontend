@@ -107,7 +107,8 @@ export default class MyDocument extends Document {
              --------------------------------------------------------------- */}
           {!isBiennial2026 && (
             <>
-              <link rel="canonical" href="https://sonicacts.com/" />
+          <link rel="canonical" href="https://sonicacts.com/" />
+          <meta name="theme-color" content="transparent" />
 
               <script
                 async
