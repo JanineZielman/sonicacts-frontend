@@ -132,48 +132,39 @@ em {
   font-size: 1.5rem;
   letter-spacing: 0rem;
 }
-body.menu-small #main-header {
-  transform: scale(0.3);
-}
-body.menu-expanded #main-header {
-  transform: scale(1);
-}
-body.slug-biennial #main-header {
-  right: 50%;
-  transform: translateX(50%);
-}
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #main-header {
+    width: 78vw;
     top: calc(100dvh - 12rem);
     bottom: auto;
-    width: 80vw;
-    left: 10vw;
     right: auto;
     height: 10rem;
     transform-origin: right bottom;
+    right: 1rem;
+    left: auto;
+    width: auto;
     transform: scale(0.3);
+    transform-origin: right bottom;
     transition: all 0.3s ease;
   }
-  body.slug-biennial #main-header {
-    transform: translateX(-50%);
-    top: calc(100dvh - 10rem);
-    transform: scale(1) translateX(-50%);
-    right: auto;
-    left: 50%;
+  body.menu-small #main-header {
+    right: 1rem;
+    left: auto;
+    width: auto;
+    transform: scale(0.3);
+    transform-origin: right bottom;
   }
-  body.slug-biennial #main-header .minimal-nav__overlay {
-    display: none;
+  body.menu-small #main-header .minimal-nav {
+    transform-origin: right bottom;
+    gap: 2rem;
   }
-  body.slug-biennial #main-header .minimal-nav {
-    gap: 0.1rem;
-  }
-  body.slug-biennial #main-header ul {
-    gap: 0.2rem;
-    font-size: 1rem;
-  }
-  body.slug-biennial #main-header ul li a {
+  body.menu-small #main-header ul li a {
     opacity: 1;
-    color: var(--color-brown);
+    color: var(--color-pink);
+  }
+  body.menu-expanded #main-header {
+    transform: scale(1);
+    left: 23vw;
   }
   #main-header .minimal-nav {
     position: relative;
@@ -189,12 +180,17 @@ body.slug-biennial #main-header {
     cursor: pointer;
     transition: transform 0.3s ease;
   }
-  #main-header body.slug-biennial .minimal-nav__overlay {
-    display: none;
-  }
   #main-header .minimal-nav__overlay--active {
     transform: scale(1.2);
     pointer-events: none;
+  }
+  #main-header .minimal-nav {
+    transform-origin: right bottom;
+    gap: 2rem;
+  }
+  #main-header ul li a {
+    opacity: 1;
+    color: var(--color-pink);
   }
   #main-header * {
     transition: all 0.3s ease;
@@ -202,14 +198,15 @@ body.slug-biennial #main-header {
   #main-header .minimal-nav {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.1rem;
     transform-origin: right bottom;
   }
   #main-header ul {
     gap: 0;
   }
   #main-header ul li a {
-    opacity: 0;
+    opacity: 1;
+    color: var(--color-brown);
   }
   body.menu-expanded #main-header {
     transform: scale(1);
@@ -225,6 +222,37 @@ body.slug-biennial #main-header {
   body.menu-expanded #main-header ul li a {
     opacity: 1;
     color: var(--color-brown);
+  }
+  body.slug-home #main-header {
+    transform: scale(1);
+    left: 11vw;
+    right: auto;
+    width: 78vw;
+  }
+  body.slug-home #main-header .minimal-nav__overlay {
+    display: none;
+  }
+  body.slug-home #main-header .minimal-nav {
+    gap: 0.1rem;
+  }
+  body.slug-home #main-header ul li a {
+    opacity: 1;
+    color: var(--color-brown);
+  }
+  body.slug-home.has-scrolled #main-header {
+    right: 1rem;
+    left: auto;
+    width: auto;
+    transform: scale(0.3);
+    transform-origin: right bottom;
+  }
+  body.slug-home.has-scrolled #main-header .minimal-nav {
+    transform-origin: right bottom;
+    gap: 2rem;
+  }
+  body.slug-home.has-scrolled #main-header ul li a {
+    opacity: 1;
+    color: var(--color-pink);
   }
   #main-header.click--active {
     transform: scale(1);
@@ -2101,6 +2129,7 @@ body.scrolled #social-homelink {
     width: 100%;
     left: 0;
     bottom: 4.5rem;
+    min-height: auto;
   }
 }
 body.slug-artists .title-wrapper {
@@ -4924,12 +4953,6 @@ body.slug-timetable .minimal-nav__overlay {
 body.slug-timetable .social-channel {
   display: none;
 }
-body.slug-timetable #main-header {
-  right: 1rem;
-  bottom: 1rem;
-  top: auto;
-  transform: scale(1);
-}
 body.slug-timetable .page-title {
   color: var(--color-pink);
   position: static;
@@ -4984,9 +5007,11 @@ body.slug-timetable .timetable-layout .timetable-sidebar {
     position: relative;
     top: 0;
     right: auto;
-    width: 100%;
-    max-height: none;
+    width: calc(100% - 2rem);
+    max-height: 20rem;
     padding-right: 1rem;
+    margin: 0 auto 2rem auto;
+    overflow: scroll;
   }
 }
 body.slug-timetable .timetable-layout .timetable-sidebar__month:not(:last-child) {
@@ -5314,6 +5339,9 @@ body.slug-timetable .timetable .timetable-locations .location {
   border-top: 1px solid var(--color-brown);
   max-height: var(--timetable-row-height);
   min-height: var(--timetable-row-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable .timetable-locations .location {
@@ -5326,7 +5354,7 @@ body.slug-timetable .timetable .timetable-locations .location p {
   border-right: 0 solid var(--color-brown);
   margin-bottom: -1px;
   font-size: 0.9rem;
-  padding: 1.8rem 0 1.5rem 0.5rem;
+  padding: 0 0.5rem 0rem 0.5rem;
   word-break: break-word;
 }
 body.slug-timetable .timetable .timetable-locations .location.sub p {
@@ -5416,6 +5444,11 @@ html {
   margin: 0 0.2rem;
   border-radius: 1rem;
   padding: 0.1rem 0.5rem;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .timetable-links {
+    padding-bottom: 0;
+  }
 }
 
 .timetable {
@@ -5875,6 +5908,11 @@ body.has-scrolled.slug-home #sonic-acts #acts {
     height: 22vw !important;
     max-height: 22vw !important;
     bottom: 1rem !important;
+  }
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.has-scrolled.slug-home #sonic-acts #acts {
+    left: 10rem !important;
   }
 }
 
@@ -6950,7 +6988,7 @@ body.slug-programme .event-layout__grid .programme-mobile-expander {
     align-items: center;
     width: 4rem;
     height: 4rem;
-    margin: -1rem auto 0;
+    margin: -2rem auto 1rem;
     border-radius: 999px;
     border: 2px solid var(--color-pink);
     background: transparent;
@@ -7000,6 +7038,12 @@ body.slug-programme .event-layout__grid .event-aside .discover-item {
 }
 body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes {
   background: transparent;
+  margin-top: 2rem;
+}
+body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .subtitle {
+  display: block;
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
 }
 body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .programme-container {
   display: flex;
@@ -7345,3 +7389,13 @@ body.slug-artist .title-wrapper h1.page-title {
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px;
 }
+
+.mobile-only .primary-when-where .subtitle {
+  display: none;
+}
+.mobile-only .primary-when-where .item-wrapper {
+  background-color: transparent !important;
+  text-align: center;
+}
+
+/*# sourceMappingURL=biennial.css.map */

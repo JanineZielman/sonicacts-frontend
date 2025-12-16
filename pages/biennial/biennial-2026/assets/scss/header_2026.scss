@@ -1,3 +1,22 @@
+// Reusable compact minimal-nav state (mobile)
+@mixin minimal-nav-compact {
+    right: 1rem;
+    left: auto;
+    width: auto;
+    transform: scale(0.3);
+    transform-origin: right bottom;
+
+    .minimal-nav {
+        transform-origin: right bottom;
+        gap: 2rem;
+    }
+
+    ul li a {
+        opacity: 1;
+        color: var(--color-pink);
+    }
+}
+
 #main-header {
     position: fixed;
     bottom: 1rem;
@@ -12,55 +31,23 @@
     transform-origin: right bottom;
     transition: transform 0.3s ease;
 
-    body.menu-small & {
-        transform: scale(0.3);
-    }
-
-    body.menu-expanded & {
-        transform: scale(1);
-    }
-
-    body.slug-biennial & {
-        right: 50%;
-        transform: translateX(50%);
-    }
-
     @include mobile {
+        width: 78vw;
         top: calc(100dvh - 12rem);
         bottom: auto;
-        width: 80vw;
-        left: (10vw);
 
         right: auto;
         height: 10rem;
 
-        body.slug-biennial & {
-            transform: translateX(-50%);
-            top: calc(100dvh - 10rem);
-            transform: scale(1) translateX(-50%);
-            right: auto;
-            left: 50%;
-
-            .minimal-nav__overlay {
-                display: none;
-            }
-
-            .minimal-nav {
-                gap: 0.1rem;
-            }
-
-            ul {
-                gap: 0.2rem;
-                font-size: 1rem;
-
-                li {
-                    a {
-                        opacity: 1;
-                        color: var(--color-brown);
-                    }
-                }
-            }
+        body.menu-small & {
+            @include minimal-nav-compact;
         }
+
+        body.menu-expanded & {
+            transform: scale(1);
+            left: 23vw;
+        }
+
 
         .minimal-nav {
             position: relative;
@@ -78,10 +65,6 @@
             transition: transform 0.3s ease;
         }
 
-        body.slug-biennial .minimal-nav__overlay {
-            display: none;
-        }
-
         .minimal-nav__overlay--active {
             transform: scale(1.2);
             pointer-events: none;
@@ -89,7 +72,7 @@
 
         // Mobile behaviour: keep small until menu is expanded
         transform-origin: right bottom;
-        transform: scale(0.3);
+        @include minimal-nav-compact;
         transition: all 0.3s ease;
 
         * {
@@ -99,7 +82,7 @@
         .minimal-nav {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 0.1rem;
             transform-origin: right bottom;
         }
 
@@ -108,7 +91,8 @@
 
             li {
                 a {
-                    opacity: 0;
+                    opacity: 1;
+                    color: var(--color-brown);
                 }
             }
         }
@@ -132,6 +116,32 @@
                     }
                 }
             }
+        }
+
+        // Home page: keep nav full-size and readable on mobile
+        body.slug-home & {
+            transform: scale(1);
+
+            left: 11vw; // center ~78vw width on mobile
+            right: auto;
+            width: 78vw;
+
+            .minimal-nav__overlay {
+                display: none;
+            }
+
+            .minimal-nav {
+                gap: 0.1rem;
+            }
+
+            ul li a {
+                opacity: 1;
+                color: var(--color-brown);
+            }
+        }
+
+        body.slug-home.has-scrolled & {
+            @include minimal-nav-compact;
         }
 
         &.click--active {

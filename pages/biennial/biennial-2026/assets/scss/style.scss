@@ -2224,6 +2224,7 @@ body {
     width: 100%;
     left: 0;
     bottom: 4.5rem;
+    min-height: auto;
   }
 
   body.slug-artists & {
@@ -4602,14 +4603,6 @@ body.slug-timetable {
     display: none;
   }
 
-  // Keep the header anchored bottom-right on timetable pages (override slug-biennial centering)
-  #main-header {
-    right: 1rem;
-    bottom: 1rem;
-    top: auto;
-    transform: scale(1);
-  }
-
   .page-title {
     color: var(--color-pink);
     position: static;
@@ -4668,9 +4661,11 @@ body.slug-timetable {
         position: relative;
         top: 0;
         right: auto;
-        width: 100%;
-        max-height: none;
+        width: calc(100% - 2rem);        
+        max-height: 20rem;
         padding-right: 1rem;
+        margin: 0 auto 2rem auto;
+        overflow: scroll;
       }
     }
 
@@ -5054,6 +5049,9 @@ body.slug-timetable {
         border-top: 1px solid var(--color-brown);
         max-height: var(--timetable-row-height);
         min-height: var(--timetable-row-height);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         @include mobile {
           width: var(--timetable-location-width-mobile);
@@ -5065,7 +5063,7 @@ body.slug-timetable {
           border-right: 0 solid var(--color-brown);
           margin-bottom: -1px;
           font-size: 0.9rem;
-          padding: 1.8rem 0 1.5rem 0.5rem;
+          padding: 0 0.5rem 0rem 0.5rem;
           word-break: break-word;
         }
 
@@ -5172,6 +5170,9 @@ html {
   }
 
   padding-bottom: 2rem;
+  @include mobile {
+    padding-bottom: 0;
+  }
 }
 
 .timetable {
@@ -5705,6 +5706,13 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
         max-height: 22vw !important;
         bottom: 1rem !important;
       }
+    }
+
+    #acts {
+      @include mobile {
+        left: 10rem !important;
+      }
+
     }
   }
 }
@@ -6874,7 +6882,7 @@ body.slug-programme {
         align-items: center;
         width: 4rem;
         height: 4rem;
-        margin: -1rem auto 0;
+        margin: -2rem auto 1rem;
         border-radius: 999px;
         border: 2px solid var(--color-pink);
         background: transparent;
@@ -6935,6 +6943,12 @@ body.slug-programme {
 
       .discover.parent-programmes {
         background: transparent;
+        margin-top: 2rem;
+        .subtitle {
+          display: block;
+          text-align: center;
+          padding: 1rem 0 0.5rem 0;
+        }
 
         .day-programme {
           .programme-container {
@@ -7343,4 +7357,19 @@ body.slug-artist .title-wrapper h1.page-title {
 
 body.slug-programme .title-wrapper h1.page-title {
   font-size: 97px
+}
+
+
+.mobile-only {
+  .primary-when-where {
+    .subtitle {
+      display: none;
+    }
+
+    .item-wrapper {
+      background-color: transparent !important;
+      text-align: center;
+    }
+  }
+
 }

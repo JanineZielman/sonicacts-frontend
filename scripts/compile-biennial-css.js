@@ -13,16 +13,24 @@ const ENTRY_SCSS = path.join(
   "../pages/biennial/biennial-2026/assets/scss/biennial.scss"
 );
 const OUTPUT_CSS_FILE = path.join(__dirname, "../public/biennial.css");
+const OUTPUT_MAP_FILE = path.join(__dirname, "../public/biennial.css.map");
 
 // Ensure output directory exists
 fs.mkdirSync(path.dirname(OUTPUT_CSS_FILE), { recursive: true });
 
 try {
-  // Compile SCSS to CSS
-  const result = sass.compile(ENTRY_SCSS, { style: "expanded" });
+  // Compile SCSS to CSS (with source map)
+  const result = sass.compile(ENTRY_SCSS, {
+    style: "expanded",
+    sourceMap: true,
+    sourceMapIncludeSources: true,
+  });
 
   // Write to public/biennial.css
   fs.writeFileSync(OUTPUT_CSS_FILE, result.css);
+  if (result.sourceMap) {
+    fs.writeFileSync(OUTPUT_MAP_FILE, JSON.stringify(result.sourceMap));
+  }
 
   console.log(`[biennial-css] Successfully compiled ${ENTRY_SCSS} to ${OUTPUT_CSS_FILE}`);
 } catch (err) {

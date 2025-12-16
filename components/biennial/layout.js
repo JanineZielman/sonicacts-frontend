@@ -1,7 +1,7 @@
 "use client"
 
 import Nav from "./nav"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useRouter } from 'next/router';
 import Image from "./image"
 import ReactMarkdown from "react-markdown"
@@ -52,6 +52,7 @@ const frontpageHiddenIntro = `
 const Layout = ({ children, festival, seo }) => {
   const router = useRouter();
   const pathname = router.pathname;
+  const isBiennialHome = pathname === "/biennial/biennial-2026" || pathname === "/biennial/biennial-2026/";
 
   const [loading, setLoading] = useState(false)
 
@@ -140,6 +141,8 @@ const Layout = ({ children, festival, seo }) => {
 
   const [isMobileLayout, setIsMobileLayout] = useState(false)
 
+  const lastMobileCheckRef = useRef(null)
+
   useEffect(() => {
     if (typeof window === "undefined") {
       return undefined
@@ -150,6 +153,20 @@ const Layout = ({ children, festival, seo }) => {
         window.matchMedia("(hover: none)").matches ||
         window.matchMedia("(pointer: coarse)").matches ||
         window.innerWidth <= 768
+      if (lastMobileCheckRef.current !== isMobile) {
+        console.log("[MinimalNav] checkMobile change", {
+          isMobile,
+          width: window.innerWidth,
+          hoverNone: window.matchMedia("(hover: none)").matches,
+          coarse: window.matchMedia("(pointer: coarse)").matches,
+        })
+        lastMobileCheckRef.current = isMobile
+      } else {
+        console.log("[MinimalNav] checkMobile same", {
+          isMobile,
+          width: window.innerWidth,
+        })
+      }
       setIsMobileLayout(isMobile)
     }
 
@@ -162,12 +179,17 @@ const Layout = ({ children, festival, seo }) => {
   }, [])
 
   useEffect(() => {
-    if (!isMobileLayout) {
+    console.log("[MinimalNav] mobile effect mount", { isMobileLayout, pathname, isBiennialHome })
+    if (!isMobileLayout || isBiennialHome) {
+      console.log("[MinimalNav] mobile effect skipped", {
+        reason: !isMobileLayout ? "desktop" : "biennial-home",
+      })
       return undefined
     }
 
     const menu = document.querySelector(".menu")
     if (!menu) {
+      console.log("[MinimalNav] menu not found")
       return undefined
     }
 
@@ -186,6 +208,7 @@ const Layout = ({ children, festival, seo }) => {
       overlayElement = document.createElement("div")
       overlayElement.className = "minimal-nav__overlay"
       minimalNav.appendChild(overlayElement)
+      console.log("[MinimalNav] overlay created")
     }
 
     const handleOverlayClick = (event) => {
@@ -205,9 +228,9 @@ const Layout = ({ children, festival, seo }) => {
 
     const logNavState = (context, metadata = "") => {
       const mode = isMobileLayout ? "mobile" : "desktop"
-      // console.log(
-      //   `[MinimalNav] ${context} (${mode}) -> active:${menuIsActive}, body:${body.className}, menu:${menu.className}${metadata}`
-      // )
+      console.log(
+        `[MinimalNav] ${context} (${mode}) -> active:${menuIsActive}, body:${body.className}, menu:${menu.className}${metadata}`
+      )
     }
 
     const activateMenu = () => {
@@ -224,6 +247,7 @@ const Layout = ({ children, festival, seo }) => {
       body.classList.remove("menu-expanded")
       body.classList.add("menu-small")
       overlayElement?.classList.remove("minimal-nav__overlay--active")
+      console.log("[MinimalNav] collapseMenu")
     }
 
     const handleClick = (event) => {

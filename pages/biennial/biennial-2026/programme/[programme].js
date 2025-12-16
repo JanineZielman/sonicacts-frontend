@@ -947,6 +947,24 @@ const ProgrammeItem = ({
       ? "event-aside--subs-only"
       : null,
   ].filter(Boolean)
+  const asideContent = hasSidebarContent ? (
+    <aside className={eventAsideClasses.join(" ")}>
+      {whenWhereAsideBlock && <div className="desktop-only">{whenWhereAsideBlock}</div>}
+      {ticketsBlockElement && <div className="desktop-only">{ticketsBlockElement}</div>}
+      {isArtistsFirst ? (
+        <>
+          {artistsBlock}
+          {subProgrammesBlock}
+        </>
+      ) : (
+        <>
+          {subProgrammesBlock}
+          {artistsBlock}
+        </>
+      )}
+      {parentProgrammesBlock}
+    </aside>
+  ) : null
 
   useEffect(() => {
     if (typeof document === "undefined") {
@@ -1081,6 +1099,8 @@ const ProgrammeItem = ({
             </div>
           )}
         </div>
+        {whenWhereAsideBlock && <div className="mobile-only">{whenWhereAsideBlock}</div>}
+        {ticketsBlockElement && <div className="mobile-only">{ticketsBlockElement}</div>}
         <div className="event-layout__grid">
           <div
             className={[
@@ -1114,24 +1134,7 @@ const ProgrammeItem = ({
               <span>+</span>
             </button>
           )}
-          {hasSidebarContent && (
-            <aside className={eventAsideClasses.join(" ")}>
-              {whenWhereAsideBlock}
-              {ticketsBlockElement}
-              {isArtistsFirst ? (
-                <>
-                  {artistsBlock}
-                  {subProgrammesBlock}
-                </>
-              ) : (
-                <>
-                  {subProgrammesBlock}
-                  {artistsBlock}
-                </>
-              )}
-              {parentProgrammesBlock}
-            </aside>
-          )}
+          {asideContent}
         </div>
         {allProgrammeEntries.length > 0 && (
           <section className="discover artists programme-all">
