@@ -738,7 +738,9 @@ const ProgrammeItem = ({
                   const artistItems = resolveArtistsForSubProgrammeItem(item)
                   const artistLabel = formatArtistsLabel(artistItems)
                   const showArtists =
-                    Array.isArray(artistItems) && artistItems.length > 0 && artistItems.length < 8
+                    hasCoverImage &&
+                    Array.isArray(artistItems) &&
+                    artistItems.length > 0
                   return (
                     <div
                       className="discover-item"
