@@ -4427,6 +4427,7 @@ body.scrolled .article .sidebar {
 
             left: 0.5rem;
             bottom: 0.5rem;
+            display: none;
 
             @include mobile {
               font-size: 0.8rem;
@@ -4928,7 +4929,8 @@ body.slug-timetable {
       .programme {
         background-color: transparent;
         height: auto;
-        top: 0.6rem;
+        top: 50%;
+        transform: translateY(-50%);
         border-radius: 0.2rem;
         overflow: hidden;
         position: absolute;
@@ -4979,7 +4981,7 @@ body.slug-timetable {
             padding: 0.2rem 0.2rem 0 0.2rem;
             font-size: 0.8rem !important;
             line-height: 0.8rem;
-            max-height: 1.84rem;
+            max-height: 2.7rem;
             -webkit-line-clamp: 2;
             text-transform: uppercase;
             font-family: "BSTBazaineMono";
