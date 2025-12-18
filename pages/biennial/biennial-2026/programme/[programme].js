@@ -319,6 +319,9 @@ const ProgrammeItem = ({
       if (!title) {
         return null
       }
+      if (title === "W139 Tours") {
+        return null
+      }
       return subtitle ? `${title} – ${subtitle}` : title
     })
     .filter(Boolean)

@@ -331,45 +331,51 @@ $grid-columns: 12;
 
   .category-title-wrapper {
     gap: 0.35rem;
-  }
 
-  .category-title-wrapper .title span {
-    text-align: center;
-    color: var(--color-sand);
-    font-size: 3.3rem;
+    .category,
+    .locations,
+    .date-label {
+      color: var(--color-sand);
+      font-size: 0.7rem;
 
-    @include mobile {
-      font-size: 4rem;
+      @include mobile {
+        font-size: 1.2rem;
+      }
+
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      word-spacing: -0.4em;
     }
 
-    line-height: 1;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-    display: block;
-    word-spacing: -0.4em;
-    -webkit-text-stroke-color: var(--color-brown);
-    -webkit-text-stroke-width: 1px;
-  }
+    .title span {
+      text-align: center;
+      color: var(--color-sand);
+      font-size: 3.3rem;
 
-  .category-title-wrapper .category,
-  .category-title-wrapper .locations,
-  .category-title-wrapper .date-label {
-    color: var(--color-sand);
-    font-size: 0.7rem;
+      @include mobile {
+        font-size: 4rem;
+      }
 
-    @include mobile {
-      font-size: 1.2rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      display: block;
+      word-spacing: -0.4em;
+      -webkit-text-stroke-color: var(--color-brown);
+      -webkit-text-stroke-width: 1px;
     }
-
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-align: center;
-    word-spacing: -0.4em;
   }
 
   .locations,
   .when .black-label {
     color: var(--color-sand);
+  }
+
+  .locations {
+    @include mobile {
+      padding: 0 1rem;
+    }
   }
 }
 
@@ -634,6 +640,7 @@ em {
 
     .logo {
       padding: 0.5rem 1rem;
+      padding-bottom: 3rem;
 
       &:nth-child(1),
       &:nth-child(2),
@@ -715,6 +722,15 @@ em {
           padding-top: 10vw;
         }
       }
+
+      &#logo-id-4038 {
+        width: 25%;
+
+        @include mobile {
+          width: 50% !important;
+          padding-top: 10vw;
+        }
+      }      
     }
   }
 }

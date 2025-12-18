@@ -540,6 +540,7 @@ em {
 }
 .prefooter .logos .logo {
   padding: 0.5rem 1rem;
+  padding-bottom: 3rem;
 }
 .prefooter .logos .logo:nth-child(1), .prefooter .logos .logo:nth-child(2), .prefooter .logos .logo:nth-child(3), .prefooter .logos .logo:nth-child(4), .prefooter .logos .logo:nth-child(5) {
   padding: 0;
@@ -608,6 +609,15 @@ em {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .prefooter .logos .logo#logo-id-3760 {
+    width: 50% !important;
+    padding-top: 10vw;
+  }
+}
+.prefooter .logos .logo#logo-id-4038 {
+  width: 25%;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .prefooter .logos .logo#logo-id-4038 {
     width: 50% !important;
     padding-top: 10vw;
   }
@@ -3610,23 +3620,6 @@ body.slug-programme .template-programme .discover.programme-wrapper .programme-c
 .template-programme .discover.programme-wrapper .programme-container .category-title-wrapper {
   gap: 0.35rem;
 }
-.template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .title span {
-  text-align: center;
-  color: var(--color-sand);
-  font-size: 3.3rem;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  display: block;
-  word-spacing: -0.4em;
-  -webkit-text-stroke-color: var(--color-brown);
-  -webkit-text-stroke-width: 1px;
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .title span {
-    font-size: 4rem;
-  }
-}
 .template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .category,
 .template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .locations,
 .template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .date-label {
@@ -3644,9 +3637,31 @@ body.slug-programme .template-programme .discover.programme-wrapper .programme-c
     font-size: 1.2rem;
   }
 }
+.template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .title span {
+  text-align: center;
+  color: var(--color-sand);
+  font-size: 3.3rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  display: block;
+  word-spacing: -0.4em;
+  -webkit-text-stroke-color: var(--color-brown);
+  -webkit-text-stroke-width: 1px;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .template-programme .discover.programme-wrapper .programme-container .category-title-wrapper .title span {
+    font-size: 4rem;
+  }
+}
 .template-programme .discover.programme-wrapper .programme-container .locations,
 .template-programme .discover.programme-wrapper .programme-container .when .black-label {
   color: var(--color-sand);
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .template-programme .discover.programme-wrapper .programme-container .locations {
+    padding: 0 1rem;
+  }
 }
 .template-programme .discover.programme-wrapper .programme-container .discover-item {
   position: relative;
@@ -3861,23 +3876,6 @@ body.slug-programme .discover.artists.programme-all #programme-overview-grid .it
 .discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper {
   gap: 0.35rem;
 }
-.discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .title span {
-  text-align: center;
-  color: var(--color-sand);
-  font-size: 3.3rem;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
-  display: block;
-  word-spacing: -0.4em;
-  -webkit-text-stroke-color: var(--color-brown);
-  -webkit-text-stroke-width: 1px;
-}
-@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .title span {
-    font-size: 4rem;
-  }
-}
 .discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .category,
 .discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .locations,
 .discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .date-label {
@@ -3895,9 +3893,31 @@ body.slug-programme .discover.artists.programme-all #programme-overview-grid .it
     font-size: 1.2rem;
   }
 }
+.discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .title span {
+  text-align: center;
+  color: var(--color-sand);
+  font-size: 3.3rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  display: block;
+  word-spacing: -0.4em;
+  -webkit-text-stroke-color: var(--color-brown);
+  -webkit-text-stroke-width: 1px;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .discover.artists.programme-all #programme-overview-grid .items-wrapper .category-title-wrapper .title span {
+    font-size: 4rem;
+  }
+}
 .discover.artists.programme-all #programme-overview-grid .items-wrapper .locations,
 .discover.artists.programme-all #programme-overview-grid .items-wrapper .when .black-label {
   color: var(--color-sand);
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .discover.artists.programme-all #programme-overview-grid .items-wrapper .locations {
+    padding: 0 1rem;
+  }
 }
 
 .template-programme .title-wrapper {
