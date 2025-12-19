@@ -55,7 +55,9 @@
 
         .minimal-nav__overlay {
             position: absolute;
-            inset: 0;
+            inset: -1rem;
+            width: calc(100% + 2rem);
+            height: calc(100% + 2rem);
             z-index: 9999;
             border: 2px solid transparent;
             pointer-events: auto;
@@ -63,6 +65,10 @@
             touch-action: manipulation;
             cursor: pointer;
             transition: transform 0.3s ease;
+        }
+
+        body.menu-expanded & .minimal-nav__overlay {
+            pointer-events: none;
         }
 
         .minimal-nav__overlay--active {

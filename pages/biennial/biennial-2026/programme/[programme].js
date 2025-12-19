@@ -33,6 +33,22 @@ const getArtistCountClass = (count) => {
   return "more-than-four-artists"
 }
 
+const getTitleLengthClass = (title) => {
+  if (typeof title !== "string") {
+    return null
+  }
+
+  const length = title.trim().length
+
+  if (length <= 10) {
+    return "title-10-chars"
+  }
+  if (length <= 20) {
+    return "title-11-20-chars"
+  }
+  return "title-more-than-20-chars"
+}
+
 const ProgrammeItem = ({
   page,
   global,
@@ -1093,7 +1109,15 @@ const ProgrammeItem = ({
         <div className="event-layout__header title-wrapper">
           {page?.attributes?.title && (
             <div className="event-layout__header-inner">
-              <h1 className="event-layout__title page-title">
+              <h1
+                className={[
+                  "event-layout__title",
+                  "page-title",
+                  getTitleLengthClass(page.attributes.title),
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
                 {page.attributes.title}
               </h1>
               {pageSubtitle && (

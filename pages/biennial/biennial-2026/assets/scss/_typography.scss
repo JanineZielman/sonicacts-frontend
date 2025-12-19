@@ -21,12 +21,28 @@
   }
 }
 
+@mixin text-stroke($width: 0.75px, $color: var(--color-brown)) {
+  -webkit-text-stroke-color: $color;
+  text-stroke-color: $color;
+  -webkit-text-stroke-width: $width;
+  text-stroke-width: $width;
+}
+
 @mixin headline-h2 {
   font-family: 'BSTBazaineMono', monospace;
   font-size: 12rem;
 
+  &.title-more-than-20-chars {
+      font-size: 6rem !important;
+      // /biennial/biennial-2026/programme/nothing-will-remain-other-than-the-thorn-lodged-in-the-throat-of-this-world
+  }
+
   @include mobile {
     font-size: 4.5rem !important;
+
+    &.title-more-than-20-chars {
+      font-size: 2.5rem !important;
+    }
   }
 
   line-height: 0.9;
