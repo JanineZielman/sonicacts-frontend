@@ -322,7 +322,7 @@ const CommunityItem = ({
                     } else if (sameMonth) {
                       dateLabel = `${Moment(startDate).format("D")}–${Moment(endDate).format("D MMM")}`
                     } else {
-                      dateLabel = `${Moment(startDate).format("D MMM")} - ${Moment(endDate).format("D MMM")}`
+                      dateLabel = `${Moment(startDate).format("D MMM")} – ${Moment(endDate).format("D MMM")}`
                     }
                   }
 
@@ -381,20 +381,14 @@ const CommunityItem = ({
                             </div>
                           </div>
 
-                          {dateLabel && (
-                            <div className="single-artist-timing">
-                              <div className="single-artist-timing__date">
-                                {dateLabel}
-                              </div>
-                              {timeLabel && (
-                                <div className="single-artist-timing__time">
-                                  {timeLabel}
-                                </div>
-                              )}
-                            </div>
-                          )}
-
                           <div className="category-title-wrapper">
+                            {dateLabel && (
+                              <div className="single-artist-timing">
+                                <div className="single-artist-timing__date">
+                                  {timeLabel ? `${dateLabel}, ${timeLabel}` : dateLabel}
+                                </div>
+                              </div>
+                            )}
                             <div className="title">
                               {attributes?.title}
                             </div>

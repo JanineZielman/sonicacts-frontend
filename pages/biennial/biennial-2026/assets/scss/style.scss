@@ -331,45 +331,51 @@ $grid-columns: 12;
 
   .category-title-wrapper {
     gap: 0.35rem;
-  }
 
-  .category-title-wrapper .title span {
-    text-align: center;
-    color: var(--color-sand);
-    font-size: 3.3rem;
+    .category,
+    .locations,
+    .date-label {
+      color: var(--color-sand);
+      font-size: 0.7rem;
 
-    @include mobile {
-      font-size: 4rem;
+      @include mobile {
+        font-size: 1.2rem;
+      }
+
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      word-spacing: -0.4em;
     }
 
-    line-height: 1;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-    display: block;
-    word-spacing: -0.4em;
-    -webkit-text-stroke-color: var(--color-brown);
-    -webkit-text-stroke-width: 1px;
-  }
+    .title span {
+      text-align: center;
+      color: var(--color-sand);
+      font-size: 3.3rem;
 
-  .category-title-wrapper .category,
-  .category-title-wrapper .locations,
-  .category-title-wrapper .date-label {
-    color: var(--color-sand);
-    font-size: 0.7rem;
+      @include mobile {
+        font-size: 4rem;
+      }
 
-    @include mobile {
-      font-size: 1.2rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      display: block;
+      word-spacing: -0.4em;
+      -webkit-text-stroke-color: var(--color-brown);
+      -webkit-text-stroke-width: 1px;
     }
-
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-align: center;
-    word-spacing: -0.4em;
   }
 
   .locations,
   .when .black-label {
     color: var(--color-sand);
+  }
+
+  .locations {
+    @include mobile {
+      padding: 0 1rem;
+    }
   }
 }
 
@@ -634,6 +640,7 @@ em {
 
     .logo {
       padding: 0.5rem 1rem;
+      padding-bottom: 3rem;
 
       &:nth-child(1),
       &:nth-child(2),
@@ -715,6 +722,15 @@ em {
           padding-top: 10vw;
         }
       }
+
+      &#logo-id-4038 {
+        width: 25%;
+
+        @include mobile {
+          width: 50% !important;
+          padding-top: 10vw;
+        }
+      }      
     }
   }
 }
@@ -857,7 +873,7 @@ em {
     padding: 2rem 2rem 7rem 2rem;
 
     @include mobile {
-      padding: 1rem 1rem 5rem 1rem;
+      padding: 4rem 1rem 5rem 1rem;
     }
 
     min-height: 100vh;
@@ -978,6 +994,10 @@ em {
     padding-top: 0rem;
     padding-bottom: 1.5rem;
 
+    @include mobile {
+      padding-bottom: 2.5rem;
+    }
+
     .single-artist-socials__heading {
       margin: 0 0 1rem;
       font-size: 1.125rem;
@@ -1037,6 +1057,10 @@ em {
       position: sticky;
       top: 8rem;
       align-self: start;
+    }
+
+    @include mobile() {
+      padding-bottom: 1rem;
     }
 
     .discover {
@@ -1199,6 +1223,11 @@ em {
 
     .single-artist-timing {
       margin-top: 0.75rem;
+      
+      @include mobile() {
+        margin-top: 0.25rem;
+      }
+
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
@@ -1208,7 +1237,8 @@ em {
       &__date {
         font-weight: 600;
         text-align: center;
-        font-size: 1rem;
+        font-size: 0.85rem;
+        word-spacing: -0.2em;
       }
 
       &__time {
@@ -2011,6 +2041,14 @@ body {
   display: flex;
   flex-direction: column;
 
+  @include mobile() {
+    position: absolute;
+    left: auto;
+    right: 1rem;
+    top: 0.5rem;
+    flex-direction: row;
+  }
+
   color: var(--color-pink);
 
   body.slug-timetable & {
@@ -2030,6 +2068,11 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 0.35rem;
+    @include mobile {
+      flex-direction: row;
+      padding-left: 1rem;
+      height: 2rem;
+    }
   }
 
   .social-channel {
@@ -2038,6 +2081,11 @@ body {
     grid-auto-rows: 1fr;
     gap: 0.35rem;
     padding: 0 0 0.4rem 0;
+
+    @include mobile {
+      display: flex;
+      gap: 1rem;
+    }
   }
 
   .social-item {
@@ -2053,6 +2101,11 @@ body {
       color 0.3s ease;
     width: 2.5rem;
     height: 2.5rem;
+
+    @include mobile {
+      width: 2rem;
+      height: 2rem;
+    }
     aspect-ratio: 1;
 
     &:hover,
@@ -2124,7 +2177,8 @@ body {
     line-height: 1.2;
 
     @include mobile {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
+      margin-left: 0.5rem;
     }
   }
 
@@ -2151,7 +2205,7 @@ body {
     line-height: 1.2;
 
     @include mobile {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -2383,6 +2437,11 @@ body {
 
 .discover.artists .subtitle h1 {
   margin: 1rem 1rem 3rem 1rem;
+  
+  @include mobile() {
+    margin-bottom: 1rem;
+  }
+
   font-size: 2rem;
   @include font-bazaine;
   font-variation-settings: "wght" 200;
@@ -3097,6 +3156,7 @@ body {
       }
     }
 
+
     .programme-container {
       --programme-card-gap: 0.4rem;
       --programme-card-padding: 1rem;
@@ -3109,7 +3169,7 @@ body {
       @include mobile {
         grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 0.35rem;
-        padding: 1rem;
+        padding: 0;
       }
 
       &:empty {
@@ -3144,6 +3204,32 @@ body {
           letter-spacing: -0.05em;
           word-spacing: -0.2em;
           line-height: 0.9;
+          * {
+            font-size: 3rem;
+
+            -webkit-text-stroke-color: var(--color-brown);
+            -webkit-text-stroke-width: 1px;
+            letter-spacing: -0.05em;
+            word-spacing: -0.2em;
+            line-height: 0.9;
+            font-family: "BSTBazaineMono", "Courier", monospace;
+
+            text-wrap: balance;
+          }
+
+          @include mobile() {
+            font-size: 1.5rem;
+            -webkit-text-stroke-width: 0.05rem;
+            line-height: 1.4;
+            word-spacing: -0.3rem;
+            * {
+              font-size: 1.5rem;
+              -webkit-text-stroke-width: 0.05rem;
+              line-height: 1.4;
+              word-spacing: -0.3rem;
+              font-family: "BSTBazaineMono", "Courier", monospace;
+            }
+          }
 
           body.programme-overview &,
           #programme-overview-grid & {
@@ -3420,7 +3506,26 @@ body {
         border-radius: 1rem;
       }
     }
+
+    &.primary-when-where .day-programme {
+      .discover-container.programme-container.sub-programme-container {
+        @include mobile {
+          padding: 0.5rem 4.5rem 1rem 4.5rem; //top location container /biennial/biennial-2026/programme/exhibition-2026?preview=true
+        }
+      }
+    }
+
+    .discover-container.programme-container.sub-programme-container {
+      .day-programme {
+        .discover-container.programme-container.sub-programme-container {
+          padding: 3rem 1rem 3rem 1rem;
+        }
+      }
+    }
+    
+    
   }
+
 }
 
 .single-artist-layout__related {
@@ -4645,6 +4750,11 @@ body.slug-timetable {
       --calendar-highlight: var(--color-pink);
 
       position: fixed;
+      
+      @include mobile {
+        position: relative;
+      }
+
       top: 1rem;
       right: 1rem;
       width: 18rem;
@@ -4653,20 +4763,49 @@ body.slug-timetable {
       background: var(--calendar-surface);
       border: 1px solid var(--calendar-ink);
       border-radius: 1rem;
-      padding: 1rem 1rem 1.25rem;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      z-index: 50;
+      padding: 1rem 1rem 1rem;
+      z-index: 500;
+      
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+
+      .timetable-sidebar__inner {
+        position: relative;
+        height: 100%;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        @include mobile {
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 82%,
+            rgba(0, 0, 0, 0) 100%
+          );
+          mask-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 82%,
+            rgba(0, 0, 0, 0) 100%
+          );
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+        }
+
+      }
 
       @include mobile {
         position: relative;
         top: 0;
         right: auto;
         width: calc(100% - 2rem);        
-        max-height: 20rem;
+        max-height: 22rem;
         padding-right: 1rem;
         margin: 0 auto 2rem auto;
-        overflow: scroll;
+        min-height: 0;
       }
     }
 
@@ -4722,6 +4861,9 @@ body.slug-timetable {
       letter-spacing: -0.04rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
       padding: 0;
+      @include mobile {
+        font-size: 1rem;
+      }
 
       &::after {
         content: "";
@@ -4903,11 +5045,11 @@ body.slug-timetable {
         left: 63vw;
         top: 0.25rem !important;
         z-index: 999;
-        width: 2rem;
-        height: 2rem;
+        width:  1.6rem;
+        height: 1.6rem;
         border-radius: 100%;
 
-        border: 1px solid var(--color-brown);
+        border: 0px solid transparent;
         background: var(--color-pink);
         color: var(--color-brown);
 
@@ -4917,7 +5059,8 @@ body.slug-timetable {
 
         cursor: pointer;
 
-        font-size: 1.2rem;
+        font-size: 1rem;
+        line-height: 0;
         font-weight: 700;
         font-family: 'BSTBazaineMono';
 
@@ -5725,6 +5868,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
 
   @include mobile {
     left: 1rem;
+    display: none;
   }
 
   top: 1.1rem;
@@ -5814,10 +5958,11 @@ body.scrolled #frontpage-aqua-03 {
 #frontpage-aqua-01 {
   @include mobile {
     opacity: 1;
-    width: 95vw;
+    width: 180vw;
+
     height: auto;
     left: 0;
-    top: 0;
+    top: -4rem;
     position: fixed;
     transform: scale(-100%, 1);
   }
@@ -6230,6 +6375,10 @@ body.slug-about.almost-at-the-bottom #aqua-03 {
       appearance: none;
       overflow: hidden;
 
+      @include mobile {
+        margin-bottom: 0.5rem;
+      }
+
       img {
         display: block;
         width: 100%;
@@ -6303,6 +6452,9 @@ body.slug-about.almost-at-the-bottom #aqua-03 {
       white-space: nowrap;
 
       transform: translateY(-1rem);
+      @include mobile {
+        transform: translateY(-0.6rem);
+      }
 
       @include mono-s;
       color: var(--color-brown);
@@ -6344,6 +6496,10 @@ body.slug-about.almost-at-the-bottom #aqua-03 {
       font-size: 1.5rem;
       font-style: normal;
       padding: 0.5rem 0 0.75rem 0;
+      @include mobile {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
 
       * {
         font-style: normal;
@@ -6407,6 +6563,10 @@ body.slug-about.almost-at-the-bottom #aqua-03 {
         letter-spacing: 0.1rem;
         font-family: "BSTBazaineMono";
         font-size: 0.8rem;
+        @include mobile {
+          font-size: 1rem;
+          word-spacing: -0.4em;
+        }
       }
     }
   }
@@ -6812,6 +6972,12 @@ body.slug-programme {
 
   .event-layout__header.title-wrapper {
     width: calc(100% - 6rem);
+
+    @include mobile() {
+      width: calc(100%);
+      padding-top: 4rem;
+    }
+
     position: relative;
     left: 0;
     top: 0;
@@ -6847,7 +7013,7 @@ body.slug-programme {
       padding: 2rem 4rem;
 
       @include mobile {
-        padding: 2rem 1rem;
+        padding: 0rem 1rem;
         margin: 0 1rem;
       }
 
@@ -6875,33 +7041,35 @@ body.slug-programme {
           rgba(0, 0, 0, 0) 100%);
     }
 
-    .programme-mobile-expander {
-      display: none;
+      .programme-mobile-expander {
+        display: none;
 
-      @include mobile {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 4rem;
-        height: 4rem;
-        margin: -2rem auto 1rem;
-        border-radius: 999px;
-        border: 2px solid var(--color-pink);
-        background: transparent;
-        font-size: 3rem;
-        font-weight: 200;
-        cursor: pointer;
-        transition: transform 0.2s ease;
+        @include mobile {
+          display: flex;
+          width: 3rem;
+          height: 3rem;
+          margin: -2rem auto 3.5rem;
+          border-radius: 999px;
+          border: none;
+          background: var(--color-pink);
+          position: relative;
+          cursor: pointer;
+          transition: transform 0.2s ease;
 
-        span {
-          line-height: 1;
-          color: var(--color-pink);
-          -webkit-text-stroke: 1px var(--color-brown);
-        }
+          span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: var(--color-brown);
+          }
 
-        &:hover,
-        &:focus {
-          transform: scale(1.05);
+          &:hover,
+          &:focus {
+            transform: scale(1.05);
         }
       }
     }
@@ -6950,6 +7118,10 @@ body.slug-programme {
           display: block;
           text-align: center;
           padding: 1rem 0 0.5rem 0;
+          
+          h1 {
+            font-size: 1rem;
+          }
         }
 
         .day-programme {
@@ -6967,6 +7139,12 @@ body.slug-programme {
             display: flex;
             height: auto;
             min-height: 8rem;
+
+            width: calc(70% - 0.1rem) !important;    
+
+            .item-wrapper a .category-title-wrapper .title {
+              font-size: 1.5rem;
+            }
           }
         }
       }
@@ -7108,6 +7286,9 @@ body.slug-programme {
 
             .discover-item {
               width: calc(50% - 1rem);
+              @include mobile() {
+                width: calc(50% - 0.1rem);
+              }
               border-radius: 2rem;
               display: flex;
               height: auto;
@@ -7131,35 +7312,39 @@ body.slug-programme {
                 .when-where-details {
                   display: flex;
                   gap: 0rem;
-                  flex-direction: column;
-                  padding-top: 1rem;
-                  color: var(--color-pink);
-                  -webkit-text-stroke-width: 0.5px;
-                  -webkit-text-stroke-color: var(--color-brown);
+	                  flex-direction: column;
+	                  padding-top: 1rem;
+	                  color: var(--color-pink);
+	                  @include text-stroke(0.75px, var(--color-brown));
 
-                  .when {
-                    span {
-                      text-align: center;
-                      display: block;
-                      color: inherit;
-                      -webkit-text-stroke-width: inherit;
-                      -webkit-text-stroke-color: inherit;
-                    }
-                  }
+	                  .when {
+	                    span {
+	                      text-align: center;
+	                      display: block;
+	                      color: inherit;
+	                      -webkit-text-stroke-width: inherit;
+	                      -webkit-text-stroke-color: inherit;
+	                    }
+	                  }
 
-                  .time {
-                    text-align: center;
-                    color: inherit;
-                    -webkit-text-stroke-width: inherit;
-                    -webkit-text-stroke-color: inherit;
-                  }
+	                  .time {
+	                    text-align: center;
+	                    color: inherit;
+	                    -webkit-text-stroke-width: inherit;
+	                    -webkit-text-stroke-color: inherit;
 
-                  .locations {
-                    text-align: center;
-                    color: inherit;
-                    -webkit-text-stroke-width: inherit;
-                    -webkit-text-stroke-color: inherit;
-                  }
+	                    span {
+	                      -webkit-text-stroke-width: inherit;
+	                      -webkit-text-stroke-color: inherit;
+	                    }
+	                  }
+
+	                  .locations {
+	                    text-align: center;
+	                    color: inherit;
+	                    -webkit-text-stroke-width: inherit;
+	                    -webkit-text-stroke-color: inherit;
+	                  }
                 }
 
                 .doors {
@@ -7167,6 +7352,8 @@ body.slug-programme {
                   padding-top: 0rem;
 
                   span {
+                    display: block;
+                    padding-top: 0.5rem;
                     font-size: 1.4rem;
                     letter-spacing: 0;
                     color: var(--color-pink);
@@ -7194,6 +7381,7 @@ body.slug-programme {
                     -webkit-text-stroke-width: 0.5px;
                     -webkit-text-stroke-color: var(--color-brown);
                     margin: 0;
+                    text-wrap: balance;
                   }
                 }
 
@@ -7282,6 +7470,9 @@ body.slug-programme .when .black-label,
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 3rem;
+  @include mobile {
+    margin-bottom: 3rem;
+  }
 
   display: flex;
   justify-content: center;

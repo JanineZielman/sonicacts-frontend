@@ -33,6 +33,40 @@ const getArtistCountClass = (count) => {
   return "more-than-four-artists"
 }
 
+const getTitleLengthClass = (title) => {
+  if (typeof title !== "string") {
+    return null
+  }
+
+  const length = title.trim().length
+
+  if (length <= 10) {
+    return "title-10-chars"
+  }
+  if (length <= 20) {
+    return "title-11-20-chars"
+  }
+  return "title-more-than-20-chars"
+}
+
+const normalizeLocationTitle = (title) => {
+  if (typeof title !== "string") {
+    return ""
+  }
+
+  const trimmed = title.trim()
+  if (!trimmed) {
+    return ""
+  }
+
+  const lower = trimmed.toLowerCase()
+  if (lower.includes("w139 tours")) {
+    return "W139"
+  }
+
+  return trimmed
+}
+
 const ProgrammeItem = ({
   page,
   global,
@@ -314,7 +348,7 @@ const ProgrammeItem = ({
       : []
   const primaryLocationLabel = locationEntries
     .map((loc) => {
-      const title = loc?.attributes?.title?.trim()
+      const title = normalizeLocationTitle(loc?.attributes?.title)
       const subtitle = loc?.attributes?.subtitle?.trim()
       if (!title) {
         return null
@@ -322,6 +356,7 @@ const ProgrammeItem = ({
       return subtitle ? `${title} – ${subtitle}` : title
     })
     .filter(Boolean)
+    .filter((value, index, self) => self.indexOf(value) === index)
     .join(", ")
 
   const parseWhenWhereDate = (value) => {
@@ -1090,7 +1125,15 @@ const ProgrammeItem = ({
         <div className="event-layout__header title-wrapper">
           {page?.attributes?.title && (
             <div className="event-layout__header-inner">
-              <h1 className="event-layout__title page-title">
+              <h1
+                className={[
+                  "event-layout__title",
+                  "page-title",
+                  getTitleLengthClass(page.attributes.title),
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
                 {page.attributes.title}
               </h1>
               {pageSubtitle && (
@@ -1222,8 +1265,9 @@ const ProgrammeItem = ({
                   const categoryLabel =
                     primaryTag?.attributes?.title || derivedCategory || null
                   const locationLabel = (entryAttributes.locations?.data || [])
-                    .map((loc) => loc?.attributes?.title?.trim())
+                    .map((loc) => normalizeLocationTitle(loc?.attributes?.title))
                     .filter(Boolean)
+                    .filter((value, index, self) => self.indexOf(value) === index)
                     .join(", ")
                   return (
                     <div

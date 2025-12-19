@@ -530,64 +530,66 @@ const Timetable = ({ global, festival, programmes, locRes }) => {
             </div>
             <div className="timetable-layout">
               <aside className="timetable-sidebar">
-                {calendarMonths.map((month) => (
-                  <div className="timetable-sidebar__month" key={month.key}>
-                    <div className="timetable-sidebar__header">
-                      {month.label}
-                    </div>
-                    <div className="timetable-sidebar__weekdays">
-                      {weekdaysShort.map((wd) => (
-                        <div
-                          key={`${month.key}-${wd}`}
-                          className="timetable-sidebar__weekday"
-                        >
-                          {wd}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="timetable-sidebar__days">
-                      {month.days.map((day, idx) =>
-                        day.type === "blank" ? (
+                <div className="timetable-sidebar__inner">
+                  {calendarMonths.map((month) => (
+                    <div className="timetable-sidebar__month" key={month.key}>
+                      <div className="timetable-sidebar__header">
+                        {month.label}
+                      </div>
+                      <div className="timetable-sidebar__weekdays">
+                        {weekdaysShort.map((wd) => (
                           <div
-                            key={`${month.key}-blank-${idx}`}
-                            className="timetable-sidebar__day timetable-sidebar__day--blank"
-                          />
-                        ) : (
-                          <button
-                            key={`${month.key}-${day.key}`}
-                            type="button"
-                            className={[
-                              "timetable-sidebar__day",
-                              day.clickable
-                                ? "timetable-sidebar__day--clickable"
-                                : "timetable-sidebar__day--disabled",
-                              day.type === "adjacent"
-                                ? "timetable-sidebar__day--adjacent"
-                                : null,
-                              day.eventCount > 0
-                                ? `timetable-sidebar__day--events-${Math.min(
-                                  day.eventCount,
-                                  4
-                                )}`
-                                : null,
-                            ]
-                              .filter(Boolean)
-                              .join(" ")}
-                            disabled={!day.clickable}
-                            onClick={() => handleDayClick(day)}
-                            aria-label={
-                              day.clickable
-                                ? `Go to ${day.key}`
-                                : `No events on ${day.key}`
-                            }
+                            key={`${month.key}-${wd}`}
+                            className="timetable-sidebar__weekday"
                           >
-                            {day.day}
-                          </button>
-                        )
-                      )}
+                            {wd}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="timetable-sidebar__days">
+                        {month.days.map((day, idx) =>
+                          day.type === "blank" ? (
+                            <div
+                              key={`${month.key}-blank-${idx}`}
+                              className="timetable-sidebar__day timetable-sidebar__day--blank"
+                            />
+                          ) : (
+                            <button
+                              key={`${month.key}-${day.key}`}
+                              type="button"
+                              className={[
+                                "timetable-sidebar__day",
+                                day.clickable
+                                  ? "timetable-sidebar__day--clickable"
+                                  : "timetable-sidebar__day--disabled",
+                                day.type === "adjacent"
+                                  ? "timetable-sidebar__day--adjacent"
+                                  : null,
+                                day.eventCount > 0
+                                  ? `timetable-sidebar__day--events-${Math.min(
+                                    day.eventCount,
+                                    4
+                                  )}`
+                                  : null,
+                              ]
+                                .filter(Boolean)
+                                .join(" ")}
+                              disabled={!day.clickable}
+                              onClick={() => handleDayClick(day)}
+                              aria-label={
+                                day.clickable
+                                  ? `Go to ${day.key}`
+                                  : `No events on ${day.key}`
+                              }
+                            >
+                              {day.day}
+                            </button>
+                          )
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </aside>
               <div className="timetable">
                 {renderDates.map((day, i) => {
