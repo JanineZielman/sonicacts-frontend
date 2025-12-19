@@ -5132,11 +5132,15 @@ body.slug-timetable .timetable-layout .timetable-sidebar {
   border-radius: 1rem;
   padding: 1rem 1rem 1rem;
   z-index: 50;
-  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-timetable .timetable-layout .timetable-sidebar {
+    position: relative;
+  }
 }
 body.slug-timetable .timetable-layout .timetable-sidebar .timetable-sidebar__inner {
   position: relative;

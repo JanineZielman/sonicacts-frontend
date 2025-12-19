@@ -4750,6 +4750,11 @@ body.slug-timetable {
       --calendar-highlight: var(--color-pink);
 
       position: fixed;
+      
+      @include mobile {
+        position: relative;
+      }
+
       top: 1rem;
       right: 1rem;
       width: 18rem;
@@ -4760,7 +4765,7 @@ body.slug-timetable {
       border-radius: 1rem;
       padding: 1rem 1rem 1rem;
       z-index: 50;
-      position: relative;
+      
       display: flex;
       flex-direction: column;
       overflow: hidden;
