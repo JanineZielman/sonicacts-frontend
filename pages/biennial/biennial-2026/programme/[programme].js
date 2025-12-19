@@ -49,6 +49,24 @@ const getTitleLengthClass = (title) => {
   return "title-more-than-20-chars"
 }
 
+const normalizeLocationTitle = (title) => {
+  if (typeof title !== "string") {
+    return ""
+  }
+
+  const trimmed = title.trim()
+  if (!trimmed) {
+    return ""
+  }
+
+  const lower = trimmed.toLowerCase()
+  if (lower.includes("w139 tours")) {
+    return "W139"
+  }
+
+  return trimmed
+}
+
 const ProgrammeItem = ({
   page,
   global,
@@ -330,17 +348,15 @@ const ProgrammeItem = ({
       : []
   const primaryLocationLabel = locationEntries
     .map((loc) => {
-      const title = loc?.attributes?.title?.trim()
+      const title = normalizeLocationTitle(loc?.attributes?.title)
       const subtitle = loc?.attributes?.subtitle?.trim()
       if (!title) {
-        return null
-      }
-      if (title === "W139 Tours") {
         return null
       }
       return subtitle ? `${title} – ${subtitle}` : title
     })
     .filter(Boolean)
+    .filter((value, index, self) => self.indexOf(value) === index)
     .join(", ")
 
   const parseWhenWhereDate = (value) => {
@@ -1249,8 +1265,9 @@ const ProgrammeItem = ({
                   const categoryLabel =
                     primaryTag?.attributes?.title || derivedCategory || null
                   const locationLabel = (entryAttributes.locations?.data || [])
-                    .map((loc) => loc?.attributes?.title?.trim())
+                    .map((loc) => normalizeLocationTitle(loc?.attributes?.title))
                     .filter(Boolean)
+                    .filter((value, index, self) => self.indexOf(value) === index)
                     .join(", ")
                   return (
                     <div
