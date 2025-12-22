@@ -177,7 +177,7 @@ em {
     z-index: 9999;
     border: 2px solid transparent;
     pointer-events: auto;
-    background: transparent;
+    background: rgba(255, 105, 180, 0.18);
     touch-action: manipulation;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -1770,6 +1770,12 @@ body.slug-programme.sidebar-has-content .template-single-artist .single-artist-l
     font-size: 1rem;
   }
 }
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .article.visit .mapboxgl-popup-content .popup-inner .opening-times strong,
+.article.visit .mapboxgl-popup-content .popup-inner .additional-info strong {
+    font-size: 0.9rem;
+  }
+}
 .article.visit .mapboxgl-popup-content .popup-inner .opening-times p,
 .article.visit .mapboxgl-popup-content .popup-inner .additional-info p {
   margin: 0 0 0.75rem;
@@ -1993,14 +1999,17 @@ body {
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #social-homelink {
     position: absolute;
-    left: auto;
-    right: 1rem;
+    right: auto;
     top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     flex-direction: row;
   }
 }
-body.slug-timetable #social-homelink {
-  display: none;
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+  body.slug-timetable #social-homelink {
+    display: none;
+  }
 }
 #social-homelink a {
   color: var(--color-pink);
@@ -3322,9 +3331,14 @@ body.slug-programme .discover.programme-wrapper .programme-container .category-t
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.9;
   text-align: center;
+  opacity: 0.9;
   color: var(--color-brown);
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .discover.programme-wrapper .programme-container .category-title-wrapper .locations, .discover.sub .programme-container .category-title-wrapper .locations {
+    font-size: 0.9rem;
+  }
 }
 .discover.programme-wrapper .programme-container .category-title-wrapper .category,
 .discover.programme-wrapper .programme-container .category-title-wrapper .date-label, .discover.sub .programme-container .category-title-wrapper .category,
@@ -3336,10 +3350,18 @@ body.slug-programme .discover.programme-wrapper .programme-container .category-t
   text-align: center;
   font-weight: 600;
 }
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .discover.programme-wrapper .programme-container .category-title-wrapper .category,
+.discover.programme-wrapper .programme-container .category-title-wrapper .date-label, .discover.sub .programme-container .category-title-wrapper .category,
+.discover.sub .programme-container .category-title-wrapper .date-label {
+    font-size: 0.9rem;
+  }
+}
 .discover.programme-wrapper .programme-container .category-title-wrapper .title, .discover.sub .programme-container .category-title-wrapper .title {
-  font-size: 1rem;
+  font-size: 1.4rem;
   line-height: 1.35;
   letter-spacing: 0.01em;
+  word-spacing: -0.05em;
   font-variation-settings: "wght" 420;
   color: var(--color-brown);
   position: relative;
@@ -4048,12 +4070,14 @@ body.slug-programme .discover.artists.programme-all #programme-overview-grid .it
 }
 body.slug-programme .template-programme .title-wrapper .page-title {
   font-size: 10rem !important;
-  left: 1rem;
-  top: 1rem;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-programme .template-programme .title-wrapper .page-title {
     font-size: 4.5rem !important;
+    padding: 6rem 1rem 2.5rem 1rem;
+    margin: 1.5rem auto;
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -5084,7 +5108,12 @@ body.slug-timetable .minimal-nav__overlay {
   display: none;
 }
 body.slug-timetable .social-channel {
-  display: none;
+  display: flex !important;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+  background: transparent;
 }
 body.slug-timetable .page-title {
   color: var(--color-pink);
@@ -5094,6 +5123,15 @@ body.slug-timetable .page-title {
   transform: none;
   display: block;
   margin: 0 0 1rem 0;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-timetable .page-title {
+    font-size: 4.5rem !important;
+    padding: 6rem 1rem 2.5rem 1rem;
+    margin: 1.5rem auto;
+    width: 100%;
+    text-align: center;
+  }
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .main-container {
@@ -5131,7 +5169,7 @@ body.slug-timetable .timetable-layout .timetable-sidebar {
   border: 1px solid var(--calendar-ink);
   border-radius: 1rem;
   padding: 1rem 1rem 1rem;
-  z-index: 50;
+  z-index: 500;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -5147,12 +5185,16 @@ body.slug-timetable .timetable-layout .timetable-sidebar .timetable-sidebar__inn
   height: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, rgba(0, 0, 0, 0) 100%);
-  mask-image: linear-gradient(to bottom, black 0%, black 82%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-timetable .timetable-layout .timetable-sidebar .timetable-sidebar__inner {
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 82%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .timetable-layout .timetable-sidebar {
@@ -7064,19 +7106,42 @@ body.slug-about {
 body.slug-about .intro-text {
   display: none;
 }
+body.slug-about .title-wrapper {
+  position: static;
+  left: auto;
+  bottom: auto;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-about .title-wrapper {
+    margin: 1.5rem auto 1.5rem;
+  }
+}
 body.slug-about .page-title {
-  position: fixed;
-  bottom: 0.5rem;
-  left: 50vw;
+  position: static;
   font-family: "BSTBazaineMono", monospace;
   font-size: 2rem;
   line-height: 1.15;
   word-spacing: -0.25em;
   letter-spacing: -0.1rem;
   text-wrap: balance;
-  font-size: 4rem;
+  font-size: 3rem;
   color: var(--color-pink);
-  display: none;
+  display: block;
+  margin: 0 1rem 1.5rem;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-about .page-title {
+    font-size: 4.5rem !important;
+    padding: 6rem 1rem 2.5rem 1rem;
+    margin: 1.5rem auto;
+    width: 100%;
+    text-align: center;
+    margin: 1.5rem auto 1.5rem;
+  }
 }
 body.slug-artists body.slug-about #sonic-acts #sonic svg path, body.slug-programme body.slug-about #sonic-acts #sonic svg path {
   fill: var(--color-pink);
@@ -7119,10 +7184,14 @@ body.slug-programme .event-layout__header.title-wrapper {
     padding-top: 4rem;
   }
 }
-body.slug-programme .title-wrapper h1.page-title {
-  padding: 1rem;
-  position: relative;
-  left: 0;
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-programme .event-layout__header .page-title {
+    font-size: 4.5rem !important;
+    padding: 6rem 1rem 2.5rem 1rem;
+    margin: 1.5rem auto;
+    width: 100%;
+    text-align: center;
+  }
 }
 body.slug-programme .event-layout__subtitle {
   padding: 0 1rem 1rem 1rem;
@@ -7254,7 +7323,7 @@ body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes
   width: calc(70% - 0.1rem) !important;
 }
 body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .day-programme .discover-item .item-wrapper a .category-title-wrapper .title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 body.slug-programme .event-layout__grid .event-aside .discover.artists {
   background-color: transparent;
@@ -7501,6 +7570,11 @@ body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes
   text-align: center;
   font-weight: 600;
 }
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .item-wrapper a .category-title-wrapper .date-label {
+    font-size: 0.9rem;
+  }
+}
 body.slug-programme .event-layout__grid .event-aside .discover.parent-programmes .item-wrapper a .category-title-wrapper .title {
   font-size: 1rem;
   line-height: 1.35;
@@ -7615,5 +7689,3 @@ body.slug-programme .title-wrapper h1.page-title {
   background-color: transparent !important;
   text-align: center;
 }
-
-/*# sourceMappingURL=biennial.css.map */
