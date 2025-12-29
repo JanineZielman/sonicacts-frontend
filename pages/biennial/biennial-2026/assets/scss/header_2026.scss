@@ -61,7 +61,7 @@
             z-index: 9999;
             border: 2px solid transparent;
             pointer-events: auto;
-            background: transparent;
+            background: rgba(255, 105, 180, 0.18); // visible overlay to verify coverage
             touch-action: manipulation;
             cursor: pointer;
             transition: transform 0.3s ease;

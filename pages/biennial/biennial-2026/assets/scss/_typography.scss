@@ -21,11 +21,39 @@
   }
 }
 
+@mixin label-xs {
+  font-size: 0.75rem;
+
+  @include mobile {
+    font-size: 0.9rem;
+  }
+}
+
+@mixin label-xs-upper {
+  @include label-xs;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 @mixin text-stroke($width: 0.75px, $color: var(--color-brown)) {
   -webkit-text-stroke-color: $color;
   text-stroke-color: $color;
   -webkit-text-stroke-width: $width;
   text-stroke-width: $width;
+}
+
+@mixin page-title-mobile-center {
+  font-size: 4.5rem !important;
+  padding: 6rem 1rem 2.5rem 1rem;
+  margin: 1.5rem auto;
+  width: 100%;
+  text-align: center;
+}
+
+// Tall mobile hero-style title
+@mixin page-title-mobile-hero {
+  @include page-title-mobile-center;
 }
 
 @mixin headline-h2 {

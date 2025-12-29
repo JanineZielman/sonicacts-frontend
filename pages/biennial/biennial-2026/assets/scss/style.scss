@@ -1807,7 +1807,7 @@ em {
           strong {
             display: block;
             @include mono-s;
-            font-size: 0.75rem;
+            @include label-xs;
             margin-bottom: 0.25rem;
           }
 
@@ -2043,16 +2043,22 @@ body {
 
   @include mobile() {
     position: absolute;
-    left: auto;
-    right: 1rem;
+    
+    right: auto;
     top: 0.5rem;
+
+    left: 50%;
+    transform: translateX(-50%);
+
     flex-direction: row;
   }
 
   color: var(--color-pink);
 
   body.slug-timetable & {
-    display: none;
+    @include desktop {
+      display: none;
+    }
   }
 
   a {
@@ -3426,28 +3432,24 @@ body {
         pointer-events: none;
 
         .locations {
-          font-size: 0.75rem;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+          @include label-xs-upper;
           opacity: 0.9;
-          text-align: center;
           color: var(--color-brown);
         }
 
         .category,
         .date-label {
           color: var(--color-brown);
-          font-size: 0.75rem;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          text-align: center;
+          @include label-xs-upper;
           font-weight: 600;
         }
 
         .title {
-          font-size: 1rem;
+          font-size: 1.4rem;
           line-height: 1.35;
           letter-spacing: 0.01em;
+          word-spacing: -0.05em;
+
           font-variation-settings: "wght" 420;
           color: var(--color-brown);
           position: relative;
@@ -3753,21 +3755,18 @@ body {
   z-index: 3;
 }
 
-.template-programme .title-wrapper .page-title {
-  color: inherit;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  .template-programme .title-wrapper .page-title {
+    color: inherit;
+    font-size: clamp(2.5rem, 6vw, 5rem);
 
-  body.slug-programme & {
-    font-size: 10rem !important;
+    body.slug-programme & {
+      font-size: 10rem !important;
 
-    @include mobile {
-      font-size: 4.5rem !important;
+      @include mobile {
+        @include page-title-mobile-center;
+      }
     }
-
-    left: 1rem;
-    top: 1rem;
   }
-}
 
 body.slug-programmeprogramme .category-title-wrapper::before,
 body.slug-programmeprogrammesub .category-title-wrapper::before {
@@ -4706,7 +4705,12 @@ body.slug-timetable {
   }
 
   .social-channel {
-    display: none;
+    display: flex !important;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+    background: transparent;
   }
 
   .page-title {
@@ -4717,6 +4721,9 @@ body.slug-timetable {
     transform: none;
     display: block;
     margin: 0 0 1rem 0;
+    @include mobile {
+      @include page-title-mobile-hero;
+    }
   }
 
   @include mobile {
@@ -6913,14 +6920,32 @@ body.slug-about {
     display: none;
   }
 
+  .title-wrapper {
+    position: static;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    text-align: center;
+
+    @include mobile {
+      margin: 1.5rem auto 1.5rem;
+    }
+  }
+
   .page-title {
-    position: fixed;
-    bottom: 0.5rem;
-    left: 50vw;
+    position: static;
     @include headline-h3;
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--color-pink);
-    display: none;
+    display: block;
+    margin: 0 1rem 1.5rem;
+
+    @include mobile {
+      @include page-title-mobile-hero;
+      margin: 1.5rem auto 1.5rem;
+    }
   }
 
   #sonic-acts #sonic {
@@ -6985,10 +7010,10 @@ body.slug-programme {
     padding: 1 1rem 1rem 1rem;
   }
 
-  .title-wrapper h1.page-title {
-    padding: 1rem;
-    position: relative;
-    left: 0;
+  .event-layout__header .page-title {
+    @include mobile {
+      @include page-title-mobile-center;
+    }
   }
 
   .event-layout__subtitle {
@@ -7143,7 +7168,7 @@ body.slug-programme {
             width: calc(70% - 0.1rem) !important;    
 
             .item-wrapper a .category-title-wrapper .title {
-              font-size: 1.5rem;
+              font-size: 1.4rem;
             }
           }
         }
@@ -7427,10 +7452,7 @@ body.slug-programme {
 
               .date-label {
                 color: var(--color-brown);
-                font-size: 0.75rem;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                text-align: center;
+                @include label-xs-upper;
                 font-weight: 600;
               }
 

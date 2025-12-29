@@ -151,6 +151,8 @@ export default class MyDocument extends Document {
              --------------------------------------------------------------- */}
           {isBiennial2026 && (
             <>
+              <meta name="theme-color" content="transparent" />
+
               <script defer src="/biennial/biennial-2026/assets/js/vanilla-tilt.js" />
 
 
