@@ -4689,6 +4689,10 @@ body.slug-programmeprogrammesub {
   }
 }
 
+#__next {
+  background: var(--color-grey);
+}
+
 body.slug-timetable {
   --timetable-location-width: 11rem;
   --timetable-location-width-mobile: 7.2rem;
