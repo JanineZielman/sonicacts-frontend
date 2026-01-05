@@ -4700,7 +4700,7 @@ body.slug-timetable {
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
 
-  background-color: transparent;
+  background-color: var(--color-brown);
 
   #__next {
     background-color: var(--color-brown);
@@ -5250,6 +5250,18 @@ body.slug-timetable {
       }
     }
   }
+}
+
+body.slug-timetable,
+body.artists-overview,
+body.programme-overview {
+  background-color: var(--color-brown);
+}
+
+body.slug-artist,
+body.slug-about,
+body.slug-tickets {
+  background-color: var(--color-grey);
 }
 
 body.artists-overview #__next,
