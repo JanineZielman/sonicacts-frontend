@@ -5386,7 +5386,9 @@ body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-track {
   background: var(--color-brown);
 }
 body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-thumb {
-  background: var(--color-pink);
+  @include desktop {
+    background: var(--color-pink);
+  }
   border-radius: 0.4rem;
 }
 body.slug-timetable .timetable .timetable-day__right:hover {

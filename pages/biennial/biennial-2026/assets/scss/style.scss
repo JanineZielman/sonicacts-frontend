@@ -4977,7 +4977,9 @@ body.slug-timetable {
       overflow-y: hidden;
       position: relative;
       display: flex;
-      scrollbar-color: var(--color-pink) var(--color-brown);
+      @include desktop {
+        scrollbar-color: var(--color-pink) var(--color-brown);
+      }
       scrollbar-width: thin;
 
       &::-webkit-scrollbar {
@@ -4985,11 +4987,15 @@ body.slug-timetable {
       }
 
       &::-webkit-scrollbar-track {
-        background: var(--color-brown);
+        @include desktop {
+          background: var(--color-brown);
+        }
       }
 
       &::-webkit-scrollbar-thumb {
-        background: var(--color-pink);
+        @include desktop {
+          background: var(--color-pink);
+        }
         border-radius: 0.4rem;
       }
 

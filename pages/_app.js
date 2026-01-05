@@ -27,6 +27,15 @@ const MyApp = ({ Component, pageProps }) => {
   const [loading, setLoading] = useState(true);
 
   const isBiennial2026 = router.pathname.startsWith("/biennial/biennial-2026");
+  const isBiennialTimetable =
+    router.pathname === "/biennial/biennial-2026/timetable";
+  const isBiennialArtist =
+    router.pathname === "/biennial/biennial-2026/artists/[artist]";
+  const themeColor = isBiennialTimetable
+    ? "#7a3800"
+    : isBiennialArtist
+      ? "#babadf"
+      : "transparent";
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 100);
@@ -77,6 +86,7 @@ const MyApp = ({ Component, pageProps }) => {
               type="text/css"
               href="/biennial.css"
             />
+            <meta name="theme-color" content={themeColor} key="theme-color" />
           </>
         }
       </Head>
