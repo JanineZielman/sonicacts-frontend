@@ -544,6 +544,7 @@ body {
   line-height: 1.14;
   letter-spacing: 0rem;
   color: var(--color-brown);
+  --mobile-nav-bottom: 1rem;
   font-variation-settings:
     "wght" 400,
     "ital" 0;
@@ -5860,7 +5861,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
   #sonic,
   #acts {
     position: fixed;
-    bottom: 1rem;
+    bottom: var(--mobile-nav-bottom, 1rem);
 
     height: var(--sonicLogoHeight);
     max-height: var(--sonicLogoHeight);
@@ -5870,7 +5871,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
     @include mobile {
       height: 22vw;
       max-height: 22vw;
-      bottom: 1rem;
+      bottom: var(--mobile-nav-bottom, 1rem);
     }
 
     body.slug-home & {
@@ -5880,7 +5881,6 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
       @include mobile {
         height: 42vw !important;
         max-height: 42vw !important;
-        bottom: 12.5rem !important;
         left: 1.5rem !important;
       }
     }
@@ -5905,7 +5905,6 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
       @include mobile {
         height: 22vw !important;
         max-height: 22vw !important;
-        bottom: 1rem !important;
       }
     }
 
@@ -6942,6 +6941,7 @@ body.slug-home {
   padding-top: 100vh;
   background-color: var(--color-brown);
   transition: padding-top 1.4s ease;
+  --mobile-nav-bottom: 12.5rem;
 
   &.scrolled {
     background-color: var(--color-grey);
@@ -6956,6 +6956,7 @@ body.slug-home #news {
 
 body.slug-home.has-scrolled {
   padding-top: 50vh;
+  --mobile-nav-bottom: 1rem;
 
   #news {
     opacity: 1;
