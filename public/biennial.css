@@ -5987,7 +5987,7 @@ html {
 body {
   height: auto;
   width: 100%;
-  background: var(--color-grey);
+  background: transparent;
 }
 
 body.frontpage-intro .intro-fade-target {
