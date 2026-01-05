@@ -4690,7 +4690,7 @@ body.slug-programmeprogrammesub {
 }
 
 #__next {
-  background: var(--color-grey);
+  background: transparent;
 }
 
 body.slug-timetable {
@@ -5250,6 +5250,17 @@ body.slug-timetable {
       }
     }
   }
+}
+
+body.artists-overview #__next,
+body.programme-overview #__next {
+  background-color: var(--color-brown);
+}
+
+body.slug-artist #__next,
+body.slug-about #__next,
+body.slug-tickets #__next {
+  background-color: var(--color-grey);
 }
 
 body.slug-visit {

@@ -5129,6 +5129,10 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
   }
 }
 
+#__next {
+  background: transparent;
+}
+
 body.slug-timetable {
   --timetable-location-width: 11rem;
   --timetable-location-width-mobile: 7.2rem;
@@ -5151,7 +5155,7 @@ body.slug-timetable .minimal-nav-container {
   transform-origin: right bottom;
 }
 body.slug-timetable .minimal-nav__overlay {
-  display: none;
+  display: block;
 }
 body.slug-timetable .social-channel {
   display: flex !important;
@@ -5376,20 +5380,28 @@ body.slug-timetable .timetable .timetable-day__right {
   overflow-y: hidden;
   position: relative;
   display: flex;
-  scrollbar-color: var(--color-pink) var(--color-brown);
   scrollbar-width: thin;
+}
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+  body.slug-timetable .timetable .timetable-day__right {
+    scrollbar-color: var(--color-pink) var(--color-brown);
+  }
 }
 body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar {
   width: 0.6rem;
 }
-body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-track {
-  background: var(--color-brown);
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+  body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-track {
+    background: var(--color-brown);
+  }
 }
 body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-thumb {
-  @include desktop {
+  border-radius: 0.4rem;
+}
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+  body.slug-timetable .timetable .timetable-day__right::-webkit-scrollbar-thumb {
     background: var(--color-pink);
   }
-  border-radius: 0.4rem;
 }
 body.slug-timetable .timetable .timetable-day__right:hover {
   scrollbar-width: auto;
@@ -5609,6 +5621,17 @@ body.slug-timetable .timetable .timetable-locations .location p {
 body.slug-timetable .timetable .timetable-locations .location.sub p {
   opacity: 0;
   padding-left: 2rem;
+}
+
+body.artists-overview #__next,
+body.programme-overview #__next {
+  background-color: var(--color-brown);
+}
+
+body.slug-artist #__next,
+body.slug-about #__next,
+body.slug-tickets #__next {
+  background-color: var(--color-grey);
 }
 
 body.slug-visit .visit__left-column {
@@ -5893,7 +5916,6 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background: #111;
 }
 
 #app {

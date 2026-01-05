@@ -37,6 +37,8 @@ const MyApp = ({ Component, pageProps }) => {
     router.pathname === "/biennial/biennial-2026/programme";
   const isBiennialInformation =
     router.pathname === "/biennial/biennial-2026/about";
+  const isBiennialTickets =
+    router.pathname === "/biennial/biennial-2026/tickets";
   const themeColor = isBiennialTimetable
     ? "#7a3800"
     : isBiennialArtistsOverview
@@ -46,6 +48,8 @@ const MyApp = ({ Component, pageProps }) => {
       : isBiennialArtist
         ? "#babadf"
       : isBiennialInformation
+        ? "#babadf"
+      : isBiennialTickets
         ? "#babadf"
         : "transparent";
 
@@ -65,6 +69,10 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
         {/* <link
           rel="shortcut icon"
           href={getStrapiMedia(global?.attributes?.favicon?.data?.attributes)}
