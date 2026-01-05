@@ -162,9 +162,24 @@ em {
     opacity: 1;
     color: var(--color-pink);
   }
+  body.menu-small #main-header * {
+    pointer-events: none;
+  }
+  body.menu-small #main-header .minimal-nav__overlay {
+    pointer-events: auto;
+  }
   body.menu-expanded #main-header {
     transform: scale(1);
     left: 23vw;
+  }
+  body.menu-expanded #main-header * {
+    pointer-events: none;
+  }
+  body.menu-expanded #main-header .minimal-nav__overlay {
+    pointer-events: auto;
+  }
+  body.menu-expanded.menu-links-ready #main-header * {
+    pointer-events: auto;
   }
   #main-header .minimal-nav {
     position: relative;
@@ -177,7 +192,7 @@ em {
     z-index: 9999;
     border: 2px solid transparent;
     pointer-events: auto;
-    background: rgba(255, 105, 180, 0.18);
+    background: transparent;
     touch-action: manipulation;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -258,6 +273,22 @@ em {
   body.slug-home.has-scrolled #main-header ul li a {
     opacity: 1;
     color: var(--color-pink);
+  }
+  body.slug-home.has-scrolled #main-header .minimal-nav__overlay {
+    display: block;
+  }
+  body.slug-home.has-scrolled.menu-expanded #main-header {
+    transform: scale(1);
+    left: 11vw;
+    right: auto;
+    width: 78vw;
+  }
+  body.slug-home.has-scrolled.menu-expanded #main-header .minimal-nav {
+    gap: 0.1rem;
+  }
+  body.slug-home.has-scrolled.menu-expanded #main-header ul li a {
+    opacity: 1;
+    color: var(--color-brown);
   }
   #main-header.click--active {
     transform: scale(1);
@@ -449,6 +480,12 @@ em {
     line-height: 1.1;
   }
 }
+html,
+body {
+  margin: 0;
+  background: transparent;
+}
+
 body {
   font-family: "BSTBazaineMono", "Courier", monospace;
   font-size: 1.4rem;
@@ -2105,6 +2142,7 @@ body.scrolled #social-homelink {
   font-family: "BSTBazaineMono", monospace;
   font-size: 0.7rem;
   color: var(--color-brown);
+  text-decoration: none;
   text-transform: uppercase;
   text-align: center;
   padding: 0.1rem 0.25rem;
@@ -4073,7 +4111,7 @@ body.slug-programme .template-programme .title-wrapper .page-title {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-programme .template-programme .title-wrapper .page-title {
-    font-size: 4.5rem !important;
+    font-size: 4.3rem !important;
     padding: 6rem 1rem 2.5rem 1rem;
     margin: 1.5rem auto;
     width: 100%;
@@ -4842,7 +4880,6 @@ body.scrolled .article .sidebar {
 }
 
 .slug-tickets {
-  padding-top: 10rem;
   position: relative;
 }
 .slug-tickets .tickets-aquarelle {
@@ -4877,6 +4914,12 @@ body.scrolled .article .sidebar {
   top: 1rem;
   bottom: auto;
   display: flex;
+  position: relative;
+}
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .slug-tickets .title-wrapper {
+    padding-top: 4rem;
+  }
 }
 .slug-tickets .tickets-container {
   display: flex;
@@ -5092,6 +5135,9 @@ body.slug-timetable {
   --timetable-row-height: 5rem;
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
+  background-color: transparent;
+}
+body.slug-timetable #__next {
   background-color: var(--color-brown);
 }
 body.slug-timetable .global-frontpage-visuals {
@@ -5126,7 +5172,7 @@ body.slug-timetable .page-title {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-timetable .page-title {
-    font-size: 4.5rem !important;
+    font-size: 4.3rem !important;
     padding: 6rem 1rem 2.5rem 1rem;
     margin: 1.5rem auto;
     width: 100%;
@@ -7135,7 +7181,7 @@ body.slug-about .page-title {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-about .page-title {
-    font-size: 4.5rem !important;
+    font-size: 4.3rem !important;
     padding: 6rem 1rem 2.5rem 1rem;
     margin: 1.5rem auto;
     width: 100%;
@@ -7186,7 +7232,7 @@ body.slug-programme .event-layout__header.title-wrapper {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-programme .event-layout__header .page-title {
-    font-size: 4.5rem !important;
+    font-size: 4.3rem !important;
     padding: 6rem 1rem 2.5rem 1rem;
     margin: 1.5rem auto;
     width: 100%;
@@ -7689,3 +7735,5 @@ body.slug-programme .title-wrapper h1.page-title {
   background-color: transparent !important;
   text-align: center;
 }
+
+/*# sourceMappingURL=biennial.css.map */

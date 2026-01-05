@@ -532,6 +532,12 @@ $grid-columns: 12;
   }
 }
 
+html,
+body {
+  margin: 0;
+  background: transparent;
+}
+
 body {
   font-family: "BSTBazaineMono", "Courier", monospace;
   font-size: 1.4rem;
@@ -2170,6 +2176,7 @@ body {
     font-family: "BSTBazaineMono", monospace;
     font-size: 0.7rem;
     color: var(--color-brown);
+    text-decoration: none;
     text-transform: uppercase;
     text-align: center;
     padding: 0.1rem 0.25rem;
@@ -4417,7 +4424,6 @@ body.scrolled .article .sidebar {
 }
 
 .slug-tickets {
-  padding-top: 10rem;
   position: relative;
 
   .tickets-aquarelle {
@@ -4454,6 +4460,10 @@ body.scrolled .article .sidebar {
     top: 1rem;
     bottom: auto;
     display: flex;
+    position: relative;
+    @include mobile {
+      padding-top: 4rem;
+    }
   }
 
   .tickets-container {
@@ -4686,7 +4696,11 @@ body.slug-timetable {
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
 
-  background-color: var(--color-brown);
+  background-color: transparent;
+
+  #__next {
+    background-color: var(--color-brown);
+  }
 
   .global-frontpage-visuals {
     display: none !important;

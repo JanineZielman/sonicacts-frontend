@@ -41,11 +41,33 @@
 
         body.menu-small & {
             @include minimal-nav-compact;
+
+            * {
+                pointer-events: none;
+            }
+
+            .minimal-nav__overlay {
+                pointer-events: auto;
+            }
         }
 
         body.menu-expanded & {
             transform: scale(1);
             left: 23vw;
+
+            * {
+                pointer-events: none;
+            }
+
+            .minimal-nav__overlay {
+                pointer-events: auto;
+            }
+        }
+
+        body.menu-expanded.menu-links-ready & {
+            * {
+                pointer-events: auto;
+            }
         }
 
 
@@ -61,7 +83,7 @@
             z-index: 9999;
             border: 2px solid transparent;
             pointer-events: auto;
-            background: rgba(255, 105, 180, 0.18); // visible overlay to verify coverage
+            background: transparent;
             touch-action: manipulation;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -148,6 +170,26 @@
 
         body.slug-home.has-scrolled & {
             @include minimal-nav-compact;
+
+            .minimal-nav__overlay {
+                display: block;
+            }
+        }
+
+        body.slug-home.has-scrolled.menu-expanded & {
+            transform: scale(1);
+            left: 11vw;
+            right: auto;
+            width: 78vw;
+
+            .minimal-nav {
+                gap: 0.1rem;
+            }
+
+            ul li a {
+                opacity: 1;
+                color: var(--color-brown);
+            }
         }
 
         &.click--active {
