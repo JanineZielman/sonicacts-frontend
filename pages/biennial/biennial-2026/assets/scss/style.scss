@@ -5254,13 +5254,15 @@ body.slug-timetable {
 
 body.slug-timetable,
 body.artists-overview,
-body.programme-overview {
+body.programme-overview,
+body.slug-visit {
   background-color: var(--color-brown);
 }
 
 body.slug-artist,
 body.slug-about,
-body.slug-tickets {
+body.slug-tickets,
+body.slug-single-programme-event {
   background-color: var(--color-grey);
 }
 
@@ -5271,7 +5273,8 @@ body.programme-overview #__next {
 
 body.slug-artist #__next,
 body.slug-about #__next,
-body.slug-tickets #__next {
+body.slug-tickets #__next,
+body.slug-single-programme-event #__next {
   background-color: var(--color-grey);
 }
 

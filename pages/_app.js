@@ -39,17 +39,26 @@ const MyApp = ({ Component, pageProps }) => {
     router.pathname === "/biennial/biennial-2026/about";
   const isBiennialTickets =
     router.pathname === "/biennial/biennial-2026/tickets";
+  const isBiennialVisit =
+    router.pathname === "/biennial/biennial-2026/visit";
+  const isBiennialProgrammeDetail =
+    router.pathname.startsWith("/biennial/biennial-2026/programme/") &&
+    router.pathname !== "/biennial/biennial-2026/programme";
   const themeColor = isBiennialTimetable
     ? "#7a3800"
     : isBiennialArtistsOverview
       ? "#7a3800"
       : isBiennialProgrammeOverview
         ? "#7a3800"
+      : isBiennialVisit
+        ? "#7a3800"
       : isBiennialArtist
         ? "#babadf"
       : isBiennialInformation
         ? "#babadf"
       : isBiennialTickets
+        ? "#babadf"
+      : isBiennialProgrammeDetail
         ? "#babadf"
         : "transparent";
 
