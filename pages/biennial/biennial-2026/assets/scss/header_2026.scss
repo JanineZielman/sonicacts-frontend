@@ -37,7 +37,7 @@
         bottom: var(--mobile-nav-bottom, 1rem);
 
         right: auto;
-        height: 10rem;
+        height: 12.5rem;
 
         body.menu-small & {
             @include minimal-nav-compact;
