@@ -31,11 +31,23 @@ const MyApp = ({ Component, pageProps }) => {
     router.pathname === "/biennial/biennial-2026/timetable";
   const isBiennialArtist =
     router.pathname === "/biennial/biennial-2026/artists/[artist]";
+  const isBiennialArtistsOverview =
+    router.pathname === "/biennial/biennial-2026/artists";
+  const isBiennialProgrammeOverview =
+    router.pathname === "/biennial/biennial-2026/programme";
+  const isBiennialInformation =
+    router.pathname === "/biennial/biennial-2026/about";
   const themeColor = isBiennialTimetable
     ? "#7a3800"
-    : isBiennialArtist
-      ? "#babadf"
-      : "transparent";
+    : isBiennialArtistsOverview
+      ? "#7a3800"
+      : isBiennialProgrammeOverview
+        ? "#7a3800"
+      : isBiennialArtist
+        ? "#babadf"
+      : isBiennialInformation
+        ? "#babadf"
+        : "transparent";
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 100);
