@@ -532,12 +532,19 @@ $grid-columns: 12;
   }
 }
 
+html,
+body {
+  margin: 0;
+  background: transparent;
+}
+
 body {
   font-family: "BSTBazaineMono", "Courier", monospace;
   font-size: 1.4rem;
   line-height: 1.14;
   letter-spacing: 0rem;
   color: var(--color-brown);
+  --mobile-nav-bottom: 1rem;
   font-variation-settings:
     "wght" 400,
     "ital" 0;
@@ -2170,6 +2177,7 @@ body {
     font-family: "BSTBazaineMono", monospace;
     font-size: 0.7rem;
     color: var(--color-brown);
+    text-decoration: none;
     text-transform: uppercase;
     text-align: center;
     padding: 0.1rem 0.25rem;
@@ -4417,7 +4425,6 @@ body.scrolled .article .sidebar {
 }
 
 .slug-tickets {
-  padding-top: 10rem;
   position: relative;
 
   .tickets-aquarelle {
@@ -4454,6 +4461,10 @@ body.scrolled .article .sidebar {
     top: 1rem;
     bottom: auto;
     display: flex;
+    position: relative;
+    @include mobile {
+      padding-top: 4rem;
+    }
   }
 
   .tickets-container {
@@ -4679,6 +4690,10 @@ body.slug-programmeprogrammesub {
   }
 }
 
+#__next {
+  background: transparent;
+}
+
 body.slug-timetable {
   --timetable-location-width: 11rem;
   --timetable-location-width-mobile: 7.2rem;
@@ -4687,6 +4702,10 @@ body.slug-timetable {
   --timetable-hour-width: 6.7rem;
 
   background-color: var(--color-brown);
+
+  #__next {
+    background-color: var(--color-brown);
+  }
 
   .global-frontpage-visuals {
     display: none !important;
@@ -4701,7 +4720,7 @@ body.slug-timetable {
   }
 
   .minimal-nav__overlay {
-    display: none;
+    display: block;
   }
 
   .social-channel {
@@ -4959,7 +4978,9 @@ body.slug-timetable {
       overflow-y: hidden;
       position: relative;
       display: flex;
-      scrollbar-color: var(--color-pink) var(--color-brown);
+      @include desktop {
+        scrollbar-color: var(--color-pink) var(--color-brown);
+      }
       scrollbar-width: thin;
 
       &::-webkit-scrollbar {
@@ -4967,11 +4988,15 @@ body.slug-timetable {
       }
 
       &::-webkit-scrollbar-track {
-        background: var(--color-brown);
+        @include desktop {
+          background: var(--color-brown);
+        }
       }
 
       &::-webkit-scrollbar-thumb {
-        background: var(--color-pink);
+        @include desktop {
+          background: var(--color-pink);
+        }
         border-radius: 0.4rem;
       }
 
@@ -5226,6 +5251,33 @@ body.slug-timetable {
       }
     }
   }
+}
+
+body.slug-timetable,
+body.artists-overview,
+body.programme-overview,
+body.slug-programme.programme-overview,
+body.slug-visit {
+  background-color: var(--color-brown);
+}
+
+body.slug-artist,
+body.slug-about,
+body.slug-tickets,
+body.slug-single-programme-event {
+  background-color: var(--color-grey);
+}
+
+body.artists-overview #__next,
+body.programme-overview #__next {
+  background-color: var(--color-brown);
+}
+
+body.slug-artist #__next,
+body.slug-about #__next,
+body.slug-tickets #__next,
+body.slug-single-programme-event #__next {
+  background-color: var(--color-grey);
 }
 
 body.slug-visit {
@@ -5556,7 +5608,6 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background: #111;
 }
 
 #app {
@@ -5659,7 +5710,7 @@ html {
 body {
   height: auto;
   width: 100%;
-  background: var(--color-grey);
+  background: transparent;
 }
 
 body.frontpage-intro .intro-fade-target {
@@ -5811,7 +5862,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
   #sonic,
   #acts {
     position: fixed;
-    bottom: 1rem;
+    bottom: var(--mobile-nav-bottom, 1rem);
 
     height: var(--sonicLogoHeight);
     max-height: var(--sonicLogoHeight);
@@ -5821,7 +5872,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
     @include mobile {
       height: 22vw;
       max-height: 22vw;
-      bottom: 1rem;
+      bottom: var(--mobile-nav-bottom, 1rem);
     }
 
     body.slug-home & {
@@ -5831,7 +5882,6 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
       @include mobile {
         height: 42vw !important;
         max-height: 42vw !important;
-        bottom: 12.5rem !important;
         left: 1.5rem !important;
       }
     }
@@ -5856,7 +5906,6 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
       @include mobile {
         height: 22vw !important;
         max-height: 22vw !important;
-        bottom: 1rem !important;
       }
     }
 
@@ -6893,6 +6942,7 @@ body.slug-home {
   padding-top: 100vh;
   background-color: var(--color-brown);
   transition: padding-top 1.4s ease;
+  --mobile-nav-bottom: 12.5rem;
 
   &.scrolled {
     background-color: var(--color-grey);
@@ -6907,6 +6957,7 @@ body.slug-home #news {
 
 body.slug-home.has-scrolled {
   padding-top: 50vh;
+  --mobile-nav-bottom: 1rem;
 
   #news {
     opacity: 1;

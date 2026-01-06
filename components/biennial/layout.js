@@ -180,9 +180,9 @@ const Layout = ({ children, festival, seo }) => {
 
   useEffect(() => {
     console.log("[MinimalNav] mobile effect mount", { isMobileLayout, pathname, isBiennialHome })
-    if (!isMobileLayout || isBiennialHome) {
+    if (!isMobileLayout) {
       console.log("[MinimalNav] mobile effect skipped", {
-        reason: !isMobileLayout ? "desktop" : "biennial-home",
+        reason: "desktop",
       })
       return undefined
     }
@@ -194,9 +194,9 @@ const Layout = ({ children, festival, seo }) => {
     }
 
     const body = document.body
-    body.classList.add("menu-small")
     let menuIsActive = false
     let hideTimeout = null
+    let linksReadyTimeout = null
 
     const minimalNav =
       document.querySelector(".minimal-nav") ||
@@ -211,7 +211,32 @@ const Layout = ({ children, festival, seo }) => {
       console.log("[MinimalNav] overlay created")
     }
 
+    const navLinks = minimalNav
+      ? Array.from(minimalNav.querySelectorAll("a"))
+      : []
+    const disableNavLinks = () => {
+      navLinks.forEach((link) => {
+        if (!link.hasAttribute("data-original-href")) {
+          const href = link.getAttribute("href")
+          if (href) {
+            link.setAttribute("data-original-href", href)
+          }
+        }
+        link.setAttribute("href", "#")
+      })
+    }
+    const enableNavLinks = () => {
+      navLinks.forEach((link) => {
+        const original = link.getAttribute("data-original-href")
+        if (original) {
+          link.setAttribute("href", original)
+          link.removeAttribute("data-original-href")
+        }
+      })
+    }
+
     const handleOverlayClick = (event) => {
+      event.preventDefault()
       event.stopPropagation()
       if (!menuIsActive) {
         overlayElement?.classList.add("minimal-nav__overlay--active")
@@ -238,6 +263,17 @@ const Layout = ({ children, festival, seo }) => {
       menu.classList.add("menu--mobile-active")
       body.classList.add("menu-expanded")
       body.classList.remove("menu-small")
+      body.classList.remove("menu-links-ready")
+      disableNavLinks()
+      if (linksReadyTimeout) {
+        window.clearTimeout(linksReadyTimeout)
+      }
+      linksReadyTimeout = window.setTimeout(() => {
+        if (body.classList.contains("menu-expanded")) {
+          body.classList.add("menu-links-ready")
+          enableNavLinks()
+        }
+      }, 350)
       overlayElement?.classList.add("minimal-nav__overlay--active")
     }
 
@@ -246,13 +282,47 @@ const Layout = ({ children, festival, seo }) => {
       menu.classList.remove("menu--mobile-active")
       body.classList.remove("menu-expanded")
       body.classList.add("menu-small")
+      body.classList.remove("menu-links-ready")
+      disableNavLinks()
+      if (linksReadyTimeout) {
+        window.clearTimeout(linksReadyTimeout)
+        linksReadyTimeout = null
+      }
       overlayElement?.classList.remove("minimal-nav__overlay--active")
       console.log("[MinimalNav] collapseMenu")
+    }
+
+    const syncHomeScrollState = () => {
+      if (!isBiennialHome) {
+        return
+      }
+      const hasScrolled = body.classList.contains("has-scrolled")
+      if (hasScrolled) {
+        menuIsActive = false
+        menu.classList.remove("menu--mobile-active")
+        body.classList.add("menu-small")
+        body.classList.remove("menu-expanded")
+        body.classList.remove("menu-links-ready")
+        disableNavLinks()
+        overlayElement?.classList.remove("minimal-nav__overlay--active")
+        return
+      }
+      menuIsActive = false
+      menu.classList.remove("menu--mobile-active")
+      body.classList.remove("menu-small")
+      body.classList.remove("menu-expanded")
+      body.classList.add("menu-links-ready")
+      enableNavLinks()
+      overlayElement?.classList.remove("minimal-nav__overlay--active")
     }
 
     const handleClick = (event) => {
       const link = event.target.closest("a")
       const isMinimalNavLink = link && minimalNav && minimalNav.contains(link)
+      if (!body.classList.contains("menu-links-ready")) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
       if (isMinimalNavLink) {
         event.preventDefault()
       }
@@ -284,12 +354,22 @@ const Layout = ({ children, festival, seo }) => {
     }
 
     const handleScroll = () => {
+      if (isBiennialHome) {
+        syncHomeScrollState()
+        return
+      }
       collapseMenu()
     }
 
     menu.addEventListener("touchstart", activateMenu, { passive: true })
     menu.addEventListener("click", handleClick)
     window.addEventListener("scroll", handleScroll, { passive: true })
+    if (isBiennialHome) {
+      syncHomeScrollState()
+    } else {
+      body.classList.add("menu-small")
+      disableNavLinks()
+    }
 
     return () => {
       overlayElement?.removeEventListener("click", handleOverlayClick)
@@ -298,8 +378,13 @@ const Layout = ({ children, festival, seo }) => {
       window.removeEventListener("scroll", handleScroll)
       collapseMenu()
       body.classList.remove("menu-small")
+      body.classList.remove("menu-links-ready")
+      enableNavLinks()
       if (hideTimeout) {
         window.clearTimeout(hideTimeout)
+      }
+      if (linksReadyTimeout) {
+        window.clearTimeout(linksReadyTimeout)
       }
     }
   }, [isMobileLayout])

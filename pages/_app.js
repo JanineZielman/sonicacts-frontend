@@ -27,6 +27,40 @@ const MyApp = ({ Component, pageProps }) => {
   const [loading, setLoading] = useState(true);
 
   const isBiennial2026 = router.pathname.startsWith("/biennial/biennial-2026");
+  const isBiennialTimetable =
+    router.pathname === "/biennial/biennial-2026/timetable";
+  const isBiennialArtist =
+    router.pathname === "/biennial/biennial-2026/artists/[artist]";
+  const isBiennialArtistsOverview =
+    router.pathname === "/biennial/biennial-2026/artists";
+  const isBiennialProgrammeOverview =
+    router.pathname === "/biennial/biennial-2026/programme";
+  const isBiennialInformation =
+    router.pathname === "/biennial/biennial-2026/about";
+  const isBiennialTickets =
+    router.pathname === "/biennial/biennial-2026/tickets";
+  const isBiennialVisit =
+    router.pathname === "/biennial/biennial-2026/visit";
+  const isBiennialProgrammeDetail =
+    router.pathname.startsWith("/biennial/biennial-2026/programme/") &&
+    router.pathname !== "/biennial/biennial-2026/programme";
+  const themeColor = isBiennialTimetable
+    ? "#7a3800"
+    : isBiennialArtistsOverview
+      ? "#7a3800"
+      : isBiennialProgrammeOverview
+        ? "#7a3800"
+      : isBiennialVisit
+        ? "#7a3800"
+      : isBiennialArtist
+        ? "#babadf"
+      : isBiennialInformation
+        ? "#babadf"
+      : isBiennialTickets
+        ? "#babadf"
+      : isBiennialProgrammeDetail
+        ? "#babadf"
+        : "transparent";
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 100);
@@ -44,6 +78,10 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
         {/* <link
           rel="shortcut icon"
           href={getStrapiMedia(global?.attributes?.favicon?.data?.attributes)}
@@ -77,6 +115,7 @@ const MyApp = ({ Component, pageProps }) => {
               type="text/css"
               href="/biennial.css"
             />
+            <meta name="theme-color" content={themeColor} key="theme-color" />
           </>
         }
       </Head>
