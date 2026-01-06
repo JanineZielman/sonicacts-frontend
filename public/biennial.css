@@ -135,16 +135,17 @@ em {
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #main-header {
     width: 78vw;
-    top: calc(100dvh - 12rem);
-    bottom: auto;
+    top: auto;
+    bottom: var(--mobile-nav-bottom, 1rem);
     right: auto;
-    height: 10rem;
+    height: 12.5rem;
     transform-origin: right bottom;
     right: 1rem;
     left: auto;
     width: auto;
     transform: scale(0.3);
     transform-origin: right bottom;
+    bottom: 2rem;
     transition: all 0.3s ease;
   }
   body.menu-small #main-header {
@@ -153,6 +154,7 @@ em {
     width: auto;
     transform: scale(0.3);
     transform-origin: right bottom;
+    bottom: 2rem;
   }
   body.menu-small #main-header .minimal-nav {
     transform-origin: right bottom;
@@ -171,6 +173,7 @@ em {
   body.menu-expanded #main-header {
     transform: scale(1);
     left: 23vw;
+    bottom: var(--mobile-nav-bottom, 1rem);
   }
   body.menu-expanded #main-header * {
     pointer-events: none;
@@ -248,6 +251,8 @@ em {
     left: 11vw;
     right: auto;
     width: 78vw;
+    bottom: 1rem;
+    height: 9rem;
   }
   body.slug-home #main-header .minimal-nav__overlay {
     display: none;
@@ -265,6 +270,7 @@ em {
     width: auto;
     transform: scale(0.3);
     transform-origin: right bottom;
+    bottom: 2rem;
   }
   body.slug-home.has-scrolled #main-header .minimal-nav {
     transform-origin: right bottom;
@@ -303,6 +309,11 @@ em {
   #main-header.click--active ul li a {
     opacity: 1;
     color: var(--color-brown);
+  }
+}
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+  body.slug-home #main-header {
+    right: calc(50vw - 13rem);
   }
 }
 #main-header a:link,
@@ -492,6 +503,7 @@ body {
   line-height: 1.14;
   letter-spacing: 0rem;
   color: var(--color-brown);
+  --mobile-nav-bottom: 1rem;
   font-variation-settings: "wght" 400, "ital" 0;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -5139,7 +5151,7 @@ body.slug-timetable {
   --timetable-row-height: 5rem;
   --timetable-date-height: 3rem;
   --timetable-hour-width: 6.7rem;
-  background-color: transparent;
+  background-color: var(--color-brown);
 }
 body.slug-timetable #__next {
   background-color: var(--color-brown);
@@ -5623,6 +5635,21 @@ body.slug-timetable .timetable .timetable-locations .location.sub p {
   padding-left: 2rem;
 }
 
+body.slug-timetable,
+body.artists-overview,
+body.programme-overview,
+body.slug-programme.programme-overview,
+body.slug-visit {
+  background-color: var(--color-brown);
+}
+
+body.slug-artist,
+body.slug-about,
+body.slug-tickets,
+body.slug-single-programme-event {
+  background-color: var(--color-grey);
+}
+
 body.artists-overview #__next,
 body.programme-overview #__next {
   background-color: var(--color-brown);
@@ -5630,7 +5657,8 @@ body.programme-overview #__next {
 
 body.slug-artist #__next,
 body.slug-about #__next,
-body.slug-tickets #__next {
+body.slug-tickets #__next,
+body.slug-single-programme-event #__next {
   background-color: var(--color-grey);
 }
 
@@ -6135,7 +6163,7 @@ body.slug-artist #sonic-acts #acts path {
 #sonic-acts #sonic,
 #sonic-acts #acts {
   position: fixed;
-  bottom: 1rem;
+  bottom: var(--mobile-nav-bottom, 1rem);
   height: var(--sonicLogoHeight);
   max-height: var(--sonicLogoHeight);
   transition: all 0.3s ease;
@@ -6145,20 +6173,19 @@ body.slug-artist #sonic-acts #acts path {
 #sonic-acts #acts {
     height: 22vw;
     max-height: 22vw;
-    bottom: 1rem;
+    bottom: var(--mobile-nav-bottom, 1rem);
   }
 }
 body.slug-home #sonic-acts #sonic,
 body.slug-home #sonic-acts #acts {
-  height: min(57vh, 50vw);
-  max-height: min(57vh, 50vw);
+  height: min(45vh, 50vw);
+  max-height: min(45vh, 50vw);
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-home #sonic-acts #sonic,
 body.slug-home #sonic-acts #acts {
     height: 42vw !important;
     max-height: 42vw !important;
-    bottom: 12.5rem !important;
     left: 1.5rem !important;
   }
 }
@@ -6178,7 +6205,6 @@ body.has-scrolled.slug-home #sonic-acts #acts {
 body.has-scrolled.slug-home #sonic-acts #acts {
     height: 22vw !important;
     max-height: 22vw !important;
-    bottom: 1rem !important;
   }
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
@@ -7152,6 +7178,7 @@ body.slug-home {
   padding-top: 100vh;
   background-color: var(--color-brown);
   transition: padding-top 1.4s ease;
+  --mobile-nav-bottom: 12.5rem;
 }
 body.slug-home.scrolled {
   background-color: var(--color-grey);
@@ -7165,6 +7192,7 @@ body.slug-home #news {
 
 body.slug-home.has-scrolled {
   padding-top: 50vh;
+  --mobile-nav-bottom: 1rem;
 }
 body.slug-home.has-scrolled #news {
   opacity: 1;

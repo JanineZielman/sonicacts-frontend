@@ -5876,8 +5876,8 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
     }
 
     body.slug-home & {
-      height: min(57vh, 50vw);
-      max-height: min(57vh, 50vw);
+      height: min(45vh, 50vw);
+      max-height: min(45vh, 50vw);
 
       @include mobile {
         height: 42vw !important;
