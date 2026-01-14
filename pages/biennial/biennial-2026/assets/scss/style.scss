@@ -4189,7 +4189,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 .ReactModal__Content .close {
   position: absolute;
   right: 1.5rem;
-  top: 1rem;
+  top: 1.5rem;
   cursor: pointer;
 }
 
@@ -4675,17 +4675,18 @@ body.slug-programmeprogrammesub {
 
 .ticket-modal {
   width: 550px;
+  overflow: none;
 
   @include mobile {
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90dvh;
   }
 
   iframe {
     height: 90vh;
 
     @include mobile {
-      height: 100vh;
+      height: calc(90dvh - 2rem);
     }
   }
 }
@@ -5876,8 +5877,8 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
     }
 
     body.slug-home & {
-      height: min(45vh, 50vw);
-      max-height: min(45vh, 50vw);
+      height: min(55vh, 55vw);
+      max-height: min(55vh, 55vw);
 
       @include mobile {
         height: 42vw !important;
