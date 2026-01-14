@@ -4669,7 +4669,7 @@ body.slug-programmeprogrammesub .category-title-wrapper::before {
 .ReactModal__Content .close {
   position: absolute;
   right: 1.5rem;
-  top: 1rem;
+  top: 1.5rem;
   cursor: pointer;
 }
 
@@ -5125,11 +5125,12 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 
 .ticket-modal {
   width: 550px;
+  overflow: none;
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .ticket-modal {
-    width: 100vw;
-    height: 100vh;
+    width: 90vw;
+    height: 90dvh;
   }
 }
 .ticket-modal iframe {
@@ -5137,7 +5138,7 @@ body.slug-programmeprogrammesub .ticket.available-soon h3 {
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .ticket-modal iframe {
-    height: 100vh;
+    height: calc(90dvh - 2rem);
   }
 }
 
@@ -6178,8 +6179,8 @@ body.slug-artist #sonic-acts #acts path {
 }
 body.slug-home #sonic-acts #sonic,
 body.slug-home #sonic-acts #acts {
-  height: min(45vh, 50vw);
-  max-height: min(45vh, 50vw);
+  height: min(55vh, 55vw);
+  max-height: min(55vh, 55vw);
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   body.slug-home #sonic-acts #sonic,
