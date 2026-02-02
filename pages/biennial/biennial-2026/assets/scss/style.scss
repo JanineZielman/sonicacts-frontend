@@ -580,6 +580,10 @@ ul {
 strong {
   font-weight: normal;
   color: rgb(71, 18, 0);
+
+  body.slug-single-news & {
+    color: var(--color-pink);
+  }
 }
 
 h4 {
@@ -5835,7 +5839,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
       }
 
       body.slug-news & {
-        fill: var(--color-brown);
+        fill: var(--color-pink);
       }
 
       body.slug-programme & {
@@ -5858,7 +5862,7 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
     }
   }
 
-  --sonicLogoHeight: 8.7rem;
+  --sonicLogoHeight: 7rem;
 
   #sonic,
   #acts {
@@ -5867,6 +5871,10 @@ body.frontpage-intro .intro-fade-target.intro-fade-target--visible {
 
     height: var(--sonicLogoHeight);
     max-height: var(--sonicLogoHeight);
+
+    @include desktop {
+      bottom: 1rem;
+    }
 
     transition: all 0.3s ease;
 
