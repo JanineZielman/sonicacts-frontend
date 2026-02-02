@@ -539,6 +539,9 @@ strong {
   font-weight: normal;
   color: #471200;
 }
+body.slug-single-news strong {
+  color: var(--color-pink);
+}
 
 h4 {
   font-size: 1rem;
@@ -6094,7 +6097,7 @@ body.has-scrolled #app {
   z-index: 10000;
   position: relative;
   width: 100%;
-  --sonicLogoHeight: 8.7rem;
+  --sonicLogoHeight: 7rem;
 }
 #sonic-acts svg {
   height: 100%;
@@ -6145,7 +6148,7 @@ body.slug-artists #sonic-acts #acts path {
   fill: var(--color-blue);
 }
 body.slug-news #sonic-acts #acts path {
-  fill: var(--color-brown);
+  fill: var(--color-pink);
 }
 body.slug-programme #sonic-acts #acts path {
   fill: var(--color-blue);
@@ -6168,6 +6171,12 @@ body.slug-artist #sonic-acts #acts path {
   height: var(--sonicLogoHeight);
   max-height: var(--sonicLogoHeight);
   transition: all 0.3s ease;
+}
+@media only screen and (min-device-width: 813px) and (-webkit-min-device-pixel-ratio: 3), only screen and (min-device-width: 668px) and (-webkit-min-device-pixel-ratio: 2), only screen and (orientation: landscape) {
+  #sonic-acts #sonic,
+#sonic-acts #acts {
+    bottom: 1rem;
+  }
 }
 @media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait), only screen and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #sonic-acts #sonic,
