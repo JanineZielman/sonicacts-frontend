@@ -13,7 +13,7 @@ html {
   color: #000;
   font-size: 24px;
   overflow-x: hidden;
-  background-color: #e6e6e6;
+  background-color: #FFD9D9;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -39,7 +39,7 @@ html {
   top: 14px;
 }
 .highlight .logo .glitch {
-  color: #000;
+  color: #fff;
   font-family: "Sonic Logo";
   font-size: 60px;
   line-height: 0.8;
@@ -106,8 +106,8 @@ html {
   font-feature-settings: "ss02" on;
   left: 0px;
   top: 0;
-  color: #000;
-  background: yellow;
+  color: #fff;
+  background: red;
   clip: rect(0, 300px, 0, 0);
   animation: noise-anim-3 30s infinite ease-in-out alternate;
   animation-delay: var(--delay);
@@ -219,15 +219,15 @@ html {
   font-feature-settings: "ss02" on;
   left: 0px;
   top: 0;
-  color: black;
-  background: yellow;
+  color: #fff;
+  background: red;
   clip: rect(0, 300px, 0, 0);
   animation: noise-anim-2 30s infinite ease-in-out alternate;
   animation-delay: var(--delay);
 }
 
 .highlight .socials {
-  border-top: 1px solid #000;
+  border-top: 1px solid #fff;
   width: 100%;
 }
 .highlight .socials .social div {
@@ -500,7 +500,7 @@ div.wrapper.intro p {
 }
 .menu .menu-wrapper {
   z-index: 888;
-  background-color: yellow;
+  background-color: red;
   position: fixed;
   top: 0;
   width: calc(100% - 2vw);
@@ -508,7 +508,8 @@ div.wrapper.intro p {
   display: flex;
   justify-content: space-between;
   padding: 4px 0 4px 0;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #fff;
+  color: #fff;
 }
 .menu .menu-wrapper .breadcrumbs {
   display: flex;
@@ -546,8 +547,8 @@ div.wrapper.intro p {
   top: 0;
   right: 0;
   width: 100%;
-  background-color: #CFCFCF;
-  background: linear-gradient(90deg, rgba(207, 207, 207, 0) 0%, #cfcfcf 80%);
+  background-color: #FFD9D9;
+  background: linear-gradient(90deg, rgba(207, 207, 207, 0) 0%, #FFD9D9 80%);
   background-position: top right;
   background-size: contain;
   background-repeat: no-repeat;
@@ -979,7 +980,7 @@ div.wrapper.intro p {
 
 .page-title {
   height: calc(100% - 220px);
-  border-top: 1px solid black;
+  border-top: 1px solid #fff;
   padding-top: 5px;
   text-transform: capitalize;
 }
@@ -1190,7 +1191,7 @@ p img {
   margin-right: 3vw;
   z-index: 3;
   height: 100%;
-  background-color: yellow;
+  background-color: red;
   position: fixed;
   left: 0;
   box-shadow: 1px 1px 16px -6px rgba(0, 0, 0, 0.75);
@@ -1216,7 +1217,7 @@ p img {
   object-fit: contain;
 }
 .highlight a {
-  color: #000;
+  color: #fff;
 }
 .highlight h3 {
   margin: 0;
@@ -2063,7 +2064,7 @@ p img {
 .slick-slider .slick-next, .slick-slider .slick-prev {
   width: 50px;
   height: 100%;
-  background-color: #e6e6e6;
+  background-color: #FFD9D9;
 }
 .slick-slider .slick-next:before, .slick-slider .slick-prev:before {
   font-family: "SuisseIntl";
@@ -4041,7 +4042,7 @@ p img {
     justify-content: space-between;
   }
   .new-home .highlight .logo {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #fff;
   }
   .new-home .highlight .page-title {
     border: none;
@@ -4083,6 +4084,7 @@ p img {
   .new-home .wrapper-intro .intro-text h1 {
     font-size: 13px;
     padding-bottom: 0;
+    color: #fff;
   }
 
   .homepage .wrapper-large {
@@ -4209,6 +4211,9 @@ p img {
   .hamburger {
     margin-right: 5px;
     transform: scale(0.8);
+  }
+  .hamburger svg line{
+    stroke: #fff;
   }
 
   .close {
@@ -4898,4 +4903,8 @@ p img {
   .radio .radio-wrapper p {
     font-size: 14px;
   }
+}
+
+p a{
+  color: red!important;
 }
