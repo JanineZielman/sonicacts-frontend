@@ -50,17 +50,17 @@ const MyApp = ({ Component, pageProps }) => {
       ? "#7a3800"
       : isBiennialProgrammeOverview
         ? "#7a3800"
-      : isBiennialVisit
-        ? "#7a3800"
-      : isBiennialArtist
-        ? "#babadf"
-      : isBiennialInformation
-        ? "#babadf"
-      : isBiennialTickets
-        ? "#babadf"
-      : isBiennialProgrammeDetail
-        ? "#babadf"
-        : "transparent";
+        : isBiennialVisit
+          ? "#7a3800"
+          : isBiennialArtist
+            ? "#babadf"
+            : isBiennialInformation
+              ? "#babadf"
+              : isBiennialTickets
+                ? "#babadf"
+                : isBiennialProgrammeDetail
+                  ? "#babadf"
+                  : "transparent";
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 100);
@@ -82,10 +82,10 @@ const MyApp = ({ Component, pageProps }) => {
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
-        {/* <link
+        <link
           rel="shortcut icon"
           href={getStrapiMedia(global?.attributes?.favicon?.data?.attributes)}
-        /> */}
+        />
         {!isBiennial2026 ?
           <>
             <link

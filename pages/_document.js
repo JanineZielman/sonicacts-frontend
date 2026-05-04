@@ -85,7 +85,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
+          {/* <link
             rel="icon"
             type="image/png"
             href="/biennial/biennial-2026/assets/favicon/favicon-96x96.png"
@@ -101,13 +101,13 @@ export default class MyDocument extends Document {
             rel="apple-touch-icon"
             sizes="180x180"
             href="/biennial/biennial-2026/assets/favicon/apple-touch-icon.png"
-          />
+          /> */}
           {/* ---------------------------------------------------------------
              PORTAL HEAD (default)
              --------------------------------------------------------------- */}
           {!isBiennial2026 && (
             <>
-          <link rel="canonical" href="https://sonicacts.com/" />
+              <link rel="canonical" href="https://sonicacts.com/" />
 
               <script
                 async
