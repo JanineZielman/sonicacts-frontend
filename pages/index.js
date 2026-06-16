@@ -187,6 +187,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
                             )}
                             <div className="text">
                               <div>
+
                                 {item.attributes.hide_names === false &&
                                   item.attributes?.community_items?.data && (
                                     <h2 className="authors index-authors">
@@ -199,6 +200,10 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                       )}
                                     </h2>
                                   )}
+
+                                {item.attributes.title && (
+                                  <h2>{item.attributes.title}</h2>
+                                )}
                                 {item.attributes.category?.data && (
                                   <div className="category">
                                     {
@@ -207,13 +212,6 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                     }
                                   </div>
                                 )}
-                                {/* {item.attributes.date && (
-                                  <span>
-                                    {Moment(item.attributes.date).format(
-                                      "D MMM y"
-                                    )}
-                                  </span>
-                                )} */}
                                 {item.attributes.date &&
                                   <>
                                     {item.attributes.dates?.[0] ?
@@ -255,9 +253,6 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                     }
                                   </>
                                 }
-                                {item.attributes.title && (
-                                  <h2>{item.attributes.title}</h2>
-                                )}
                               </div>
                               {item.attributes.name && (
                                 <h2>{item.attributes.name}</h2>

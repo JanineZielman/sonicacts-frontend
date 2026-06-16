@@ -441,6 +441,9 @@ div.wrapper.intro p {
   height: 100%;
   cursor: pointer;
 }
+.home-menu .collapsible.archive .text span{
+  display: none!important;
+}
 .home-menu .collapsible h2 {
   font-size: 24px;
 }
