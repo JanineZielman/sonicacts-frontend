@@ -1,8 +1,10 @@
-.big-animation{
+.big-animation {
 	background-color: black;
-	&.smaller{
+
+	&.smaller {
 		background-color: transparent;
 	}
+
 	@keyframes noise-anim {
 		$steps: 10;
 
@@ -12,6 +14,7 @@
 			}
 		}
 	}
+
 	@keyframes noise-anim-2 {
 		$steps: 10;
 
@@ -21,25 +24,29 @@
 			}
 		}
 	}
-	
-	.glitch{
+
+	.glitch {
 		color: white;
 		font-size: 24vw;
 	}
-	.glitch:before, .glitch:after{
+
+	.glitch:before,
+	.glitch:after {
 		background-color: black;
 		color: white;
 	}
 
-	.logo{
+	.logo {
 		position: relative;
 		margin-top: 5vw;
 		margin-left: 5vw;
 	}
+
 	.logo .s1 {
 		z-index: 9;
 	}
-	.logo .s2{
+
+	.logo .s2 {
 		top: 22vw;
 		z-index: 0;
 	}
@@ -49,18 +56,20 @@
 			color: black;
 			font-size: 135px;
 		}
+
 		.glitch:before,
 		.glitch:after {
-			// background-color: #e6e6e6;
 			color: black;
 		}
+
 		.logo {
 			margin-bottom: 30vw;
 			margin-left: 0;
+
 			.s2 {
 				top: 120px;
 			}
 		}
 	}
-	
+
 }
