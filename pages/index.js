@@ -76,10 +76,11 @@ const Home = ({ homepage, menus, global, items, about }) => {
         <div className="wrapper-large">
           <div className="home-menu">
             {menus.map((page, i) => {
-              const slug = page.attributes.slug;
+              const slug = page.attributes.slug.replace('/', '');
+              const title = page.attributes.title
               const pageItems = items[slug] || [];
 
-              if (slug === "shop") {
+              if (title.includes("Shop")) {
                 return (
                   <div key={slug} className="collapsible shop">
                     <a
@@ -152,9 +153,9 @@ const Home = ({ homepage, menus, global, items, about }) => {
                 slug === "community"
                   ? communitySettings
                   : {
-                      ...baseSettings,
-                      slidesToShow: Math.min(pageItems.length, 3),
-                    };
+                    ...baseSettings,
+                    slidesToShow: Math.min(pageItems.length, 3),
+                  };
 
               return (
                 <div key={slug} className={`collapsible ${slug}`}>
@@ -167,11 +168,10 @@ const Home = ({ homepage, menus, global, items, about }) => {
                         {pageItems.slice(0, 6).map((item, idx) => (
                           <a
                             href={`/${slug}/${item.attributes.slug}`}
-                            className={`slider-item ${
-                              slug === "community"
-                                ? "community-slider-item"
-                                : ""
-                            }`}
+                            className={`slider-item ${slug === "community"
+                              ? "community-slider-item"
+                              : ""
+                              }`}
                             draggable="false"
                             key={idx}
                           >
@@ -187,6 +187,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
                             )}
                             <div className="text">
                               <div>
+
                                 {item.attributes.hide_names === false &&
                                   item.attributes?.community_items?.data && (
                                     <h2 className="authors index-authors">
@@ -199,6 +200,10 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                       )}
                                     </h2>
                                   )}
+
+                                {item.attributes.title && (
+                                  <h2>{item.attributes.title}</h2>
+                                )}
                                 {item.attributes.category?.data && (
                                   <div className="category">
                                     {
@@ -207,33 +212,26 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                     }
                                   </div>
                                 )}
-                                {/* {item.attributes.date && (
-                                  <span>
-                                    {Moment(item.attributes.date).format(
-                                      "D MMM y"
-                                    )}
-                                  </span>
-                                )} */}
                                 {item.attributes.date &&
                                   <>
                                     {item.attributes.dates?.[0] ?
                                       <span>
                                         {item.attributes.dates.map((date, i) => {
-                                          return(
+                                          return (
                                             <span className={`date ${i}`} key={`dates-${i}`}>
                                               {date.single_date &&
                                                 <>
-                                                {i == 0 && Moment(item.attributes.date).format('D MMM y')}
-                                                , {Moment(date.single_date).format('D MMM y')}
+                                                  {i == 0 && Moment(item.attributes.date).format('D MMM y')}
+                                                  , {Moment(date.single_date).format('D MMM y')}
                                                 </>
                                               }
                                               {date.end_date &&
                                                 <>
-                                                  {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ? 
+                                                  {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ?
                                                     <>
                                                       {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
                                                         <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                      :
+                                                        :
                                                         <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
                                                       }
                                                     </>
@@ -248,16 +246,13 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                           )
                                         })}
                                       </span>
-                                    : 
-                                    <span>
-                                      {Moment(item.attributes.date).format('D MMM y')}
-                                    </span>
+                                      :
+                                      <span>
+                                        {Moment(item.attributes.date).format('D MMM y')}
+                                      </span>
                                     }
                                   </>
                                 }
-                                {item.attributes.title && (
-                                  <h2>{item.attributes.title}</h2>
-                                )}
                               </div>
                               {item.attributes.name && (
                                 <h2>{item.attributes.name}</h2>
@@ -278,19 +273,19 @@ const Home = ({ homepage, menus, global, items, about }) => {
               <div>
                 <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
 
-                    <div className='contact-wrapper'>
-                      {/* <div className="contact-item adres">
+                <div className='contact-wrapper'>
+                  {/* <div className="contact-item adres">
                         <h5>
                           {about.attributes.content[0].text_block}
                         </h5>
                       </div> */}
-                      <div className="contact-item">
-                        <p>
-                          <ReactMarkdown children={about.attributes.content[1].text_block}/>
-                        </p>
-                      </div>
-                    </div>
- 
+                  <div className="contact-item">
+                    <p>
+                      <ReactMarkdown children={about.attributes.content[1].text_block} />
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
