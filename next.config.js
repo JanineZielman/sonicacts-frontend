@@ -31,9 +31,9 @@ const nextConfig = {
       { source: "/agenda/sonic-acts-biennial-2026", destination: "/biennial/biennial-2026", permanent: true },
 
 
-      // { source: "/biennial-2026", destination: "https://2026.sonicacts.com/", permanent: true },
-      // { source: "/biennial2026", destination: "https://2026.sonicacts.com/", permanent: true },
-      // { source: "/biennial/biennial-2026", destination: "https://2026.sonicacts.com/", permanent: true },
+      // Move Biennial 2026 to dedicated subdomain
+      { source: "/biennial/biennial-2026", destination: "https://2026.sonicacts.com/biennial/biennial-2026", permanent: true },
+      { source: "/biennial/biennial-2026/:path*", destination: "https://2026.sonicacts.com/biennial/biennial-2026/:path*", permanent: true },
 
       { source: "/undefined", destination: "/404", permanent: true },
       { source: "/undefined/:path*", destination: "/404", permanent: true },
