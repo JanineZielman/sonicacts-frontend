@@ -2,11 +2,6 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // Limit build workers to prevent EAGAIN errors on the server
-  experimental: {
-    cpus: 2,
-  },
-
   images: {
     loader: "default",
     domains: ["localhost", "cms.sonicacts.com"],
