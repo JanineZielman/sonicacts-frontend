@@ -17,19 +17,17 @@ const nextConfig = {
       { source: "/portal/:path*", destination: "https://sonicacts.com/", permanent: true },
       { source: "/sashop", destination: "https://shop.sonicacts.com/", permanent: true },
       { source: "/sashop/:path*", destination: "https://shop.sonicacts.com/:path*", permanent: true },
-      { source: "/darkecology", destination: "https://portal.sonicacts.com/darkecology", permanent: true },
-      { source: "/darkecology/:path*", destination: "https://portal.sonicacts.com/darkecology/:path*", permanent: true },
-      { source: "/2017", destination: "https://portal.sonicacts.com/2017", permanent: true },
-      { source: "/2017/:path*", destination: "https://portal.sonicacts.com/2017/:path*", permanent: true },
-      { source: "/2018", destination: "https://portal.sonicacts.com/2018", permanent: true },
-      { source: "/2018/:path*", destination: "https://portal.sonicacts.com/2018/:path*", permanent: true },
+      { source: "/darkecology", destination: "https://darkecology.net", permanent: true },
+      { source: "/darkecology/:path*", destination: "https://darkecology.net/:path*", permanent: true },
+      { source: "/2016", destination: "https://archive.sonicacts.com/2016.html", permanent: true },
+      { source: "/2016/:path*", destination: "https://archive.sonicacts.com/2016/:path*", permanent: true },
+      { source: "/2017", destination: "https://archive.sonicacts.com/2017.html", permanent: true },
+      { source: "/2017/:path*", destination: "https://archive.sonicacts.com/2017/:path*", permanent: true },
+      { source: "/2018", destination: "https://archive.sonicacts.com/2018.html", permanent: true },
+      { source: "/2018/:path*", destination: "https://archive.sonicacts.com/2018/:path*", permanent: true },
 
-      { source: "/biennial-2022", destination: "/biennial/biennial-2022", permanent: true },
-      { source: "/biennial2022", destination: "/biennial/biennial-2022", permanent: true },
-
-      { source: "/biennial", destination: "/biennial/biennial-2026", permanent: true },
-      { source: "/agenda/sonic-acts-biennial-2026", destination: "/biennial/biennial-2026", permanent: true },
-
+      { source: "/biennial-2022", destination: "https://2022.sonicacts.com", permanent: true },
+      { source: "/biennial2022", destination: "https://2022.sonicacts.com", permanent: true },
 
       // Move Biennial 2026 to dedicated subdomain
       { source: "/biennial/biennial-2026", destination: "https://2026.sonicacts.com/biennial/biennial-2026", permanent: true },
