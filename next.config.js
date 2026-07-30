@@ -2,6 +2,11 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  // Limit build workers to prevent EAGAIN errors on the server
+  experimental: {
+    cpus: 2,
+  },
+
   images: {
     loader: "default",
     domains: ["localhost", "cms.sonicacts.com"],
@@ -13,7 +18,7 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // Redirect the complete portal subdomain to old.sonicacts.com
+      // Redirect portal.sonicacts.com to old.sonicacts.com
       {
         source: "/:path*",
         has: [
