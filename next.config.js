@@ -18,19 +18,6 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // Redirect portal.sonicacts.com to old.sonicacts.com
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "portal.sonicacts.com",
-          },
-        ],
-        destination: "https://old.sonicacts.com/:path*",
-        permanent: true,
-      },
-
       // Legacy portal paths
       {
         source: "/portal",
@@ -70,32 +57,32 @@ const nextConfig = {
       // Festival archives
       {
         source: "/2016",
-        destination: "https://old.sonicacts.com/2016",
+        destination: "https://portal.sonicacts.com/2016",
         permanent: true,
       },
       {
         source: "/2016/:path*",
-        destination: "https://old.sonicacts.com/2016/:path*",
+        destination: "https://portal.sonicacts.com/2016/:path*",
         permanent: true,
       },
       {
         source: "/2017",
-        destination: "https://old.sonicacts.com/2017",
+        destination: "https://portal.sonicacts.com/2017",
         permanent: true,
       },
       {
         source: "/2017/:path*",
-        destination: "https://old.sonicacts.com/2017/:path*",
+        destination: "https://portal.sonicacts.com/2017/:path*",
         permanent: true,
       },
       {
         source: "/2018",
-        destination: "https://old.sonicacts.com/2018",
+        destination: "https://portal.sonicacts.com/2018",
         permanent: true,
       },
       {
         source: "/2018/:path*",
-        destination: "https://old.sonicacts.com/2018/:path*",
+        destination: "https://portal.sonicacts.com/2018/:path*",
         permanent: true,
       },
 
