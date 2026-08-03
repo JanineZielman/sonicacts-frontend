@@ -97,6 +97,18 @@ const nextConfig = {
         destination: "https://2022.sonicacts.com",
         permanent: true,
       },
+      {
+        source: "/biennial/biennial-2022",
+        destination:
+          "https://2022.sonicacts.com/biennial/biennial-2022",
+        permanent: true,
+      },
+      {
+        source: "/biennial/biennial-2022/:path*",
+        destination:
+          "https://2022.sonicacts.com/biennial/biennial-2022/:path*",
+        permanent: true,
+      },
 
       // Biennial 2026
       {
