@@ -328,6 +328,26 @@
   }
 }
 
+
+.crt-feed .crt-post-c {
+  padding: 12px;
+}
+
+.crt-feed-window {
+  height: 100% !important;
+}
+
+.crt-feed .crt-post-c:after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  background: #FFD9D9;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 .crt-feed .crt-grid-post {
   &:nth-child(2) {
     display: none;
