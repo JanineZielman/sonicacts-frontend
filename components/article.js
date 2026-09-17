@@ -23,6 +23,12 @@ const Article = ({ page, relations, discover, agenda }) => {
 		}
 	}, []);
 
+	const normalizeLineBreaks = (text = "") => {
+		return text
+			.replace(/\\r\\n/g, "\n\n")
+			.replace(/\\n/g, "\n\n");
+	};
+
 	function toggleShow() {
 		var element = document.getElementById("maxLength");
 		var button = document.getElementById("show-button");
@@ -106,7 +112,7 @@ const Article = ({ page, relations, discover, agenda }) => {
 											<div className={'text-block ' + item.size} key={'text' + i}>
 
 												<ReactMarkdown
-													children={item.text_block}
+													children={normalizeLineBreaks(item.text_block)}
 												/>
 											</div>
 										}
