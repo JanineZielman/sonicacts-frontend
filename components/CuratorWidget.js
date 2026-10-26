@@ -1,32 +1,23 @@
 import React from 'react';
 
 export default class CuratorWidget extends React.Component {
-  constructor(props) {
-    super(props);
-    this.loadScript = this.loadScript.bind(this)
-  }
+  componentDidMount() {
+    const src = 'https://elfsightcdn.com/platform.js';
 
-  loadScript(src, libraryId) {
-    return new Promise((resolve) => {
+    if (!document.querySelector(`script[src="${src}"]`)) {
       const script = document.createElement('script');
       script.src = src;
-      script.id = libraryId;
+      script.async = true;
       document.body.appendChild(script);
-
-      script.onload = () => {
-        // add a small timeout to give it time to load
-        setTimeout(() => {
-          resolve(true);
-        }, 100);
-      };
-    });
-  }
-
-  componentDidMount() {
-    this.loadScript('https://cdn.curator.io/published/' + this.props.feedId + '.js');
+    }
   }
 
   render() {
-    return <div data-crt-feed-id={this.props.feedId}></div>;
+    return (
+      <div
+        className="elfsight-app-150d95d1-f27c-4bb8-92f1-a84d0bca0e61"
+        data-elfsight-app-lazy=""
+      />
+    );
   }
 }
