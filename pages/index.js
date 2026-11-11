@@ -201,17 +201,6 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                     </h2>
                                   )}
 
-                                {item.attributes.title && (
-                                  <h2>{item.attributes.title}</h2>
-                                )}
-                                {item.attributes.category?.data && (
-                                  <div className="category">
-                                    {
-                                      item.attributes.category.data.attributes
-                                        .title
-                                    }
-                                  </div>
-                                )}
                                 {item.attributes.date &&
                                   <>
                                     {item.attributes.dates?.[0] ?
@@ -253,6 +242,12 @@ const Home = ({ homepage, menus, global, items, about }) => {
                                     }
                                   </>
                                 }
+
+                                {item.attributes.title && (
+                                  <h2>{item.attributes.title}</h2>
+                                )}
+
+
                               </div>
                               {item.attributes.name && (
                                 <h2>{item.attributes.name}</h2>

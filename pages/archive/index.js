@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/new-layout"
 import Image from "../../components/image"
@@ -7,7 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import LazyLoad from 'react-lazyload';
 import Moment from 'moment';
 
-const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
+const Discover = ({ menus, global, page, items, categories, numberOfPosts }) => {
   const [posts, setPosts] = useState(items);
   const [hasMore, setHasMore] = useState(true);
 
@@ -32,8 +32,8 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
       <div className="discover">
         <h1 className="wrapper intro">{page.attributes.introTextBig}</h1>
         <div className="wrapper intro">
-          <ReactMarkdown 
-            children={page.attributes.introTextSmall} 
+          <ReactMarkdown
+            children={page.attributes.introTextSmall}
           />
         </div>
         <div className="filter">
@@ -78,12 +78,12 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
             {posts.map((item, i) => {
               return (
                 <div className={`discover-item ${item.attributes.category?.data?.attributes?.slug}`}>
-                   <LazyLoad height={600}>
+                  <LazyLoad height={600}>
                     <div className="item-wrapper">
-                      <a target={`${item.attributes.link_to_external_page ? '_blank': ''}`} href={item.attributes.link_to_external_page ? `${item.attributes.link_to_external_page}` : `/${page?.attributes.slug}/${item.attributes.slug}`} key={'discover'+i}>
+                      <a target={`${item.attributes.link_to_external_page ? '_blank' : ''}`} href={item.attributes.link_to_external_page ? `${item.attributes.link_to_external_page}` : `/${page?.attributes.slug}/${item.attributes.slug}`} key={'discover' + i}>
                         <div className="image">
                           {item.attributes.cover_image?.data &&
-                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover'/>
+                            <Image image={item.attributes.cover_image?.data?.attributes} layout='fill' objectFit='cover' />
                           }
                         </div>
                         <div className="title-wrapper main-title-wrapper">
@@ -91,7 +91,7 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                             <div className="authors">
                               {item.attributes?.community_items?.data &&
                                 item.attributes.community_items.data.map((author, i) => {
-                                  return( 
+                                  return (
                                     <div className="author">{author.attributes.name}</div>
                                   )
                                 })
@@ -99,37 +99,21 @@ const Discover = ({ menus, global, page, items, categories, numberOfPosts}) => {
                             </div>
                           }
                           <div className="title">{item.attributes.title}</div>
-                        </div>   
-                        {item.attributes.category?.data && 
+                        </div>
+                        {item.attributes.category?.data &&
                           <div className="category">
-                            <a href={'/'+page?.attributes.slug+'/filter/'+item.attributes.category?.data?.attributes.slug} key={'discover'+i}>
+                            <a href={'/' + page?.attributes.slug + '/filter/' + item.attributes.category?.data?.attributes.slug} key={'discover' + i}>
                               {item.attributes.category?.data.attributes.title}
                             </a>
-                            {item.attributes.authors?.data.map((author, i) =>{
-                              return(
-                                <a className="author by-line" href={'/community/'+author.attributes.slug} key={'discover'+i}>
+                            {item.attributes.authors?.data.map((author, i) => {
+                              return (
+                                <a className="author by-line" href={'/community/' + author.attributes.slug} key={'discover' + i}>
                                   {author.attributes.name}
                                 </a>
                               )
                             })}
                           </div>
-                        }               
-                        {/* <div className="tags">
-                          {item.attributes.tags?.data && 
-                            <>
-                            {item.attributes.tags.data.map((tag, i) => {
-                              return(
-                              <a href={'/search/'+tag.attributes.slug} key={'search'+i}>
-                                {tag.attributes.slug}
-                              </a>
-                              )
-                            })}
-                            </>
-                          }
-                          {item.attributes.date &&
-                            <span>{Moment(item.attributes.date).format('y')}</span>
-                          }
-                        </div> */}
+                        }
                       </a>
                     </div>
                   </LazyLoad>
@@ -156,18 +140,18 @@ export async function getServerSideProps() {
 
   var mergedItems = items.data.concat(agendaItems.data)
 
-  mergedItems.sort(function(a,b){
+  mergedItems.sort(function (a, b) {
     return new Date(b.attributes.date) - new Date(a.attributes.date);
   });
 
 
-	const totalItems = 
-    await fetchAPI( `/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
-  );
+  const totalItems =
+    await fetchAPI(`/discover-items?sort[0]=date%3Adesc&filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
+    );
 
-  const totalItemsAgenda = 
-    await fetchAPI( `/agenda-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
-  );
+  const totalItemsAgenda =
+    await fetchAPI(`/agenda-items?filters[$or][0][hide][$null]=true&filters[$or][1][hide][$eq]=false`
+    );
 
   const numberOfPosts = totalItems.meta.pagination.total + totalItemsAgenda.meta.pagination.total;
 
