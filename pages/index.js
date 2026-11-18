@@ -194,7 +194,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
 
                       {renderAuthors(item.attributes)}
 
-                      {item.attributes.date &&
+                      {/* {item.attributes.date &&
                         <>
                           {item.attributes.dates?.[0] ?
                             <span>
@@ -234,7 +234,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
                             </span>
                           }
                         </>
-                      }
+                      } */}
 
                       {item.attributes.title && (
                         <h2>{item.attributes.title}</h2>
@@ -313,7 +313,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
                           )}
                           <div className="text">
                             {renderAuthors(attributes)}
-                            {date && <span>{Moment(date).format('D MMM y')}</span>}
+                            {/* {date && <span>{Moment(date).format('D MMM y')}</span>} */}
                             <h2>{attributes.title}</h2>
                           </div>
                         </a>
