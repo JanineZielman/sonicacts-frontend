@@ -257,18 +257,22 @@ const Home = ({ homepage, menus, global, items, about }) => {
       </div>
     );
   }).filter(Boolean);
-  const highlightedArchives = (homepage.attributes.Highlights ?? []).flatMap((item) => {
-    const related = item.archive_item?.data;
-    const entries = Array.isArray(related) ? related : [related];
-    return entries
-      .filter((entry) => entry?.attributes?.slug)
-      .map((entry) => ({
-        key: `${item.id}-${entry.id}`,
-        slug: entry.attributes.slug,
-        attributes: entry.attributes,
-        image: entry.attributes.cover_image?.data?.attributes,
-      }));
-  });
+  const highlights = (homepage.attributes.Highlights ?? []).flatMap((item) =>
+    ["archive", "news", "agenda"].flatMap((section) => {
+      const related = item[`${section}_item`]?.data;
+      const entries = Array.isArray(related) ? related : [related];
+
+      return entries
+        .filter((entry) => entry?.attributes?.slug)
+        .map(({ id, attributes }) => ({
+          key: `${item.id}-${section}-${id}`,
+          href: `/${section}/${attributes.slug}`,
+          attributes,
+          image: attributes.cover_image?.data?.attributes,
+          date: section === "archive" ? null : attributes.date,
+        }));
+    })
+  );
 
   return (
     <Layout page={homepage} menus={menus} global={global} homepage={homepage}>
@@ -282,7 +286,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
         <div className="wrapper-large">
           <div className="home-menu">
             {menuSections.slice(0, 2)}
-            {highlightedArchives.length > 0 && (
+            {highlights.length > 0 && (
               <div className="collapsible highlights">
                 <div>
                   <a href="/archive" className="show-more-link">
@@ -291,11 +295,11 @@ const Home = ({ homepage, menus, global, items, about }) => {
                   <div className="home-collapsible-project">
                     <Slider
                       {...baseSettings}
-                      slidesToShow={Math.min(highlightedArchives.length, 3)}
+                      slidesToShow={Math.min(highlights.length, 3)}
                     >
-                      {highlightedArchives.map(({ key, slug, attributes, image }) => (
+                      {highlights.map(({ key, href, attributes, image, date }) => (
                         <a
-                          href={`/archive/${slug}`}
+                          href={href}
                           className="slider-item"
                           key={key}
                         >
@@ -309,6 +313,7 @@ const Home = ({ homepage, menus, global, items, about }) => {
                           )}
                           <div className="text">
                             {renderAuthors(attributes)}
+                            {date && <span>{Moment(date).format('D MMM y')}</span>}
                             <h2>{attributes.title}</h2>
                           </div>
                         </a>
@@ -359,6 +364,8 @@ export async function getServerSideProps() {
           "populate[shop_item][populate]=*",
           "populate[Highlights][populate][archive_item][populate][0]=cover_image",
           "populate[Highlights][populate][archive_item][populate][1]=community_items",
+          "populate[Highlights][populate][news_item][populate][0]=cover_image",
+          "populate[Highlights][populate][agenda_item][populate][0]=cover_image",
           "populate[highlight_items][populate]=*",
           "populate[archive_items][populate]=*",
           "populate[news_items][populate]=*",
