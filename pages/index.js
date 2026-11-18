@@ -6,6 +6,21 @@ import Image from "../components/image";
 import { fetchAPI } from "../lib/api";
 import React from "react";
 
+const renderAuthors = ({ hide_names, community_items }) => {
+  const authors = community_items?.data;
+  if (hide_names !== false || !authors?.length) return null;
+
+  return (
+    <h2 className="authors index-authors">
+      {authors.map((author) => (
+        <div className="author" key={author.id}>
+          {author.attributes.name}
+        </div>
+      ))}
+    </h2>
+  );
+};
+
 const Home = ({ homepage, menus, global, items, about }) => {
   const baseSettings = {
     dots: false,
@@ -64,6 +79,197 @@ const Home = ({ homepage, menus, global, items, about }) => {
     ],
   };
 
+  const menuSections = menus.map((page) => {
+    const slug = page.attributes.slug.replace('/', '');
+    const title = page.attributes.title
+    const pageItems = items[slug] || [];
+
+    if (title.includes("Shop")) {
+      return (
+        <div key={slug} className="collapsible shop">
+          <a
+            href="https://shop.sonicacts.com/"
+            target="_blank"
+            className="show-more-link"
+          >
+            Shop
+          </a>
+          <div className="home-collapsible-project">
+            <Slider {...shopSettings}>
+              {homepage.attributes.shop_item.map((item, i) => (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  className="slider-item shop-slider-item"
+                  key={i}
+                >
+                  {item.image?.data && (
+                    <div className="image">
+                      <Image
+                        image={item.image.data.attributes}
+                        objectFit="cover"
+                      />
+                    </div>
+                  )}
+                  <div className="text">
+                    <div>
+                      {item.price && (
+                        <span className="category">{item.price}</span>
+                      )}
+                      {item.title && <h2>{item.title}</h2>}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </Slider>
+          </div>
+        </div>
+      );
+    }
+
+    if (slug === "contact") {
+      return (
+        <div key={slug} className="collapsible contact">
+          <div>
+            <a
+              href={"/" + about.attributes.slug}
+              className="show-more-link"
+            >
+              {about.attributes.slug}
+            </a>
+            <div className="contact-wrapper">
+              <div className="contact-item">
+                <p>
+                  <ReactMarkdown
+                    children={about.attributes.content[1].text_block}
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (pageItems.length === 0) return null;
+
+    const settings =
+      slug === "community"
+        ? communitySettings
+        : {
+          ...baseSettings,
+          slidesToShow: Math.min(pageItems.length, 3),
+        };
+
+    return (
+      <div key={slug} className={`collapsible ${slug}`}>
+        <div>
+          <a href={"/" + slug} className="show-more-link">
+            {slug}
+          </a>
+          <div className="home-collapsible-project">
+            <Slider {...settings}>
+              {pageItems.slice(0, 6).map((item, idx) => (
+                <a
+                  href={`/${slug}/${item.attributes.slug}`}
+                  className={`slider-item ${slug === "community"
+                    ? "community-slider-item"
+                    : ""
+                    }`}
+                  draggable="false"
+                  key={idx}
+                >
+                  {item.attributes.cover_image?.data && (
+                    <div className="image">
+                      <Image
+                        image={
+                          item.attributes.cover_image.data.attributes
+                        }
+                        objectFit="cover"
+                      />
+                    </div>
+                  )}
+                  <div className="text">
+                    <div>
+
+                      {renderAuthors(item.attributes)}
+
+                      {item.attributes.date &&
+                        <>
+                          {item.attributes.dates?.[0] ?
+                            <span>
+                              {item.attributes.dates.map((date, i) => {
+                                return (
+                                  <span className={`date ${i}`} key={`dates-${i}`}>
+                                    {date.single_date &&
+                                      <>
+                                        {i == 0 && Moment(item.attributes.date).format('D MMM y')}
+                                        , {Moment(date.single_date).format('D MMM y')}
+                                      </>
+                                    }
+                                    {date.end_date &&
+                                      <>
+                                        {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ?
+                                          <>
+                                            {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
+                                              <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                              :
+                                              <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
+                                            }
+                                          </>
+                                          :
+                                          <>
+                                            {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
+                                          </>
+                                        }
+                                      </>
+                                    }
+                                  </span>
+                                )
+                              })}
+                            </span>
+                            :
+                            <span>
+                              {Moment(item.attributes.date).format('D MMM y')}
+                            </span>
+                          }
+                        </>
+                      }
+
+                      {item.attributes.title && (
+                        <h2>{item.attributes.title}</h2>
+                      )}
+
+
+                    </div>
+                    {item.attributes.name && (
+                      <h2>{item.attributes.name}</h2>
+                    )}
+                    {item.attributes.job_description && (
+                      <span>{item.attributes.job_description}</span>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </Slider>
+          </div>
+        </div>
+      </div>
+    );
+  }).filter(Boolean);
+  const highlightedArchives = (homepage.attributes.Highlights ?? []).flatMap((item) => {
+    const related = item.archive_item?.data;
+    const entries = Array.isArray(related) ? related : [related];
+    return entries
+      .filter((entry) => entry?.attributes?.slug)
+      .map((entry) => ({
+        key: `${item.id}-${entry.id}`,
+        slug: entry.attributes.slug,
+        attributes: entry.attributes,
+        image: entry.attributes.cover_image?.data?.attributes,
+      }));
+  });
+
   return (
     <Layout page={homepage} menus={menus} global={global} homepage={homepage}>
       <div className="columns homepage">
@@ -75,195 +281,44 @@ const Home = ({ homepage, menus, global, items, about }) => {
 
         <div className="wrapper-large">
           <div className="home-menu">
-            {menus.map((page, i) => {
-              const slug = page.attributes.slug.replace('/', '');
-              const title = page.attributes.title
-              const pageItems = items[slug] || [];
-
-              if (title.includes("Shop")) {
-                return (
-                  <div key={slug} className="collapsible shop">
-                    <a
-                      href="https://shop.sonicacts.com/"
-                      target="_blank"
-                      className="show-more-link"
+            {menuSections.slice(0, 2)}
+            {highlightedArchives.length > 0 && (
+              <div className="collapsible highlights">
+                <div>
+                  <a href="/archive" className="show-more-link">
+                    Highlights
+                  </a>
+                  <div className="home-collapsible-project">
+                    <Slider
+                      {...baseSettings}
+                      slidesToShow={Math.min(highlightedArchives.length, 3)}
                     >
-                      Shop
-                    </a>
-                    <div className="home-collapsible-project">
-                      <Slider {...shopSettings}>
-                        {homepage.attributes.shop_item.map((item, i) => (
-                          <a
-                            href={item.link}
-                            target="_blank"
-                            className="slider-item shop-slider-item"
-                            key={i}
-                          >
-                            {item.image?.data && (
-                              <div className="image">
-                                <Image
-                                  image={item.image.data.attributes}
-                                  objectFit="cover"
-                                />
-                              </div>
-                            )}
-                            <div className="text">
-                              <div>
-                                {item.price && (
-                                  <span className="category">{item.price}</span>
-                                )}
-                                {item.title && <h2>{item.title}</h2>}
-                              </div>
+                      {highlightedArchives.map(({ key, slug, attributes, image }) => (
+                        <a
+                          href={`/archive/${slug}`}
+                          className="slider-item"
+                          key={key}
+                        >
+                          {image && (
+                            <div className="image">
+                              <Image
+                                image={image}
+                                objectFit="cover"
+                              />
                             </div>
-                          </a>
-                        ))}
-                      </Slider>
-                    </div>
-                  </div>
-                );
-              }
-
-              if (slug === "contact") {
-                return (
-                  <div key={slug} className="collapsible contact">
-                    <div>
-                      <a
-                        href={"/" + about.attributes.slug}
-                        className="show-more-link"
-                      >
-                        {about.attributes.slug}
-                      </a>
-                      <div className="contact-wrapper">
-                        <div className="contact-item">
-                          <p>
-                            <ReactMarkdown
-                              children={about.attributes.content[1].text_block}
-                            />
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              if (pageItems.length === 0) return null;
-
-              const settings =
-                slug === "community"
-                  ? communitySettings
-                  : {
-                    ...baseSettings,
-                    slidesToShow: Math.min(pageItems.length, 3),
-                  };
-
-              return (
-                <div key={slug} className={`collapsible ${slug}`}>
-                  <div>
-                    <a href={"/" + slug} className="show-more-link">
-                      {slug}
-                    </a>
-                    <div className="home-collapsible-project">
-                      <Slider {...settings}>
-                        {pageItems.slice(0, 6).map((item, idx) => (
-                          <a
-                            href={`/${slug}/${item.attributes.slug}`}
-                            className={`slider-item ${slug === "community"
-                              ? "community-slider-item"
-                              : ""
-                              }`}
-                            draggable="false"
-                            key={idx}
-                          >
-                            {item.attributes.cover_image?.data && (
-                              <div className="image">
-                                <Image
-                                  image={
-                                    item.attributes.cover_image.data.attributes
-                                  }
-                                  objectFit="cover"
-                                />
-                              </div>
-                            )}
-                            <div className="text">
-                              <div>
-
-                                {item.attributes.hide_names === false &&
-                                  item.attributes?.community_items?.data && (
-                                    <h2 className="authors index-authors">
-                                      {item.attributes.community_items.data.map(
-                                        (author, i) => (
-                                          <div className="author" key={i}>
-                                            {author.attributes.name}
-                                          </div>
-                                        )
-                                      )}
-                                    </h2>
-                                  )}
-
-                                {item.attributes.date &&
-                                  <>
-                                    {item.attributes.dates?.[0] ?
-                                      <span>
-                                        {item.attributes.dates.map((date, i) => {
-                                          return (
-                                            <span className={`date ${i}`} key={`dates-${i}`}>
-                                              {date.single_date &&
-                                                <>
-                                                  {i == 0 && Moment(item.attributes.date).format('D MMM y')}
-                                                  , {Moment(date.single_date).format('D MMM y')}
-                                                </>
-                                              }
-                                              {date.end_date &&
-                                                <>
-                                                  {(Moment(item.attributes.date).format('y') == Moment(date.end_date).format('y')) ?
-                                                    <>
-                                                      {(Moment(item.attributes.date).format('MMM y') == Moment(date.end_date).format('MMM y')) ?
-                                                        <>{Moment(item.attributes.date).format('D')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                        :
-                                                        <>{Moment(item.attributes.date).format('D MMM')}&nbsp;– {Moment(date.end_date).format('D MMM y')}</>
-                                                      }
-                                                    </>
-                                                    :
-                                                    <>
-                                                      {Moment(item.attributes.date).format('D MMM y')}&nbsp;– {Moment(date.end_date).format('D MMM y')}
-                                                    </>
-                                                  }
-                                                </>
-                                              }
-                                            </span>
-                                          )
-                                        })}
-                                      </span>
-                                      :
-                                      <span>
-                                        {Moment(item.attributes.date).format('D MMM y')}
-                                      </span>
-                                    }
-                                  </>
-                                }
-
-                                {item.attributes.title && (
-                                  <h2>{item.attributes.title}</h2>
-                                )}
-
-
-                              </div>
-                              {item.attributes.name && (
-                                <h2>{item.attributes.name}</h2>
-                              )}
-                              {item.attributes.job_description && (
-                                <span>{item.attributes.job_description}</span>
-                              )}
-                            </div>
-                          </a>
-                        ))}
-                      </Slider>
-                    </div>
+                          )}
+                          <div className="text">
+                            {renderAuthors(attributes)}
+                            <h2>{attributes.title}</h2>
+                          </div>
+                        </a>
+                      ))}
+                    </Slider>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            )}
+            {menuSections.slice(2)}
             <div className="collapsible contact">
               <div>
                 <a href={'/' + about.attributes.slug} className="show-more-link">{about.attributes.slug}</a>
@@ -299,7 +354,15 @@ export async function getServerSideProps() {
   const [homepageRes, globalRes, menusRes, agendaRes, communityRes, aboutRes] =
     await Promise.all([
       fetchAPI(
-        "/homepage?populate[shop_item][populate]=*&populate[highlight_items][populate]=*&populate[archive_items][populate]=*&populate[news_items][populate]=*&populate=*"
+        "/homepage?" +
+        [
+          "populate[shop_item][populate]=*",
+          "populate[Highlights][populate][archive_item][populate][0]=cover_image",
+          "populate[Highlights][populate][archive_item][populate][1]=community_items",
+          "populate[highlight_items][populate]=*",
+          "populate[archive_items][populate]=*",
+          "populate[news_items][populate]=*",
+        ].join("&")
       ),
       fetchAPI(
         "/global?populate[prefooter][populate]=*&populate[socials][populate]=*&populate[image][populate]=*&populate[footer_links][populate]=*&populate[favicon][populate]=*"

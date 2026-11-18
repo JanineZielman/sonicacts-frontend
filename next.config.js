@@ -110,6 +110,20 @@ const nextConfig = {
         permanent: true,
       },
 
+      // Biennial 2024
+      {
+        source: "/biennial/biennial-2024",
+        destination:
+          "https://2024.sonicacts.com/",
+        permanent: true,
+      },
+      {
+        source: "/biennial/biennial-2024/programme/:path*",
+        destination:
+          "https://2024.sonicacts.com/programme.html",
+        permanent: true,
+      },
+
       // Biennial 2026
       {
         source: "/biennial/biennial-2026",
